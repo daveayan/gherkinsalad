@@ -14,6 +14,9 @@ public class ComponentObjectRegistry {
 	private static void init() {
 		if(registry_map == null) {
 			registry_map = new HashMap<String, Class<?>>();
+			registry_map.put("Search Results", example.SearchResults.class);
+			registry_map.put("Go", example.Go.class);
+			registry_map.put("Search Box", example.SearchBox.class);
 		}
 	}
 	

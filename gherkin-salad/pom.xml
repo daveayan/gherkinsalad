@@ -23,6 +23,7 @@
 									-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
 								</jvmArg>
 								<jvmArg>-Dfile.encoding=UTF-8</jvmArg>
+								<jvmArg>-Dcucumber.features=${basedir}/src/test/resources/features</jvmArg>
 							</jvmArgs>
 							<!-- You may not need all of these arguments in your own project. 
 								We have a lot here for testing purposes... -->
@@ -118,19 +119,16 @@
 			<groupId>org.picocontainer</groupId>
 			<artifactId>picocontainer</artifactId>
 			<version>2.10.2</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>cuke4duke</groupId>
 			<artifactId>cuke4duke</artifactId>
 			<version>0.4.4</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -141,19 +139,16 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-htmlunit-driver</artifactId>
 			<version>${selenium.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
 			<version>${selenium.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>${selenium.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
