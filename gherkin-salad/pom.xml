@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>daveayan</groupId>
-  <artifactId>gherkin-salad</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>gk-sld</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<selenium.version>2.0b3</selenium.version>
+		<selenium.version>2.13.0</selenium.version>
 	</properties>
 
 	<profiles>
@@ -65,7 +65,7 @@
 	</profiles>
 
 	<build>
-		<finalName>atdd-studio</finalName>
+		<finalName>gherkin-salad</finalName>
 		<plugins>
 			<plugin>
 				<groupId>cuke4duke</groupId>
@@ -129,6 +129,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -155,6 +156,12 @@
 			<artifactId>selenium-ie-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.4</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -171,6 +178,10 @@
 		<pluginRepository>
 			<id>cukes</id>
 			<url>http://cukes.info/maven</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>daveayan-releases</id>
+			<url>https://github.com/daveayan/_mavenrepository/raw/master/releases</url>
 		</pluginRepository>
 	</pluginRepositories>
 </project>
