@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad;
+package daveayan.gherkinsalad.browser;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import daveayan.gherkinsalad.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
 public class Browser {
 	private String name;

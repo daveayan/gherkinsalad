@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad;
+package daveayan.gherkinsalad.browser;
 
 import org.apache.commons.lang.StringUtils;
 

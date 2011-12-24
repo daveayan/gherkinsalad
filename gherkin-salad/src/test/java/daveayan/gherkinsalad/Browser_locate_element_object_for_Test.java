@@ -1,17 +1,16 @@
 package daveayan.gherkinsalad;
 
-import java.util.List;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import daveayan.gherkinsalad.actions.BrowserElement;
-import daveayan.gherkinsalad.actions.NullBrowserElement;
+import daveayan.gherkinsalad.browser.Browser;
+import daveayan.gherkinsalad.browser.PageElementKey;
+import daveayan.gherkinsalad.browser.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
 
 public class Browser_locate_element_object_for_Test {
 	private Browser browser;
@@ -116,9 +115,8 @@ public class Browser_locate_element_object_for_Test {
 		BrowserElement actual_browser_element = (BrowserElement) browser.locate_element_object_for(pek);
 		
 		Assert.assertNotNull(actual_browser_element);
-		Assert.assertTrue(actual_browser_element instanceof NullBrowserElement);
-		Assert.assertTrue(actual_browser_element.isNull());
-		Assert.assertEquals("PageElement with key 'anyuser,component,element'", actual_browser_element.toString());
+		Assert.assertTrue("actual_browser_element is not null, it is '" + actual_browser_element.getClass().getName() + "'", actual_browser_element instanceof NullBrowserElement);
+		Assert.assertEquals("daveayan.gherkinsalad.browser.actions.NullBrowserElement : PageElement with key 'anyuser,component,element'", actual_browser_element.toString());
 	}
 	
 	@Test
@@ -136,29 +134,5 @@ public class Browser_locate_element_object_for_Test {
 		Assert.assertEquals(1, actual_browser_element.element_locators.size());
 		Assert.assertEquals("By.linkText: no_such_element_in_page_structure", actual_browser_element.element_locators.get(0).toString());
 		Assert.assertEquals("PageElement with key '*,*,*'", actual_browser_element.pek.toString());
-	}
-}
-
-class MockBrowserElement implements BrowserElement {
-	public WebDriver driver;
-	public List<By> element_locators;
-	public PageElementKey pek;
-	public boolean isNull() {
-		return false;
-	}
-	public void element_locators_are(List<By> element_locators) {
-		this.element_locators = element_locators;
-	}
-	public void driver_is(WebDriver driver) {
-		this.driver = driver;
-	}
-	public boolean isEnabled() {
-		return false;
-	}
-	public boolean isDisabled() {
-		return false;
-	}
-	public void page_element_key_is(PageElementKey pek) {
-		this.pek = pek;
 	}
 }

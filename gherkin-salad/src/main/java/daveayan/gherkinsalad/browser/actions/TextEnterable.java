@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.actions;
+package daveayan.gherkinsalad.browser.actions;
 
 public interface TextEnterable extends BrowserElement {
 	public void enter_text_if_enabled(String text);

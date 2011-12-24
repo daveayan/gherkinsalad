@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.actions.builtins;
+package daveayan.gherkinsalad.browser.actions.builtins;
 
 import java.util.List;
 
@@ -6,8 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import daveayan.gherkinsalad.PageElementKey;
-import daveayan.gherkinsalad.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.NullWebElement;
+import daveayan.gherkinsalad.browser.PageElementKey;
+import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
 public abstract class BaseBrowserElement implements BrowserElement {
 	protected PageElementKey page_element_key;
@@ -18,11 +19,14 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		return element_locators.get(id);
 	}
 	
-	public WebElement fetch_element_assert_not_null(int id) {
+	public WebElement fetch_element(int id) {
+		if(id >= element_locators.size()) {
+			return NullWebElement.newInstance(null, page_element_key);
+		}
 		By selector = element_locators.get(id);
 		WebElement element = driver.findElement(selector);
-		if(element == null) { 
-			throw new AssertionError("Element fetched with the selector '" + selector + "' is null. PageElementKey is '" + page_element_key + "'");
+		if(element == null) {
+			element = NullWebElement.newInstance(selector, page_element_key);
 		}
 		return element;
 	}
@@ -51,8 +55,5 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	}
 	public void driver_is(WebDriver driver) {
 		this.driver = driver;
-	}
-	public boolean isNull() {
-		return false;
 	}
 }

@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad;
+package daveayan.gherkinsalad.browser;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import daveayan.gherkinsalad.actions.BrowserElement;
-import daveayan.gherkinsalad.actions.NullBrowserElement;
+import daveayan.gherkinsalad.browser.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
 
 public class PageStructure {
 	private static final String NA = "NA";
