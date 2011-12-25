@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
-import daveayan.gherkinsalad.browser.actions.BrowserElement;
-import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
 
 public class Browser_locate_element_object_for_Test {
 	private Browser browser;
@@ -112,11 +110,12 @@ public class Browser_locate_element_object_for_Test {
 	@Test
 	public void for_no_element_type_specified_returns_NullBrowserElement() {
 		PageElementKey pek = PageElementKey.newInstance("anyuser", "component", "element");
-		BrowserElement actual_browser_element = (BrowserElement) browser.locate_element_object_for(pek);
-		
-		Assert.assertNotNull(actual_browser_element);
-		Assert.assertTrue("actual_browser_element is not null, it is '" + actual_browser_element.getClass().getName() + "'", actual_browser_element instanceof NullBrowserElement);
-		Assert.assertEquals("daveayan.gherkinsalad.browser.actions.NullBrowserElement : PageElement with key 'anyuser,component,element'", actual_browser_element.toString());
+		try {
+			browser.locate_element_object_for(pek);
+			Assert.fail();
+		} catch(AssertionError ae) {
+			Assert.assertEquals("Did not find any element type name in the page structure file for page element key PageElement with key 'anyuser,component,element'", ae.getMessage());
+		}
 	}
 	
 	@Test

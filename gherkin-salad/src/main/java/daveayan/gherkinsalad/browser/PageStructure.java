@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
+import daveayan.lang.NullList;
 
 public class PageStructure {
 	private static final String NA = "NA";
@@ -50,24 +51,23 @@ public class PageStructure {
 	
 	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
-		if(be != null) {
-			be.page_element_key_is(page_element_key);
-			be.driver_is(driver);
-			return be;
-		} else {
+		if(be instanceof NullBrowserElement) {
 			PageElementKey pek = PageElementKey.newInstance("", "", "");
 			be = getElementWithBys(pek);
-			if(be != null) {
+			if(be instanceof NullBrowserElement) {
+				be = new NullBrowserElement();
+				be.page_element_key_is(page_element_key);
+			} else {
 				be.page_element_key_is(pek);
 				be.driver_is(driver);
 				List<By> element_locators = new ArrayList<By>();
 				element_locators.add(By.linkText(page_element_key.element_name()));
 				be.element_locators_are(element_locators);
-				return be;
 			}
+		} else {
+			be.page_element_key_is(page_element_key);
+			be.driver_is(driver);
 		}
-		be = new NullBrowserElement();
-		be.page_element_key_is(page_element_key);
 		return be;
 	}
 	
@@ -76,7 +76,7 @@ public class PageStructure {
 		if(StringUtils.isNotBlank(value)) {
 			String[] value_elements = value.split("~");
 			if(StringUtils.equalsIgnoreCase(value_elements[0], NA)) {
-				return new NullBrowserElement();
+				throw new AssertionError("Did not find any element type name in the page structure file for page element key " + page_element_key);
 			}
 			BrowserElement be = create_browser_element_for(value_elements[0]);
 			List<By> bys = new ArrayList<By>();
@@ -86,7 +86,7 @@ public class PageStructure {
 			be.element_locators_are(bys);
 			return be;
 		}
-		return null;
+		return new NullBrowserElement();
 	}
 	
 	private Properties loadPageStructureIfPossible(String file_path) {
@@ -132,16 +132,13 @@ public class PageStructure {
 			Object object = clazz.newInstance();
 			return (BrowserElement) object;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new NullBrowserElement();
 	}
 	
 	private List<By> getBys(String element_locators_comma_seperated) {
@@ -153,7 +150,7 @@ public class PageStructure {
 				if(pair.length == 2) {
 					bys.add(getBy(pair[0], pair[1]));
 				} else {
-					return null;
+					return new NullList<By>();
 				}
 			}
 		}
