@@ -1,0 +1,2 @@
+Run shopping.feature With Browser FireFox Page Structure ./src/test/resources/shop.amazon.feature.page.structure.csv Url http://www.amazon.com
+Run shopping.feature With Browser FireFox Page Structure ./src/test/resources/shop.amazon.feature.page.structure.csv Url http://www.amazon.com

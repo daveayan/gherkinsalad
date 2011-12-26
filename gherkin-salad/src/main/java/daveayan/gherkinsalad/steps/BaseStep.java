@@ -42,7 +42,8 @@ public class BaseStep {
 		selectable_element.select_if_enabled(text);
 	}
 	
-	public void launch_browser() {
+	public void launch_browser(String browser_name) {
+		browser = Browser.instance(browser_name);
 		browser.launch();
 	}
 	

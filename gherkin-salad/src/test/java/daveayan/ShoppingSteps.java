@@ -6,14 +6,23 @@ import cuke4duke.annotation.I18n.EN.When;
 import daveayan.gherkinsalad.steps.BaseStep;
 
 public class ShoppingSteps extends BaseStep {
-	@Given("^User launched the browser window$")
-	public void launch_browser_window() {
-		launch_browser_with("firefox", "./src/test/resources/shop.amazon.feature.page.structure.csv");
+	@Given("^User launched the FireFox browser$")
+	public void launch_browser() {
+		String browser_name = "FireFox";
+		launch_browser(browser_name);
 	}
 	
-	@Given("^User visited website$")
+	@Given("^User launched the FireFox browser with page structure file ./src/test/resources/shop.amazon.feature.page.structure.csv$")
+	public void launch_browser_with_page_structure() {
+		String browser_name = "FireFox";
+		String page_structure_file = "./src/test/resources/shop.amazon.feature.page.structure.csv";
+		launch_browser_with(browser_name, page_structure_file);
+	}
+	
+	@Given("^User visited website http://www.amazon.com$")
 	public void goto_website() {
-		goto_url("http://www.amazon.com");
+		String url = "http://www.amazon.com";
+		goto_url(url);
 	}
 	
 	@Given("^User entered MacBook in Search Box$")
