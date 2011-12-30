@@ -4,6 +4,7 @@ import groovy.io.FileType
 
 class PrepareFromExecutionPlan {
 	public static void main(String[] args) {
+		println "gherkin-salad -> Preparing features from Execution Plan"
 		def object = new PrepareFromExecutionPlan()
 		object.enhance_groovy()
 		object.clean_and_prepare()
