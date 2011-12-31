@@ -1,0 +1,260 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>daveayan</groupId>
+	<artifactId>gherkin-salad-framework</artifactId>
+	<version>1.0</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<selenium.version>2.13.0</selenium.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>wip</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>cuke4duke</groupId>
+						<artifactId>cuke4duke-maven-plugin</artifactId>
+						<configuration>
+							<jvmArgs>
+								<jvmArg>
+									-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
+								</jvmArg>
+								<jvmArg>-Dfile.encoding=UTF-8</jvmArg>
+								<jvmArg>-Dcucumber.features=${basedir}/src/test/resources/features</jvmArg>
+							</jvmArgs>
+							<!-- You may not need all of these arguments in your own project. 
+								We have a lot here for testing purposes... -->
+							<cucumberArgs>
+								<cucumberArg>--tag</cucumberArg>
+								<cucumberArg>@wip</cucumberArg>
+								<cucumberArg>--tag</cucumberArg>
+								<cucumberArg>~@manual</cucumberArg>
+								<cucumberArg>--backtrace</cucumberArg>
+								<cucumberArg>--color</cucumberArg>
+								<cucumberArg>--verbose</cucumberArg>
+								<cucumberArg>--format</cucumberArg>
+								<cucumberArg>pretty</cucumberArg>
+								<cucumberArg>--format</cucumberArg>
+								<cucumberArg>html</cucumberArg>
+								<cucumberArg>--out</cucumberArg>
+								<cucumberArg>${project.build.directory}/cucumber-reports.html</cucumberArg>
+								<cucumberArg>--require</cucumberArg>
+								<cucumberArg>${basedir}/target/test-classes</cucumberArg>
+								<cucumberArg>--guess</cucumberArg>
+							</cucumberArgs>
+							<gems>
+								<gem>install cuke4duke --version 0.4.4</gem>
+							</gems>
+						</configuration>
+						<executions>
+							<execution>
+								<id>run-features</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>cucumber</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>gherkin-salad</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="${basedir}/src/main/groovy" />
+								<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
+									<classpath refid="maven.compile.classpath" />
+								</taskdef>
+								<mkdir dir="${project.build.outputDirectory}" />
+								<groovyc destdir="${project.build.outputDirectory}"
+									srcdir="${basedir}/src/main/groovy/" listfiles="true">
+									<classpath refid="maven.compile.classpath" />
+								</groovyc>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>test-compile</id>
+						<phase>test-compile</phase>
+						<configuration>
+							<tasks>
+								<mkdir dir="${basedir}/src/test/groovy" />
+								<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc">
+									<classpath refid="maven.test.classpath" />
+								</taskdef>
+								<mkdir dir="${project.build.testOutputDirectory}" />
+								<groovyc destdir="${project.build.testOutputDirectory}"
+									srcdir="${basedir}/src/test/groovy/" listfiles="true">
+									<classpath refid="maven.test.classpath" />
+								</groovyc>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>apply-execution-plan</id>
+						<phase>integration-test</phase>
+						<configuration>
+							<tasks>
+								<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
+									<classpath refid="maven.compile.classpath" />
+								</taskdef>
+								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFromExecutionPlan.groovy">
+								  <classpath refid="maven.compile.classpath" />
+								</groovy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>cuke4duke</groupId>
+				<artifactId>cuke4duke-maven-plugin</artifactId>
+				<configuration>
+					<jvmArgs>
+						<jvmArg>
+							-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
+						</jvmArg>
+						<jvmArg>-Dfile.encoding=UTF-8</jvmArg>
+					</jvmArgs>
+					<!-- You may not need all of these arguments in your own project. We 
+						have a lot here for testing purposes... -->
+					<cucumberArgs>
+						<cucumberArg>--tag</cucumberArg>
+						<cucumberArg>~@manual</cucumberArg>
+						<cucumberArg>--tag</cucumberArg>
+						<cucumberArg>~@wip</cucumberArg>
+						<cucumberArg>--backtrace</cucumberArg>
+						<cucumberArg>--color</cucumberArg>
+						<cucumberArg>--verbose</cucumberArg>
+						<cucumberArg>--format</cucumberArg>
+						<cucumberArg>pretty</cucumberArg>
+						<cucumberArg>--format</cucumberArg>
+						<cucumberArg>html</cucumberArg>
+						<cucumberArg>--out</cucumberArg>
+						<cucumberArg>${project.build.directory}/cucumber-reports.html</cucumberArg>
+						<cucumberArg>--require</cucumberArg>
+						<cucumberArg>${basedir}/target/test-classes</cucumberArg>
+						<cucumberArg>--guess</cucumberArg>
+					</cucumberArgs>
+					<gems>
+						<gem>install cuke4duke --version 0.4.4</gem>
+					</gems>
+				</configuration>
+				<executions>
+					<execution>
+						<id>run-features</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>cucumber</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.picocontainer</groupId>
+			<artifactId>picocontainer</artifactId>
+			<version>2.10.2</version>
+		</dependency>
+		<dependency>
+			<groupId>cuke4duke</groupId>
+			<artifactId>cuke4duke</artifactId>
+			<version>0.4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-ie-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>codehaus</id>
+			<url>http://repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>cukes</id>
+			<url>http://cukes.info/maven</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>cukes</id>
+			<url>http://cukes.info/maven</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>daveayan-releases</id>
+			<url>https://github.com/daveayan/_mavenrepository/raw/master/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
