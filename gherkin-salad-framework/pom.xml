@@ -126,6 +126,7 @@
 								</taskdef>
 								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFromExecutionPlan.groovy">
 								  <classpath refid="maven.compile.classpath" />
+								  	<arg line="${basedir}/src/test/resources/executionplan/execution-when-development.plan" />
 								</groovy>
 							</tasks>
 						</configuration>

@@ -1,24 +1,38 @@
 package daveayan.gherkinsalad.executionplan
 
-import groovy.io.FileType
 
 public class PrepareFromExecutionPlan {
 	public static void main(String[] args) {
 		println "gherkin-salad -> Preparing features from Execution Plan"
 		def object = new PrepareFromExecutionPlan()
-		object.run()
+		object.clean_and_prepare()
+		println args
+		if(args.length != 1) {
+			println "Please pass in the execution plan file"
+			return
+		}
+		object.run(args[0])
 	}
 	
-	def run() {
+	def run(atdd_execution_plan) {
+		println "-------------------------------------------------------"
+		println "Gherkin Salad"
+		println "-------------------------------------------------------"
+		println ""
 		enhance_groovy()
 		clean_and_prepare()
-		process_execution_plan()
+		process_execution_plan(atdd_execution_plan)
+		println ""
 	}
 	
-	def process_execution_plan() {
-		def atdd_execution_plan = System.getenv("ATDD_EXECUTION_PLAN")
-		println "Applying execution plan '${atdd_execution_plan}' "
-		def execution_plan = new File(atdd_execution_plan).text
+	def process_execution_plan(atdd_execution_plan) {
+		def execution_plan_file = new File(atdd_execution_plan)
+		println "--> Applying execution plan '${execution_plan_file.absolutePath}' "
+		if(! execution_plan_file.exists()) {
+			println "--> Execution file does not exist !"
+			return
+		}
+		def execution_plan = execution_plan_file.text
 		
 		def plan_items = execution_plan.split("Run")
 		plan_items.each { plan_item ->
@@ -65,7 +79,7 @@ public class PrepareFromExecutionPlan {
 	def process_feature_file(feature_file_name, def top_scenario_text, bottom_scenario_text) {
 		def feature_file = new File('./src/test/resources/features/' + feature_file_name)
 		if(feature_file.exists()) {
-			println "Processing Feature File '${feature_file.absolutePath}'"
+			println "--> Processing Feature File '${feature_file.absolutePath}'"
 			def processed_content = feature_file.text.replace("#EXECUTION PLAN INSTRUCTION AT TOP", top_scenario_text);
 			processed_content = processed_content.replace("#EXECUTION PLAN INSTRUCTION AT BOTTOM", bottom_scenario_text);
 			
@@ -75,7 +89,7 @@ public class PrepareFromExecutionPlan {
 			processed_feature_file.createNewFile()
 			processed_feature_file.write(processed_content);
 		} else {
-			println "File referred to by execution plan does not exist '${feature_file.absolutePath}'"
+			println "--> File referred to by execution plan does not exist '${feature_file.absolutePath}'"
 		}
 	}
 	
