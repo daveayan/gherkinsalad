@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
 import daveayan.lang.NullList;
@@ -21,31 +22,31 @@ public class PageStructure {
 	private Properties default_page_structure = null;
 	private Properties specific_page_structure = null;
 
-	public static PageStructure instanceFromFile(String absolute_file_path) {
+	public static PageStructure instanceFromFile(String file_name) {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible(absolute_file_path);
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible(absolute_file_path);
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible(file_name);
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible(file_name);
 		return page_structure;
 	}
 	
 	public static PageStructure instanceForIE() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./data/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./data/ie.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/ie.page.structure.csv");
 		return page_structure;
 	}
 	
 	public static PageStructure instanceForChrome() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./data/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./data/chrome.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/chrome.page.structure.csv");
 		return page_structure;
 	}
 	
 	public static PageStructure instanceForFirefox() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./data/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./data/firefox.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/firefox.page.structure.csv");
 		return page_structure;
 	}
 	
@@ -89,14 +90,14 @@ public class PageStructure {
 		return new NullBrowserElement();
 	}
 	
-	private Properties loadPageStructureIfPossible(String file_path) {
+	private Properties loadPageStructureIfPossible(String file_name) {
 		Properties props = new Properties();
 		try {
-			File file = new File(file_path);
+			File file = new File(Path.TO_PAGE_STRUCTURE + file_name);
 			if(! file.exists()) {
-				throw new AssertionError("File does not exist '" + file_path + "'");
+				throw new AssertionError("File does not exist '" + Path.TO_PAGE_STRUCTURE + file_name + "'");
 			}
-			LineIterator it = FileUtils.lineIterator(new File(file_path));
+			LineIterator it = FileUtils.lineIterator(new File(Path.TO_PAGE_STRUCTURE + file_name));
 			try {
 				while (it.hasNext()) {
 					String line = it.nextLine();

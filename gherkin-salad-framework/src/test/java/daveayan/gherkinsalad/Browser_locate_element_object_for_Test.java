@@ -18,7 +18,7 @@ public class Browser_locate_element_object_for_Test {
 	public void setup() {
 		driver = Mockito.mock(WebDriver.class);
 		
-		browser = Browser.instance_with_name_and_page_structure_path("unittest", "./src/test/resources/unit.test.page.structure.csv");
+		browser = Browser.instance_with_name_and_page_structure_name("unittest", "unit.test.page.structure.csv");
 		browser.launch_with_instance(driver);
 	}
 	

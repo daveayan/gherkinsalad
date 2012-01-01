@@ -12,10 +12,10 @@ public class ShoppingSteps extends BaseStep {
 		launch_browser(browser_name);
 	}
 	
-	@Given("^User launched the FireFox browser with page structure file ./src/test/resources/shop.amazon.feature.page.structure.csv$")
+	@Given("^User launched the FireFox browser with page structure file shop.amazon.feature.page.structure.csv$")
 	public void launch_browser_with_page_structure() {
 		String browser_name = "FireFox";
-		String page_structure_file = "./src/test/resources/shop.amazon.feature.page.structure.csv";
+		String page_structure_file = "shop.amazon.feature.page.structure.csv";
 		launch_browser_with(browser_name, page_structure_file);
 	}
 	

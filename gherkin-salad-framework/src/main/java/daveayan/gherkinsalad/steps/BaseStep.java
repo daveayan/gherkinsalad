@@ -47,8 +47,8 @@ public class BaseStep {
 		browser.launch();
 	}
 	
-	public void launch_browser_with(String name, String page_structure_path) {
-		browser = Browser.instance_with_name_and_page_structure_path(name, page_structure_path);
+	public void launch_browser_with(String name, String page_structure_file_name) {
+		browser = Browser.instance_with_name_and_page_structure_name(name, page_structure_file_name);
 		browser.launch();
 	}
 

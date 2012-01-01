@@ -17,10 +17,10 @@ public class Browser {
 
 	private static WebDriver instance;
 
-	public static Browser instance_with_name_and_page_structure_path(String name, String page_structure_path) {
+	public static Browser instance_with_name_and_page_structure_name(String name, String page_structure_name) {
 		Browser browser = new Browser();
 		browser.name = name;
-		browser.load_page_structure(page_structure_path);
+		browser.load_page_structure(page_structure_name);
 		return browser;
 	}
 
@@ -79,9 +79,9 @@ public class Browser {
 		instance.get(url);
 	}
 
-	private void load_page_structure(String page_structure_file_path) {
+	private void load_page_structure(String page_structure_file_name) {
 		if (page_structure == null) {
-			this.page_structure = PageStructure.instanceFromFile(page_structure_file_path);
+			this.page_structure = PageStructure.instanceFromFile(page_structure_file_name);
 		}
 	}
 
