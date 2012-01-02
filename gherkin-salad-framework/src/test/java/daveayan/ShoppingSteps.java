@@ -6,40 +6,31 @@ import cuke4duke.annotation.I18n.EN.When;
 import daveayan.gherkinsalad.steps.BaseStep;
 
 public class ShoppingSteps extends BaseStep {
-	@Given("^User launched the FireFox browser$")
-	public void launch_browser() {
-		String browser_name = "FireFox";
-		launch_browser(browser_name);
+	@Given("^User launched the (.*) browser with page structure file (.*)$")
+	public void launch_browser_with_page_structure(String browser_name, String page_structure_file_name) {
+		launch_browser_with(browser_name, page_structure_file_name);
 	}
 	
-	@Given("^User launched the FireFox browser with page structure file shop.amazon.feature.page.structure.csv$")
-	public void launch_browser_with_page_structure() {
-		String browser_name = "FireFox";
-		String page_structure_file = "shop.amazon.feature.page.structure.csv";
-		launch_browser_with(browser_name, page_structure_file);
-	}
-	
-	@Given("^User visited website http://www.amazon.com$")
-	public void goto_website() {
-		String url = "http://www.amazon.com";
+	@Given("^User visited website (.*)$")
+	public void goto_website(String url) {
 		goto_url(url);
 	}
 	
-	@Given("^User entered MacBook in Search Box$")
-	public void enter_macbook_in_search_box() throws InterruptedException {
+	@Given("^User entered (.*) in (.*)$")
+	public void enter_macbook_in_search_box(String text, String element_name) throws InterruptedException {
 		wait_for_page_to_load();
-		enter_text("MacBook", on_element_with_key("", "", "Search Box"));
+		enter(text, on_element_with_key("", "", element_name));
 	}
 	
-	@When("^User clicks Go$")
-	public void click_go() throws InterruptedException {
+	@When("^User clicks (.*)$")
+	public void click_go(String element_name) throws InterruptedException {
 		wait_for_page_to_load();
-		click(on_element_with_key("", "", "Go"));
+		click(on_element_with_key("", "", element_name));
 	}
 	
 	@Then("^User closes the browser window$")
-	public void close_browser() {
+	public void close_browser_window() {
 		wait_for_page_to_load();
-		super.close_browser();
+		close_browser();
 	}
 }

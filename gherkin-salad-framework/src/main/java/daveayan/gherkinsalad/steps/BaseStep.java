@@ -17,29 +17,24 @@ public class BaseStep {
 		return on_element_with_key(role_name, component_name, element_name);
 	}
 	
-	public void select(String text, PageElementKey page_element_key) {
-		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
-		selectable_element.select_if_enabled(text);
-	}
-	
-	public void append(String text, PageElementKey page_element_key) {
-		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
-		text_enterable_element.append_text_if_enabled(text);
-	}
-	
 	public void click(PageElementKey page_element_key) {
 		Clickable go_button = (Clickable) browser.locate_element_object_for(page_element_key);
 		go_button.click_if_enabled();
 	}
 	
-	public void enter_text(String text, PageElementKey page_element_key) {
+	public void select(String text, PageElementKey page_element_key) {
+		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
+		selectable_element.select_if_enabled(text);
+	}
+	
+	public void enter(String text, PageElementKey page_element_key) {
 		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
 		text_enterable_element.enter_text_if_enabled(text);
 	}
 	
-	public void select_text(String text, PageElementKey page_element_key) {
-		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
-		selectable_element.select_if_enabled(text);
+	public void append(String text, PageElementKey page_element_key) {
+		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
+		text_enterable_element.append_text_if_enabled(text);
 	}
 	
 	public void launch_browser(String browser_name) {
