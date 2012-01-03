@@ -30,4 +30,8 @@ public class MockBrowserElement implements BrowserElement {
 	public void page_element_key_is(PageElementKey pek) {
 		this.pek = pek;
 	}
+	public void has_text(String[] expected_texts) {
+	}
+	public void does_not_have_text(String[] expected_texts) {
+	}
 }

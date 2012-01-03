@@ -70,7 +70,7 @@ public class Browser_locate_element_object_for_Test {
 		Assert.assertEquals(driver, actual_browser_element.driver);
 		Assert.assertEquals(1, actual_browser_element.element_locators.size());
 		Assert.assertEquals("By.id: edit_button", actual_browser_element.element_locators.get(0).toString());
-		Assert.assertEquals("PageElement with key 'anyuser,*,Edit'", actual_browser_element.pek.toString());
+		Assert.assertEquals("PageElement with key 'anyuser,Page,Edit'", actual_browser_element.pek.toString());
 	}
 	
 	@Test
@@ -88,7 +88,7 @@ public class Browser_locate_element_object_for_Test {
 		Assert.assertEquals(2, actual_browser_element.element_locators.size());
 		Assert.assertEquals("By.id: menu", actual_browser_element.element_locators.get(0).toString());
 		Assert.assertEquals("By.id: add_option", actual_browser_element.element_locators.get(1).toString());
-		Assert.assertEquals("PageElement with key 'anyuser,*,Add'", actual_browser_element.pek.toString());
+		Assert.assertEquals("PageElement with key 'anyuser,Page,Add'", actual_browser_element.pek.toString());
 	}
 	
 	@Test
@@ -104,7 +104,7 @@ public class Browser_locate_element_object_for_Test {
 		
 		Assert.assertEquals(driver, actual_browser_element.driver);
 		Assert.assertEquals(0, actual_browser_element.element_locators.size());
-		Assert.assertEquals("PageElement with key 'anyuser,*,*'", actual_browser_element.pek.toString());
+		Assert.assertEquals("PageElement with key 'anyuser,Page,*'", actual_browser_element.pek.toString());
 	}
 	
 	@Test
@@ -132,6 +132,6 @@ public class Browser_locate_element_object_for_Test {
 		Assert.assertEquals(driver, actual_browser_element.driver);
 		Assert.assertEquals(1, actual_browser_element.element_locators.size());
 		Assert.assertEquals("By.linkText: no_such_element_in_page_structure", actual_browser_element.element_locators.get(0).toString());
-		Assert.assertEquals("PageElement with key '*,*,*'", actual_browser_element.pek.toString());
+		Assert.assertEquals("PageElement with key '*,Page,*'", actual_browser_element.pek.toString());
 	}
 }
