@@ -23,7 +23,7 @@ public class PageElementKey {
 	
 	private void create_key(String role, String component_name, String element_name) {
 		if(StringUtils.isBlank(role)) role = "*";
-		if(StringUtils.isBlank(component_name)) component_name = "*";
+		if(StringUtils.isBlank(component_name)) component_name = "Page";
 		if(StringUtils.isBlank(element_name)) element_name = "*";
 		key = role.trim() + "," + component_name.trim() + "," + element_name.trim();
 	}

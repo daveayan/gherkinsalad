@@ -167,6 +167,8 @@ public class PageStructure {
 			return By.tagName(value);
 		} else if("className".equalsIgnoreCase(type.trim())) {
 			return By.className(value);
+		} else if("cssSelector".equalsIgnoreCase(type.trim())) {
+			return By.cssSelector(value);
 		} 
 		return By.linkText(value);
 	}
