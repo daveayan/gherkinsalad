@@ -3,8 +3,19 @@ Feature: So that I can find a laptop at the lowest price possible I want to chec
 	#EXECUTION PLAN INSTRUCTION AT TOP
 
 	Scenario: Search for MacBook on amazon.com
-		Given 	User entered MacBook in Search Box
+		Given 	User entered MacBook in text box Search Box
 		When 	User clicks Go
-		Then 	User should see the text MacBook in Search Results
+		Then 	Search Results has text ~MacBook ; Apple ; Laptop~
+			And Search Results does not have text ~gherkin ; salad~
+			And Page does not have text ~gherkin ; salad~
+			And Page has enabled elements ~Search Box ; Go~
+			
+	Scenario: Search for MacBook on amazon.com, electronics department
+		Given 	User selected option Electronics in drop down Department
+			And User entered MacBook in text box Search Box
+		When 	User clicks Go
+		Then 	Search Results has text ~MacBook ; Apple ; Laptop~
+			And Search Results does not have text ~gherkin ; salad~
+			And Page does not have text ~gherkin ; salad~
 		
 	#EXECUTION PLAN INSTRUCTION AT BOTTOM
