@@ -53,7 +53,7 @@ public class PageStructure {
 	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
 		if(be instanceof NullBrowserElement) {
-			PageElementKey pek = PageElementKey.newInstance("", "", "");
+			PageElementKey pek = PageElementKey.instanceForAnyRoleComponentElement();
 			be = getElementWithBys(pek);
 			if(be instanceof NullBrowserElement) {
 				be = new NullBrowserElement();
@@ -176,6 +176,12 @@ public class PageStructure {
 		String element_locator = (String) specific_page_structure.getProperty(page_element_key.key());
 		if(element_locator == null) { 
 			element_locator = (String) default_page_structure.getProperty(page_element_key.key());
+		}
+		if(element_locator == null) {
+			element_locator = (String) specific_page_structure.getProperty(page_element_key.key_for_any_role());
+			if(element_locator == null) { 
+				element_locator = (String) default_page_structure.getProperty(page_element_key.key_for_any_role());
+			}
 		}
 		return element_locator;
 	}
