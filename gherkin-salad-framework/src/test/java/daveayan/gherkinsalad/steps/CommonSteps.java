@@ -21,6 +21,14 @@ public class CommonSteps extends BaseStep {
 	public void goto_website(String url) {
 		goto_url(url);
 	}
+	@Given("^Data Management driver is (.*)$")
+	public void data_management_driver(String dmd) {
+		data_management_driver = dmd;
+	}
+	@Given("^Data Management file is (.*)$")
+	public void data_management_file(String dmf) {
+		feature_data_source = load_data_source(dmf, data_management_driver);
+	}
 	@Given("^User is a ([^\\.]*)$")
 	public void assume_role(String role_name) {
 		current_role = role_name;

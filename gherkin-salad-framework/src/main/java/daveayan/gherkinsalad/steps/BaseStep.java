@@ -17,6 +17,7 @@ public class BaseStep {
 	protected static String current_role = StringUtils.EMPTY;
 	protected static String feature_under_test = StringUtils.EMPTY;
 	protected static DataSource feature_data_source = null;
+	protected static String data_management_driver = StringUtils.EMPTY;
 	protected static Browser browser;
 	
 	public DataSource load_data_source(String data_source_file_name, String data_source_driver) {
@@ -39,7 +40,7 @@ public class BaseStep {
 	}
 	
 	private String data_with_key(DataElementKey data_element_key) {
-		return "";
+		return feature_data_source.get_data_for(data_element_key);
 	}
 	
 	public DataElementKey data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {

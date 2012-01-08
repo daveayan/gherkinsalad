@@ -2,8 +2,13 @@ Feature: So that I can find a laptop at the lowest price possible I want to chec
 	
 	#EXECUTION PLAN INSTRUCTION AT TOP
 
+	Scenario: Setup
+		Given 	User is a Developer
+			And Data Management driver is daveayan.gherkinsalad.driver.AmazonDataDriver
+			And Data Management file is amazon-shopping-data.csv
+
 	Scenario: Search for MacBook on amazon.com
-		Given 	User entered text MacBook in text box Search Box
+		Given 	User entered data Item to Shop in text box Search Box
 		When 	User clicks Go
 		Then 	Search Results has text ~MacBook ; Apple ; Laptop~
 			And Search Results does not have text ~gherkin ; salad~
