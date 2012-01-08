@@ -40,6 +40,7 @@ public class PrepareFromExecutionPlan {
 		plan_items.each { plan_item ->
 			if(! plan_item.isAllWhitespace()) {
 				plan_item = plan_item.replace("Url", "~")
+				plan_item = plan_item.replace("Data File", "~")
 				def items = plan_item.split("~")
 				
 				def top_scenario_text = get_top_scenario_text(browser_name, items)
@@ -55,6 +56,7 @@ public class PrepareFromExecutionPlan {
 		def scenario_text = "Scenario: Prepare browser and test data"
 		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser"
 		scenario_text += "\n\t\tAnd User visited website " + items[1].trim()
+		if(items.length > 2) scenario_text += "\n\t\tAnd Data Management file is " + items[2].trim()
 		return scenario_text
 	}
 	

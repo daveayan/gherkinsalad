@@ -17,7 +17,7 @@ public class BaseStep {
 	protected static String current_role = StringUtils.EMPTY;
 	protected static String feature_under_test = StringUtils.EMPTY;
 	protected static DataSource feature_data_source = null;
-	protected static String data_management_driver = StringUtils.EMPTY;
+	protected static String data_management_driver = StringUtils.EMPTY, data_management_file = StringUtils.EMPTY;
 	protected static Browser browser;
 	
 	public DataSource load_data_source(String data_source_file_name, String data_source_driver) {

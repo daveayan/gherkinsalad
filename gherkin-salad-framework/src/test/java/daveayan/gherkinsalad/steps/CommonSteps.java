@@ -27,7 +27,11 @@ public class CommonSteps extends BaseStep {
 	}
 	@Given("^Data Management file is (.*)$")
 	public void data_management_file(String dmf) {
-		feature_data_source = load_data_source(dmf, data_management_driver);
+		data_management_file = dmf;
+	}
+	@Given("^Data is loaded$")
+	public void load_data_management_module() {
+		feature_data_source = load_data_source(data_management_file, data_management_driver);
 	}
 	@Given("^User is a ([^\\.]*)$")
 	public void assume_role(String role_name) {

@@ -5,7 +5,7 @@ Feature: So that I can find a laptop at the lowest price possible I want to chec
 	Scenario: Setup
 		Given 	User is a Developer
 			And Data Management driver is daveayan.gherkinsalad.driver.AmazonDataDriver
-			And Data Management file is amazon-shopping-data.csv
+			And Data is loaded
 
 	Scenario: Search for MacBook on amazon.com
 		Given 	User entered data Item to Shop in text box Search Box
