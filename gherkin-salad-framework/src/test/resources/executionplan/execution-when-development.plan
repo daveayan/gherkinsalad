@@ -1,3 +1,6 @@
-Run learn-html.feature With Browser FireFox Page Structure learn.html.page.structure.csv Url http://www.w3schools.com/html/html_forms.asp
-Run shopping.feature With Browser FireFox Page Structure shop.amazon.feature.page.structure.csv Url http://www.amazon.com
-Run shopping.feature With Browser FireFox Page Structure shop.amazon.feature.page.structure.csv Url http://www.amazon.com
+browser:FireFox
+
+Specifics
+Run learn-html.feature Url http://www.w3schools.com/html/html_forms.asp
+Run shopping.feature Url http://www.amazon.com
+Run shopping.feature Url http://www.amazon.com

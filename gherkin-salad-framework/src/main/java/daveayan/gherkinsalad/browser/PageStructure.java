@@ -31,22 +31,22 @@ public class PageStructure {
 	
 	public static PageStructure instanceForIE() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/ie.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("ie.page.structure.csv");
 		return page_structure;
 	}
 	
 	public static PageStructure instanceForChrome() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/chrome.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("chrome.page.structure.csv");
 		return page_structure;
 	}
 	
 	public static PageStructure instanceForFirefox() {
 		PageStructure page_structure = new PageStructure();
-		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/page.structure.csv");
-		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("./src/test/resources/pagestructure/firefox.page.structure.csv");
+		page_structure.default_page_structure = page_structure.loadPageStructureIfPossible("page.structure.csv");
+		page_structure.specific_page_structure = page_structure.loadPageStructureIfPossible("firefox.page.structure.csv");
 		return page_structure;
 	}
 	
@@ -94,32 +94,31 @@ public class PageStructure {
 		Properties props = new Properties();
 		try {
 			File file = new File(Path.TO_PAGE_STRUCTURE + file_name);
-			if(! file.exists()) {
-				throw new AssertionError("File does not exist '" + Path.TO_PAGE_STRUCTURE + file_name + "'");
-			}
-			LineIterator it = FileUtils.lineIterator(new File(Path.TO_PAGE_STRUCTURE + file_name));
-			try {
-				while (it.hasNext()) {
-					String line = it.nextLine();
-					String[] items = StringUtils.splitByWholeSeparatorPreserveAllTokens(line, ",");
-					if (items != null && items.length == 7) {
-						if (StringUtils.isNotBlank(items[0])) {
-							String key = items[0] + "," + items[1] + "," + items[2];
-
-							if(StringUtils.isBlank(items[3])) {
-								items[3] = NA;
+			if(file.exists()) {
+				LineIterator it = FileUtils.lineIterator(new File(Path.TO_PAGE_STRUCTURE + file_name));
+				try {
+					while (it.hasNext()) {
+						String line = it.nextLine();
+						String[] items = StringUtils.splitByWholeSeparatorPreserveAllTokens(line, ",");
+						if (items != null && items.length == 7) {
+							if (StringUtils.isNotBlank(items[0])) {
+								String key = items[0] + "," + items[1] + "," + items[2];
+	
+								if(StringUtils.isBlank(items[3])) {
+									items[3] = NA;
+								}
+								String value = items[3] + "~" + items[4];
+								if (StringUtils.isNotBlank(items[5]))
+									value = value + "," + items[5];
+								if (StringUtils.isNotBlank(items[6]))
+									value = value + "," + items[6];
+								props.put(key, value);
 							}
-							String value = items[3] + "~" + items[4];
-							if (StringUtils.isNotBlank(items[5]))
-								value = value + "," + items[5];
-							if (StringUtils.isNotBlank(items[6]))
-								value = value + "," + items[6];
-							props.put(key, value);
 						}
 					}
+				} finally {
+					it.close();
 				}
-			} finally {
-				it.close();
 			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();

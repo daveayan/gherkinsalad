@@ -33,16 +33,16 @@ public class PrepareFromExecutionPlan {
 			return
 		}
 		def execution_plan = execution_plan_file.text
+		def browser_and_features = execution_plan.split("Specifics")
+		def browser_name = browser_and_features[0].split(":")[1]
 		
-		def plan_items = execution_plan.split("Run")
+		def plan_items = browser_and_features[1].split("Run")
 		plan_items.each { plan_item ->
 			if(! plan_item.isAllWhitespace()) {
-				plan_item = plan_item.replace("With Browser", "~")
-				plan_item = plan_item.replace("Page Structure", "~")
 				plan_item = plan_item.replace("Url", "~")
 				def items = plan_item.split("~")
 				
-				def top_scenario_text = get_top_scenario_text(items)
+				def top_scenario_text = get_top_scenario_text(browser_name, items)
 				def bottom_scenario_text = "Scenario: Close Browser\n"
 				bottom_scenario_text += "\t\tThen User closes the browser window"
 				
@@ -51,21 +51,11 @@ public class PrepareFromExecutionPlan {
 		}
 	}
 	
-	def get_top_scenario_text(items) {
-		if(items.length == 4) {
-			def scenario_text = "Scenario: Prepare browser and test data"
-			scenario_text += "\n\t\tGiven User launched the " + items[1].trim() + " browser"
-			scenario_text += " with page structure file " + items[2].trim()
-			scenario_text += "\n\t\tAnd User visited website " + items[3].trim()
-			return scenario_text
-		} 
-		if(items.length == 3) {
-			def scenario_text = "Scenario: Prepare browser and test data"
-			scenario_text += "\n\t\tGiven User launched the " + items[1].trim() + " browser"
-			scenario_text += "\n\t\tAnd User visited website " + items[2].trim()
-			return scenario_text
-		}
-		return null;
+	def get_top_scenario_text(browser_name, items) {
+		def scenario_text = "Scenario: Prepare browser and test data"
+		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser"
+		scenario_text += "\n\t\tAnd User visited website " + items[1].trim()
+		return scenario_text
 	}
 	
 	def clean_and_prepare() {
