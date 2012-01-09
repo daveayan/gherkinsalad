@@ -124,9 +124,9 @@
 								<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
 									<classpath refid="maven.compile.classpath" />
 								</taskdef>
-								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFromExecutionPlan.groovy">
+								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFeaturesFromExecutionPlan.groovy">
 								  <classpath refid="maven.compile.classpath" />
-								  	<arg line="${basedir}/src/test/resources/executionplan/execution-when-development.plan" />
+								  	<arg line="${basedir}/src/test/resources/executionplan/integration-test-execution-plan.csv" />
 								</groovy>
 							</tasks>
 						</configuration>

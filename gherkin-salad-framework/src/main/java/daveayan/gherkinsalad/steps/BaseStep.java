@@ -148,6 +148,11 @@ public class BaseStep {
 	}
 	// ******************************************************************************************************************************************************
 	
+	public void launch_browser_with(String name, String page_structure_file_name) {
+		browser = Browser.instance_with_name_and_page_structure_name(name, page_structure_file_name);
+		browser.launch();
+	}
+	
 	public void launch_browser(String browser_name) {
 		browser = Browser.instance(browser_name);
 		browser.launch();

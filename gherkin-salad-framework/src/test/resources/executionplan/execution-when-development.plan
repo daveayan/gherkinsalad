@@ -1,6 +1,0 @@
-browser:FireFox
-
-Specifics
-Run learn-html.feature Url http://www.w3schools.com/html/html_forms.asp
-Run shopping.feature Url http://www.amazon.com Data File amazon-shopping-data.csv
-Run shopping.feature Url http://www.amazon.com Data File amazon-shopping-data.csv
