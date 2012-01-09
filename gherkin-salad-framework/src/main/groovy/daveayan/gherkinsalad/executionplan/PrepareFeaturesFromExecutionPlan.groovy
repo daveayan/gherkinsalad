@@ -5,8 +5,12 @@ import daveayan.gherkinsalad.Path
 class PrepareFeaturesFromExecutionPlan {
 	public static void main(String[] args) {
 		PrepareFeaturesFromExecutionPlan object = new PrepareFeaturesFromExecutionPlan()
-		object.clean_and_prepare()
-		object.process_execution_plan("integration-test-execution-plan.csv")
+		object.run(args[0])
+	}
+	
+	def run(file_name) {
+		clean_and_prepare()
+		process_execution_plan(file_name)
 	}
 	
 	def clean_and_prepare() {

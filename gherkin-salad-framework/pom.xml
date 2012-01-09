@@ -126,7 +126,7 @@
 								</taskdef>
 								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFeaturesFromExecutionPlan.groovy">
 								  <classpath refid="maven.compile.classpath" />
-								  	<arg line="${basedir}/src/test/resources/executionplan/integration-test-execution-plan.csv" />
+								  	<arg line="integration-test-execution-plan.csv" />
 								</groovy>
 							</tasks>
 						</configuration>
