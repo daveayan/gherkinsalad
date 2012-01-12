@@ -24,13 +24,6 @@ public class Browser {
 		return browser;
 	}
 
-	public static Browser instance(String name) {
-		Browser browser = new Browser();
-		browser.name = name;
-		browser.load_page_structure();
-		return browser;
-	}
-
 	public BrowserElement locate_element_object_for(String role, String component_name, String element_name) {
 		PageElementKey pek = PageElementKey.newInstance(role, component_name, element_name);
 		return locate_element_object_for(pek);
@@ -85,17 +78,17 @@ public class Browser {
 		}
 	}
 
-	private void load_page_structure() {
-		if (page_structure == null) {
-			if (this.is_IE()) {
-				this.page_structure = PageStructure.instanceForIE();
-			} else if (this.is_Chrome()) {
-				this.page_structure = PageStructure.instanceForChrome();
-			} else if (this.is_Firefox()) {
-				this.page_structure = PageStructure.instanceForFirefox();
-			}
-		}
-	}
+//	private void load_page_structure() {
+//		if (page_structure == null) {
+//			if (this.is_IE()) {
+//				this.page_structure = PageStructure.instanceForIE();
+//			} else if (this.is_Chrome()) {
+//				this.page_structure = PageStructure.instanceForChrome();
+//			} else if (this.is_Firefox()) {
+//				this.page_structure = PageStructure.instanceForFirefox();
+//			}
+//		}
+//	}
 
 	private boolean is_IE() {
 		return "ie".equalsIgnoreCase(this.name);
