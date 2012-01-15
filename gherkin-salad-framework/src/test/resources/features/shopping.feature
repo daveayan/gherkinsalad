@@ -6,16 +6,16 @@ Feature: So that I can find a laptop at the lowest price possible I want to chec
 		Given 	User is a Developer
 
 	Scenario: Search for MacBook on amazon.com
-		Given 	User entered data Item to Shop in text box Search Box
-		When 	User clicks Go
+		Given 	I entered data Item to Shop in text box Search Box
+		When 	You clicks Go
 		Then 	Search Results has text ~MacBook ; Apple ; Laptop~
 			And Search Results does not have text ~gherkin ; salad~
 			And Page does not have text ~gherkin ; salad~
 			And Page has enabled elements ~Search Box ; Go~
 			
 	Scenario: Search for MacBook on amazon.com, electronics department
-		Given 	User selected option text Electronics in drop down Department
-			And User entered text MacBook in text box Search Box
+		Given 	you selected option text Electronics in drop down Department
+			And user entered text MacBook in text box Search Box
 		When 	User clicks Go
 		Then 	Search Results has text ~MacBook ; Apple ; Laptop~
 			And Search Results does not have text ~gherkin ; salad~
