@@ -26,7 +26,6 @@ public class CommonSteps extends BaseStep {
 	}
 	@Then("^(?:User|user|I|You|you) closes the browser window$")
 	public void close_browser_window() {
-		wait_for_page_to_load();
 		close_browser();
 	}
 }

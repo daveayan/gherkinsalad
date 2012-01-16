@@ -2,7 +2,9 @@ package daveayan.gherkinsalad.browser;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -31,6 +33,10 @@ public class Browser {
 
 	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
 		return page_structure.getElement(instance, page_element_key);
+	}
+	
+	public WebElement findElementBy(By by) {
+		return instance.findElement(by);
 	}
 
 	public void close() {

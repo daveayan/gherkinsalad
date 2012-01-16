@@ -34,4 +34,10 @@ public class MockBrowserElement implements BrowserElement {
 	}
 	public void does_not_have_text(String[] expected_texts) {
 	}
+	public boolean exists() {
+		return false;
+	}
+	public boolean does_not_exist() {
+		return false;
+	}
 }

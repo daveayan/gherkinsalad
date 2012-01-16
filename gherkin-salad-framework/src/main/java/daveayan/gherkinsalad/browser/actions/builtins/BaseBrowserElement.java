@@ -2,10 +2,16 @@ package daveayan.gherkinsalad.browser.actions.builtins;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.browser.NullWebElement;
 import daveayan.gherkinsalad.browser.PageElementKey;
@@ -17,7 +23,16 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	protected List<By> element_locators;
 
 	protected WebDriver driver;
-
+	
+	public boolean exists() {
+		WebElement element = fetch_element(0);
+		return element != null;
+	}
+	
+	public boolean does_not_exist() {
+		return !exists();
+	}
+	
 	public void has_text(String[] expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
@@ -57,11 +72,29 @@ public abstract class BaseBrowserElement implements BrowserElement {
 			return NullWebElement.newInstance(null, page_element_key);
 		}
 		By selector = element_locators.get(id);
-		WebElement element = driver.findElement(selector);
-		if (element == null) {
-			element = NullWebElement.newInstance(selector, page_element_key);
+		try {
+			WebElement element = findElement(selector);
+			if(element == null) {
+				element = NullWebElement.newInstance(selector, page_element_key);
+			} return element;
+		} catch (NoSuchElementException nsee) {
+			nsee.printStackTrace();
 		}
-		return element;
+		return NullWebElement.newInstance(selector, page_element_key);
+	}
+	
+	private WebElement findElement(final By by) {
+	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+	       .withTimeout(30, TimeUnit.SECONDS)
+	       .pollingEvery(1, TimeUnit.SECONDS)
+	       .ignoring(NoSuchElementException.class);
+	 
+	   WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+	     public WebElement apply(WebDriver driver) {
+	       return driver.findElement(by);
+	     }
+	   });
+	   return element;
 	}
 
 	public void assert_that_the_number_of_element_locators_is(int expected_number) {

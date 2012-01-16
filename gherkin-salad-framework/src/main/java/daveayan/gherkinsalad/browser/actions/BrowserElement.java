@@ -14,4 +14,7 @@ public interface BrowserElement extends CanBeEnabled, CanBeDisabled {
 	
 	public void has_text(String[] expected_texts);
 	public void does_not_have_text(String[] expected_texts);
+	
+	public boolean exists();
+	public boolean does_not_exist();
 }
