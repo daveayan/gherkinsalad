@@ -24,6 +24,11 @@ public abstract class BaseBrowserElement implements BrowserElement {
 
 	protected WebDriver driver;
 	
+	public boolean exists_immediate() {
+		WebElement element = fetch_element_immediate(0);
+		return ! (element instanceof NullWebElement);
+	}
+	
 	public boolean exists() {
 		WebElement element = fetch_element(0);
 		return element != null;
@@ -76,9 +81,27 @@ public abstract class BaseBrowserElement implements BrowserElement {
 			WebElement element = findElement(selector);
 			if(element == null) {
 				element = NullWebElement.newInstance(selector, page_element_key);
-			} return element;
+			} 
+			return element;
 		} catch (NoSuchElementException nsee) {
-			nsee.printStackTrace();
+			System.out.println(nsee.getMessage());
+		}
+		return NullWebElement.newInstance(selector, page_element_key);
+	}
+	
+	private WebElement fetch_element_immediate(int id) {
+		if (id >= element_locators.size()) {
+			return NullWebElement.newInstance(null, page_element_key);
+		}
+		By selector = element_locators.get(id);
+		try {
+			WebElement element = driver.findElement(selector);
+			if(element == null) {
+				element = NullWebElement.newInstance(selector, page_element_key);
+			} 
+			return element;
+		} catch (NoSuchElementException nsee) {
+			System.out.println(nsee.getMessage());
 		}
 		return NullWebElement.newInstance(selector, page_element_key);
 	}

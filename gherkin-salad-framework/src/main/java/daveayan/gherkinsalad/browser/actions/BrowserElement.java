@@ -17,4 +17,6 @@ public interface BrowserElement extends CanBeEnabled, CanBeDisabled {
 	
 	public boolean exists();
 	public boolean does_not_exist();
+	
+	public boolean exists_immediate();
 }

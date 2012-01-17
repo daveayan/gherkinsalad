@@ -50,18 +50,22 @@ public class BaseStep {
 		return DataElementKey.newInstance(current_role, feature_under_test, symbolic_data_name);
 	}
 	
-	public PageElementKey on_page_element_with_key(String role_name, String component_name, String element_name) {
-		return PageElementKey.newInstance(role_name, component_name, element_name);
+	public PageElementKey on_page_element_with_key(String element_name) {
+		return PageElementKey.newInstance(current_role, "", element_name);
 	}
 	
-	public PageElementKey to_element_with_key(String role_name, String component_name, String element_name) {
-		return on_page_element_with_key(role_name, component_name, element_name);
+	public PageElementKey on_page_element_with_key(String component_name, String element_name) {
+		return PageElementKey.newInstance(current_role, component_name, element_name);
+	}
+	
+	public PageElementKey to_element_with_key(String component_name, String element_name) {
+		return on_page_element_with_key(component_name, element_name);
 	}
 	
 	public void has_enabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(current_role, component_name, element_name);
+				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.isDisabled()) {
 					throw new AssertionError("Element '" + pek + "' is disabled, expected it to be enabled");
@@ -73,7 +77,7 @@ public class BaseStep {
 	public void has_disabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(current_role, component_name, element_name);
+				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.isDisabled()) {
 					throw new AssertionError("Element '" + pek + "' is enabled, expected it to be disabled");
@@ -83,11 +87,12 @@ public class BaseStep {
 	}
 	
 	public void elements_dont_exist(String component_name, String[] element_names) {
+		wait_for_seconds(10);
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(current_role, component_name, element_name);
+				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
-				if(element.exists()) {
+				if(element.exists_immediate()) {
 					throw new AssertionError("Element '" + pek + "' should not exist, found '" + element + "'");
 				}
 			}
@@ -162,5 +167,13 @@ public class BaseStep {
 	
 	public void goto_url(String url) {
 		browser.goto_url(url);
+	}
+	
+	protected void wait_for_seconds(int seconds) {
+		try {
+			Thread.sleep(seconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
