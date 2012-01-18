@@ -38,7 +38,7 @@ public class BaseStep {
 		return null;
 	}
 	
-	private String data_with_key(DataElementKey data_element_key) {
+	public String data_with_key(DataElementKey data_element_key) {
 		return feature_data_source.get_data_for(data_element_key);
 	}
 	
@@ -142,12 +142,14 @@ public class BaseStep {
 	}
 	
 	public void enter(DataElementKey data_element_key, PageElementKey page_element_key) {
-		String text = data_with_key(data_element_key);
+		println "In enter 1"
+		String text = this.data_with_key(data_element_key);
 		enter(text, page_element_key);
 	}
 	
 	public void append(DataElementKey data_element_key, PageElementKey page_element_key) {
-		String text = data_with_key(data_element_key);
+		println "In enter 2"
+		String text = this.data_with_key(data_element_key);
 		append(text, page_element_key);
 	}
 	// ******************************************************************************************************************************************************
