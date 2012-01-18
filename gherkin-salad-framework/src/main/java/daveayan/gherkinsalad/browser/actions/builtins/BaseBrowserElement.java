@@ -134,6 +134,14 @@ public abstract class BaseBrowserElement implements BrowserElement {
 					+ expected_number + "' for '" + this.getClass().getName() + "', page element key '" + page_element_key + "'");
 		}
 	}
+	
+	public boolean is_null() {
+		return false;
+	}
+	
+	public boolean is_not_null() {
+		return !is_null();
+	}
 
 	public boolean isDisabled() {
 		return !isEnabled();

@@ -30,10 +30,10 @@ public class PageStructure {
 
 	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
-		if (be instanceof NullBrowserElement) {
+		if (be.is_null()) {
 			PageElementKey pek = PageElementKey.instanceForAnyRoleComponentElement();
 			be = getElementWithBys(pek);
-			if (be instanceof NullBrowserElement) {
+			if (be.is_null()) {
 				be = new NullBrowserElement();
 				be.page_element_key_is(page_element_key);
 			} else {

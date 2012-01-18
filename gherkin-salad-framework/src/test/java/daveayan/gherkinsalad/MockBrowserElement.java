@@ -43,4 +43,10 @@ public class MockBrowserElement implements BrowserElement {
 	public boolean exists_immediate() {
 		return false;
 	}
+	public boolean is_null() {
+		return false;
+	}
+	public boolean is_not_null() {
+		return !is_null();
+	}
 }

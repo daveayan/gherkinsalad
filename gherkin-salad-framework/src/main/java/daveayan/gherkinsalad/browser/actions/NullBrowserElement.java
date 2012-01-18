@@ -10,6 +10,12 @@ import daveayan.gherkinsalad.browser.PageElementKey;
 public class NullBrowserElement implements Clickable, Selectable, TextEnterable, BrowserElement {
 	private PageElementKey pek;
 	
+	public boolean is_null() {
+		return true;
+	}
+	public boolean is_not_null() {
+		return !is_null();
+	}
 	public boolean exists() {
 		throw new AssertionError("operation exists not allowed on a NullBrowserElement '" + this + "'");
 	}
