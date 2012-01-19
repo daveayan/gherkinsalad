@@ -24,21 +24,21 @@ public abstract class BaseBrowserElement implements BrowserElement {
 
 	protected WebDriver driver;
 	
-	public boolean exists_immediate() {
+	def exists_immediate() {
 		WebElement element = fetch_element_immediate(0);
 		return ! (element instanceof NullWebElement);
 	}
 	
-	public boolean exists() {
+	def exists() {
 		WebElement element = fetch_element(0);
 		return element != null;
 	}
 	
-	public boolean does_not_exist() {
+	def does_not_exist() {
 		return !exists();
 	}
 	
-	public void has_text(String[] expected_texts) {
+	def has_text(String[] expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
@@ -54,7 +54,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 	}
 	
-	public void does_not_have_text(String[] unexpected_texts) {
+	def does_not_have_text(String[] unexpected_texts) {
 		if (unexpected_texts != null) {
 			List<String> unexpected_text_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
@@ -137,27 +137,27 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 	}
 	
-	public boolean is_null() {
+	def is_null() {
 		return false;
 	}
 	
-	public boolean is_not_null() {
+	def is_not_null() {
 		return !is_null();
 	}
 
-	public boolean isDisabled() {
+	def isDisabled() {
 		return !isEnabled();
 	}
 
-	public void page_element_key_is(PageElementKey pek) {
+	def page_element_key_is(PageElementKey pek) {
 		this.page_element_key = pek;
 	}
 
-	public void element_locators_are(List<By> element_locators) {
+	def element_locators_are(List<By> element_locators) {
 		this.element_locators = element_locators;
 	}
 
-	public void driver_is(WebDriver driver) {
+	def driver_is(WebDriver driver) {
 		this.driver = driver;
 	}
 }

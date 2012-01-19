@@ -28,7 +28,7 @@ public class PageStructure {
 		return page_structure;
 	}
 
-	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
+	def getElement(WebDriver driver, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
 		if (be.is_null()) {
 			PageElementKey pek = PageElementKey.instanceForAnyRoleComponentElement();
@@ -50,7 +50,7 @@ public class PageStructure {
 		return be;
 	}
 
-	private BrowserElement getElementWithBys(PageElementKey page_element_key) {
+	def getElementWithBys(PageElementKey page_element_key) {
 		String value = element_locators_for(page_element_key);
 		if (StringUtils.isNotBlank(value)) {
 			String[] value_elements = value.split("~");
@@ -69,7 +69,7 @@ public class PageStructure {
 		return new NullBrowserElement();
 	}
 
-	private Properties loadPageStructureIfPossible(String file_name) {
+	def loadPageStructureIfPossible(String file_name) {
 		Properties props = new Properties();
 		try {
 			File file = new File(Path.TO_PAGE_STRUCTURE + file_name);
@@ -105,7 +105,7 @@ public class PageStructure {
 		return props;
 	}
 
-	private BrowserElement create_browser_element_for(String class_name) {
+	def create_browser_element_for(String class_name) {
 		try {
 			Class< ? > clazz = Class.forName(class_name);
 			Object object = clazz.newInstance();
@@ -120,7 +120,7 @@ public class PageStructure {
 		return new NullBrowserElement();
 	}
 
-	private List<By> getBys(String element_locators_comma_seperated) {
+	def getBys(String element_locators_comma_seperated) {
 		List<By> bys = new ArrayList<By>();
 		if (StringUtils.isNotBlank(element_locators_comma_seperated)) {
 			String[] locators = element_locators_comma_seperated.split(",");
@@ -136,7 +136,7 @@ public class PageStructure {
 		return bys;
 	}
 
-	private By getBy(String type, String value) {
+	def getBy(String type, String value) {
 		if ("id".equalsIgnoreCase(type.trim())) {
 			return By.id(value);
 		} else if ("xpath".equalsIgnoreCase(type.trim())) {
@@ -151,7 +151,7 @@ public class PageStructure {
 		return By.linkText(value);
 	}
 
-	private String element_locators_for(PageElementKey page_element_key) {
+	def element_locators_for(PageElementKey page_element_key) {
 		String element_locator = (String) default_page_structure.getProperty(page_element_key.key());
 		if (element_locator == null) {
 			element_locator = (String) default_page_structure.getProperty(page_element_key.key_for_any_role());

@@ -17,19 +17,19 @@ public class PageElementKey {
 		return key;
 	}
 	
-	public String key() {
+	def key() {
 		return create_key(role, component_name, element_name);
 	}
 	
-	public String key_for_any_role() {
+	def key_for_any_role() {
 		return create_key(StringUtils.EMPTY, component_name, element_name);
 	}
 	
-	public String element_name() {
+	def element_name() {
 		return element_name;
 	}
 	
-	private String create_key(String role, String component_name, String element_name) {
+	def create_key(String role, String component_name, String element_name) {
 		if(StringUtils.isBlank(role)) role = "*";
 		if(StringUtils.isBlank(component_name)) component_name = "Page";
 		if(StringUtils.isBlank(element_name)) element_name = "*";

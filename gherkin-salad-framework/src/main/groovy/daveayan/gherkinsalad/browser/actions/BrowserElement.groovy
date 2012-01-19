@@ -9,15 +9,15 @@ import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.lang.IsNullable;
 
 public interface BrowserElement extends CanBeEnabled, CanBeDisabled, IsNullable {
-	public void page_element_key_is(PageElementKey pek);
-	public void element_locators_are(List<By> element_locators);
-	public void driver_is(WebDriver driver);
+	def page_element_key_is(PageElementKey pek);
+	def element_locators_are(List<By> element_locators);
+	def driver_is(WebDriver driver);
 	
-	public void has_text(String[] expected_texts);
-	public void does_not_have_text(String[] expected_texts);
+	def has_text(String[] expected_texts);
+	def does_not_have_text(String[] expected_texts);
 	
-	public boolean exists();
-	public boolean does_not_exist();
+	def exists();
+	def does_not_exist();
 	
-	public boolean exists_immediate();
+	def exists_immediate();
 }

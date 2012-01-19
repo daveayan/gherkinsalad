@@ -15,38 +15,38 @@ public class MockBrowserElement implements BrowserElement {
 	public boolean isNull() {
 		return false;
 	}
-	public void element_locators_are(List<By> element_locators) {
+	def element_locators_are(List<By> element_locators) {
 		this.element_locators = element_locators;
 	}
-	public void driver_is(WebDriver driver) {
+	def driver_is(WebDriver driver) {
 		this.driver = driver;
 	}
-	public boolean isEnabled() {
+	def isEnabled() {
 		return false;
 	}
-	public boolean isDisabled() {
+	def isDisabled() {
 		return false;
 	}
-	public void page_element_key_is(PageElementKey pek) {
+	def page_element_key_is(PageElementKey pek) {
 		this.pek = pek;
 	}
-	public void has_text(String[] expected_texts) {
+	def has_text(String[] expected_texts) {
 	}
-	public void does_not_have_text(String[] expected_texts) {
+	def does_not_have_text(String[] expected_texts) {
 	}
-	public boolean exists() {
+	def exists() {
 		return false;
 	}
-	public boolean does_not_exist() {
+	def does_not_exist() {
 		return false;
 	}
-	public boolean exists_immediate() {
+	def exists_immediate() {
 		return false;
 	}
-	public boolean is_null() {
+	def is_null() {
 		return false;
 	}
-	public boolean is_not_null() {
+	def is_not_null() {
 		return !is_null();
 	}
 }

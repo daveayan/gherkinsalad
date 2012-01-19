@@ -31,15 +31,15 @@ public class Browser {
 		return locate_element_object_for(pek);
 	}
 
-	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
+	def locate_element_object_for(PageElementKey page_element_key) {
 		return page_structure.getElement(instance, page_element_key);
 	}
 	
-	public WebElement findElementBy(By by) {
+	def findElementBy(By by) {
 		return instance.findElement(by);
 	}
 
-	public void close() {
+	def close() {
 		if (instance != null) {
 			instance.close();
 			instance.quit();
@@ -48,7 +48,7 @@ public class Browser {
 		}
 	}
 
-	public void launch() {
+	def launch() {
 		if (instance == null) {
 			if (this.is_IE()) {
 				instance = new InternetExplorerDriver();
@@ -70,41 +70,29 @@ public class Browser {
 		}
 	}
 
-	public void launch_with_instance(WebDriver driver) {
+	def launch_with_instance(WebDriver driver) {
 		Browser.instance = driver;
 	}
 
-	public void goto_url(String url) {
+	def goto_url(String url) {
 		instance.get(url);
 	}
 
-	private void load_page_structure(String page_structure_file_name) {
+	def load_page_structure(String page_structure_file_name) {
 		if (page_structure == null) {
 			this.page_structure = PageStructure.instanceFromFile(page_structure_file_name);
 		}
 	}
 
-//	private void load_page_structure() {
-//		if (page_structure == null) {
-//			if (this.is_IE()) {
-//				this.page_structure = PageStructure.instanceForIE();
-//			} else if (this.is_Chrome()) {
-//				this.page_structure = PageStructure.instanceForChrome();
-//			} else if (this.is_Firefox()) {
-//				this.page_structure = PageStructure.instanceForFirefox();
-//			}
-//		}
-//	}
-
-	private boolean is_IE() {
+	def is_IE() {
 		return "ie".equalsIgnoreCase(this.name);
 	}
 
-	private boolean is_Chrome() {
+	def is_Chrome() {
 		return "chrome".equalsIgnoreCase(this.name);
 	}
 
-	private boolean is_Firefox() {
+	def is_Firefox() {
 		return "firefox".equalsIgnoreCase(this.name);
 	}
 }

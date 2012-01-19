@@ -12,7 +12,7 @@ public class DataElementKey {
 		return key;
 	}
 	
-	private void create_key(String r, String fn, String sdn) {
+	def create_key(String r, String fn, String sdn) {
 		this.role = r;
 		this.feature_name = fn;
 		this.symbolic_data_name = sdn;
@@ -24,19 +24,19 @@ public class DataElementKey {
 		key = role.trim() + "," + feature_name.trim() + "," + symbolic_data_name.trim();
 	}
 	
-	public String key() {
+	def key() {
 		return key;
 	}
 
-	public String role() {
+	def role() {
 		return role;
 	}
 
-	public String feature_name() {
+	def feature_name() {
 		return feature_name;
 	}
 
-	public String symbolic_data_name() {
+	def symbolic_data_name() {
 		return symbolic_data_name;
 	}
 

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.browser.actions.TextEnterable;
 
 public class TextBox extends BaseBrowserElement implements TextEnterable {
-	public boolean isEnabled() {
+	def isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();
 	}

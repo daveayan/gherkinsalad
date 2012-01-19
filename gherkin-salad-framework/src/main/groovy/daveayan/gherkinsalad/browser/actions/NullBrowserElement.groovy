@@ -10,25 +10,25 @@ import daveayan.gherkinsalad.browser.PageElementKey;
 public class NullBrowserElement implements Clickable, Selectable, TextEnterable, BrowserElement {
 	private PageElementKey pek;
 	
-	public boolean is_null() {
+	def is_null() {
 		return true;
 	}
-	public boolean is_not_null() {
+	def is_not_null() {
 		return !is_null();
 	}
-	public boolean exists() {
+	def exists() {
 		throw new AssertionError("operation exists not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public boolean does_not_exist() {
+	def does_not_exist() {
 		throw new AssertionError("operation does_not_exist not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public boolean exists_immediate() {
+	def exists_immediate() {
 		throw new AssertionError("operation exists_immediate not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public boolean isEnabled() {
+	def isEnabled() {
 		throw new AssertionError("operation isEnabled not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public boolean isDisabled() {
+	def isDisabled() {
 		throw new AssertionError("operation isDisabled not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public void enter_text_if_enabled(String text) {
@@ -43,18 +43,18 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void click_if_enabled() {
 		throw new AssertionError("operation click_if_enabled not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public void has_text(String[] expected_texts) {
+	def has_text(String[] expected_texts) {
 		throw new AssertionError("operation has_text not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public void does_not_have_text(String[] expected_texts) {
+	def does_not_have_text(String[] expected_texts) {
 		throw new AssertionError("operation does_not_have_text not allowed on a NullBrowserElement '" + this + "'");
 	}
 	
-	public void element_locators_are(List<By> element_locators) {
+	def element_locators_are(List<By> element_locators) {
 	}
-	public void driver_is(WebDriver driver) {
+	def driver_is(WebDriver driver) {
 	}
-	public void page_element_key_is(PageElementKey pek) {
+	def page_element_key_is(PageElementKey pek) {
 		this.pek = pek;
 	}
 	public String toString() {

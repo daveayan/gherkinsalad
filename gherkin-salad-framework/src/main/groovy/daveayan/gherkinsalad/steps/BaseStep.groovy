@@ -19,7 +19,7 @@ public class BaseStep {
 	protected static String data_management_driver = StringUtils.EMPTY, data_management_file = StringUtils.EMPTY;
 	protected static Browser browser;
 	
-	public DataSource load_data_source(String data_source_file_name, String data_source_driver) {
+	def load_data_source(String data_source_file_name, String data_source_driver) {
 		try {
 			Class<?> clazz = Class.forName(data_source_driver);
 			DataSource data_source = (DataSource) clazz.newInstance();
@@ -38,31 +38,31 @@ public class BaseStep {
 		return null;
 	}
 	
-	public String data_with_key(DataElementKey data_element_key) {
+	def data_with_key(DataElementKey data_element_key) {
 		return feature_data_source.get_data_for(data_element_key);
 	}
 	
-	public DataElementKey data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {
+	def data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {
 		return DataElementKey.newInstance(role_name, feature_name, symbolic_data_name);
 	}
 	
-	public DataElementKey data_element_with_key(String symbolic_data_name) {
+	def data_element_with_key(String symbolic_data_name) {
 		return DataElementKey.newInstance(current_role, feature_under_test, symbolic_data_name);
 	}
 	
-	public PageElementKey on_page_element_with_key(String element_name) {
+	def on_page_element_with_key(String element_name) {
 		return PageElementKey.newInstance(current_role, "", element_name);
 	}
 	
-	public PageElementKey on_page_element_with_key(String component_name, String element_name) {
+	def on_page_element_with_key(String component_name, String element_name) {
 		return PageElementKey.newInstance(current_role, component_name, element_name);
 	}
 	
-	public PageElementKey to_element_with_key(String component_name, String element_name) {
+	def to_element_with_key(String component_name, String element_name) {
 		return on_page_element_with_key(component_name, element_name);
 	}
 	
-	public void has_enabled_elements(String component_name, String[] element_names) {
+	def has_enabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
@@ -74,7 +74,7 @@ public class BaseStep {
 		}
 	}
 	
-	public void has_disabled_elements(String component_name, String[] element_names) {
+	def has_disabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
@@ -86,7 +86,7 @@ public class BaseStep {
 		}
 	}
 	
-	public void elements_dont_exist(String component_name, String[] element_names) {
+	def elements_dont_exist(String component_name, String[] element_names) {
 		wait_for_seconds(10);
 		if(element_names != null) {
 			for(String element_name: element_names) {
@@ -99,17 +99,17 @@ public class BaseStep {
 		}
 	}
 	
-	public void verify_text_exists(String[] expected_texts, PageElementKey page_element_key) {
+	def verify_text_exists(String[] expected_texts, PageElementKey page_element_key) {
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
 		element.has_text(expected_texts);
 	}
 	
-	public void verify_text_does_not_exist(String[] unexpected_texts, PageElementKey page_element_key) {
+	def verify_text_does_not_exist(String[] unexpected_texts, PageElementKey page_element_key) {
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
 		element.does_not_have_text(unexpected_texts);
 	}
 	
-	public void click(PageElementKey page_element_key) {
+	def click(PageElementKey page_element_key) {
 		Clickable go_button = (Clickable) browser.locate_element_object_for(page_element_key);
 		go_button.click_if_enabled();
 	}
@@ -117,17 +117,17 @@ public class BaseStep {
 	// ******************************************************************************************************************************************************
 	// TEXT STEPS
 	// ******************************************************************************************************************************************************
-	public void select(String text, PageElementKey page_element_key) {
+	def select(String text, PageElementKey page_element_key) {
 		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
 		selectable_element.select_if_enabled(text);
 	}
 	
-	public void enter(String text, PageElementKey page_element_key) {
+	def enter(String text, PageElementKey page_element_key) {
 		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
 		text_enterable_element.enter_text_if_enabled(text);
 	}
 	
-	public void append(String text, PageElementKey page_element_key) {
+	def append(String text, PageElementKey page_element_key) {
 		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
 		text_enterable_element.append_text_if_enabled(text);
 	}
@@ -136,30 +136,28 @@ public class BaseStep {
 	// ******************************************************************************************************************************************************
 	// DATA STEPS
 	// ******************************************************************************************************************************************************
-	public void select(DataElementKey data_element_key, PageElementKey page_element_key) {
+	def select(DataElementKey data_element_key, PageElementKey page_element_key) {
 		String text = data_with_key(data_element_key);
 		select(text, page_element_key);
 	}
 	
-	public void enter(DataElementKey data_element_key, PageElementKey page_element_key) {
-		println "In enter 1"
+	def enter(DataElementKey data_element_key, PageElementKey page_element_key) {
 		String text = this.data_with_key(data_element_key);
 		enter(text, page_element_key);
 	}
 	
-	public void append(DataElementKey data_element_key, PageElementKey page_element_key) {
-		println "In enter 2"
+	def append(DataElementKey data_element_key, PageElementKey page_element_key) {
 		String text = this.data_with_key(data_element_key);
 		append(text, page_element_key);
 	}
 	// ******************************************************************************************************************************************************
 	
-	public void launch_browser_with(String name, String page_structure_file_name) {
+	def launch_browser_with(String name, String page_structure_file_name) {
 		browser = Browser.instance_with_name_and_page_structure_name(name, page_structure_file_name);
 		browser.launch();
 	}
 
-	public void close_browser() {
+	def close_browser() {
 		current_role = StringUtils.EMPTY;
 		feature_data_source = null;
 		if (browser != null) {
@@ -167,11 +165,11 @@ public class BaseStep {
 		}
 	}
 	
-	public void goto_url(String url) {
+	def goto_url(String url) {
 		browser.goto_url(url);
 	}
 	
-	protected void wait_for_seconds(int seconds) {
+	def wait_for_seconds(int seconds) {
 		try {
 			Thread.sleep(seconds);
 		} catch (InterruptedException e) {

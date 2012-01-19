@@ -6,7 +6,7 @@ import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.actions.builtins.BaseBrowserElement;
 
 public class AmazonGoButton extends BaseBrowserElement implements Clickable {
-	public boolean isEnabled() {
+	def isEnabled() {
 		assert_that_the_number_of_element_locators_is(2);
 		WebElement button_div = fetch_element(0);
 		if(! button_div.isEnabled()) return false;

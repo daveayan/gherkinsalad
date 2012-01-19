@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.browser.actions.Clickable;
 
 public class Link extends BaseBrowserElement implements Clickable {
-	public boolean isEnabled() {
+	def isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();
 	}

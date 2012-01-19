@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.browser.actions.Selectable;
 
 public class DropDown extends BaseBrowserElement implements Selectable {
-	public boolean isEnabled() {
+	def isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();
 	}
