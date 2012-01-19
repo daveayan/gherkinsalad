@@ -42,8 +42,9 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
+			String element_text = element.getText()
 			for(String expected_text: expected_texts) {
-				if(! element.getText().contains(expected_text.trim())) {
+				if(! element_text.contains(expected_text.trim())) {
 					expected_text_not_present.add(expected_text.trim());
 				}
 			}
@@ -57,8 +58,9 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		if (unexpected_texts != null) {
 			List<String> unexpected_text_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
+			String element_text = element.getText()
 			for(String expected_text: unexpected_texts) {
-				if(element.getText().contains(expected_text.trim())) {
+				if(element_text.contains(expected_text.trim())) {
 					unexpected_text_present.add(expected_text.trim());
 				}
 			}
