@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
@@ -58,7 +57,7 @@ public class Browser {
 
 	public void launch() {
 		if (this.is_IE()) {
-			instance = new InternetExplorerDriver();
+			instance = IeBrowser.getDriver();
 		} else if (this.is_Chrome()) {
 			instance = ChromeBrowser.getDriver();
 		} else if (this.is_Firefox()) {
