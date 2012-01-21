@@ -8,8 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -38,29 +38,31 @@ public class Browser {
 	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
 		return page_structure.getElement(instance, page_element_key);
 	}
-	
+
 	public WebElement findElementBy(By by) {
 		return instance.findElement(by);
 	}
 
 	public void close() {
-		if (instance != null) {
-			instance.close();
-			instance.quit();
-			instance = null;
-			page_structure = null;
+		try {
+			if (instance != null) {
+				instance.close();
+				instance.quit();
+			}
+		} catch (WebDriverException wde) {
+			System.out.println(wde.getMessage());
 		}
+		instance = null;
+		page_structure = null;
 	}
 
 	public void launch() {
-		if (instance == null) {
-			if (this.is_IE()) {
-				instance = new InternetExplorerDriver();
-			} else if (this.is_Chrome()) {
-				instance = new ChromeDriver();
-			} else if (this.is_Firefox()) {
-				instance = new FirefoxDriver();
-			}
+		if (this.is_IE()) {
+			instance = new InternetExplorerDriver();
+		} else if (this.is_Chrome()) {
+			instance = ChromeBrowser.getDriver();
+		} else if (this.is_Firefox()) {
+			instance = new FirefoxDriver();
 		}
 	}
 
@@ -77,14 +79,14 @@ public class Browser {
 			this.page_structure = PageStructure.instanceFromFile(page_structure_file_name);
 		}
 	}
-	
+
 	public WebDriver driver() {
 		return instance;
 	}
-	
+
 	public void takeScreenshot() {
 		try {
-			File screenshot_file = ((TakesScreenshot)instance).getScreenshotAs(OutputType.FILE);
+			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
