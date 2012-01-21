@@ -110,8 +110,8 @@ public class BaseStep {
 	}
 	
 	public void click(PageElementKey page_element_key) {
-		Clickable clickable_element = (Clickable) browser.locate_element_object_for(page_element_key);
-		clickable_element.click_if_enabled();
+		Clickable go_button = (Clickable) browser.locate_element_object_for(page_element_key);
+		go_button.click_if_enabled();
 		browser.takeScreenshot();
 	}
 	

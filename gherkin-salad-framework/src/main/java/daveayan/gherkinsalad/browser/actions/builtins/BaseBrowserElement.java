@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.NullWebElement;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -116,16 +115,11 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	}
 	
 	private WebElement findElement(final By by) {
-		System.out.println("1 " + driver);
-		if(driver instanceof NullWebDriver) {
-			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
-		}
-		System.out.println("2");
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 	       .withTimeout(30, TimeUnit.SECONDS)
 	       .pollingEvery(1, TimeUnit.SECONDS)
 	       .ignoring(NoSuchElementException.class);
-	   System.out.println("3");
+	 
 	   WebElement element = wait.until(new Function<WebDriver, WebElement>() {
 	     public WebElement apply(WebDriver driver) {
 	       return driver.findElement(by);
