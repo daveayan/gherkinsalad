@@ -2,7 +2,6 @@ package daveayan.gherkinsalad.browser;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -13,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
@@ -59,17 +57,7 @@ public class Browser {
 			if (this.is_IE()) {
 				instance = new InternetExplorerDriver();
 			} else if (this.is_Chrome()) {
-				DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
-
-				System.setProperty("webdriver.chrome.driver", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
-				String chromeBinary = System.getProperty("webdriver.chrome.driver");
-				if (chromeBinary == null || chromeBinary.equals("")) {
-					String os = System.getProperty("os.name").toLowerCase().substring(0, 3);
-					chromeBinary = "lib/chromedriver-" + os + (os.equals("win") ? ".exe" : "");
-					System.setProperty("webdriver.chrome.driver", chromeBinary);
-				}
-				instance = new ChromeDriver(chromeCapabilities);
-				instance.manage().timeouts().implicitlyWait(70, TimeUnit.SECONDS);
+				instance = new ChromeDriver();
 			} else if (this.is_Firefox()) {
 				instance = new FirefoxDriver();
 			}
