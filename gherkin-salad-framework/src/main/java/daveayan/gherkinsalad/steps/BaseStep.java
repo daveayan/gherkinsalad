@@ -26,13 +26,10 @@ public class BaseStep {
 			data_source.load_up_from_file_at_location(Path.TO_DATA_MANAGEMENT + data_source_file_name);
 			return data_source;
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -68,6 +65,7 @@ public class BaseStep {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.isDisabled()) {
+					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' is disabled, expected it to be enabled");
 				}
 			}
@@ -80,6 +78,7 @@ public class BaseStep {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.isDisabled()) {
+					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' is enabled, expected it to be disabled");
 				}
 			}
@@ -93,6 +92,7 @@ public class BaseStep {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.exists_immediate()) {
+					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' should not exist, found '" + element + "'");
 				}
 			}
@@ -112,6 +112,7 @@ public class BaseStep {
 	public void click(PageElementKey page_element_key) {
 		Clickable go_button = (Clickable) browser.locate_element_object_for(page_element_key);
 		go_button.click_if_enabled();
+		browser.takeScreenshot();
 	}
 	
 	// ******************************************************************************************************************************************************

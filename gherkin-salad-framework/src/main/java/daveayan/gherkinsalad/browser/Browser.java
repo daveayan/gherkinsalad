@@ -1,8 +1,13 @@
 package daveayan.gherkinsalad.browser;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
 public class Browser {
@@ -83,18 +89,19 @@ public class Browser {
 			this.page_structure = PageStructure.instanceFromFile(page_structure_file_name);
 		}
 	}
-
-//	private void load_page_structure() {
-//		if (page_structure == null) {
-//			if (this.is_IE()) {
-//				this.page_structure = PageStructure.instanceForIE();
-//			} else if (this.is_Chrome()) {
-//				this.page_structure = PageStructure.instanceForChrome();
-//			} else if (this.is_Firefox()) {
-//				this.page_structure = PageStructure.instanceForFirefox();
-//			}
-//		}
-//	}
+	
+	public WebDriver driver() {
+		return instance;
+	}
+	
+	public void takeScreenshot() {
+		try {
+			File screenshot_file = ((TakesScreenshot)instance).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private boolean is_IE() {
 		return "ie".equalsIgnoreCase(this.name);

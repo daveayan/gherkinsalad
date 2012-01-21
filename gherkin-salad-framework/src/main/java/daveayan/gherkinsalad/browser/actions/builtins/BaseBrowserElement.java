@@ -1,11 +1,16 @@
 package daveayan.gherkinsalad.browser.actions.builtins;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -13,6 +18,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
+import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.NullWebElement;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
@@ -48,6 +54,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 				}
 			}
 			if(! expected_text_not_present.isEmpty()) {
+				takeScreenshot();
 				throw new AssertionError("Component '" + page_element_key + "' does not have expected text(s) '" + expected_text_not_present + "'");
 			}
 		}
@@ -63,6 +70,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 				}
 			}
 			if(! unexpected_text_present.isEmpty()) {
+				takeScreenshot();
 				throw new AssertionError("Component '" + page_element_key + "' has unexpected text(s) '" + unexpected_text_present + "'");
 			}
 		}
@@ -126,12 +134,23 @@ public abstract class BaseBrowserElement implements BrowserElement {
 
 	public void assert_that_the_number_of_element_locators_are(int expected_number) {
 		if (element_locators == null) {
+			takeScreenshot();
 			throw new AssertionError("element_locators is null for '" + this.getClass().getName() + "', page element key '"
 					+ page_element_key + "'");
 		}
 		if (element_locators.size() != expected_number) {
+			takeScreenshot();
 			throw new AssertionError("Size of element_locators is '" + element_locators.size() + "', expected '"
 					+ expected_number + "' for '" + this.getClass().getName() + "', page element key '" + page_element_key + "'");
+		}
+	}
+	
+	private void takeScreenshot() {
+		try {
+			File screenshot_file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
