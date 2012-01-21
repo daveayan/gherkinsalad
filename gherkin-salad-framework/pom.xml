@@ -124,9 +124,10 @@
 								<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
 									<classpath refid="maven.compile.classpath" />
 								</taskdef>
-								<groovy src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFeaturesFromExecutionPlan.groovy">
-								  <classpath refid="maven.compile.classpath" />
-								  	<arg line="integration-test-execution-plan.csv" />
+								<groovy
+									src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFeaturesFromExecutionPlan.groovy">
+									<classpath refid="maven.compile.classpath" />
+									<arg line="integration-test-execution-plan.csv" />
 								</groovy>
 							</tasks>
 						</configuration>
@@ -223,6 +224,11 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-ie-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>
