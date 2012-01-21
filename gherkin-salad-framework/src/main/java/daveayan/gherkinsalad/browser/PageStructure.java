@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NullList;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -15,7 +16,6 @@ import org.openqa.selenium.WebDriver;
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
-import daveayan.lang.NullList;
 
 public class PageStructure {
 	private static final String NA = "NA";

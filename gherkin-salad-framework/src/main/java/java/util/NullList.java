@@ -1,4 +1,4 @@
-package daveayan.lang;
+package java.util;
 
 import java.util.Collection;
 import java.util.Iterator;

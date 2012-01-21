@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NullWebElement;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,6 @@ import org.openqa.selenium.support.ui.Wait;
 import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.Path;
-import daveayan.gherkinsalad.browser.NullWebElement;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
