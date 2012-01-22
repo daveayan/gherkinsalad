@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.browser;
+package daveayan.gherkinsalad.browser.factory;
 
 import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.WebDriver;

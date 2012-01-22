@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.browser;
+package daveayan.gherkinsalad.browser.factory;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -14,6 +14,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
+import daveayan.gherkinsalad.browser.factory.IeBrowser;
 
 public class Browser {
 	private String name;
