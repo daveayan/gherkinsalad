@@ -49,7 +49,7 @@ public class Browser {
 				instance.quit();
 			}
 		} catch (WebDriverException wde) {
-			System.out.println(wde.getMessage());
+			System.err.println(wde.getMessage());
 		}
 		instance = null;
 		page_structure = null;
