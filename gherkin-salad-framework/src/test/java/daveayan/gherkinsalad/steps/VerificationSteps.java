@@ -1,5 +1,6 @@
 package daveayan.gherkinsalad.steps;
 
+import cuke4duke.annotation.I18n.EN.Given;
 import cuke4duke.annotation.I18n.EN.Then;
 
 public class VerificationSteps extends BaseStep{
@@ -24,10 +25,12 @@ public class VerificationSteps extends BaseStep{
 	public void does_not_have_text(String element_name, String component_name, String text) {
 		verify_text_does_not_exist(text.split(";"), on_page_element_with_key(component_name, element_name));
 	}
+	@Given("^([^\\.]*) had enabled elements ~([^\\.]*)~$")
 	@Then("^([^\\.]*) has enabled elements ~([^\\.]*)~$")
 	public void these_elements_are_enabled(String component_name, String element_names) throws InterruptedException {
 		has_enabled_elements(component_name, element_names.split(";"));
 	}
+	@Given("^([^\\.]*) had disabled elements ~([^\\.]*)~$")
 	@Then("^([^\\.]*) has disabled elements ~([^\\.]*)~$")
 	public void these_elements_are_disabled(String component_name, String element_names) throws InterruptedException {
 		has_disabled_elements(component_name, element_names.split(";"));
