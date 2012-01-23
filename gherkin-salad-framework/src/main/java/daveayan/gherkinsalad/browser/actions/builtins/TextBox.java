@@ -24,4 +24,11 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 			element.sendKeys(text);
 		}
 	}
+
+	public void click_if_enabled() {
+		WebElement element = fetch_element(0);
+		if(this.isEnabled()) {
+			element.click();
+		}
+	}
 }

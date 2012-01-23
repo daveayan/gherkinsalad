@@ -52,6 +52,6 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 		this.pek = pek;
 	}
 	public String toString() {
-		return this.getClass().getName() + " : " + pek.toString();
+		return this.getClass().getName() + " : " + pek;
 	}
 }

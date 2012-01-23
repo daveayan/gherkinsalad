@@ -1,7 +1,6 @@
 package daveayan.gherkinsalad.browser.actions.builtins;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +55,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 			}
 			if(! expected_text_not_present.isEmpty()) {
 				takeScreenshot();
-				throw new AssertionError("Component '" + page_element_key + "' does not have expected text(s) '" + expected_text_not_present + "'");
+				throw new AssertionError("Component '" + page_element_key + "' does not have expected text(s) '" + expected_text_not_present + "'\n. It has text '" + element.getText() + "'");
 			}
 		}
 	}
@@ -152,8 +151,8 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		try {
 			File screenshot_file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Throwable th) {
+			System.out.println(th.getMessage());
 		}
 	}
 

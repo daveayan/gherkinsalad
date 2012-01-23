@@ -64,6 +64,7 @@ public class BaseStep {
 			for(String element_name: element_names) {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
+				System.out.println("Verifying " + element);
 				if(element.isDisabled()) {
 					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' is disabled, expected it to be enabled");
@@ -77,7 +78,7 @@ public class BaseStep {
 			for(String element_name: element_names) {
 				PageElementKey pek = on_page_element_with_key(component_name, element_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
-				if(element.isDisabled()) {
+				if(element.isEnabled()) {
 					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' is enabled, expected it to be disabled");
 				}
@@ -172,9 +173,10 @@ public class BaseStep {
 	
 	protected void wait_for_seconds(int seconds) {
 		try {
-			Thread.sleep(seconds);
+			System.out.println("User is waiting for " + seconds + " seconds");
+			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 }

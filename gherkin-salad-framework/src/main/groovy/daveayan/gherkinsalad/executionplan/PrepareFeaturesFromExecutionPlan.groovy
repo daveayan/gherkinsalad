@@ -67,7 +67,9 @@ class PrepareFeaturesFromExecutionPlan {
 	def top_scenario_text(feature_name, browser_name, page_structure_file_name, url, data_file_name, data_source_driver) {
 		def scenario_text = "Scenario: Prepare browser and test data"
 		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser with page structure file " + page_structure_file_name.trim()
-		scenario_text += "\n\t\tAnd User visited website " + url.trim()
+		if(! url.trim().equals("NA")) {
+			scenario_text += "\n\t\tAnd User visited website " + url.trim()
+		}
 		if(! data_file_name.trim().equals("NA") && ! data_source_driver.trim().equals("NA")) {
 			scenario_text += "\n\t\tAnd User uses the data source file " + data_file_name.trim() + " with driver " + data_source_driver.trim()
 		}

@@ -1,7 +1,6 @@
 package daveayan.gherkinsalad.browser;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -89,8 +88,8 @@ public class Browser {
 		try {
 			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Throwable th) {
+			System.out.println(th.getMessage());
 		}
 	}
 

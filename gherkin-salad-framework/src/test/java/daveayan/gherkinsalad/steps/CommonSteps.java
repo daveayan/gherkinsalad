@@ -28,4 +28,10 @@ public class CommonSteps extends BaseStep {
 	public void close_browser_window() {
 		close_browser();
 	}
+	@Given("^(?:User|user|I|You|you) waited for ([^\\.]*) seconds$")
+	@Then("^(?:User|user|I|You|you) waits for ([^\\.]*) seconds$")
+	public void wait(String seconds) {
+		int s = Integer.parseInt(seconds);
+		wait_for_seconds(s);
+	}
 }
