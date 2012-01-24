@@ -47,7 +47,7 @@ public class BaseStep {
 		return DataElementKey.newInstance(current_role, feature_under_test, symbolic_data_name);
 	}
 	
-	public PageElementKey on_page_element_with_key(String element_name) {
+	public PageElementKey on_element(String element_name) {
 		return PageElementKey.newInstance(current_role, "", element_name);
 	}
 	

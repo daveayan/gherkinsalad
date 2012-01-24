@@ -37,6 +37,21 @@ public class PageElementKey {
 		return key;
 	}
 	
+	public PageElementKey on_element(String element_name) {
+		this.element_name = element_name;
+		return this;
+	}
+	
+	public PageElementKey on_component(String component_name) {
+		this.element_name = component_name;
+		return this;
+	}
+	
+	public PageElementKey for_role(String role) {
+		this.role = role;
+		return this;
+	}
+	
 	public String toString() {
 		return "PageElement with key '" + key() + "'";
 	}
