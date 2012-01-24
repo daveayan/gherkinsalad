@@ -35,7 +35,7 @@ public class BaseStep {
 		return null;
 	}
 	
-	private String data_with_key(DataElementKey data_element_key) {
+	protected String data_with_key(DataElementKey data_element_key) {
 		return feature_data_source.get_data_for(data_element_key);
 	}
 	
@@ -111,9 +111,15 @@ public class BaseStep {
 	}
 	
 	public void click(PageElementKey page_element_key) {
+		System.out.println("click on " + page_element_key);
 		Clickable clickable_element = (Clickable) browser.locate_element_object_for(page_element_key);
 		clickable_element.click_if_enabled();
 		browser.takeScreenshot();
+	}
+	
+	public void verify_there_are(String[] options, PageElementKey page_element_key) {
+		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
+		selectable_element.has_options(options);
 	}
 	
 	// ******************************************************************************************************************************************************

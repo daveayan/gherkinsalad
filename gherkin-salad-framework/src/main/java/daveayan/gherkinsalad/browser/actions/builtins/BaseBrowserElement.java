@@ -118,6 +118,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		if(driver instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
+		System.out.println("Looking for element " + by);
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 	       .withTimeout(30, TimeUnit.SECONDS)
 	       .pollingEvery(1, TimeUnit.SECONDS)
@@ -170,5 +171,9 @@ public abstract class BaseBrowserElement implements BrowserElement {
 
 	public void driver_is(WebDriver driver) {
 		this.driver = driver;
+	}
+	
+	public String toString() {
+		return this.getClass().getName() + ", " + page_element_key + ", " + element_locators;
 	}
 }
