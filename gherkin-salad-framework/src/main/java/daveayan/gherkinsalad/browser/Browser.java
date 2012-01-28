@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
 
@@ -35,6 +36,10 @@ public class Browser {
 		return locate_element_object_for(pek);
 	}
 
+	public Clickable locate_clickable_element_for(String colon_seperated_element_locator) {
+		return (Clickable) page_structure.getElement(instance, colon_seperated_element_locator);
+	}
+	
 	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
 		return page_structure.getElement(instance, page_element_key);
 	}

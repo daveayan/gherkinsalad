@@ -117,6 +117,17 @@ public class BaseStep {
 		browser.takeScreenshot();
 	}
 	
+	public void click(DataElementKey data_element_key) {
+		System.out.println("click on " + data_element_key);
+		String link_text = data_with_key(data_element_key);
+		System.out.println("full link text : " + link_text);
+		String[] data_items = link_text.split("~");
+		if(data_items.length == 2) {
+			Clickable clickable_element = browser.locate_clickable_element_for(data_items[1]);
+			clickable_element.click_if_enabled();
+		}
+	}
+	
 	public void verify_there_are(String[] options, PageElementKey page_element_key) {
 		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
 		selectable_element.has_options(options);

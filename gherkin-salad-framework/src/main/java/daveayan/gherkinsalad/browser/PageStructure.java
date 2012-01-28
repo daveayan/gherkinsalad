@@ -14,7 +14,9 @@ import org.openqa.selenium.WebDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
+import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
+import daveayan.gherkinsalad.browser.actions.builtins.Link;
 import daveayan.lang.NullList;
 
 public class PageStructure {
@@ -28,6 +30,14 @@ public class PageStructure {
 		return page_structure;
 	}
 
+	public Clickable getElement(WebDriver driver, String element_locator) {
+		List<By> bys = getBys(element_locator);
+		Clickable clickable_element = new Link();
+		clickable_element.driver_is(driver);
+		clickable_element.element_locators_are(bys);
+		return clickable_element;
+	}
+	
 	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
 		if (be instanceof NullBrowserElement) {
