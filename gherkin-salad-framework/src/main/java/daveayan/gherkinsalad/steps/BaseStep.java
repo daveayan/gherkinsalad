@@ -47,8 +47,16 @@ public class BaseStep {
 		return DataElementKey.newInstance(current_role, feature_under_test, symbolic_data_name);
 	}
 	
+	public PageElementKey on_component(String component_name) {
+		return PageElementKey.newInstance(current_role, component_name, "");
+	}
+	
 	public PageElementKey on_element(String element_name) {
 		return PageElementKey.newInstance(current_role, "", element_name);
+	}
+	
+	public PageElementKey on_element(String component_name, String element_name) {
+		return PageElementKey.newInstance(current_role, component_name, element_name);
 	}
 	
 	public PageElementKey on_page_element_with_key(String component_name, String element_name) {
@@ -57,6 +65,21 @@ public class BaseStep {
 	
 	public PageElementKey to_element_with_key(String component_name, String element_name) {
 		return on_page_element_with_key(component_name, element_name);
+	}
+	
+	public PageElementKey element_with_key(String element_name) {
+		return on_page_element_with_key("", element_name);
+	}
+	
+	public PageElementKey component_with_key(String component_name) {
+		return on_page_element_with_key(component_name, "");
+	}
+	
+	public void is_enabled(PageElementKey pek) {
+		BrowserElement element = browser.locate_element_object_for(pek);
+		if(element.isDisabled()) {
+			throw new AssertionError(pek + " is disabled, expected it to be enabled");
+		}
 	}
 	
 	public void has_enabled_elements(String component_name, String[] element_names) {
