@@ -3,6 +3,7 @@ package daveayan.gherkinsalad.executionplan
 import daveayan.gherkinsalad.Path
 
 class PrepareFeaturesFromExecutionPlan {
+	private static int count = 1;
 	public static void main(String[] args) {
 		PrepareFeaturesFromExecutionPlan object = new PrepareFeaturesFromExecutionPlan()
 		object.run("integration-test-execution-plan.csv")
@@ -36,20 +37,38 @@ class PrepareFeaturesFromExecutionPlan {
 	def process_feature_file(feature_file_name, top_scenario_text, bottom_scenario_text) {
 		def feature_file = new File(Path.TO_FEATURES + feature_file_name)
 		if(feature_file.exists()) {
-			println "--> Processing Feature File '${feature_file.absolutePath}'"
+			println "--> Processing '${feature_file.absolutePath}'"
 			def processed_content = feature_file.text.replace("#EXECUTION PLAN INSTRUCTION AT TOP", top_scenario_text);
 			processed_content = processed_content.replace("#EXECUTION PLAN INSTRUCTION AT BOTTOM", bottom_scenario_text);
 			
 			def file_relative_path_and_name = feature_file_name.toString()
-			def new_file_name = file_relative_path_and_name.replace(".feature", "_" + System.currentTimeMillis() + ".feature");
+			def new_file_name = get_new_file_name(file_relative_path_and_name)
 
-			create_intermediate_folders (file_relative_path_and_name)
+//			create_intermediate_folders (file_relative_path_and_name)
 			def processed_feature_file = new File("./features/" + new_file_name)
+			println "       Created '${processed_feature_file}'" + processed_feature_file
 			processed_feature_file.createNewFile()
 			processed_feature_file.write(processed_content);
 		} else {
 			println "--> File referred to by execution plan does not exist '${feature_file.absolutePath}'"
 		}
+	}
+	
+	def get_new_file_name(file_relative_path_and_name) {
+		def file_name = null
+		def path_elements = file_relative_path_and_name.split("/")
+		path_elements.each {
+			if(it.endsWith(".feature")) {
+				file_name = it
+			}
+		}
+		
+		def padded_count = count.toString().padLeft(4, "0")		
+//		def new_file_name = file_relative_path_and_name.replace(file_name, padded_count + "_" + file_name)
+		def new_file_name = padded_count + "_" + file_name
+		count = count + 1
+
+		return new_file_name
 	}
 	
 	def create_intermediate_folders(file_relative_path_and_name) {
