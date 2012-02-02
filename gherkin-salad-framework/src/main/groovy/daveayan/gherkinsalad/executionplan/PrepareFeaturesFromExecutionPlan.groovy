@@ -10,16 +10,14 @@ class PrepareFeaturesFromExecutionPlan {
 	}
 	
 	def run(file_name) {
-		clean_and_prepare()
+		println """
+#########################################################
+# GHERKIN SALAD 
+# Applying execution plan 
+# ${file_name}
+#########################################################
+"""
 		process_execution_plan(file_name)
-	}
-	
-	def clean_and_prepare() {
-		def features_folder = new File("./features")
-		if(features_folder.exists()) {
-			features_folder.deleteDir()
-		}
-		features_folder.mkdir()
 	}
 	
 	def process_execution_plan(file_name) {

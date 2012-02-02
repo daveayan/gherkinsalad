@@ -10,11 +10,14 @@ import daveayan.gherkinsalad.executionplan.PrepareFeaturesFromExecutionPlan;
  * @goal apply-execution-plan
  */
 public class ApplyExecutionPlanMojo extends AbstractMojo {
-	/**@parameter expression="${apply-execution-plan.planfilename}" */
-	private String planfilename;
+	/**@parameter expression="${apply-execution-plan.planfiles}" */
+	private String planfiles;
 	public void execute() throws MojoExecutionException
   {
 		PrepareFeaturesFromExecutionPlan plan = new PrepareFeaturesFromExecutionPlan();
-		plan.run(planfilename);
+		String[] planfilenames = planfiles.split(",");
+		for(String filename: planfilenames) {
+			plan.run(filename);
+		}
   }
 }
