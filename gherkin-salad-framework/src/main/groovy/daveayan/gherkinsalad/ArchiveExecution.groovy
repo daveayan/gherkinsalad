@@ -1,8 +1,6 @@
 package daveayan.gherkinsalad
 
 import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
 
 import org.apache.commons.io.FileUtils
 import org.apache.commons.logging.Log
@@ -16,15 +14,7 @@ class ArchiveExecution {
 	}
 
 	def archiving_is_enabled() {
-		def config_file_location = System.getenv("GHKSALAD_CONFIG");
-		log.info("GHKSALAD_CONFIG file is " + config_file_location);
-		def config_file = new File(System.getenv("GHKSALAD_CONFIG"));
-		def config = new Properties();
-		config.load(new FileInputStream(config_file));
-		log.info("GHKSALAD_CONFIG Properties are: " + config);
-		boolean value = Boolean.parseBoolean(config.getProperty("archive.results"))
-		println value
-		return value
+		return Config.archive_results
 	}
 
 	def archive() {

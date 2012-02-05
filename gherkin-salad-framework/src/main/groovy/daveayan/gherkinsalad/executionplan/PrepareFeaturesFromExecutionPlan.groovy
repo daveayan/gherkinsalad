@@ -3,12 +3,12 @@ package daveayan.gherkinsalad.executionplan
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
+import daveayan.gherkinsalad.Config
 import daveayan.gherkinsalad.Path
 
 class PrepareFeaturesFromExecutionPlan {
 	private static Log log = LogFactory.getLog(PrepareFeaturesFromExecutionPlan.class)
 	private static int count = 1;
-	private boolean skip_ie = false;
 	public static void main(String[] args) {
 		PrepareFeaturesFromExecutionPlan object = new PrepareFeaturesFromExecutionPlan()
 		object.run("networks.atdd.qa.csv")
@@ -22,18 +22,7 @@ class PrepareFeaturesFromExecutionPlan {
 # ${file_name}
 #########################################################
 """
-		check_if_ie_execution_enabled()
 		process_execution_plan(file_name)
-	}
-	
-	def check_if_ie_execution_enabled() {
-		def config_file_location = System.getenv("GHKSALAD_CONFIG");
-		log.info("GHKSALAD_CONFIG file is " + config_file_location);
-		def config_file = new File(System.getenv("GHKSALAD_CONFIG"));
-		def config = new Properties();
-		config.load(new FileInputStream(config_file));
-		log.info("GHKSALAD_CONFIG Properties are: " + config);
-		skip_ie = Boolean.parseBoolean(config.getProperty("skip.internet.explorer"))
 	}
 	
 	def process_execution_plan(file_name) {
@@ -43,7 +32,7 @@ class PrepareFeaturesFromExecutionPlan {
 				if(! line.startsWith("feature file")) {
 					def line_items = line.split(",")
 					def browser = line_items[2];
-					if(browser.trim().equalsIgnoreCase("ie") && skip_ie) {
+					if(browser.trim().equalsIgnoreCase("ie") && Config.skip_ie) {
 						println "Skipping IE execution of feature ${line_items[0]}"
 					} else {
 						def top_scenario_text = top_scenario_text(line_items[1], line_items[2], line_items[3], line_items[4], line_items[5], line_items[6])
@@ -67,7 +56,6 @@ class PrepareFeaturesFromExecutionPlan {
 			def file_relative_path_and_name = feature_file_name.toString()
 			def new_file_name = get_new_file_name(file_relative_path_and_name)
 
-//			create_intermediate_folders (file_relative_path_and_name)
 			def processed_feature_file = new File("./features/" + new_file_name)
 			println "       Created '${processed_feature_file}'" + processed_feature_file
 			processed_feature_file.createNewFile()

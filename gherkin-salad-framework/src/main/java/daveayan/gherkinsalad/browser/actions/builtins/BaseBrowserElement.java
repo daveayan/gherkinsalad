@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
+import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.Util;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
@@ -120,8 +121,8 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 		log.info("Looking for element " + by);
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-	       .withTimeout(30, TimeUnit.SECONDS)
-	       .pollingEvery(1, TimeUnit.SECONDS)
+	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
 	       .ignoring(NoSuchElementException.class);
 	   WebElement element = wait.until(new Function<WebDriver, WebElement>() {
 	     public WebElement apply(WebDriver driver) {
