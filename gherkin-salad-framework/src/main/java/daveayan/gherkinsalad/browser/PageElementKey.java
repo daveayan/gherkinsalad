@@ -43,7 +43,7 @@ public class PageElementKey {
 	}
 	
 	public PageElementKey on_component(String component_name) {
-		this.element_name = component_name;
+		this.component_name = component_name;
 		return this;
 	}
 	

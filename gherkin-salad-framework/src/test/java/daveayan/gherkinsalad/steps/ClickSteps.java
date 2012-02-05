@@ -12,7 +12,8 @@ public class ClickSteps extends BaseStep {
 	@Given("^(?:User|user|I|You|you) clicked ([^\\.]*) on ([^\\.]*)$")
 	@When("^(?:User|user|I|You|you) clicks ([^\\.]*) on ([^\\.]*)$")
 	public void click(String element_name, String component_name) throws InterruptedException {
-		click(on_page_element_with_key(component_name, element_name));
+		click(element(element_name).on_component(component_name));
+//	click(on_page_element_with_key(component_name, element_name));
 	}
 	@Given("^(?:User|user|I|You|you) checked text ([^\\.]*)$")
 	@When("^(?:User|user|I|You|you) checks text ([^\\.]*)$")
@@ -22,7 +23,8 @@ public class ClickSteps extends BaseStep {
 	@Given("^(?:User|user|I|You|you) checked text ([^\\.]*) on ([^\\.]*)$")
 	@When("^(?:User|user|I|You|you) checks text ([^\\.]*) on ([^\\.]*)$")
 	public void check_check_box(String element_name, String component_name) {
-		click(on_page_element_with_key(component_name, element_name));
+		click(element(element_name).on_component(component_name));
+//	click(on_page_element_with_key(component_name, element_name));
 	}
 	@Given("^(?:User|user|I|You|you) selected radio button text ([^\\.]*)$")
 	@When("^(?:User|user|I|You|you) selects radio button text ([^\\.]*)$")

@@ -35,46 +35,50 @@ public class BaseStep {
 		return null;
 	}
 	
+	// DATA METHODS
+	
 	protected String data_with_key(DataElementKey data_element_key) {
 		return feature_data_source.get_data_for(data_element_key);
 	}
 	
-	public DataElementKey data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {
+	protected DataElementKey data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {
 		return DataElementKey.newInstance(role_name, feature_name, symbolic_data_name);
 	}
 	
-	public DataElementKey data_element_with_key(String symbolic_data_name) {
-		return DataElementKey.newInstance(current_role, feature_under_test, symbolic_data_name);
+	protected DataElementKey data_for(String symbolic_data_name) {
+		return data_element_with_key(current_role, feature_under_test, symbolic_data_name);
 	}
 	
-	public PageElementKey on_component(String component_name) {
+	protected DataElementKey data(String symbolic_data_name) {
+		return data_element_with_key(current_role, feature_under_test, symbolic_data_name);
+	}
+	
+	// COMPONENT ELEMENT METHODS
+	
+	protected PageElementKey on_component(String component_name) {
+		return component(component_name);
+	}
+	
+	protected PageElementKey on_element(String element_name) {
+		return element(element_name);
+	}
+	
+	protected PageElementKey in_component(String component_name) {
+		return component(component_name);
+	}
+	
+	protected PageElementKey in_element(String element_name) {
+		return element(element_name);
+	}
+	
+	protected PageElementKey component(String component_name) {
 		return PageElementKey.newInstance(current_role, component_name, "");
 	}
 	
-	public PageElementKey on_element(String element_name) {
+	protected PageElementKey element(String element_name) {
 		return PageElementKey.newInstance(current_role, "", element_name);
 	}
-	
-	public PageElementKey on_element(String component_name, String element_name) {
-		return PageElementKey.newInstance(current_role, component_name, element_name);
-	}
-	
-	public PageElementKey on_page_element_with_key(String component_name, String element_name) {
-		return PageElementKey.newInstance(current_role, component_name, element_name);
-	}
-	
-	public PageElementKey to_element_with_key(String component_name, String element_name) {
-		return on_page_element_with_key(component_name, element_name);
-	}
-	
-	public PageElementKey element_with_key(String element_name) {
-		return on_page_element_with_key("", element_name);
-	}
-	
-	public PageElementKey component_with_key(String component_name) {
-		return on_page_element_with_key(component_name, "");
-	}
-	
+		
 	public void is_enabled(PageElementKey pek) {
 		BrowserElement element = browser.locate_element_object_for(pek);
 		if(element.isDisabled()) {
@@ -85,7 +89,7 @@ public class BaseStep {
 	public void has_enabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(component_name, element_name);
+				PageElementKey pek = on_element(element_name).on_component(component_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				System.out.println("Verifying " + element);
 				if(element.isDisabled()) {
@@ -99,7 +103,7 @@ public class BaseStep {
 	public void has_disabled_elements(String component_name, String[] element_names) {
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(component_name, element_name);
+				PageElementKey pek = on_element(element_name).on_component(component_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.isEnabled()) {
 					browser.takeScreenshot();
@@ -113,7 +117,7 @@ public class BaseStep {
 		wait_for_seconds(10);
 		if(element_names != null) {
 			for(String element_name: element_names) {
-				PageElementKey pek = on_page_element_with_key(component_name, element_name);
+				PageElementKey pek = on_element(element_name).on_component(component_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
 				if(element.exists_immediate()) {
 					browser.takeScreenshot();
