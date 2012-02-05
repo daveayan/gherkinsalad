@@ -1,6 +1,8 @@
 package daveayan.gherkinsalad.steps;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.Browser;
@@ -13,6 +15,7 @@ import daveayan.gherkinsalad.datamanagement.DataElementKey;
 import daveayan.gherkinsalad.datamanagement.DataSource;
 
 public class BaseStep {
+	private static Log log = LogFactory.getLog(BaseStep.class);
 	protected static String current_role = StringUtils.EMPTY;
 	protected static String feature_under_test = StringUtils.EMPTY;
 	protected static DataSource feature_data_source = null;
@@ -91,7 +94,7 @@ public class BaseStep {
 			for(String element_name: element_names) {
 				PageElementKey pek = on_element(element_name).on_component(component_name);
 				BrowserElement element = (BrowserElement) browser.locate_element_object_for(pek);
-				System.out.println("Verifying " + element);
+				log.info("Verifying " + element);
 				if(element.isDisabled()) {
 					browser.takeScreenshot();
 					throw new AssertionError("Element '" + pek + "' is disabled, expected it to be enabled");
@@ -138,16 +141,16 @@ public class BaseStep {
 	}
 	
 	public void click(PageElementKey page_element_key) {
-		System.out.println("click on " + page_element_key);
+		log.info("click on " + page_element_key);
 		Clickable clickable_element = (Clickable) browser.locate_element_object_for(page_element_key);
 		clickable_element.click_if_enabled();
 		browser.takeScreenshot();
 	}
 	
 	public void click(DataElementKey data_element_key) {
-		System.out.println("click on " + data_element_key);
+		log.info("click on " + data_element_key);
 		String link_text = data_with_key(data_element_key);
-		System.out.println("full link text : " + link_text);
+		log.info("full link text : " + link_text);
 		String[] data_items = link_text.split("~");
 		if(data_items.length == 2) {
 			Clickable clickable_element = browser.locate_clickable_element_for(data_items[1]);
@@ -217,10 +220,10 @@ public class BaseStep {
 	
 	protected void wait_for_seconds(int seconds) {
 		try {
-			System.out.println("User is waiting for " + seconds + " seconds");
+			log.info("User is waiting for " + seconds + " seconds");
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
-			System.out.println(e.getMessage());
+			log.info(e.getMessage());
 		}
 	}
 }

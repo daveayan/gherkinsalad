@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NullWebDriver;
@@ -21,6 +23,7 @@ import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
 public abstract class BaseBrowserElement implements BrowserElement {
+	private static Log log = LogFactory.getLog(BaseBrowserElement.class); 
 	protected PageElementKey page_element_key;
 
 	protected List<By> element_locators;
@@ -89,7 +92,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 			} 
 			return element;
 		} catch (NoSuchElementException nsee) {
-			System.out.println(nsee.getMessage());
+			log.info(nsee.getMessage());
 		}
 		return NullWebElement.newInstance(selector, page_element_key);
 	}
@@ -106,7 +109,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 			} 
 			return element;
 		} catch (NoSuchElementException nsee) {
-			System.out.println(nsee.getMessage());
+			log.info(nsee.getMessage());
 		}
 		return NullWebElement.newInstance(selector, page_element_key);
 	}
@@ -115,7 +118,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		if(driver instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
-		System.out.println("Looking for element " + by);
+		log.info("Looking for element " + by);
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 	       .withTimeout(30, TimeUnit.SECONDS)
 	       .pollingEvery(1, TimeUnit.SECONDS)

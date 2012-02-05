@@ -8,11 +8,14 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import daveayan.gherkinsalad.datamanagement.DataElementKey;
 import daveayan.gherkinsalad.datamanagement.DataSource;
 
 public class FlatCsvFile implements DataSource {
+	private static Log log = LogFactory.getLog(FlatCsvFile.class);
 	public String get_data_for(DataElementKey arg0) {
 		return data.getProperty(arg0.key());
 	}
@@ -30,7 +33,7 @@ public class FlatCsvFile implements DataSource {
 				}
 			}
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			log.info(e.getMessage());
 		}
 	}
 	private void add_to_properties(String line) {
