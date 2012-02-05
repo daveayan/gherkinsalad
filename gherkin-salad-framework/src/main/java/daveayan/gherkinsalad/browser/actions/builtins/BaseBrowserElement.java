@@ -1,16 +1,13 @@
 package daveayan.gherkinsalad.browser.actions.builtins;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.NullWebElement;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +16,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
-import daveayan.gherkinsalad.Path;
+import daveayan.gherkinsalad.Util;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
@@ -148,13 +145,8 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 	}
 	
-	private void takeScreenshot() {
-		try {
-			File screenshot_file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
-		} catch (Throwable th) {
-			System.out.println(th.getMessage());
-		}
+	public void takeScreenshot() {
+		Util.takeScreenShotWith((TakesScreenshot) driver);
 	}
 
 	public boolean isDisabled() {

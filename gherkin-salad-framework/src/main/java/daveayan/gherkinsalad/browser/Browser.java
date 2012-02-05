@@ -1,17 +1,13 @@
 package daveayan.gherkinsalad.browser;
 
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import daveayan.gherkinsalad.Path;
+import daveayan.gherkinsalad.Util;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
@@ -90,12 +86,7 @@ public class Browser {
 	}
 
 	public void takeScreenshot() {
-		try {
-			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + System.currentTimeMillis() + ".png"));
-		} catch (Throwable th) {
-			System.out.println(th.getMessage());
-		}
+		Util.takeScreenShotWith((TakesScreenshot) instance);
 	}
 
 	private boolean is_IE() {
