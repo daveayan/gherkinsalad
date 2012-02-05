@@ -22,13 +22,17 @@ class PrepareFeaturesFromExecutionPlan {
 	
 	def process_execution_plan(file_name) {
 		def execution_plan_file = new File(Path.TO_EXECUTION_PLAN + file_name)
-		execution_plan_file.eachLine { line ->
-			if(! line.startsWith("feature file")) {
-				def line_items = line.split(",")
-				def top_scenario_text = top_scenario_text(line_items[1], line_items[2], line_items[3], line_items[4], line_items[5], line_items[6])
-				def bottom_scenario_text = bottom_scenario_text()
-				process_feature_file(line_items[0], top_scenario_text, bottom_scenario_text)
+		if(execution_plan_file.exists()) {
+			execution_plan_file.eachLine { line ->
+				if(! line.startsWith("feature file")) {
+					def line_items = line.split(",")
+					def top_scenario_text = top_scenario_text(line_items[1], line_items[2], line_items[3], line_items[4], line_items[5], line_items[6])
+					def bottom_scenario_text = bottom_scenario_text()
+					process_feature_file(line_items[0], top_scenario_text, bottom_scenario_text)
+				}
 			}
+		} else {
+			println "Skipping file ${execution_plan_file} as it does not exist"
 		}
 	}
 	
