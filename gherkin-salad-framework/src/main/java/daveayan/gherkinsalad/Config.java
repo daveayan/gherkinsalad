@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 public class Config {
 	private static Log log = LogFactory.getLog(Config.class);
 	
+	private static Properties config = null;
+	
 	public static String chrome_webdriver_location = null;
 	
 	public static int seconds_wait_after_each_step = 0;
@@ -20,12 +22,20 @@ public class Config {
 	public static boolean archive_results = false;
 	public static boolean skip_ie = false;
 	
+	public static String default_datasource_driver = null;
+	
+	public static String env(String env_name) {
+		String url = config.getProperty("env." + env_name);
+		if(url == null) return env_name;
+		return url;
+	}
+	
 	static {
 		try {
 			String config_file_location = System.getenv("GHKSALAD_CONFIG");
 			log.info("GHKSALAD_CONFIG file is " + config_file_location);
 			File config_file = new File(System.getenv("GHKSALAD_CONFIG"));
-			Properties config = new Properties();
+			config = new Properties();
 			config.load(new FileInputStream(config_file));
 			log.info("GHKSALAD_CONFIG Properties are: " + config);
 			
@@ -35,6 +45,7 @@ public class Config {
 			seconds_poll_interval = Integer.parseInt(config.getProperty("seconds.poll.interval"));
 			archive_results = Boolean.parseBoolean(config.getProperty("archive.results"));
 			skip_ie = Boolean.parseBoolean(config.getProperty("skip.internet.explorer"));
+			default_datasource_driver = config.getProperty("default.datasource.driver");
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

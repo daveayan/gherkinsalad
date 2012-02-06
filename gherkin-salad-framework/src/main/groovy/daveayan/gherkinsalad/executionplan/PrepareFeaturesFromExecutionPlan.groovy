@@ -75,7 +75,6 @@ class PrepareFeaturesFromExecutionPlan {
 		}
 		
 		def padded_count = count.toString().padLeft(4, "0")		
-//		def new_file_name = file_relative_path_and_name.replace(file_name, padded_count + "_" + file_name)
 		def new_file_name = padded_count + "_" + file_name
 		count = count + 1
 
@@ -94,14 +93,21 @@ class PrepareFeaturesFromExecutionPlan {
 		folders_to_create.mkdirs()
 	}
 	
-	def top_scenario_text(feature_name, browser_name, page_structure_file_name, url, data_file_name, data_source_driver) {
+	def top_scenario_text(feature_name, browser_name, page_structure_file_name, env_name, data_file_name, data_source_driver) {
 		def scenario_text = "Scenario: Prepare browser and test data"
 		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser with page structure file " + page_structure_file_name.trim()
-		if(! url.trim().equals("NA")) {
+		if(! env_name.trim().equals("NA")) {
+			String url = Config.env(env_name)
 			scenario_text += "\n\t\tAnd User visited website " + url.trim()
 		}
-		if(! data_file_name.trim().equals("NA") && ! data_source_driver.trim().equals("NA")) {
-			scenario_text += "\n\t\tAnd User uses the data source file " + data_file_name.trim() + " with driver " + data_source_driver.trim()
+		if(!data_file_name.trim().equals("NA")) {
+			if(! data_source_driver.trim().equals("NA")) {
+				if(data_source_driver.trim().equalsIgnoreCase("default")) {
+					scenario_text += "\n\t\tAnd User uses the data source file " + data_file_name.trim() + " with driver " + Config.default_datasource_driver.trim()
+				} else {
+					scenario_text += "\n\t\tAnd User uses the data source file " + data_file_name.trim() + " with driver " + data_source_driver.trim()
+				}
+			}
 		}
 		if(! feature_name.trim().equals("NA")) {
 			scenario_text += "\n\t\tAnd User is testing feature " + feature_name.trim()
