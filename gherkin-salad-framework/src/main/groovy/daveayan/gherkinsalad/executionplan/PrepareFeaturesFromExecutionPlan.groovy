@@ -32,18 +32,31 @@ class PrepareFeaturesFromExecutionPlan {
 				if(! line.startsWith("feature file")) {
 					def line_items = line.split(",")
 					def browser = line_items[2];
-					if(browser.trim().equalsIgnoreCase("ie") && Config.skip_ie) {
-						println "Skipping IE execution of feature ${line_items[0]}"
-					} else {
+					if(allow_browser_execution(browser)) {
 						def top_scenario_text = top_scenario_text(line_items[1], line_items[2], line_items[3], line_items[4], line_items[5], line_items[6])
 						def bottom_scenario_text = bottom_scenario_text()
 						process_feature_file(line_items[0], top_scenario_text, bottom_scenario_text)
+					} else {
+						println "Skipping ${browser} execution of feature ${line_items[0]}"
 					}
 				}
 			}
 		} else {
 			println "Skipping file ${execution_plan_file} as it does not exist"
 		}
+	}
+	
+	def allow_browser_execution(browser) {
+		if(browser.trim().equalsIgnoreCase("ie") && Config.ie_enabled) {
+			return true
+		}
+		if(browser.trim().equalsIgnoreCase("chrome") && Config.chrome_enabled) {
+			return true
+		}
+		if(browser.trim().equalsIgnoreCase("firefox") && Config.firefox_enabled) {
+			return true
+		}
+		return false
 	}
 	
 	def process_feature_file(feature_file_name, top_scenario_text, bottom_scenario_text) {

@@ -20,7 +20,10 @@ public class Config {
 	public static int seconds_poll_interval = 1;
 	
 	public static boolean archive_results = false;
-	public static boolean skip_ie = false;
+	
+	public static boolean chrome_enabled = false;
+	public static boolean firefox_enabled = false;
+	public static boolean ie_enabled = false;
 	
 	public static String default_datasource_driver = null;
 	
@@ -44,7 +47,9 @@ public class Config {
 			seconds_timeout = Integer.parseInt(config.getProperty("seconds.timeout"));
 			seconds_poll_interval = Integer.parseInt(config.getProperty("seconds.poll.interval"));
 			archive_results = Boolean.parseBoolean(config.getProperty("archive.results"));
-			skip_ie = Boolean.parseBoolean(config.getProperty("skip.internet.explorer"));
+			chrome_enabled = Boolean.parseBoolean(config.getProperty("browser.chrome.enabled"));
+			firefox_enabled = Boolean.parseBoolean(config.getProperty("browser.firefox.enabled"));
+			ie_enabled = Boolean.parseBoolean(config.getProperty("browser.ie.enabled"));
 			default_datasource_driver = config.getProperty("default.datasource.driver");
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
