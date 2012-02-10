@@ -40,6 +40,8 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void click_if_enabled() {
 		throw new AssertionError("operation click_if_enabled not allowed on a NullBrowserElement '" + this + "'");
 	}
+	public void click_if_exists() {
+	}
 	public void has_text(String[] expected_texts) {
 		throw new AssertionError("operation has_text not allowed on a NullBrowserElement '" + this + "'");
 	}

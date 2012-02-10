@@ -22,4 +22,8 @@ public class HtmlButtonWithNoId extends BaseBrowserElement implements Clickable 
 		WebElement form_element = fetch_element(0);
 		return form_element.findElements(element_locators.get(1)).get(1);
 	}
+	
+	public void click_if_exists() {
+		click_if_enabled();
+	}
 }

@@ -31,4 +31,8 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 			element.click();
 		}
 	}
+	
+	public void click_if_exists() {
+		click_if_enabled();
+	}
 }

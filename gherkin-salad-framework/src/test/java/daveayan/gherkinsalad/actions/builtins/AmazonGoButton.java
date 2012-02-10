@@ -22,4 +22,8 @@ public class AmazonGoButton extends BaseBrowserElement implements Clickable {
 			input_element.click();
 		}
 	}
+
+	public void click_if_exists() {
+		click_if_enabled();
+	}
 }
