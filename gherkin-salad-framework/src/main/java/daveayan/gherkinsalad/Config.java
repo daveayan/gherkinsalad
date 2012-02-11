@@ -33,16 +33,20 @@ public class Config {
 		return url;
 	}
 	
-	static {
+	private static boolean load_properties_from_file(File file) {
 		try {
-			String config_file_location = System.getenv("GHKSALAD_CONFIG");
-			log.info("GHKSALAD_CONFIG file is " + config_file_location);
-			File config_file = new File(System.getenv("GHKSALAD_CONFIG"));
 			config = new Properties();
-			config.load(new FileInputStream(config_file));
-			log.info("GHKSALAD_CONFIG Properties are: " + config);
+			config.load(new FileInputStream(file));
+			log.info("GHKSALAD-CONFIG Properties are: " + config);
+			String user_home = System.getProperty("user.home");
 			
-			chrome_webdriver_location = config.getProperty("chrome.webdriver.location");
+			String os_name= System.getProperty("os.name");
+			if(os_name.trim().contains("Mac")) {
+				chrome_webdriver_location = user_home + "/chromedriver";
+			} else {
+				chrome_webdriver_location = user_home + "/chromedriver.exe";
+			}
+			log.info("chrome driver is : " + chrome_webdriver_location);
 			seconds_wait_after_each_step = Integer.parseInt(config.getProperty("seconds.wait.after.each.step"));
 			seconds_timeout = Integer.parseInt(config.getProperty("seconds.timeout"));
 			seconds_poll_interval = Integer.parseInt(config.getProperty("seconds.poll.interval"));
@@ -51,8 +55,23 @@ public class Config {
 			firefox_enabled = Boolean.parseBoolean(config.getProperty("browser.firefox.enabled"));
 			ie_enabled = Boolean.parseBoolean(config.getProperty("browser.ie.enabled"));
 			default_datasource_driver = config.getProperty("default.datasource.driver");
+			return true;
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			System.out.println(ioe.getMessage());
+		}
+		return false;
+	}
+	
+	static {
+		String user_home = System.getProperty("user.home");
+		log.info("User Home is : " + user_home);
+		File user_specific_properties_file = new File(user_home + "/ghksalad-config.properties");
+		if(user_specific_properties_file.exists()) {
+			log.info("User specific configuration exists, Using it");
+			load_properties_from_file(user_specific_properties_file);
+		} else {
+			log.info("User specific configuration does not exist, Using Default");
+			load_properties_from_file(new File(Path.TO_TEST_RESOURCES + "/ghksalad-config.properties"));
 		}
 	}
 }
