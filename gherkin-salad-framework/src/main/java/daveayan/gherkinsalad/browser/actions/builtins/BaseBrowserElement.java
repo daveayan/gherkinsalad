@@ -37,12 +37,18 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	}
 	
 	public boolean exists() {
-		WebElement element = fetch_element(0);
-		return element != null;
+		return true;
 	}
 	
 	public boolean does_not_exist() {
 		return !exists();
+	}
+	
+	public boolean is_null() {
+		return false;
+	}
+	public boolean is_not_null() {
+		return ! is_null();
 	}
 	
 	public void has_text(String[] expected_texts) {

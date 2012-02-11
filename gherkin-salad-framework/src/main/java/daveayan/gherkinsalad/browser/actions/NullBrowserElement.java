@@ -14,10 +14,16 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 		throw new AssertionError("operation has_options not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public boolean exists() {
-		throw new AssertionError("operation exists not allowed on a NullBrowserElement '" + this + "'");
+		return false;
 	}
 	public boolean does_not_exist() {
-		throw new AssertionError("operation does_not_exist not allowed on a NullBrowserElement '" + this + "'");
+		return !exists();
+	}
+	public boolean is_null() {
+		return true;
+	}
+	public boolean is_not_null() {
+		return ! is_null();
 	}
 	public boolean exists_immediate() {
 		throw new AssertionError("operation exists_immediate not allowed on a NullBrowserElement '" + this + "'");
