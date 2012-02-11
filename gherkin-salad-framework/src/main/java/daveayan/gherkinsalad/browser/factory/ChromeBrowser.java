@@ -17,8 +17,9 @@ public class ChromeBrowser {
 	private static Log log = LogFactory.getLog(ChromeBrowser.class);
 	public static WebDriver getDriver() {
 		try {
+			File file = new File(Config.chrome_webdriver_location);
 			ChromeDriverService service = new ChromeDriverService.Builder()
-					.usingChromeDriverExecutable(new File(Config.chrome_webdriver_location))
+					.usingChromeDriverExecutable(file)
 					.usingAnyFreePort().build();
 			service.start();
 			WebDriver instance = new ChromeDriver(service, DesiredCapabilities.chrome());
