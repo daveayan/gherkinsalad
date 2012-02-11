@@ -51,9 +51,11 @@ public class Config {
 			if(chrome_enabled) {
 				String os_name= System.getProperty("os.name");
 				if(os_name.trim().contains("Mac")) {
-					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/chromedriver";
+					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver";
+				} else if(os_name.trim().contains("Linux")) {
+					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/linux.chromedriver";
 				} else {
-					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/chromedriver.exe";
+					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/win.chromedriver.exe";
 				}
 			}
 			return true;
@@ -64,15 +66,15 @@ public class Config {
 	}
 	
 	static {
-		String user_name = System.getProperty("user.name");
+		String user_name = System.getProperty("user.name").trim();
 		log.info("User Name is : " + user_name);
-		File user_specific_properties_file = new File(user_name + ".ghksalad.properties");
+		File user_specific_properties_file = new File(Path.TO_SYSTEM_RESOURCES + user_name + ".ghksalad.properties");
 		if(user_specific_properties_file.exists()) {
 			log.info("User specific configuration exists, Using " + user_specific_properties_file.getAbsolutePath());
 			load_properties_from_file(user_specific_properties_file);
 		} else {
 			log.info("User specific configuration does not exist, Using Default");
-			load_properties_from_file(new File(Path.TO_SYSTEM_RESOURCES + "/default.ghksalad.properties"));
+			load_properties_from_file(new File(Path.TO_SYSTEM_RESOURCES + "default.ghksalad.properties"));
 		}
 	}
 }
