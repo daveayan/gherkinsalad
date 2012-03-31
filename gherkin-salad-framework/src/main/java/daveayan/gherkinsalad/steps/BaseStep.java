@@ -21,7 +21,7 @@ public class BaseStep {
 
 	protected static String current_role = StringUtils.EMPTY;
 
-	protected static String feature_under_test = StringUtils.EMPTY;
+	protected static String feature_under_test = "default";
 
 	protected static DataSource feature_data_source = null;
 
