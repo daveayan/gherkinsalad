@@ -21,8 +21,6 @@ public class BaseStep {
 
 	protected static String current_role = StringUtils.EMPTY;
 
-	protected static String feature_under_test = "default";
-
 	protected static DataSource feature_data_source = null;
 
 	protected static String data_management_driver = StringUtils.EMPTY, data_management_file = StringUtils.EMPTY;
@@ -48,19 +46,21 @@ public class BaseStep {
 	// DATA METHODS
 
 	protected String data_with_key(DataElementKey data_element_key) {
-		return feature_data_source.get_data_for(data_element_key);
+		String data = feature_data_source.get_data_for(data_element_key);
+		System.out.println("==> " + data_element_key + " -- Data is '" + data + "'");
+		return data;
 	}
 
-	protected DataElementKey data_element_with_key(String role_name, String feature_name, String symbolic_data_name) {
-		return DataElementKey.newInstance(role_name, feature_name, symbolic_data_name);
+	protected DataElementKey data_element_with_key(String role_name, String symbolic_data_name) {
+		return DataElementKey.newInstance(role_name, symbolic_data_name);
 	}
 
 	protected DataElementKey data_for(String symbolic_data_name) {
-		return data_element_with_key(current_role, feature_under_test, symbolic_data_name);
+		return data_element_with_key(current_role, symbolic_data_name);
 	}
 
 	protected DataElementKey data(String symbolic_data_name) {
-		return data_element_with_key(current_role, feature_under_test, symbolic_data_name);
+		return data_element_with_key(current_role, symbolic_data_name);
 	}
 
 	// COMPONENT ELEMENT METHODS

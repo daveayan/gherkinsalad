@@ -18,11 +18,11 @@ public class FlatCsvTest {
 		DataElementKey dek = null;
 		String actual_data = null;
 		
-		dek = DataElementKey.newInstance("some_role", "sample_feature", "user_name");
+		dek = DataElementKey.newInstance("some_role", "user_name");
 		actual_data = ds.get_data_for(dek);
 		Assert.assertEquals("qwerty", actual_data);
 		
-		dek = DataElementKey.newInstance("other_role", "other_feature", "search_term");
+		dek = DataElementKey.newInstance("other_role", "search_term");
 		actual_data = ds.get_data_for(dek);
 		Assert.assertEquals("macbook", actual_data);
 	}
@@ -31,7 +31,7 @@ public class FlatCsvTest {
 		DataElementKey dek = null;
 		String actual_data = null;
 		
-		dek = DataElementKey.newInstance("no_role", "no_feature", "no_data");
+		dek = DataElementKey.newInstance("no_role", "no_data");
 		actual_data = ds.get_data_for(dek);
 		Assert.assertEquals(null, actual_data);
 	}

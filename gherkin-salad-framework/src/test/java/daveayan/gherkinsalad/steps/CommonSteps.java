@@ -20,10 +20,10 @@ public class CommonSteps extends BaseStep {
 	public void assume_role(String role_name) {
 		current_role = role_name;
 	}
-	@Given("^(?:User|user|I|You|you) is testing feature ([^\\.]*)$")
-	public void testing_feature(String feature_name) {
-		feature_under_test = feature_name;
-	}
+//	@Given("^(?:User|user|I|You|you) is testing feature ([^\\.]*)$")
+//	public void testing_feature(String feature_name) {
+//		feature_under_test = feature_name;
+//	}
 	@Then("^(?:User|user|I|You|you) closes the browser window$")
 	public void close_browser_window() {
 		close_browser();

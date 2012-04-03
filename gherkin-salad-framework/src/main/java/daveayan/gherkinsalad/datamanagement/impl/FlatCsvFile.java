@@ -38,8 +38,8 @@ public class FlatCsvFile implements DataSource {
 	}
 	private void add_to_properties(String line) {
 		String[] line_items = StringUtils.splitByWholeSeparatorPreserveAllTokens(line, ",");
-		String key = line_items[0].trim() + "," + line_items[1].trim() + "," + line_items[2].trim();
-		String value = line_items[3].trim();
+		String key = line_items[0].trim() + "," + line_items[1].trim();
+		String value = line_items[2].trim();
 		data.put(key, value);
 	}
 	private boolean empty_row(String line) {

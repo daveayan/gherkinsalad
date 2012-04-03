@@ -1,5 +1,5 @@
 ROLE,FEATURE NAME,SYMBOLIC DATA,BOOK DATA,
 some_role,sample_feature,user_name,qwerty,
 some_role,sample_feature,password,pwd,
-,,,
+,,
 other_role,other_feature,search_term,macbook,
