@@ -13,8 +13,10 @@ public interface BrowserElement extends CanBeEnabled, CanBeDisabled, Nullable {
 	public void element_locators_are(List<By> element_locators);
 	public void driver_is(WebDriver driver);
 	
-	public void has_text(String[] expected_texts);
-	public void does_not_have_text(String[] expected_texts);
+	public boolean has_text(String... expected_texts);
+	
+	public void should_have_text(String... expected_texts);
+	public void should_not_have_text(String... expected_texts);
 	
 	public boolean exists();
 	public boolean does_not_exist();

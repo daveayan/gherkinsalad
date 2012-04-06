@@ -30,9 +30,9 @@ public class MockBrowserElement implements BrowserElement {
 	public void page_element_key_is(PageElementKey pek) {
 		this.pek = pek;
 	}
-	public void has_text(String[] expected_texts) {
+	public void should_have_text(String... expected_texts) {
 	}
-	public void does_not_have_text(String[] expected_texts) {
+	public void should_not_have_text(String... expected_texts) {
 	}
 	public boolean exists() {
 		return false;
@@ -48,5 +48,8 @@ public class MockBrowserElement implements BrowserElement {
 	}
 	public boolean is_not_null() {
 		return ! is_null();
+	}
+	public boolean has_text(String[] expected_texts) {
+		return true;
 	}
 }

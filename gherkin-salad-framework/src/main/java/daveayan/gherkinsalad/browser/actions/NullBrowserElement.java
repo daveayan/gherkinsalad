@@ -48,13 +48,15 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	}
 	public void click_if_exists() {
 	}
-	public void has_text(String[] expected_texts) {
+	public void should_have_text(String... expected_texts) {
+		throw new AssertionError("operation should_have_text not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_have_text(String... expected_texts) {
+		throw new AssertionError("operation should_not_have_text not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public boolean has_text(String[] expected_texts) {
 		throw new AssertionError("operation has_text not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public void does_not_have_text(String[] expected_texts) {
-		throw new AssertionError("operation does_not_have_text not allowed on a NullBrowserElement '" + this + "'");
-	}
-	
 	public void element_locators_are(List<By> element_locators) {
 	}
 	public void driver_is(WebDriver driver) {

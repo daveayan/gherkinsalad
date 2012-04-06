@@ -51,7 +51,24 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		return ! is_null();
 	}
 	
-	public void has_text(String[] expected_texts) {
+	public boolean has_text(String[] expected_texts) {
+		if (expected_texts != null) {
+			List<String> expected_text_not_present = new ArrayList<String>();
+			WebElement element = fetch_element(0);
+			for(String expected_text: expected_texts) {
+				if(! element.getText().contains(expected_text.trim())) {
+					expected_text_not_present.add(expected_text.trim());
+				}
+			}
+			if(! expected_text_not_present.isEmpty()) {
+				takeScreenshot();
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void should_have_text(String... expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
@@ -67,7 +84,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 	}
 	
-	public void does_not_have_text(String[] unexpected_texts) {
+	public void should_not_have_text(String... unexpected_texts) {
 		if (unexpected_texts != null) {
 			List<String> unexpected_text_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);

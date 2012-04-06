@@ -88,6 +88,10 @@ public class BaseStep {
 	protected PageElementKey element(String element_name) {
 		return PageElementKey.newInstance(current_role, "", element_name);
 	}
+	
+	protected BrowserElement current_page() {
+		return browser.locate_element_object_for(component("Page"));
+	}
 
 	public void is_enabled(PageElementKey pek) {
 		wait_between_steps();
@@ -143,13 +147,13 @@ public class BaseStep {
 	public void verify_text_exists(String[] expected_texts, PageElementKey page_element_key) {
 		wait_between_steps();
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
-		element.has_text(expected_texts);
+		element.should_have_text(expected_texts);
 	}
 
 	public void verify_text_does_not_exist(String[] unexpected_texts, PageElementKey page_element_key) {
 		wait_between_steps();
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
-		element.does_not_have_text(unexpected_texts);
+		element.should_not_have_text(unexpected_texts);
 	}
 
 	public void click(PageElementKey page_element_key) {
