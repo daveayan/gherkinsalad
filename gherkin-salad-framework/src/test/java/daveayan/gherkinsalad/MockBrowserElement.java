@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
@@ -49,7 +50,13 @@ public class MockBrowserElement implements BrowserElement {
 	public boolean is_not_null() {
 		return ! is_null();
 	}
-	public boolean has_text(String[] expected_texts) {
+	public boolean has_text(String... expected_texts) {
 		return true;
+	}
+	public void browser_is(Browser browser) {
+	}
+	public void should_be_enabled() {
+	}
+	public void should_be_disabled() {
 	}
 }

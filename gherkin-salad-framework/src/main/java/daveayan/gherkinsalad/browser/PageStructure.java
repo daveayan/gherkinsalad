@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
@@ -30,15 +29,15 @@ public class PageStructure {
 		return page_structure;
 	}
 
-	public Clickable getElement(WebDriver driver, String element_locator) {
+	public Clickable getElement(Browser browser, String element_locator) {
 		List<By> bys = getBys(element_locator);
 		Clickable clickable_element = new Link();
-		clickable_element.driver_is(driver);
+		clickable_element.browser_is(browser);
 		clickable_element.element_locators_are(bys);
 		return clickable_element;
 	}
 	
-	public BrowserElement getElement(WebDriver driver, PageElementKey page_element_key) {
+	public BrowserElement getElement(Browser browser, PageElementKey page_element_key) {
 		BrowserElement be = getElementWithBys(page_element_key);
 		if (be instanceof NullBrowserElement) {
 			PageElementKey pek = PageElementKey.instanceForAnyRoleComponentElement();
@@ -48,14 +47,14 @@ public class PageStructure {
 				be.page_element_key_is(page_element_key);
 			} else {
 				be.page_element_key_is(pek);
-				be.driver_is(driver);
+				be.browser_is(browser);
 				List<By> element_locators = new ArrayList<By>();
 				element_locators.add(By.linkText(page_element_key.element_name()));
 				be.element_locators_are(element_locators);
 			}
 		} else {
 			be.page_element_key_is(page_element_key);
-			be.driver_is(driver);
+			be.browser_is(browser);
 		}
 		return be;
 	}

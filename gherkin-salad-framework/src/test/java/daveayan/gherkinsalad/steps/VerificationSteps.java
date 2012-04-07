@@ -9,19 +9,19 @@ public class VerificationSteps extends BaseStep{
 	}
 	@Then("^([^\\.]*) has text ~([^\\.]*)~$")
 	public void has_text(String component_name, String text) {
-		verify_text_exists(text.split(";"), in_component(component_name));
+		verify_text_exists(in_component(component_name), text.split(";"));
 	}
 	@Then("^([^\\.]*) does not have text ~([^\\.]*)~$")
 	public void does_not_have_text(String component_name, String text) {
-		verify_text_does_not_exist(text.split(";"), in_component(component_name));
+		verify_text_does_not_exist(in_component(component_name), text.split(";"));
 	}
 	@Then("^([^\\.]*) on ([^\\.]*) has text ~([^\\.]*)~$")
 	public void has_text(String element_name, String component_name, String text) {
-		verify_text_exists(text.split(";"), in_element(element_name).on_component(component_name));
+		verify_text_exists(in_element(element_name).on_component(component_name), text.split(";"));
 	}
 	@Then("^([^\\.]*) on ([^\\.]*) does not have text ~([^\\.]*)~$")
 	public void does_not_have_text(String element_name, String component_name, String text) {
-		verify_text_does_not_exist(text.split(";"), in_element(element_name).on_component(component_name));
+		verify_text_does_not_exist(in_element(element_name).on_component(component_name), text.split(";"));
 	}
 	@Then("^([^\\.]*) has enabled elements ~([^\\.]*)~$")
 	public void these_elements_are_enabled(String component_name, String element_names) throws InterruptedException {

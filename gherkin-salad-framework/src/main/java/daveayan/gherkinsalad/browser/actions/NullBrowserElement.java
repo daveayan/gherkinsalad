@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
 
 public class NullBrowserElement implements Clickable, Selectable, TextEnterable, BrowserElement {
@@ -54,10 +55,20 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void should_not_have_text(String... expected_texts) {
 		throw new AssertionError("operation should_not_have_text not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public boolean has_text(String[] expected_texts) {
+	public boolean has_text(String... expected_texts) {
 		throw new AssertionError("operation has_text not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public void element_locators_are(List<By> element_locators) {
+		throw new AssertionError("operation element_locators_are not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void browser_is(Browser browser) {
+		throw new AssertionError("operation browser_is not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_be_enabled() {
+		throw new AssertionError("operation should_be_enabled not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_be_disabled() {
+		throw new AssertionError("operation should_be_disabled not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public void driver_is(WebDriver driver) {
 	}

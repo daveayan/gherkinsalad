@@ -1,24 +1,46 @@
 package daveayan.gherkinsalad.browser;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import daveayan.gherkinsalad.Util;
+import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
 
 public class Browser {
+	private static Log log = LogFactory.getLog(Browser.class);
 	private String name;
 
 	private PageStructure page_structure;
 
 	private static WebDriver instance;
+
+	private static int screen_shot_count = 0;
+
+	public void takeScreenshot() {
+		screen_shot_count++;
+		String file_name = Path.TO_SCREENSHOTS + "screenshot_" + screen_shot_count + ".png";
+		try {
+			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshot_file, new File(file_name));
+			log.info("Screenshot taken : " + file_name);
+		} catch (Throwable th) {
+			log.info(th.getMessage());
+			log.info("Unable to take screenshot : " + file_name);
+		}
+	}
 
 	public static Browser instance_with_name_and_page_structure_name(String name, String page_structure_name) {
 		Browser browser = new Browser();
@@ -33,11 +55,11 @@ public class Browser {
 	}
 
 	public Clickable locate_clickable_element_for(String colon_seperated_element_locator) {
-		return (Clickable) page_structure.getElement(instance, colon_seperated_element_locator);
+		return (Clickable) page_structure.getElement(this, colon_seperated_element_locator);
 	}
-	
+
 	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
-		return page_structure.getElement(instance, page_element_key);
+		return page_structure.getElement(this, page_element_key);
 	}
 
 	public WebElement findElementBy(By by) {
@@ -83,10 +105,6 @@ public class Browser {
 
 	public WebDriver driver() {
 		return instance;
-	}
-
-	public void takeScreenshot() {
-		Util.takeScreenShotWith((TakesScreenshot) instance);
 	}
 
 	private boolean is_IE() {

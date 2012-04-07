@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import junit.framework.Assert;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.NullWebElement;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -18,18 +19,19 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
+import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Config;
-import daveayan.gherkinsalad.Util;
+import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 
-public abstract class BaseBrowserElement implements BrowserElement {
+public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class); 
 	protected PageElementKey page_element_key;
 
 	protected List<By> element_locators;
 
-	protected WebDriver driver;
+	protected Browser browser;
 	
 	public boolean exists_immediate() {
 		WebElement element = fetch_element_immediate(0);
@@ -51,7 +53,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		return ! is_null();
 	}
 	
-	public boolean has_text(String[] expected_texts) {
+	public boolean has_text(String... expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
 			WebElement element = fetch_element(0);
@@ -127,7 +129,7 @@ public abstract class BaseBrowserElement implements BrowserElement {
 		}
 		By selector = element_locators.get(id);
 		try {
-			WebElement element = driver.findElement(selector);
+			WebElement element = browser.driver().findElement(selector);
 			if(element == null) {
 				element = NullWebElement.newInstance(selector, page_element_key);
 			} 
@@ -139,11 +141,11 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	}
 	
 	private WebElement findElement(final By by) {
-		if(driver instanceof NullWebDriver) {
+		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
 		log.info("Looking for element " + by);
-	   Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+	   Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
 	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
 	       .ignoring(NoSuchElementException.class);
@@ -171,13 +173,16 @@ public abstract class BaseBrowserElement implements BrowserElement {
 					+ expected_number + "' for '" + this.getClass().getName() + "', page element key '" + page_element_key + "'");
 		}
 	}
-	
-	public void takeScreenshot() {
-		Util.takeScreenShotWith((TakesScreenshot) driver);
-	}
 
 	public boolean isDisabled() {
 		return !isEnabled();
+	}
+	
+	public void should_be_enabled() {
+		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isEnabled());
+	}
+	public void should_be_disabled() {
+		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
 	}
 
 	public void page_element_key_is(PageElementKey pek) {
@@ -187,9 +192,9 @@ public abstract class BaseBrowserElement implements BrowserElement {
 	public void element_locators_are(List<By> element_locators) {
 		this.element_locators = element_locators;
 	}
-
-	public void driver_is(WebDriver driver) {
-		this.driver = driver;
+	
+	public void browser_is(Browser browser) {
+		this.browser = browser;
 	}
 	
 	public String toString() {

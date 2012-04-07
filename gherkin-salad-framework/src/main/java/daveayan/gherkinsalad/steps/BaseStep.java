@@ -5,27 +5,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
 
-import daveayan.gherkinsalad.Config;
+import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.actions.Selectable;
-import daveayan.gherkinsalad.browser.actions.TextEnterable;
 import daveayan.gherkinsalad.datamanagement.DataElementKey;
 import daveayan.gherkinsalad.datamanagement.DataSource;
 
-public class BaseStep {
+public class BaseStep extends BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseStep.class);
-
-	protected static String current_role = StringUtils.EMPTY;
 
 	protected static DataSource feature_data_source = null;
 
 	protected static String data_management_driver = StringUtils.EMPTY, data_management_file = StringUtils.EMPTY;
-
-	protected static Browser browser;
 
 	public DataSource load_data_source(String data_source_file_name, String data_source_driver) {
 		try {
@@ -61,32 +56,6 @@ public class BaseStep {
 
 	protected DataElementKey data(String symbolic_data_name) {
 		return data_element_with_key(current_role, symbolic_data_name);
-	}
-
-	// COMPONENT ELEMENT METHODS
-
-	protected PageElementKey on_component(String component_name) {
-		return component(component_name);
-	}
-
-	protected PageElementKey on_element(String element_name) {
-		return element(element_name);
-	}
-
-	protected PageElementKey in_component(String component_name) {
-		return component(component_name);
-	}
-
-	protected PageElementKey in_element(String element_name) {
-		return element(element_name);
-	}
-
-	protected PageElementKey component(String component_name) {
-		return PageElementKey.newInstance(current_role, component_name, "");
-	}
-
-	protected PageElementKey element(String element_name) {
-		return PageElementKey.newInstance(current_role, "", element_name);
 	}
 	
 	protected BrowserElement current_page() {
@@ -144,13 +113,13 @@ public class BaseStep {
 		}
 	}
 
-	public void verify_text_exists(String[] expected_texts, PageElementKey page_element_key) {
+	public void verify_text_exists(PageElementKey page_element_key, String... expected_texts) {
 		wait_between_steps();
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
 		element.should_have_text(expected_texts);
 	}
 
-	public void verify_text_does_not_exist(String[] unexpected_texts, PageElementKey page_element_key) {
+	public void verify_text_does_not_exist(PageElementKey page_element_key, String... unexpected_texts) {
 		wait_between_steps();
 		BrowserElement element = (BrowserElement) browser.locate_element_object_for(page_element_key);
 		element.should_not_have_text(unexpected_texts);
@@ -196,30 +165,7 @@ public class BaseStep {
 		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
 		selectable_element.has_options(options);
 	}
-
-	// ******************************************************************************************************************************************************
-	// TEXT STEPS
-	// ******************************************************************************************************************************************************
-	public void select(String text, PageElementKey page_element_key) {
-		wait_between_steps();
-		Selectable selectable_element = (Selectable) browser.locate_element_object_for(page_element_key);
-		selectable_element.select_if_enabled(text);
-	}
-
-	public void enter(String text, PageElementKey page_element_key) {
-		wait_between_steps();
-		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
-		text_enterable_element.enter_text_if_enabled(text);
-	}
-
-	public void append(String text, PageElementKey page_element_key) {
-		wait_between_steps();
-		TextEnterable text_enterable_element = (TextEnterable) browser.locate_element_object_for(page_element_key);
-		text_enterable_element.append_text_if_enabled(text);
-	}
-
-	// ******************************************************************************************************************************************************
-
+	
 	// ******************************************************************************************************************************************************
 	// DATA STEPS
 	// ******************************************************************************************************************************************************
@@ -258,18 +204,5 @@ public class BaseStep {
 
 	public void goto_url(String url) {
 		browser.goto_url(url);
-	}
-
-	protected void wait_between_steps() {
-		wait_for_seconds(Config.seconds_wait_after_each_step);
-	}
-
-	protected void wait_for_seconds(int seconds) {
-		try {
-			log.info("User is waiting for " + seconds + " seconds");
-			Thread.sleep(seconds * 1000);
-		} catch (InterruptedException e) {
-			log.info(e.getMessage());
-		}
 	}
 }
