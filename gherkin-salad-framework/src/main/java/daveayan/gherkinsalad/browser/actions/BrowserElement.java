@@ -11,6 +11,7 @@ import daveayan.lang.Nullable;
 public interface BrowserElement extends CanBeEnabled, CanBeDisabled, Nullable {
 	public void page_element_key_is(PageElementKey pek);
 	public void element_locators_are(List<By> element_locators);
+	public void element_locators_are(By... element_locators);
 	public void browser_is(Browser browser);
 	
 	public boolean has_text(String... expected_texts);

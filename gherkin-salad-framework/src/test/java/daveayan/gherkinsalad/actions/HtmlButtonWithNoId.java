@@ -26,4 +26,9 @@ public class HtmlButtonWithNoId extends BaseBrowserElement implements Clickable 
 	public void click_if_exists() {
 		click_if_enabled();
 	}
+
+	public void click_if_exists_and_enabled() {
+		// TODO Auto-generated method stub
+		
+	}
 }

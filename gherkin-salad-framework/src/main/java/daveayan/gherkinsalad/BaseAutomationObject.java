@@ -8,6 +8,7 @@ import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.browser.PageElementKey;
 import daveayan.gherkinsalad.browser.actions.BrowserElement;
 import daveayan.gherkinsalad.browser.actions.Clickable;
+import daveayan.gherkinsalad.browser.actions.NullBrowserElement;
 import daveayan.gherkinsalad.browser.actions.Selectable;
 import daveayan.gherkinsalad.browser.actions.TextEnterable;
 
@@ -72,6 +73,20 @@ public abstract class BaseAutomationObject {
 
 	public BrowserElement fetch(PageElementKey pek) {
 		return browser.locate_element_object_for(pek);
+	}
+	
+	public BrowserElement fetch(Class<?> clazz) {
+		BrowserElement returnObject = new NullBrowserElement();
+		try {
+			Object object = clazz.newInstance();
+			returnObject = (BrowserElement) object;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		returnObject.browser_is(browser);
+		return returnObject;
 	}
 	
 	protected void wait_for_seconds(int seconds) {

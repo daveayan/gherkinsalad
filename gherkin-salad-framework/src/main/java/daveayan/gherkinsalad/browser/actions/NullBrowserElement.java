@@ -61,6 +61,9 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void element_locators_are(List<By> element_locators) {
 		throw new AssertionError("operation element_locators_are not allowed on a NullBrowserElement '" + this + "'");
 	}
+	public void element_locators_are(By... element_locators) {
+		throw new AssertionError("operation element_locators_are By... not allowed on a NullBrowserElement '" + this + "'");
+	}
 	public void browser_is(Browser browser) {
 		throw new AssertionError("operation browser_is not allowed on a NullBrowserElement '" + this + "'");
 	}
@@ -77,5 +80,9 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	}
 	public String toString() {
 		return this.getClass().getName() + " : " + pek;
+	}
+	public void click_if_exists_and_enabled() {
+		// TODO Auto-generated method stub
+		
 	}
 }

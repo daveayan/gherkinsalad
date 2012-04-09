@@ -1,6 +1,7 @@
 package daveayan.gherkinsalad.browser.actions.builtins;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -191,6 +192,10 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 
 	public void element_locators_are(List<By> element_locators) {
 		this.element_locators = element_locators;
+	}
+	
+	public void element_locators_are(By... element_locators) {
+		this.element_locators = Arrays.asList(element_locators);
 	}
 	
 	public void browser_is(Browser browser) {

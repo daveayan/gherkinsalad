@@ -1,5 +1,6 @@
 package daveayan.gherkinsalad;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,6 +19,9 @@ public class MockBrowserElement implements BrowserElement {
 	}
 	public void element_locators_are(List<By> element_locators) {
 		this.element_locators = element_locators;
+	}
+	public void element_locators_are(By... element_locators) {
+		this.element_locators = Arrays.asList(element_locators);
 	}
 	public void driver_is(WebDriver driver) {
 		this.driver = driver;
