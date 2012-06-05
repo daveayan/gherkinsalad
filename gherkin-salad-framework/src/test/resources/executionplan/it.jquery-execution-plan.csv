@@ -1,1 +1,0 @@
-feature file,feature name,browser,page structure,url,data file,data source drivertest.jqueryui.feature,integration test jqueryui,Firefox,it.jqueryui.page.structure.csv,http://jqueryui.com/demos/,NA,NA

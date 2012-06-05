@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory
 
 import daveayan.gherkinsalad.Config
 import daveayan.gherkinsalad.Path
-import daveayan.gherkinsalad.datamanagement.XlsFileSupport
+import daveayan.gherkinsalad.XlsFile;
 
 class PrepareFeaturesFromExecutionPlan {
 	private static Log log = LogFactory.getLog(PrepareFeaturesFromExecutionPlan.class)
@@ -32,7 +32,7 @@ class PrepareFeaturesFromExecutionPlan {
 # ${file_name_parts[0]} in ${file_name_parts[1]}
 #########################################################
 """
-		XlsFileSupport support = XlsFileSupport.openXlsFile(Path.TO_EXECUTION_PLAN + file_name_parts[0])
+		XlsFile support = XlsFile.openXlsFile(Path.TO_EXECUTION_PLAN + file_name_parts[0])
 		if(support.file_exists()) {
 			support.switch_to_sheet(file_name_parts[1])
 			if(support.sheet_exists()) {
@@ -40,13 +40,12 @@ class PrepareFeaturesFromExecutionPlan {
 				while(true) {
 					String feature_file_name 		= support.value_in_cell("A_" + row_number)
 					String browser 							= support.value_in_cell("B_" + row_number)
-					String page_structure 			= support.value_in_cell("C_" + row_number)
-					String env 									= support.value_in_cell("D_" + row_number)
-					String data_file 						= support.value_in_cell("E_" + row_number)
+					String env 									= support.value_in_cell("C_" + row_number)
+					String data_file 						= support.value_in_cell("D_" + row_number)
 					if(feature_file_name.contains("QUEUE UP")) { 
 						break
 					}
-					apply_execution_plan_line_item(feature_file_name, "default", browser, page_structure, env, data_file, "DEFAULT")
+					apply_execution_plan_line_item(feature_file_name, "default", browser, env, data_file, "DEFAULT")
 					row_number ++
 				}
 			} else {
@@ -78,9 +77,9 @@ class PrepareFeaturesFromExecutionPlan {
 		}
 	}
 	
-	def apply_execution_plan_line_item(feature_file, feature_name, browser_name, page_structure_file_name, env_name, data_file_name, data_source_driver) {
+	def apply_execution_plan_line_item(feature_file, feature_name, browser_name, env_name, data_file_name, data_source_driver) {
 		if(allow_browser_execution(browser_name)) {
-			def top_scenario_text = top_scenario_text(feature_name, browser_name, page_structure_file_name, env_name, data_file_name, data_source_driver)
+			def top_scenario_text = top_scenario_text(feature_name, browser_name, env_name, data_file_name, data_source_driver)
 			def bottom_scenario_text = bottom_scenario_text()
 			process_feature_file(feature_file, top_scenario_text, bottom_scenario_text)
 		} else {
@@ -148,9 +147,9 @@ class PrepareFeaturesFromExecutionPlan {
 		folders_to_create.mkdirs()
 	}
 	
-	def top_scenario_text(feature_name, browser_name, page_structure_file_name, env_name, data_file_name, data_source_driver) {
+	def top_scenario_text(feature_name, browser_name, env_name, data_file_name, data_source_driver) {
 		def scenario_text = "Scenario: Prepare browser and test data"
-		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser with page structure file " + page_structure_file_name.trim()
+		scenario_text += "\n\t\tGiven User launched the " + browser_name.trim() + " browser"
 		if(! env_name.trim().equals("NA")) {
 			String url = Config.env(env_name)
 			scenario_text += "\n\t\tAnd User visited website " + url.trim()

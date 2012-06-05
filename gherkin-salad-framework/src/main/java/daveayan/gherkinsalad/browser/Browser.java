@@ -14,16 +14,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.Path;
-import daveayan.gherkinsalad.browser.actions.BrowserElement;
-import daveayan.gherkinsalad.browser.actions.Clickable;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
 
 public class Browser {
 	private static Log log = LogFactory.getLog(Browser.class);
 	private String name;
-
-	private PageStructure page_structure;
 
 	private static WebDriver instance;
 
@@ -42,24 +38,10 @@ public class Browser {
 		}
 	}
 
-	public static Browser instance_with_name_and_page_structure_name(String name, String page_structure_name) {
+	public static Browser instance_with_name_and_page_structure_name(String name) {
 		Browser browser = new Browser();
 		browser.name = name;
-		browser.load_page_structure(page_structure_name);
 		return browser;
-	}
-
-	public BrowserElement locate_element_object_for(String role, String component_name, String element_name) {
-		PageElementKey pek = PageElementKey.newInstance(role, component_name, element_name);
-		return locate_element_object_for(pek);
-	}
-
-	public Clickable locate_clickable_element_for(String colon_seperated_element_locator) {
-		return (Clickable) page_structure.getElement(this, colon_seperated_element_locator);
-	}
-
-	public BrowserElement locate_element_object_for(PageElementKey page_element_key) {
-		return page_structure.getElement(this, page_element_key);
 	}
 
 	public WebElement findElementBy(By by) {
@@ -76,7 +58,6 @@ public class Browser {
 			System.err.println(wde.getMessage());
 		}
 		instance = null;
-		page_structure = null;
 	}
 
 	public void launch() {
@@ -95,12 +76,6 @@ public class Browser {
 
 	public void goto_url(String url) {
 		instance.get(url);
-	}
-
-	private void load_page_structure(String page_structure_file_name) {
-		if (page_structure == null) {
-			this.page_structure = PageStructure.instanceFromFile(page_structure_file_name);
-		}
 	}
 
 	public WebDriver driver() {
