@@ -40,8 +40,8 @@ class PrepareFeaturesFromExecutionPlan {
 				while(true) {
 					String feature_file_name 		= support.value_in_cell("A_" + row_number)
 					String browser 							= support.value_in_cell("B_" + row_number)
-					String env 									= support.value_in_cell("C_" + row_number)
-					String data_file 						= support.value_in_cell("D_" + row_number)
+					String env 									= file_name_parts[1]
+					String data_file 						= support.value_in_cell("C_" + row_number)
 					if(feature_file_name.contains("QUEUE UP")) { 
 						break
 					}

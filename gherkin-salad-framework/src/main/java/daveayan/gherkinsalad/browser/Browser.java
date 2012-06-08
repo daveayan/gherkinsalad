@@ -38,7 +38,7 @@ public class Browser {
 		}
 	}
 
-	public static Browser instance_with_name_and_page_structure_name(String name) {
+	public static Browser instance_of(String name) {
 		Browser browser = new Browser();
 		browser.name = name;
 		return browser;

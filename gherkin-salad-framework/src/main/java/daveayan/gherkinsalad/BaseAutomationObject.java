@@ -1,6 +1,5 @@
 package daveayan.gherkinsalad;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,7 +9,6 @@ import daveayan.gherkinsalad.components.NullBrowserElement;
 
 public abstract class BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
-	protected static String current_role = StringUtils.EMPTY;
 	protected static Browser browser;
 	
 	protected void wait_between_steps() {
@@ -27,7 +25,7 @@ public abstract class BaseAutomationObject {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		returnObject.browser_is(browser);
+//		returnObject.browser_is(browser);
 		return returnObject;
 	}
 	
@@ -44,13 +42,12 @@ public abstract class BaseAutomationObject {
 		browser.takeScreenshot();
 	}
 	
-	public void launch_browser_with(String name) {
-		browser = Browser.instance_with_name_and_page_structure_name(name);
+	public void launch_browser_with(String browser_name) {
+		browser = Browser.instance_of(browser_name);
 		browser.launch();
 	}
 
 	public void close_browser() {
-		current_role = StringUtils.EMPTY;
 		if (browser != null) {
 			browser.close();
 		}

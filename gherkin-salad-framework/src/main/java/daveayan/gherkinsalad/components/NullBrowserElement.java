@@ -70,6 +70,9 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void should_be_disabled() {
 		throw new AssertionError("operation should_be_disabled not allowed on a NullBrowserElement '" + this + "'");
 	}
+	public void should_have_hover_text(String text) {
+		throw new AssertionError("operation should_have_hover_text not allowed on a NullBrowserElement '" + this + "'");
+	}
 	public void driver_is(WebDriver driver) {
 	}
 	public String toString() {

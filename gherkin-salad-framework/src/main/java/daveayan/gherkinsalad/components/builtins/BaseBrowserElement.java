@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -22,14 +23,13 @@ import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Config;
-import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.components.BrowserElement;
 
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
 	
 	protected List<By> element_locators;
-	protected Browser browser;
+//	protected Browser browser;
 	
 	public boolean exists_immediate() {
 		WebElement element = fetch_element_immediate(0);
@@ -99,6 +99,13 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 			}
 		}
 	}
+	
+	public void should_have_hover_text(String expected_text) {
+		if(StringUtils.isNotBlank(expected_text)) {
+//			WebElement element = fetch_element(0);
+//			 TODO: to implement
+		}
+	}
 
 	public By get_by_at_id(int id) {
 		return element_locators.get(id);
@@ -155,22 +162,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	   return element;
 	}
 
-	public void assert_that_the_number_of_element_locators_is(int expected_number) {
-		assert_that_the_number_of_element_locators_are(expected_number);
-	}
-
-	public void assert_that_the_number_of_element_locators_are(int expected_number) {
-		if (element_locators == null) {
-			takeScreenshot();
-			throw new AssertionError("element_locators is null for '" + this.getClass().getName() + "'");
-		}
-		if (element_locators.size() != expected_number) {
-			takeScreenshot();
-			throw new AssertionError("Size of element_locators is '" + element_locators.size() + "', expected '"
-					+ expected_number + "' for '" + this.getClass().getName() + "'");
-		}
-	}
-
 	public boolean isDisabled() {
 		return !isEnabled();
 	}
@@ -192,10 +183,10 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		return this;
 	}
 	
-	public BrowserElement browser_is(Browser browser) {
-		this.browser = browser;
-		return this;
-	}
+//	public BrowserElement browser_is(Browser browser) {
+//		this.browser = browser;
+//		return this;
+//	}
 	
 	public String toString() {
 		return this.getClass().getName() + ", " + element_locators;
