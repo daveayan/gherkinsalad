@@ -3,6 +3,7 @@ package daveayan.gherkinsalad.components.builtins;
 import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.components.TextEnterable;
+import daveayan.gherkinsalad.report.Report;
 
 public class TextBox extends BaseBrowserElement implements TextEnterable {
 	public boolean isEnabled() {
@@ -16,6 +17,7 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 			wait_between_steps();
 			element.clear();
 			element.sendKeys(text);
+			Report.action("Entered text '" + text + "' in " + this);
 		}
 	}
 
@@ -24,6 +26,7 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 		if(this.isEnabled()) {
 			wait_between_steps();
 			element.sendKeys(text);
+			Report.action("Appended text '" + text + "' in " + this);
 		}
 	}
 

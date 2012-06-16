@@ -19,13 +19,9 @@ public class Config {
 	public static int seconds_timeout = 30;
 	public static int seconds_poll_interval = 1;
 	
-	public static boolean archive_results = false;
-	
-	public static boolean chrome_enabled = false;
-	public static boolean firefox_enabled = false;
-	public static boolean ie_enabled = false;
-	
-	public static String default_datasource_driver = null;
+	public static String getProperty(String key) {
+		return config.getProperty(key);
+	}
 	
 	public static String env(String env_name) {
 		String url = config.getProperty("env." + env_name);
@@ -42,13 +38,7 @@ public class Config {
 			seconds_wait_after_each_step = Integer.parseInt(config.getProperty("seconds.wait.after.each.step"));
 			seconds_timeout = Integer.parseInt(config.getProperty("seconds.timeout"));
 			seconds_poll_interval = Integer.parseInt(config.getProperty("seconds.poll.interval"));
-			archive_results = Boolean.parseBoolean(config.getProperty("archive.results"));
-			chrome_enabled = Boolean.parseBoolean(config.getProperty("browser.chrome.enabled"));
-			firefox_enabled = Boolean.parseBoolean(config.getProperty("browser.firefox.enabled"));
-			ie_enabled = Boolean.parseBoolean(config.getProperty("browser.ie.enabled"));
-			default_datasource_driver = config.getProperty("default.datasource.driver");
 			
-			if(chrome_enabled) {
 				String os_name= System.getProperty("os.name");
 				if(os_name.trim().contains("Mac")) {
 					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver";
@@ -57,7 +47,6 @@ public class Config {
 				} else {
 					chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/win.chromedriver.exe";
 				}
-			}
 			return true;
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());

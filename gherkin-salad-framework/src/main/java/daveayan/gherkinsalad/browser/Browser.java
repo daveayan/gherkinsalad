@@ -16,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
+import daveayan.gherkinsalad.report.Report;
 
 public class Browser {
 	private static Log log = LogFactory.getLog(Browser.class);
@@ -36,6 +37,7 @@ public class Browser {
 			log.info(th.getMessage());
 			log.info("Unable to take screenshot : " + file_name);
 		}
+		Report.screenshot_taken(file_name);
 	}
 
 	public static Browser instance_of(String name) {

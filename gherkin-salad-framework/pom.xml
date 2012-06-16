@@ -113,31 +113,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>apply-execution-plan</id>
-						<phase>integration-test</phase>
-						<configuration>
-							<tasks>
-								<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
-									<classpath refid="maven.compile.classpath" />
-								</taskdef>
-								<groovy
-									src="${basedir}/src/main/groovy/daveayan/gherkinsalad/executionplan/PrepareFeaturesFromExecutionPlan.groovy">
-									<classpath refid="maven.compile.classpath" />
-									<arg line="integration-test-execution-plan.csv" />
-								</groovy>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 			<plugin>
 				<groupId>cuke4duke</groupId>
 				<artifactId>cuke4duke-maven-plugin</artifactId>
@@ -235,6 +210,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>

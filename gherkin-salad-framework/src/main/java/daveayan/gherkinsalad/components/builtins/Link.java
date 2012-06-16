@@ -6,6 +6,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.components.Clickable;
+import daveayan.gherkinsalad.report.Report;
 
 public class Link extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(Link.class);
@@ -20,6 +21,7 @@ public class Link extends BaseBrowserElement implements Clickable {
 		if(this.isEnabled()) {
 			element.click();
 		}
+		Report.action("Clicked " + this);
 	}
 	
 	public void click_if_exists() {

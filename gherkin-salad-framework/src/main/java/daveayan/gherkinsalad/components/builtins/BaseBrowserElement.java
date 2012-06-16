@@ -29,7 +29,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
 	
 	protected List<By> element_locators;
-//	protected Browser browser;
 	
 	public boolean exists_immediate() {
 		WebElement element = fetch_element_immediate(0);
@@ -182,11 +181,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		this.element_locators = Arrays.asList(element_locators);
 		return this;
 	}
-	
-//	public BrowserElement browser_is(Browser browser) {
-//		this.browser = browser;
-//		return this;
-//	}
 	
 	public String toString() {
 		return this.getClass().getName() + ", " + element_locators;

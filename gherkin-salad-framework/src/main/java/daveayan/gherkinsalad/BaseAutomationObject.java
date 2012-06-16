@@ -4,8 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import daveayan.gherkinsalad.browser.Browser;
-import daveayan.gherkinsalad.components.BrowserElement;
-import daveayan.gherkinsalad.components.NullBrowserElement;
 
 public abstract class BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
@@ -14,21 +12,7 @@ public abstract class BaseAutomationObject {
 	protected void wait_between_steps() {
 		wait_for_seconds(Config.seconds_wait_after_each_step);
 	}
-	
-	public BrowserElement fetch(Class<?> clazz) {
-		BrowserElement returnObject = new NullBrowserElement();
-		try {
-			Object object = clazz.newInstance();
-			returnObject = (BrowserElement) object;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-//		returnObject.browser_is(browser);
-		return returnObject;
-	}
-	
+
 	protected void wait_for_seconds(int seconds) {
 		try {
 			log.info("User is waiting for " + seconds + " seconds");
