@@ -8,9 +8,9 @@ import daveayan.gherkinsalad.report.Report;
 
 public class TextBox extends BaseBrowserElement implements TextEnterable {
 	
-	public static TextBox located(By... locators) {
+	public static TextBox find(By... locators) {
 		TextBox tb = new TextBox();
-		tb.element_locators_are(locators);
+		tb.found(locators);
 		return tb;
 	}
 	

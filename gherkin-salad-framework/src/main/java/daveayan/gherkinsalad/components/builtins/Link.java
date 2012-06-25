@@ -12,9 +12,9 @@ import daveayan.gherkinsalad.report.Report;
 public class Link extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(Link.class);
 	
-	public static Link located(By... locators) {
+	public static Link find(By... locators) {
 		Link l = new Link();
-		l.element_locators_are(locators);
+		l.found(locators);
 		return l;
 	}
 	

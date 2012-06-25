@@ -14,6 +14,7 @@ public abstract class BaseAutomationObject {
 	}
 
 	protected void wait_for_seconds(int seconds) {
+		if(seconds == 0) return;
 		try {
 			log.info("User is waiting for " + seconds + " seconds");
 			Thread.sleep(seconds * 1000);

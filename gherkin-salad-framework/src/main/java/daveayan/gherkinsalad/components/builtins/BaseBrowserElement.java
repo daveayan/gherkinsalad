@@ -172,17 +172,21 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
 	}
 
-	public BrowserElement element_locators_are(List<By> element_locators) {
+	public BrowserElement found(List<By> element_locators) {
 		this.element_locators = element_locators;
 		return this;
 	}
 	
-	public BrowserElement element_locators_are(By... element_locators) {
+	public BrowserElement found(By... element_locators) {
 		this.element_locators = Arrays.asList(element_locators);
 		return this;
 	}
 	
 	public String toString() {
 		return this.getClass().getName() + ", " + element_locators;
+	}
+
+	public boolean isEnabled() {
+		return true;
 	}
 }

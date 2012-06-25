@@ -10,9 +10,9 @@ import daveayan.gherkinsalad.components.Selectable;
 
 public class DropDown extends BaseBrowserElement implements Selectable {
 	
-	public static DropDown located(By... locators) {
+	public static DropDown find(By... locators) {
 		DropDown d = new DropDown();
-		d.element_locators_are(locators);
+		d.found(locators);
 		return d;
 	}
 	
