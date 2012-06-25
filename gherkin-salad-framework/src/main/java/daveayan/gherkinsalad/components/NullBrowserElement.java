@@ -38,8 +38,11 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public void append_text_if_enabled(String text) {
 		throw new AssertionError("operation append_text_if_enabled not allowed on a NullBrowserElement '" + this + "' and text '" + text + "'");
 	}
-	public void select_if_enabled(String text) {
+	public void select_option_if_enabled(String text) {
 		throw new AssertionError("operation select_if_enabled not allowed on a NullBrowserElement '" + this + "' and text '" + text + "'");
+	}
+	public void select_code_if_enabled(String text) {
+		throw new AssertionError("operation select_code_if_enabled not allowed on a NullBrowserElement '" + this + "' and text '" + text + "'");
 	}
 	public void click_if_enabled() {
 		throw new AssertionError("operation click_if_enabled not allowed on a NullBrowserElement '" + this + "'");
