@@ -9,6 +9,13 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.components.Selectable;
 
 public class DropDown extends BaseBrowserElement implements Selectable {
+	
+	public static DropDown located(By... locators) {
+		DropDown d = new DropDown();
+		d.element_locators_are(locators);
+		return d;
+	}
+	
 	public boolean isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();

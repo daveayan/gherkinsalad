@@ -2,6 +2,7 @@ package daveayan.gherkinsalad.components.builtins;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
@@ -10,6 +11,13 @@ import daveayan.gherkinsalad.report.Report;
 
 public class Link extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(Link.class);
+	
+	public static Link located(By... locators) {
+		Link l = new Link();
+		l.element_locators_are(locators);
+		return l;
+	}
+	
 	public boolean isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();

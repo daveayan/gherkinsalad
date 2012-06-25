@@ -1,11 +1,19 @@
 package daveayan.gherkinsalad.components.builtins;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.components.TextEnterable;
 import daveayan.gherkinsalad.report.Report;
 
 public class TextBox extends BaseBrowserElement implements TextEnterable {
+	
+	public static TextBox located(By... locators) {
+		TextBox tb = new TextBox();
+		tb.element_locators_are(locators);
+		return tb;
+	}
+	
 	public boolean isEnabled() {
 		WebElement element = fetch_element(0);
 		return element.isEnabled();
