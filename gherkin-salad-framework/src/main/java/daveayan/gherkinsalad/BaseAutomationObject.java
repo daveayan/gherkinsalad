@@ -12,6 +12,10 @@ public abstract class BaseAutomationObject {
 	protected void wait_between_steps() {
 		wait_for_seconds(Config.seconds_wait_after_each_step);
 	}
+	
+	protected void wait_between_steps_plus(int seconds) {
+		wait_for_seconds(Config.seconds_wait_after_each_step + seconds);
+	}
 
 	protected void wait_for_seconds(int seconds) {
 		if(seconds == 0) return;

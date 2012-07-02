@@ -83,4 +83,16 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	}
 	public void click_if_exists_and_enabled() {
 	}
+	public boolean isDisplayed() {
+		throw new AssertionError("operation isDisplayed not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_be_displayed() {
+		throw new AssertionError("operation should_be_displayed not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_be_displayed() {
+		throw new AssertionError("operation should_not_be_displayed not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public List<String> get_all_options() {
+		throw new AssertionError("operation get_all_options not allowed on a NullBrowserElement '" + this + "'");
+	}
 }

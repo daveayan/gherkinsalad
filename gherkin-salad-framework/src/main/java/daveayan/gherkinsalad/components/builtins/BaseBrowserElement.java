@@ -144,7 +144,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		return NullWebElement.newInstance(selector);
 	}
 	
-	private WebElement findElement(final By by) {
+	protected WebElement findElement(final By by) {
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
@@ -160,9 +160,55 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	   });
 	   return element;
 	}
+	
+	protected List<WebElement> findElements(final By by) {
+		if(browser.driver() instanceof NullWebDriver) {
+			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
+		}
+		log.info("Looking for element " + by);
+	   Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
+	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
+	       .ignoring(NoSuchElementException.class);
+	   List<WebElement> elements = wait.until(new Function<WebDriver, List<WebElement>>() {
+	     public List<WebElement> apply(WebDriver driver) {
+	       return driver.findElements(by);
+	     }
+	   });
+	   return elements;
+	}
+	
+	protected List<WebElement> findElements(final By by, final WebElement in) {
+		if(browser.driver() instanceof NullWebDriver) {
+			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
+		}
+		log.info("Looking for element " + by);
+	   Wait<WebElement> wait = new FluentWait<WebElement>(in)
+	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
+	       .ignoring(NoSuchElementException.class);
+	   List<WebElement> elements = wait.until(new Function<WebElement, List<WebElement>>() {
+	     public List<WebElement> apply(WebElement in_element) {
+	       return in_element.findElements(by);
+	     }
+	   });
+	   return elements;
+	}
 
 	public boolean isDisabled() {
 		return !isEnabled();
+	}
+	
+	public boolean isDisplayed() {
+		return true;
+	}
+	
+	public void should_be_displayed() {
+		Assert.assertTrue("Expected '" + this + "' to be displayed, found it hidden", this.isDisplayed());
+	}
+	
+	public void should_not_be_displayed() {
+		Assert.assertFalse("Expected '" + this + "' to be hidden, found it displayed", this.isDisplayed());
 	}
 	
 	public void should_be_enabled() {
