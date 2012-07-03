@@ -148,7 +148,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
-		log.info("Looking for element " + by);
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
 	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
@@ -165,7 +164,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
-		log.info("Looking for element " + by);
 	   Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
 	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)

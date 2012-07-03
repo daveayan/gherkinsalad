@@ -33,7 +33,9 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 		WebElement element = fetch_element(0);
 		if(this.isEnabled()) {
 			wait_between_steps();
-			element.sendKeys(text);
+			String current_text = element.getAttribute("value");
+			element.clear();
+			element.sendKeys(text + current_text);
 			Report.action("Appended text '" + text + "' in " + this);
 		}
 	}
