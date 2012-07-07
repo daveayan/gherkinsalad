@@ -12,20 +12,20 @@ import daveayan.gherkinsalad.report.Report;
 public class Link extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(Link.class);
 	
-	public static Link find(By... locators) {
+	public static Link find(By locator) {
 		Link l = new Link();
-		l.found(locators);
+		l.found(locator);
 		return l;
 	}
 	
 	public boolean isEnabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
 		wait_between_steps();
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}

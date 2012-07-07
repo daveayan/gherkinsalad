@@ -8,19 +8,19 @@ import daveayan.gherkinsalad.report.Report;
 
 public class TextBox extends BaseBrowserElement implements TextEnterable {
 	
-	public static TextBox find(By... locators) {
+	public static TextBox find(By locator) {
 		TextBox tb = new TextBox();
-		tb.found(locators);
+		tb.found(locator);
 		return tb;
 	}
 	
 	public boolean isEnabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void enter_text_if_enabled(String text) {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			element.clear();
@@ -30,7 +30,7 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void append_text_if_enabled(String text) {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			String current_text = element.getAttribute("value");
@@ -41,7 +41,7 @@ public class TextBox extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}

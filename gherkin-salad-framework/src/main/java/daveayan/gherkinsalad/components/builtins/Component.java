@@ -1,10 +1,18 @@
 package daveayan.gherkinsalad.components.builtins;
 
-import daveayan.gherkinsalad.components.NavigationAware;
-import daveayan.gherkinsalad.components.SelfValidating;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public abstract class Component extends BaseBrowserElement implements NavigationAware, SelfValidating {
-	public boolean isEnabled() {
-		return true;
+
+public class Component extends BaseBrowserElement {
+	public static Component find(By locator) {
+		Component c = new Component();
+		c.found(locator);
+		return c;
+	}
+	
+	public String getAttribute(String name) {
+		WebElement e = fetch_element();
+		return e.getAttribute(name);
 	}
 }

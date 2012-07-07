@@ -1,7 +1,6 @@
 package daveayan.gherkinsalad.components.builtins;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -28,10 +27,10 @@ import daveayan.gherkinsalad.components.BrowserElement;
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
 	
-	protected List<By> element_locators;
+	protected By element_locator;
 	
 	public boolean exists_immediate() {
-		WebElement element = fetch_element_immediate(0);
+		WebElement element = fetch_element_immediate();
 		return ! (element instanceof NullWebElement);
 	}
 	
@@ -53,7 +52,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	public boolean has_text(String... expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
-			WebElement element = fetch_element(0);
+			WebElement element = fetch_element();
 			for(String expected_text: expected_texts) {
 				if(! element.getText().contains(expected_text.trim())) {
 					expected_text_not_present.add(expected_text.trim());
@@ -70,7 +69,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	public void should_have_text(String... expected_texts) {
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
-			WebElement element = fetch_element(0);
+			WebElement element = fetch_element();
 			for(String expected_text: expected_texts) {
 				if(! element.getText().contains(expected_text.trim())) {
 					expected_text_not_present.add(expected_text.trim());
@@ -86,7 +85,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	public void should_not_have_text(String... unexpected_texts) {
 		if (unexpected_texts != null) {
 			List<String> unexpected_text_present = new ArrayList<String>();
-			WebElement element = fetch_element(0);
+			WebElement element = fetch_element();
 			for(String expected_text: unexpected_texts) {
 				if(element.getText().contains(expected_text.trim())) {
 					unexpected_text_present.add(expected_text.trim());
@@ -105,43 +104,49 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 //			 TODO: to implement
 		}
 	}
-
-	public By get_by_at_id(int id) {
-		return element_locators.get(id);
+	
+	public Component locate_element(By locator) {
+		Component c = new Component();
+		c.found(locator);
+		return c;
 	}
 
-	public WebElement fetch_element(int id) {
-		if (id >= element_locators.size()) {
-			return NullWebElement.newInstance(null);
-		}
-		By selector = element_locators.get(id);
+//	public By get_by_at_id(int id) {
+//		return element_locators.get(id);
+//	}
+
+	public WebElement fetch_element() {
+//		if (id >= element_locators.size()) {
+//			return NullWebElement.newInstance(null);
+//		}
+//		By selector = element_locators.get(id);
 		try {
-			WebElement element = findElement(selector);
+			WebElement element = findElement(element_locator);
 			if(element == null) {
-				element = NullWebElement.newInstance(selector);
+				element = NullWebElement.newInstance(element_locator);
 			} 
 			return element;
 		} catch (NoSuchElementException nsee) {
 			log.info(nsee.getMessage());
 		}
-		return NullWebElement.newInstance(selector);
+		return NullWebElement.newInstance(element_locator);
 	}
 	
-	private WebElement fetch_element_immediate(int id) {
-		if (id >= element_locators.size()) {
-			return NullWebElement.newInstance(null);
-		}
-		By selector = element_locators.get(id);
+	private WebElement fetch_element_immediate() {
+//		if (id >= element_locators.size()) {
+//			return NullWebElement.newInstance(null);
+//		}
+//		By selector = element_locators.get(id);
 		try {
-			WebElement element = browser.driver().findElement(selector);
+			WebElement element = browser.driver().findElement(element_locator);
 			if(element == null) {
-				element = NullWebElement.newInstance(selector);
+				element = NullWebElement.newInstance(element_locator);
 			} 
 			return element;
 		} catch (NoSuchElementException nsee) {
 			log.info(nsee.getMessage());
 		}
-		return NullWebElement.newInstance(selector);
+		return NullWebElement.newInstance(element_locator);
 	}
 	
 	protected WebElement findElement(final By by) {
@@ -176,18 +181,33 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	   return elements;
 	}
 	
+	protected WebElement findElement(final By by, final WebElement in) {
+		if(browser.driver() instanceof NullWebDriver) {
+			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
+		}
+	   Wait<WebElement> wait = new FluentWait<WebElement>(in)
+	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
+	       .ignoring(NoSuchElementException.class);
+	   WebElement element = wait.until(new Function<WebElement, WebElement>() {
+	     public WebElement apply(WebElement find_within) {
+	       return find_within.findElement(by);
+	     }
+	   });
+	   return element;
+	}
+	
 	protected List<WebElement> findElements(final By by, final WebElement in) {
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
-		log.info("Looking for element " + by);
 	   Wait<WebElement> wait = new FluentWait<WebElement>(in)
 	       .withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 	       .pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS)
 	       .ignoring(NoSuchElementException.class);
 	   List<WebElement> elements = wait.until(new Function<WebElement, List<WebElement>>() {
-	     public List<WebElement> apply(WebElement in_element) {
-	       return in_element.findElements(by);
+	     public List<WebElement> apply(WebElement find_within) {
+	       return find_within.findElements(by);
 	     }
 	   });
 	   return elements;
@@ -216,18 +236,13 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
 	}
 
-	public BrowserElement found(List<By> element_locators) {
-		this.element_locators = element_locators;
-		return this;
-	}
-	
-	public BrowserElement found(By... element_locators) {
-		this.element_locators = Arrays.asList(element_locators);
+	public BrowserElement found(By element_locator) {
+		this.element_locator = element_locator;
 		return this;
 	}
 	
 	public String toString() {
-		return this.getClass().getName() + ", " + element_locators;
+		return this.getClass().getName() + ", " + element_locator;
 	}
 
 	public boolean isEnabled() {

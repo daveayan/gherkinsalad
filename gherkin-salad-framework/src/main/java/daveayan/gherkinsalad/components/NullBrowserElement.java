@@ -58,11 +58,8 @@ public class NullBrowserElement implements Clickable, Selectable, TextEnterable,
 	public boolean has_text(String... expected_texts) {
 		throw new AssertionError("operation has_text not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public BrowserElement found(List<By> element_locators) {
-		throw new AssertionError("operation element_locators_are not allowed on a NullBrowserElement '" + this + "'");
-	}
-	public BrowserElement found(By... element_locators) {
-		throw new AssertionError("operation element_locators_are By... not allowed on a NullBrowserElement '" + this + "'");
+	public BrowserElement found(By element_locator) {
+		throw new AssertionError("operation found By not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public BrowserElement browser_is(Browser browser) {
 		throw new AssertionError("operation browser_is not allowed on a NullBrowserElement '" + this + "'");

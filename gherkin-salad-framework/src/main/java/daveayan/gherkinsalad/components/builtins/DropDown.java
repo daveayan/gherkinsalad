@@ -10,19 +10,19 @@ import daveayan.gherkinsalad.components.Selectable;
 
 public class DropDown extends BaseBrowserElement implements Selectable {
 	
-	public static DropDown find(By... locators) {
+	public static DropDown find(By locator) {
 		DropDown d = new DropDown();
-		d.found(locators);
+		d.found(locator);
 		return d;
 	}
 	
 	public boolean isEnabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void select_option_if_enabled(String option) {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			List<WebElement> options = element.findElements(By.tagName("option"));
 			for(WebElement o: options) {
@@ -35,7 +35,7 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 	}
 	
 	public void select_code_if_enabled(String code) {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			List<WebElement> options = element.findElements(By.tagName("option"));
 			for(WebElement o: options) {
@@ -47,7 +47,7 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		}
 	}
 
-	public void has_options(String[] options) {
+	public void has_options(String... options) {
 		throw new AssertionError("DropDown::has_options(" + options + ") is not implemented yet");
 	}
 

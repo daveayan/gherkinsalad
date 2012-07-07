@@ -6,12 +6,12 @@ import daveayan.gherkinsalad.components.Clickable;
 
 public class RadioButton extends BaseBrowserElement implements Clickable {
 	public boolean isEnabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}

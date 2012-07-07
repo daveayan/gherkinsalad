@@ -10,12 +10,12 @@ import daveayan.gherkinsalad.components.Clickable;
 public class CheckBox extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(CheckBox.class);
 	public boolean isEnabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element(0);
+		WebElement element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}
