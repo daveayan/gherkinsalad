@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components.builtins;
+package daveayan.gherkinsalad.components.html;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

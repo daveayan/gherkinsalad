@@ -10,61 +10,6 @@
 		<selenium.version>2.13.0</selenium.version>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>wip</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>cuke4duke</groupId>
-						<artifactId>cuke4duke-maven-plugin</artifactId>
-						<configuration>
-							<jvmArgs>
-								<jvmArg>
-									-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
-								</jvmArg>
-								<jvmArg>-Dfile.encoding=UTF-8</jvmArg>
-								<jvmArg>-Dcucumber.features=${basedir}/src/test/resources/features</jvmArg>
-							</jvmArgs>
-							<!-- You may not need all of these arguments in your own project. 
-								We have a lot here for testing purposes... -->
-							<cucumberArgs>
-								<cucumberArg>--tag</cucumberArg>
-								<cucumberArg>@wip</cucumberArg>
-								<cucumberArg>--tag</cucumberArg>
-								<cucumberArg>~@manual</cucumberArg>
-								<cucumberArg>--backtrace</cucumberArg>
-								<cucumberArg>--color</cucumberArg>
-								<cucumberArg>--verbose</cucumberArg>
-								<cucumberArg>--format</cucumberArg>
-								<cucumberArg>pretty</cucumberArg>
-								<cucumberArg>--format</cucumberArg>
-								<cucumberArg>html</cucumberArg>
-								<cucumberArg>--out</cucumberArg>
-								<cucumberArg>${project.build.directory}/cucumber-reports.html</cucumberArg>
-								<cucumberArg>--require</cucumberArg>
-								<cucumberArg>${basedir}/target/test-classes</cucumberArg>
-								<cucumberArg>--guess</cucumberArg>
-							</cucumberArgs>
-							<gems>
-								<gem>install cuke4duke --version 0.4.4</gem>
-							</gems>
-						</configuration>
-						<executions>
-							<execution>
-								<id>run-features</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>cucumber</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 	<build>
 		<finalName>gherkin-salad</finalName>
 		<plugins>
@@ -109,50 +54,6 @@
 						</configuration>
 						<goals>
 							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>cuke4duke</groupId>
-				<artifactId>cuke4duke-maven-plugin</artifactId>
-				<configuration>
-					<jvmArgs>
-						<jvmArg>
-							-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
-						</jvmArg>
-						<jvmArg>-Dfile.encoding=UTF-8</jvmArg>
-					</jvmArgs>
-					<!-- You may not need all of these arguments in your own project. We 
-						have a lot here for testing purposes... -->
-					<cucumberArgs>
-						<cucumberArg>--tag</cucumberArg>
-						<cucumberArg>~@manual</cucumberArg>
-						<cucumberArg>--tag</cucumberArg>
-						<cucumberArg>~@wip</cucumberArg>
-						<cucumberArg>--backtrace</cucumberArg>
-						<cucumberArg>--color</cucumberArg>
-						<cucumberArg>--verbose</cucumberArg>
-						<cucumberArg>--format</cucumberArg>
-						<cucumberArg>pretty</cucumberArg>
-						<cucumberArg>--format</cucumberArg>
-						<cucumberArg>html</cucumberArg>
-						<cucumberArg>--out</cucumberArg>
-						<cucumberArg>${project.build.directory}/cucumber-reports.html</cucumberArg>
-						<cucumberArg>--require</cucumberArg>
-						<cucumberArg>${basedir}/target/test-classes</cucumberArg>
-						<cucumberArg>--guess</cucumberArg>
-					</cucumberArgs>
-					<gems>
-						<gem>install cuke4duke --version 0.4.4</gem>
-					</gems>
-				</configuration>
-				<executions>
-					<execution>
-						<id>run-features</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>cucumber</goal>
 						</goals>
 					</execution>
 				</executions>

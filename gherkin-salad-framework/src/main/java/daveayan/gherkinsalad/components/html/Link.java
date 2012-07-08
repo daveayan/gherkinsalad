@@ -1,8 +1,9 @@
-package daveayan.gherkinsalad.components.builtins;
+package daveayan.gherkinsalad.components.html;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NullWebElement;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
@@ -37,11 +38,13 @@ public class Link extends BaseBrowserElement implements Clickable {
 	}
 	
 	public void click_if_exists_and_enabled() {
-		try {
-			click_if_enabled();
-			log.info("Clicked on " + this);
-		} catch(TimeoutException te) {
-			log.info("Element does not exist " + this);
+		wait_between_steps();
+		WebElement element = fetch_element();
+		if(! (element instanceof NullWebElement)) {
+			if(this.isEnabled()) {
+				element.click();
+			}
+			Report.action("Clicked " + this);
 		}
 	}
 }

@@ -8,7 +8,13 @@ import org.openqa.selenium.WebDriver;
 import daveayan.gherkinsalad.browser.Browser;
 
 public class NullBrowserElement implements Clickable, Selectable, TextEnterable, BrowserElement {
-	public void has_options(String[] options) {
+	public String getText() {
+		throw new AssertionError("operation public String getText() not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public boolean isNotDisplayed() {
+		throw new AssertionError("operation public boolean isNotDisplayed() not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void has_options(String... options) {
 		throw new AssertionError("operation has_options not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public boolean exists() {

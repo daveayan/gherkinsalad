@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components.builtins;
+package daveayan.gherkinsalad.components.html;
 
 import java.util.List;
 
