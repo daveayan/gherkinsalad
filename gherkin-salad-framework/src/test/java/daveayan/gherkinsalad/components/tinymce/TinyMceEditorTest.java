@@ -13,7 +13,8 @@ public class TinyMceEditorTest extends BaseTest {
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
 		tinyMceEditor.enter_text_if_enabled("ABC TEST");
-		tinyMceEditor.should_have_text("ABC TEST");
+		
+		// TO IMPLEMENT ASSERTIONS
 		
 		wait_for_seconds(10);
 	}

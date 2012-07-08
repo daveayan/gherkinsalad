@@ -1,5 +1,8 @@
 package daveayan.gherkinsalad.components.jqueryui;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -60,11 +63,12 @@ public class JqueryUIDefaultDatePicker extends BaseBrowserElement implements Dat
 		log.info("date_to_select = " + date_to_select.getTime() + ", current_date = " + current_date.getTime());
 		
 		while(true) {
-			WebElement cal_month = fetch_element().findElement(By.className("ui-datepicker-month"));
-			WebElement cal_year = fetch_element().findElement(By.className("ui-datepicker-year"));
-			log.info("month_name = " + month_name + ", cal_month.getText() = " + cal_month.getText() + ", year = " + year+"" + ", cal_year.getText() = " + cal_year.getText());
-			if(StringUtils.equalsIgnoreCase(month_name, cal_month.getText())
-					&& StringUtils.equalsIgnoreCase(year+"", cal_year.getText())) {
+			String cal_month_text = get_month_in_picker();
+			String cal_year_text = get_year_in_picker();
+			
+			log.info("To Select: '" + month_name + "/" + year + "', In Calendar '" + cal_month_text + "/" + cal_year_text + "', ");
+			if(StringUtils.equalsIgnoreCase(month_name, cal_month_text)
+					&& StringUtils.equalsIgnoreCase(year+"", cal_year_text)) {
 				break;
 			}
 			if(date_to_select.after(current_date)) {	
@@ -75,6 +79,26 @@ public class JqueryUIDefaultDatePicker extends BaseBrowserElement implements Dat
 		}
 		log.info("Found month and year, finding day");
 		Link.find(By.linkText(day+"")).click_if_enabled();
+	}
+	
+	private String get_month_in_picker() {
+		while(true) {
+			WebElement cal_month = fetch_element().findElement(By.className("ui-datepicker-month"));
+			String cal_month_text = cal_month.getText();
+			if(StringUtils.isNotEmpty(cal_month_text)) {
+				return cal_month_text;
+			}
+		}
+	}
+	
+	private String get_year_in_picker() {
+		while(true) {
+			WebElement cal_year = fetch_element().findElement(By.className("ui-datepicker-year"));
+			String cal_year_text = cal_year.getText();
+			if(StringUtils.isNotEmpty(cal_year_text)) {
+				return cal_year_text;
+			}
+		}
 	}
 	
 	public JqueryUIDefaultDatePicker() {
