@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>daveayan</groupId>
-	<artifactId>gherkin-salad</artifactId>
+	<artifactId>gherkinsalad</artifactId>
 	<version>1.0</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -11,7 +11,7 @@
 	</properties>
 
 	<build>
-		<finalName>gherkin-salad</finalName>
+		<finalName>gherkinsalad</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -66,11 +66,6 @@
 			<groupId>org.picocontainer</groupId>
 			<artifactId>picocontainer</artifactId>
 			<version>2.10.2</version>
-		</dependency>
-		<dependency>
-			<groupId>cuke4duke</groupId>
-			<artifactId>cuke4duke</artifactId>
-			<version>0.4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -129,21 +124,7 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>codehaus</id>
-			<url>http://repository.codehaus.org</url>
-		</repository>
-		<repository>
-			<id>cukes</id>
-			<url>http://cukes.info/maven</url>
-		</repository>
-	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<id>cukes</id>
-			<url>http://cukes.info/maven</url>
-		</pluginRepository>
 		<pluginRepository>
 			<id>daveayan-releases</id>
 			<url>https://github.com/daveayan/_mavenrepository/raw/master/releases</url>

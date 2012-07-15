@@ -5,6 +5,12 @@ import org.apache.commons.logging.LogFactory;
 
 import daveayan.gherkinsalad.browser.Browser;
 
+/**
+ * 
+ * 
+ * @author daveayan
+ *
+ */
 public abstract class BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
 	protected static Browser browser;
