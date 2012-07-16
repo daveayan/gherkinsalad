@@ -47,11 +47,7 @@ import daveayan.lang.NullList;
  * Base class for all the page objects. This class provides:
  * <ul>
  * <li>Default implementations for the methods from BrowserElement, CanBeEnabled, CanBeDisabled, Nullable interfaces</li>
- * <li></li>
- * <li></li>
- * <li></li>
- * <li></li>
- * <li></li>
+ * <li>Methods to find more browser elements within this one</li>
  * </ul>
  */
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
@@ -59,79 +55,11 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	
 	private By element_locator;
 	
-	/**
-	 * Default implementation. Returns Boolean.FALSE
-	 */
-	public boolean is_null() {
-		return false;
-	}
-	
-	/**
-	 * Default implementation. Returns ! is_null()
-	 */
-	public boolean is_not_null() {
-		return ! is_null();
-	}
-	
 	public WebElement fetch_element() {
 		WebElement element = findElement(element_locator);
 		return element;
 	}
-	
-	public String getText() {
-		WebElement element = fetch_element();
-		return element.getText();
-	}
-	
-	public boolean has_text(String... expected_texts) {
-		if (expected_texts != null) {
-			List<String> expected_text_not_present = new ArrayList<String>();
-			String element_text = getText();
-			for(String expected_text: expected_texts) {
-				if(! element_text.contains(expected_text.trim())) {
-					expected_text_not_present.add(expected_text.trim());
-				}
-			}
-			if(! expected_text_not_present.isEmpty()) {
-				takeScreenshot();
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public void should_have_text(String... expected_texts) {
-		if (expected_texts != null) {
-			List<String> expected_text_not_present = new ArrayList<String>();
-			String element_text = getText();
-			for(String expected_text: expected_texts) {
-				if(! element_text.contains(expected_text.trim())) {
-					expected_text_not_present.add(expected_text.trim());
-				}
-			}
-			if(! expected_text_not_present.isEmpty()) {
-				takeScreenshot();
-				throw new AssertionError("Component '" + this + "' does not have expected text(s) '" + expected_text_not_present + "'\n. It has text '" + element_text + "'");
-			}
-		}
-	}
-	
-	public void should_not_have_text(String... unexpected_texts) {
-		if (unexpected_texts != null) {
-			List<String> unexpected_text_present = new ArrayList<String>();
-			String element_text = getText();
-			for(String expected_text: unexpected_texts) {
-				if(element_text.contains(expected_text.trim())) {
-					unexpected_text_present.add(expected_text.trim());
-				}
-			}
-			if(! unexpected_text_present.isEmpty()) {
-				takeScreenshot();
-				throw new AssertionError("Component '" + this + "' has unexpected text(s) '" + unexpected_text_present + "'");
-			}
-		}
-	}
-	
+
 	public WebElement findElement(final By by) {
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
@@ -173,7 +101,12 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	   }
 	   return element;
 	}
-	
+	/**
+	 * 
+	 * @param by
+	 * @param in
+	 * @return
+	 */
 	protected List<WebElement> findElements(final By by, final WebElement in) {
 		if(browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
@@ -194,44 +127,150 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	   }
 	   return elements;
 	}
-
+	
+	/**
+	 * DEFAULT IMPLEMENTATIONS OF THE BROWSERELEMENT INTERFACE
+	 */
+	/**
+	 * Default implementation. Returns Boolean.FALSE
+	 */
+	public boolean is_null() {
+		return false;
+	}
+	/**
+	 * Default implementation. Returns ! is_null()
+	 */
+	public boolean is_not_null() {
+		return ! is_null();
+	}
+	/**
+	 * Default implementation. Returns the value from getText() method of WebElement
+	 */
+	public String getText() {
+		WebElement element = fetch_element();
+		return element.getText();
+	}
+	/**
+	 * Default implementation. Verifies that the expected texts exists in the result of getText()
+	 * Takes Screenshot if expected text were not found and returns Boolean.FALSE
+	 * @return Boolean.TRUE of all the expected texts are present. Boolean.FALSE otherwise.
+	 */
+	public boolean has_text(String... expected_texts) {
+		if (expected_texts != null) {
+			List<String> expected_text_not_present = new ArrayList<String>();
+			String element_text = getText();
+			for(String expected_text: expected_texts) {
+				if(! element_text.contains(expected_text.trim())) {
+					expected_text_not_present.add(expected_text.trim());
+				}
+			}
+			if(! expected_text_not_present.isEmpty()) {
+				takeScreenshot();
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	 * Default Implementation. Asserts that the expected texts exists in the result of getText()
+	 * Throws single assertion error with all the texts that were expected but were not present.
+	 * Takes Screenshot if expected text were not found and assertion error was thrown
+	 */
+	public void should_have_text(String... expected_texts) {
+		if (expected_texts != null) {
+			List<String> expected_text_not_present = new ArrayList<String>();
+			String element_text = getText();
+			for(String expected_text: expected_texts) {
+				if(! element_text.contains(expected_text.trim())) {
+					expected_text_not_present.add(expected_text.trim());
+				}
+			}
+			if(! expected_text_not_present.isEmpty()) {
+				takeScreenshot();
+				throw new AssertionError("Component '" + this + "' does not have expected text(s) '" + expected_text_not_present + "'\n. It has text '" + element_text + "'");
+			}
+		}
+	}
+	/**
+	 * Default Implementation. Asserts that the unexpected texts do not exist in the result of getText()
+	 * Throws single assertion error with all the texts that were not expected but were present.
+	 * Takes Screenshot if unexpected texts were found and assertion error was thrown
+	 */
+	public void should_not_have_text(String... unexpected_texts) {
+		if (unexpected_texts != null) {
+			List<String> unexpected_text_present = new ArrayList<String>();
+			String element_text = getText();
+			for(String expected_text: unexpected_texts) {
+				if(element_text.contains(expected_text.trim())) {
+					unexpected_text_present.add(expected_text.trim());
+				}
+			}
+			if(! unexpected_text_present.isEmpty()) {
+				takeScreenshot();
+				throw new AssertionError("Component '" + this + "' has unexpected text(s) '" + unexpected_text_present + "'");
+			}
+		}
+	}
+	/**
+	 * Default Implementation. Asserts that isDisplayed() method returns Boolean.TRUE
+	 */
 	public void should_be_displayed() {
 		Assert.assertTrue("Expected '" + this + "' to be displayed, found it hidden", this.isDisplayed());
 	}
-	
+	/**
+	 * Default Implementation. Asserts that isNotDisplayed() method returns Boolean.TRUE
+	 */
 	public void should_not_be_displayed() {
-		Assert.assertFalse("Expected '" + this + "' to be hidden, found it displayed", this.isDisplayed());
+		Assert.assertTrue("Expected '" + this + "' to be hidden, found it displayed", this.isNotDisplayed());
 	}
-	
+	/**
+	 * Default Implementation. Asserts that isEnabled() method returns Boolean.TRUE
+	 */
 	public void should_be_enabled() {
 		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isEnabled());
 	}
+	/**
+	 * Default Implementation. Asserts that isDisabled() returns Boolean.TRUE
+	 */
 	public void should_be_disabled() {
 		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
 	}
-
+	/**
+	 * Sets the element locator for this browser element. Element Locator can be specified using the 
+	 * <a href="http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/By.html">By</a> object of selenium
+	 */
 	public BrowserElement found(By element_locator) {
 		this.element_locator = element_locator;
 		return this;
 	}
-	
-	public String toString() {
-		return this.getClass().getName() + ", " + element_locator;
-	}
-	
+	/**
+	 * Default Implementation. Returns Boolean.TRUE
+	 */
 	public boolean isEnabled() {
-		return true;
+		return Boolean.TRUE;
 	}
-	
+	/**
+	 * Default Implementation. Returns ! isEnabled()
+	 */
 	public boolean isDisabled() {
 		return !isEnabled();
 	}
-	
+	/**
+	 * Default Implementation. Returns Boolean.TRUE
+	 */
 	public boolean isDisplayed() {
-		return true;
+		return Boolean.TRUE;
 	}
-	
+	/**
+	 * Default Implementation. Returns ! isDisplayed()
+	 */
 	public boolean isNotDisplayed() {
 		return ! isDisplayed();
+	}
+	/**
+	 * Default Implementation. Returns a formatted string with the element locator.
+	 */
+	public String toString() {
+		return this.getClass().getName() + ", " + element_locator;
 	}
 }
