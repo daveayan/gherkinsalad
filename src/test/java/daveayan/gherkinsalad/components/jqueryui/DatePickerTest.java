@@ -19,7 +19,7 @@ public class DatePickerTest extends BaseTest {
 		super.launch_browser_with("Firefox");
 		super.goto_url("http://jqueryui.com/demos/datepicker/");
 		
-		DatePicker datepicker = new JqueryUIDefaultDatePicker();
+		DatePicker datepicker = new DefaultDatePicker();
 		TextEnterable date_textbox = TextField.find(By.id("datepicker"));
 		
 		// #########

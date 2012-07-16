@@ -47,7 +47,7 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		}
 	}
 
-	public void has_options(String... options) {
+	public void should_have_options(String... options) {
 		throw new AssertionError("DropDown::has_options(" + options + ") is not implemented yet");
 	}
 

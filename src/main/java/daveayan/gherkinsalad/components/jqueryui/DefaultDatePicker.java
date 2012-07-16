@@ -1,8 +1,5 @@
 package daveayan.gherkinsalad.components.jqueryui;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -18,7 +15,7 @@ import daveayan.gherkinsalad.components.DatePicker;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.gherkinsalad.components.html.Link;
 
-public class JqueryUIDefaultDatePicker extends BaseBrowserElement implements DatePicker {
+public class DefaultDatePicker extends BaseBrowserElement implements DatePicker {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
 	
 	public Clickable next_month = Link.find(By.className("ui-datepicker-next"));
@@ -101,7 +98,7 @@ public class JqueryUIDefaultDatePicker extends BaseBrowserElement implements Dat
 		}
 	}
 	
-	public JqueryUIDefaultDatePicker() {
+	public DefaultDatePicker() {
 		found(By.id("ui-datepicker-div"));
 		next_month.found(By.className("ui-datepicker-next"));
 		prev_month.found(By.className("ui-datepicker-prev"));
