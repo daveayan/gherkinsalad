@@ -5,12 +5,15 @@ import java.util.List;
 public class NullWebElement implements WebElement {
 	private By selector;
 
+	public String toString() {
+		return selector.toString();
+	}
+	
 	public static NullWebElement newInstance(By selector) {
 		NullWebElement nwe = new NullWebElement();
 		nwe.selector = selector;
 		return nwe;
 	}
-
 	public void clear() {
 		throw new AssertionError("Operation clear() not allowed on a null web element with selector '" + selector + "'");
 	}
