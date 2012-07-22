@@ -34,6 +34,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
+import daveayan.gherkinsalad.browser.factory.FireFoxBrowser;
+import daveayan.gherkinsalad.browser.factory.HtmlUnitBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
 import daveayan.gherkinsalad.report.Report;
 /** @author daveayan */
@@ -121,7 +123,9 @@ public class Browser {
 		} else if (this.is_Chrome()) {
 			instance = ChromeBrowser.getDriver();
 		} else if (this.is_Firefox()) {
-			instance = new FirefoxDriver();
+			instance = FireFoxBrowser.getDriver();
+		} else if(this.is_htmlunit()) {
+			instance = HtmlUnitBrowser.getDriver();
 		}
 	}
 
@@ -152,6 +156,10 @@ public class Browser {
 
 	private boolean is_Firefox() {
 		return "firefox".equalsIgnoreCase(this.name);
+	}
+	
+	private boolean is_htmlunit() {
+		return "html".equalsIgnoreCase(this.name) || "htmlunit".equalsIgnoreCase(this.name);
 	}
 	
 	private Browser() {}
