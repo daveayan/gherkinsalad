@@ -111,7 +111,10 @@ public abstract class BaseAutomationObject {
 	 */
 	public void goto_url(String url) {
 		if(browser != null) {
+			log.info("Navigating to URL '" + url + "'");
 			browser.goto_url(url);
+		} else {
+			log.info("Browser is null, cannot navigate to URL '" + url + "'");
 		}
 	}
 }

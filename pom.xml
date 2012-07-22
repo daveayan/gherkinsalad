@@ -7,7 +7,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<selenium.version>2.13.0</selenium.version>
+		<selenium.version>2.24.1</selenium.version>
 	</properties>
 
 	<build>
