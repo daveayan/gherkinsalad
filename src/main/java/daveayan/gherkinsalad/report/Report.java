@@ -15,6 +15,14 @@ public class Report {
 		report(goal);
 	}
 	
+	public static void ask(String task) {
+		report("? " + task);
+	}
+	
+	public static void warn(String task) {
+		report("! " + task);
+	}
+	
 	public static void task(String task) {
 		report("- " + task);
 	}
@@ -32,7 +40,7 @@ public class Report {
 		String datetime = df.format(new Date());
 		File report_file = new File(Path.TO_TARGET + "report.txt");
 		try {
-			FileUtils.writeStringToFile(report_file, "\n" + datetime + " : " + text, true);
+			FileUtils.writeStringToFile(report_file, "\n" + datetime + " -> " + text, true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
