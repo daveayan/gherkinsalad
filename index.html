@@ -27,7 +27,14 @@
         <h3>Welcome to Gherkin Salad</h3>
 		
 		<h3>Project Setup</h3>
-		<p>To use gherkinsalad do the following:
+		<p>Use the maven archetype using the following command
+<pre>
+mvn archetype:generate -DarchetypeGroupId=daveayan -DarchetypeArtifactId=gherkinsalad.sample-archetype -DarchetypeRepository=https://github.com/daveayan/_mavenrepository
+cd to_your_project
+mvn clean test
+</pre>
+			OR
+			Use the following instructions
 			<ul>
 				<li>Create a maven project</li>
 				<li>Add the following dependency in the pom.xml
@@ -55,6 +62,7 @@
 				</li>
 				<li>Put your gherkins in src/test/resources/cucumber/gherkins</li>
 				<li>Put stepdefs in src/test/java/cucumber/stepdefs</li>
+				<li>Run mvn clean test</li>
 			</ul>
 		</p>
 		<h3>Writing your step definitions and page objects</h3>
