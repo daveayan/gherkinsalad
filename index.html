@@ -19,16 +19,119 @@
           <li class="download"><a class="buttons" href="https://github.com/daveayan/gherkinsalad/tarball/master">Download TAR</a></li>
           <li><a class="buttons github" href="https://github.com/daveayan/gherkinsalad">View On GitHub</a></li>
         </ul>
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/daveayan">daveayan</a></p>
+        <p class="header">
+			This project is maintained by <a class="header name" href="https://github.com/daveayan">daveayan</a><br/>
+		</p>
       </header>
       <section>
         <h3>Welcome to Gherkin Salad</h3>
+		
+		<h3>Project Setup</h3>
+		<p>To use gherkinsalad do the following:
+			<ul>
+				<li>Create a maven project</li>
+				<li>Add the following dependency in the pom.xml
+<pre>
+&lt;dependency&gt;
+	&lt;groupId&gt;daveayan&lt;/groupId&gt;
+	&lt;artifactId&gt;gherkinsalad&lt;/artifactId&gt;
+	&lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
+<pre>
+&lt;repositories&gt;
+	&lt;repository&gt;
+		&lt;id&gt;daveayan-releases&lt;/id&gt;
+		&lt;url&gt;https://github.com/daveayan/_mavenrepository/raw/master/releases&lt;/url&gt;
+	&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+	&lt;pluginRepository&gt;
+		&lt;id&gt;daveayan-plugins&lt;/id&gt;
+		&lt;url&gt;https://github.com/daveayan/_mavenrepository/raw/master/releases&lt;/url&gt;
+		&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+</pre>
+				</li>
+				<li>Put your gherkins in src/test/resources/cucumber/gherkins</li>
+				<li>Put stepdefs in src/test/java/cucumber/stepdefs</li>
+			</ul>
+		</p>
+		<h3>Writing your step definitions and page objects</h3>
+			<p>Create your stepdef and page object java files and let them extend BaseBrowserElement.java
+<pre><code>
+public class SomeStep extends BaseBrowserElement {}
 
+public class SomePageObject extends BaseBrowserElement {}							
+</code></pre>
+			</p>
+		<h3>Working with Browser</h3>
+			<p>To launch a browser use the launch_browser method. Currently supported: Firefox, chrome. The browser that is launched is available to any java class that extends BaseBrowserElement.
+<pre><code>
+super.launch_browser("Firefox");
+OR
+super.launch_browser("Chrome");
+</code></pre>
+			</p>
+			<p>To close the currently open browser
+<pre><code>
+super.close_browser();
+</code></pre>
+			</p>
+			<p>To navigate to a site
+<pre><code>
+super.goto_url("http://www.gherkinsalad.com");
+</code></pre>
+			</p>
+		
+		<h3>Taking Screenshots</h3>
+			<p>To take a screenshot of the current screen on the browser window use the takeScreenshot method. The screenshot is taken as a png file in the target/screenshots folder and saved as "screenshot_###.png". The ### is incremented every time next screenshot is taken.
+<pre><code>
+super.takeScreenshot();
+</code></pre>
+			</p>
+		
+		<h3>Selecting elements</h3>
+			<p>
+				gherkinsalad framework relies on the <a href="http://selenium.googlecode.com/svn/trunk/docs/api/java/index.html">selenium selectors</a>
+<pre><code>
+By.id("someid");
+By.name("somename");
+By.className("someclassname");
+By.cssSelector("somecssselector");
+By.linkText("somelinktext");
+By.partialLinkText("somepartiallinktext");
+By.tagName("sometagname");
+By.xpath("somexpath");
+</code></pre>
+			</p>
+		
+		<h3>Clicking elements</h3>
+			<p>
+<pre><code>
+Clickable some_link = Link.find(By...);
+some_link.click_if_enabled();
+</code></pre>
+			</p>
+		<h3>Text Entry Elements</h3>
+			<p>
+<pre><code>
+TextEnterable some_text_field = TextField.find(By...);
+some_text_field.enter_text_if_enabled(""); // pass in some text
+</code></pre>
+			</p>
+		<h3>Dropdowns</h3>
+			<p>
+<pre><code>
+Selectable some_dropdown = Dropdown.find(By...);
+some_dropdown.select_option_if_enabled(""); // pass in option text
+</code></pre>
+			</p>		
 		<h3>Property File Usage</h3>
 		<p>
 			The framework will look for the property file in resources/system folder. It will first look for a property file named <b>__userid__.ghksalad.properties</b> where __userid__ is the login userid of the current user. If this file is found the framework will use it otherwise it will look for the property file <b>default.ghksalad.properties</b>.
 			The contents of the property file has to have at least the following:
-			<pre><code>
+<pre><code>
 seconds.wait.after.each.step=0
 seconds.timeout=10
 seconds.poll.interval=1
@@ -36,7 +139,7 @@ seconds.poll.interval=1
 browser.chrome.enabled=true
 browser.firefox.enabled=true
 browser.ie.enabled=true
-			</code></pre>
+</code></pre>
 		</p>
 		<h3>Null Object Pattern</h3>
 		<p>
