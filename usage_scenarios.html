@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <div id="page_head_common"></div>
+	<script src="javascripts/jquery-1.7.2.min.js"></script> 
+	<script>
+	function load_rest_of_the_page() { 
+		$("#page_head_common").load("page_head_common.html");
+	   	$("#page_left_side").load("page_left_side.html");
+		$("#page_footer").load("page_footer.html");
+	}
+	</script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="page_left_side"></div>
+      <section>
+      </section>
+	  <div id="page_footer"></div>
+    </div>
+	<script>load_rest_of_the_page()</script> 
+  </body>
+</html>

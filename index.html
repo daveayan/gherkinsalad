@@ -1,40 +1,20 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>gherkinsalad by daveayan</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-8025007-3']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
+    <div id="page_head_common"></div>
+	<script src="javascripts/jquery-1.7.2.min.js"></script> 
+	<script>
+	function load_rest_of_the_page() { 
+		$("#page_head_common").load("page_head_common.html");
+	   	$("#page_left_side").load("page_left_side.html");
+		$("#page_footer").load("page_footer.html");
+	}
 	</script>
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <h1 class="header">gherkinsalad</h1>
-        <p class="header">Framework to enable automation using maven, cucumber-jvm, java, webdriver</p>
-        <ul>
-		  <li class="download"><a class="buttons" href="http://www.gherkinsalad.com/apidocs/index.html">Javadocs</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/daveayan/gherkinsalad/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/daveayan/gherkinsalad/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/daveayan/gherkinsalad">View On GitHub</a></li>
-        </ul>
-      </header>
+      <div id="page_left_side"></div>
       <section>
-        <h3>Welcome to Gherkin Salad</h3>
+        <h3>Welcome to Gherkian Salad</h3>
 		
 		<h3>Project Setup</h3>
 		<p>Use the maven archetype using the following command
@@ -164,20 +144,8 @@ browser.ie.enabled=true
 			This project uses the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern extensively.
 		</p>
       </section>
-      <footer>
-		<p>This project is maintained by <a href="https://github.com/daveayan">Ayan Dave</a></p>
-		<p>
-			Contributions and Credits
-			<ul>
-				<li><a href="http://www.linkedin.com/in/terrywiegmann">Terry Wiegmann</a></li>
-				<li><a href="http://chaitanyat.com/">Chai Thatipamula</a></li>
-				<li><a href="http://www.linkedin.com/pub/sakshi-vaghela/24/603/541">Sakshi Vaghela</a></li>
-				<li><a href="http://www.linkedin.com/in/demetriusdjackson">Demetrius Jackson</a></li>
-			</ul>
-		</p>
-		
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a></small></p>
-      </footer>
+	  <div id="page_footer"></div>
     </div>
+	<script>load_rest_of_the_page()</script> 
   </body>
 </html>
