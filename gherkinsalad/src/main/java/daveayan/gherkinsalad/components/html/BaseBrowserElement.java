@@ -24,12 +24,10 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.Assert;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NullElement;
 import org.openqa.selenium.NullWebDriver;
-import org.openqa.selenium.NullWebElement;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,6 +39,7 @@ import com.google.common.base.Function;
 import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
+import daveayan.gherkinsalad.components.Element;
 import daveayan.lang.NullList;
 import daveayan.lang.Nullable;
 
@@ -54,8 +53,6 @@ import daveayan.lang.Nullable;
  * </ul>
  */
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
-	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
-
 	private By element_locator;
 
 	protected boolean is_not_null(Object o) {
@@ -72,48 +69,48 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		return false;
 	}
 
-	public WebElement fetch_element() {
-		WebElement element = findElement(element_locator);
+	public Element fetch_element() {
+		Element element = findElement(element_locator);
 		return element;
 	}
 
-	public WebElement findElement(final By by) {
+	public Element findElement(final By by) {
 		if (browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
 				.withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-		WebElement element;
+		WebElement _webElement;
 		try {
-			element = wait.until(new Function<WebDriver, WebElement>() {
+			_webElement = wait.until(new Function<WebDriver, WebElement>() {
 				public WebElement apply(WebDriver driver) {
 					return driver.findElement(by);
 				}
 			});
 		} catch (TimeoutException toe) {
-			element = NullWebElement.newInstance(element_locator);
+			return NullElement.newInstance(element_locator);
 		}
-		return element;
+		return Element.newInstance(_webElement);
 	}
 
-	protected WebElement findElement(final By by, final WebElement in) {
-		if (in == null || in instanceof NullWebElement) {
+	protected Element findElement(final By by, final Element in) {
+		if (in == null || in instanceof NullElement) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
 		}
-		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+		Wait<WebElement> wait = new FluentWait<WebElement>(in._nativeWebElement()).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-		WebElement element;
+		WebElement _webElement = null;
 		try {
-			element = wait.until(new Function<WebElement, WebElement>() {
+			_webElement = wait.until(new Function<WebElement, WebElement>() {
 				public WebElement apply(WebElement find_within) {
 					return find_within.findElement(by);
 				}
 			});
 		} catch (TimeoutException toe) {
-			element = NullWebElement.newInstance(element_locator);
+			return NullElement.newInstance(element_locator);
 		}
-		return element;
+		return Element.newInstance(_webElement);
 	}
 
 	/**
@@ -122,21 +119,27 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	 * @param in
 	 * @return
 	 */
-	protected List<WebElement> findElements(final By by, final WebElement in) {
+	protected List<Element> findElements(final By by, final Element in) {
 		if (browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
-		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+		Wait<WebElement> wait = new FluentWait<WebElement>(in._nativeWebElement()).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
 				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-		List<WebElement> elements;
+		List<WebElement> _webElements;
 		try {
-			elements = wait.until(new Function<WebElement, List<WebElement>>() {
+			_webElements = wait.until(new Function<WebElement, List<WebElement>>() {
 				public List<WebElement> apply(WebElement find_within) {
 					return find_within.findElements(by);
 				}
 			});
 		} catch (TimeoutException toe) {
-			elements = new NullList<WebElement>();
+			return new NullList<Element>();
+		}
+		List<Element> elements = new ArrayList<Element>();
+		if(_webElements != null) {
+			for(WebElement _we: _webElements) {
+				elements.add(Element.newInstance(_we));
+			}
 		}
 		return elements;
 	}
@@ -162,7 +165,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	 * Default implementation. Returns the value from getText() method of WebElement
 	 */
 	public String getText() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		return element.getText();
 	}
 

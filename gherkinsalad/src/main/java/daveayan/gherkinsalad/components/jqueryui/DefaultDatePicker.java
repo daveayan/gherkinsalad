@@ -8,10 +8,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.components.Clickable;
 import daveayan.gherkinsalad.components.DatePicker;
+import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.gherkinsalad.components.html.Link;
 
@@ -80,7 +80,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	
 	private String get_month_in_picker() {
 		while(true) {
-			WebElement cal_month = fetch_element().findElement(By.className("ui-datepicker-month"));
+			Element cal_month = fetch_element().findElement(By.className("ui-datepicker-month"));
 			String cal_month_text = cal_month.getText();
 			if(StringUtils.isNotEmpty(cal_month_text)) {
 				return cal_month_text;
@@ -90,7 +90,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	
 	private String get_year_in_picker() {
 		while(true) {
-			WebElement cal_year = fetch_element().findElement(By.className("ui-datepicker-year"));
+			Element cal_year = fetch_element().findElement(By.className("ui-datepicker-year"));
 			String cal_year_text = cal_year.getText();
 			if(StringUtils.isNotEmpty(cal_year_text)) {
 				return cal_year_text;

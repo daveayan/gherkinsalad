@@ -70,16 +70,24 @@ public class Browser {
 	 */
 	public void takeScreenshot() {
 		screen_shot_count++;
-		String file_name = Path.TO_SCREENSHOTS + "screenshot_" + screen_shot_count + ".png";
+		takeScreenshotAsFile(Path.TO_SCREENSHOTS + "screenshot_" + screen_shot_count + ".png");
+	}
+	
+	/**
+	 * Use this method to take a screenshot of the current browser window. The screenshot is taken as a png file and saved in target/screenshots folder.
+	 * The name of the file is screenshot_##.png where ## is the count that is incremented after each screenshot is taken. The count is maintained internally
+	 * as int.
+	 */
+	public void takeScreenshotAsFile(String absolute_path_to_file) {
 		try {
 			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenshot_file, new File(file_name));
-			log.info("Screenshot taken : " + file_name);
+			FileUtils.copyFile(screenshot_file, new File(absolute_path_to_file));
+			log.info("Screenshot taken : " + absolute_path_to_file);
 		} catch (Throwable th) {
 			log.info(th.getMessage());
-			log.info("Unable to take screenshot : " + file_name);
+			log.info("Unable to take screenshot : " + absolute_path_to_file);
 		}
-		Report.screenshot_taken(file_name);
+		Report.screenshot_taken(absolute_path_to_file);
 	}
 
 	/**

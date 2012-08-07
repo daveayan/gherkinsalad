@@ -1,9 +1,9 @@
 package daveayan.gherkinsalad.components.jqueryui;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 
 public class Draggable extends BaseBrowserElement {
@@ -14,16 +14,16 @@ public class Draggable extends BaseBrowserElement {
 	public void drag() {
 		Actions drag = new Actions(super.browser.driver());
 		Actions hover = new Actions(super.browser.driver());
-		WebElement e = fetch_element();
+		Element e = fetch_element();
 		
-		WebElement logo = browser.driver().findElement(By.linkText("Resizable"));
+		Element logo = findElement(By.linkText("Resizable"));
 		
 		System.out.println(e.getLocation());
 		
-		hover.moveToElement(logo, 10, 10).build().perform();
+		hover.moveToElement(logo._nativeWebElement(), 10, 10).build().perform();
 		wait_for_seconds(5);
 		
-		drag.dragAndDropBy(e, 100, 100).build().perform();
+		drag.dragAndDropBy(e._nativeWebElement(), 100, 100).build().perform();
 		wait_for_seconds(4);
 		
 		e = fetch_element();

@@ -1,9 +1,8 @@
 package daveayan.gherkinsalad.components.html;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import daveayan.gherkinsalad.components.NullBrowserElement;
+import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.TextEnterable;
 import daveayan.gherkinsalad.report.Report;
 
@@ -19,20 +18,20 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 		if(isNotDisplayed()) {
 			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
 		}
-		WebElement element = fetch_element();
-		if(element instanceof NullBrowserElement) {
+		Element element = fetch_element();
+		if(is_null(element)) {
 			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
 		}
 		return element.getAttribute("value");
 	}
 	
 	public boolean isEnabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void enter_text_if_enabled(String text) {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			element.clear();
@@ -42,7 +41,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void append_text_if_enabled(String text) {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			String current_text = element.getAttribute("value");
@@ -53,7 +52,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}

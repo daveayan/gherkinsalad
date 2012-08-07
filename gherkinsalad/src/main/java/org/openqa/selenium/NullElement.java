@@ -2,15 +2,21 @@ package org.openqa.selenium;
 
 import java.util.List;
 
-public class NullWebElement implements WebElement {
+import daveayan.gherkinsalad.components.Element;
+
+public class NullElement extends Element {
 	private By selector;
 
+	public boolean is_null() {
+		return true;
+	}
+	
 	public String toString() {
 		return selector.toString();
 	}
 	
-	public static NullWebElement newInstance(By selector) {
-		NullWebElement nwe = new NullWebElement();
+	public static NullElement newInstance(By selector) {
+		NullElement nwe = new NullElement();
 		nwe.selector = selector;
 		return nwe;
 	}
@@ -22,11 +28,11 @@ public class NullWebElement implements WebElement {
 		throw new AssertionError("Operation click() not allowed on a null web element with selector '" + selector + "'");
 	}
 
-	public WebElement findElement(By arg0) {
+	public Element findElement(By arg0) {
 		throw new AssertionError("Operation findElement(" + arg0 + ") not allowed on a null web element with selector '" + selector + "'");
 	}
 
-	public List<WebElement> findElements(By arg0) {
+	public List<Element> findElements(By arg0) {
 		throw new AssertionError("Operation findElements(" + arg0 + ") not allowed on a null web element with selector '" + selector + "'");
 	}
 

@@ -1,17 +1,16 @@
 package daveayan.gherkinsalad.components.html;
 
-import org.openqa.selenium.WebElement;
-
 import daveayan.gherkinsalad.components.Clickable;
+import daveayan.gherkinsalad.components.Element;
 
 public class RadioButton extends BaseBrowserElement implements Clickable {
 	public boolean isEnabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}

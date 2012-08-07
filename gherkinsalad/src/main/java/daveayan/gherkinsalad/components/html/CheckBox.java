@@ -3,19 +3,19 @@ package daveayan.gherkinsalad.components.html;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.components.Clickable;
+import daveayan.gherkinsalad.components.Element;
 
 public class CheckBox extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(CheckBox.class);
 	public boolean isEnabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
-		WebElement element = fetch_element();
+		Element element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
 		}
