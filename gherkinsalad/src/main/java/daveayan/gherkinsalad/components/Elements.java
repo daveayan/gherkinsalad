@@ -6,10 +6,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.NullElement;
+
 import daveayan.lang.NullList;
 
 public class Elements {
 	private List<Element> _elements = new ArrayList<Element>();
+	
+	public Element findElementWithText(String expectedText) {
+		if(_elements != null) {
+			for(Element e: _elements) {
+				if(e != null && StringUtils.equals(expectedText, e.getText())) {
+					return e;
+				}
+			}
+		}
+		return new NullElement();
+	}
 	
 	public List<Element> _nativeList() {
 		return _elements;
@@ -28,6 +42,8 @@ public class Elements {
 		}
 		return elements;
 	}
+	
+	// Methods from java.util.List interface
 	
 	public boolean add(Element element1) {
 		return _elements.add(element1);

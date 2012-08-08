@@ -3,6 +3,7 @@ package daveayan.gherkinsalad.components;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
@@ -31,6 +32,14 @@ public class Element implements Nullable {
 		return e;
 	}
 	
+	public boolean is(String text) {
+		if(_webElement != null) {
+			return StringUtils.equals(text, _webElement.getText());
+		}
+		return false;
+	}
+	
+	// Methods from WebElement interface
 	public void clear() {
 		_webElement.clear();
 	}
