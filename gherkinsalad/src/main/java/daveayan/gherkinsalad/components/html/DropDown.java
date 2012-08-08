@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 
 import daveayan.gherkinsalad.components.Element;
+import daveayan.gherkinsalad.components.Elements;
 import daveayan.gherkinsalad.components.Selectable;
 
 public class DropDown extends BaseBrowserElement implements Selectable {
@@ -24,8 +25,8 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 	public void select_option_if_enabled(String option) {
 		Element element = fetch_element();
 		if(this.isEnabled()) {
-			List<Element> options = element.findElements(By.tagName("option"));
-			for(Element o: options) {
+			Elements options = element.findElements(By.tagName("option"));
+			for(Element o: options._nativeList()) {
 				if(StringUtils.equals(o.getText(), option)) {
 					o.click();
 					break;
@@ -37,8 +38,8 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 	public void select_code_if_enabled(String code) {
 		Element element = fetch_element();
 		if(this.isEnabled()) {
-			List<Element> options = element.findElements(By.tagName("option"));
-			for(Element o: options) {
+			Elements options = element.findElements(By.tagName("option"));
+			for(Element o: options._nativeList()) {
 				if(StringUtils.equals(o.getAttribute("value"), code)) {
 					o.click();
 					break;

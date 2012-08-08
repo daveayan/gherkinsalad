@@ -8,10 +8,10 @@ public class NullWebDriver implements WebDriver {
 		throw new AssertionError("Operation close() not allowed on NullWebDriver");
 	}
 	public WebElement findElement(By arg0) {
-		throw new AssertionError("Operation findElement(By arg0) not allowed on NullWebDriver");
+		throw new AssertionError("public WebElement findElement(By arg0) should not be called. Use Element.java instead");
 	}
 	public List<WebElement> findElements(By arg0) {
-		throw new AssertionError("Operation findElements(By arg0) not allowed on NullWebDriver");
+		throw new AssertionError("public List<WebElement> findElements(By arg0) should not be called. Use Elements.java instead");
 	}
 	public void get(String arg0) {
 		throw new AssertionError("Operation get(String arg0) not allowed on NullWebDriver");

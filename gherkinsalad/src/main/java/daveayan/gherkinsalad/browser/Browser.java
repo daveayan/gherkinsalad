@@ -24,13 +24,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
@@ -101,10 +98,6 @@ public class Browser {
 		Browser browser = new Browser();
 		browser.name = name;
 		return browser;
-	}
-
-	public WebElement findElementBy(By by) {
-		return instance.findElement(by);
 	}
 
 	/**

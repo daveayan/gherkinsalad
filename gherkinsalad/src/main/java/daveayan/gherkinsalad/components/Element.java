@@ -1,19 +1,27 @@
 package daveayan.gherkinsalad.components;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NullElement;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
+import com.google.common.base.Function;
+
+import daveayan.gherkinsalad.Config;
 import daveayan.lang.Nullable;
 
 public class Element implements Nullable {
 	private WebElement _webElement;
 	
-	public WebElement _nativeWebElement() {
+	private WebElement _nativeWebElement() {
 		return _webElement;
 	}
 	
@@ -31,13 +39,41 @@ public class Element implements Nullable {
 		_webElement.click();
 	}
 
-	public Element findElement(By arg0) {
-		return Element.newInstance(_nativeWebElement().findElement(arg0));
+	public Element findElement(final By by) {
+		WebElement in = _nativeWebElement();
+		if (in == null || in instanceof NullElement) {
+			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
+		}
+		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		WebElement _webElement = null;
+		try {
+			_webElement = wait.until(new Function<WebElement, WebElement>() {
+				public WebElement apply(WebElement find_within) {
+					return find_within.findElement(by);
+				}
+			});
+		} catch (TimeoutException toe) {
+			return NullElement.newInstance(by);
+		}
+		return Element.newInstance(_webElement);
 	}
 	
-	public List<Element> findElements(By arg0) {
-		List<WebElement> _webElements = _nativeWebElement().findElements(arg0);
-		List<Element> elements = new ArrayList<Element>();
+	public Elements findElements(final By by) {
+		WebElement in = _nativeWebElement();
+		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		List<WebElement> _webElements;
+		try {
+			_webElements = wait.until(new Function<WebElement, List<WebElement>>() {
+				public List<WebElement> apply(WebElement find_within) {
+					return find_within.findElements(by);
+				}
+			});
+		} catch (TimeoutException toe) {
+			return Elements.nullInstance();
+		}
+		Elements elements = new Elements();
 		if(_webElements != null) {
 			for(WebElement _we: _webElements) {
 				elements.add(Element.newInstance(_we));

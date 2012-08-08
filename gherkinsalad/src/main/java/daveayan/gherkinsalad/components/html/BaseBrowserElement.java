@@ -40,7 +40,6 @@ import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
 import daveayan.gherkinsalad.components.Element;
-import daveayan.lang.NullList;
 import daveayan.lang.Nullable;
 
 /**@author daveayan*/
@@ -92,56 +91,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 			return NullElement.newInstance(element_locator);
 		}
 		return Element.newInstance(_webElement);
-	}
-
-	protected Element findElement(final By by, final Element in) {
-		if (in == null || in instanceof NullElement) {
-			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
-		}
-		Wait<WebElement> wait = new FluentWait<WebElement>(in._nativeWebElement()).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
-				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-		WebElement _webElement = null;
-		try {
-			_webElement = wait.until(new Function<WebElement, WebElement>() {
-				public WebElement apply(WebElement find_within) {
-					return find_within.findElement(by);
-				}
-			});
-		} catch (TimeoutException toe) {
-			return NullElement.newInstance(element_locator);
-		}
-		return Element.newInstance(_webElement);
-	}
-
-	/**
-	 * 
-	 * @param by
-	 * @param in
-	 * @return
-	 */
-	protected List<Element> findElements(final By by, final Element in) {
-		if (browser.driver() instanceof NullWebDriver) {
-			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
-		}
-		Wait<WebElement> wait = new FluentWait<WebElement>(in._nativeWebElement()).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
-				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
-		List<WebElement> _webElements;
-		try {
-			_webElements = wait.until(new Function<WebElement, List<WebElement>>() {
-				public List<WebElement> apply(WebElement find_within) {
-					return find_within.findElements(by);
-				}
-			});
-		} catch (TimeoutException toe) {
-			return new NullList<Element>();
-		}
-		List<Element> elements = new ArrayList<Element>();
-		if(_webElements != null) {
-			for(WebElement _we: _webElements) {
-				elements.add(Element.newInstance(_we));
-			}
-		}
-		return elements;
 	}
 
 	/**

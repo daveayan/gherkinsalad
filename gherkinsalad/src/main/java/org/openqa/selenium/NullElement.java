@@ -1,8 +1,7 @@
 package org.openqa.selenium;
 
-import java.util.List;
-
 import daveayan.gherkinsalad.components.Element;
+import daveayan.gherkinsalad.components.Elements;
 
 public class NullElement extends Element {
 	private By selector;
@@ -32,7 +31,7 @@ public class NullElement extends Element {
 		throw new AssertionError("Operation findElement(" + arg0 + ") not allowed on a null web element with selector '" + selector + "'");
 	}
 
-	public List<Element> findElements(By arg0) {
+	public Elements findElements(By arg0) {
 		throw new AssertionError("Operation findElements(" + arg0 + ") not allowed on a null web element with selector '" + selector + "'");
 	}
 
