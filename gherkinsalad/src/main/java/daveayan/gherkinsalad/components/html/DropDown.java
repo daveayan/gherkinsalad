@@ -26,12 +26,8 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		Element element = fetch_element();
 		if(this.isEnabled()) {
 			Elements options = element.findElements(By.tagName("option"));
-			for(Element o: options._nativeList()) {
-				if(StringUtils.equals(o.getText(), option)) {
-					o.click();
-					break;
-				}
-			}
+			Element option_to_select = options.findFirstElementWithText(option);
+			option_to_select.click();
 		}
 	}
 	

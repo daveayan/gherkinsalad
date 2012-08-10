@@ -32,6 +32,31 @@ public class Element implements Nullable {
 		return e;
 	}
 	
+	public boolean hasAllTexts(String... expectedTexts) {
+		for(String e: expectedTexts) {
+			if(! this.has(e)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean hasAnyText(String... expectedTexts) {
+		for(String e: expectedTexts) {
+			if(this.has(e)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean has(String text) {
+		if(_webElement != null) {
+			return _webElement.getText().contains(text);
+		}
+		return false;
+	}
+	
 	public boolean is(String text) {
 		if(_webElement != null) {
 			return StringUtils.equals(text, _webElement.getText());

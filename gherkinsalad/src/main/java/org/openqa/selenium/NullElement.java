@@ -11,7 +11,10 @@ public class NullElement extends Element {
 	}
 	
 	public String toString() {
-		return selector.toString();
+		if(selector != null)
+			return selector.toString();
+		else 
+			return "NULL Selector";
 	}
 	
 	public static NullElement newInstance(By selector) {

@@ -6,20 +6,73 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.NullElement;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+
+import daveayan.gherkinsalad.components.functions.GetTextFunction;
 import daveayan.lang.NullList;
 
 public class Elements {
 	private List<Element> _elements = new ArrayList<Element>();
 	
-	public Element findElementWithText(String expectedText) {
+	public void each(Predicate<Element> predicate) {
+		for(Element e: _elements) {
+			predicate.apply(e);
+		}
+	}
+	
+	public List<String> asString() {
+		List<String> strings = new ArrayList<String>();
+		for(Element e: _elements) {
+			strings.add(e.getText());
+		}
+//		return Lists.transform(_elements, GetTextFunction.apply);
+		return strings;
+	}
+	
+	public List<?> each(Function<Element, ?> function) {
+		return Lists.transform(_elements, function);
+	}
+	
+	public Element findFirstElementThatMatches(Predicate<Element> match) {
 		if(_elements != null) {
 			for(Element e: _elements) {
-				if(e != null && StringUtils.equals(expectedText, e.getText())) {
+				if(match.apply(e)) {
 					return e;
 				}
+			}
+		}
+		return new NullElement();
+	}
+	
+	public Element findFirstElementWithText(String expectedText) {
+		if(_elements != null) {
+			for(Element e: _elements) {
+				if(e.has(expectedText)) {
+					return e;
+				}
+			}
+		}
+		return new NullElement();
+	}
+	
+	public Element findFirstElementWithAllOfTheseTexts(String... expectedTexts) {
+		for(Element e: _elements) {
+			if(e.hasAllTexts(expectedTexts)) {
+				return e;
+			}
+			System.out.println("Element '" + e + "' does not have texts '" + expectedTexts + "'");
+		}
+		return new NullElement();
+	}
+	
+	public Element findFirstElementWithAnyOfTheseTexts(String... expectedTexts) {
+		for(Element e: _elements) {
+			if(e.hasAnyText(expectedTexts)) {
+				return e;
 			}
 		}
 		return new NullElement();
