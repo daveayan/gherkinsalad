@@ -20,8 +20,14 @@ package daveayan.gherkinsalad;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+
+import com.google.common.annotations.Beta;
 
 import daveayan.gherkinsalad.browser.Browser;
+import daveayan.gherkinsalad.report.Report;
 
 /** @author daveayan */
 /**
@@ -37,6 +43,52 @@ import daveayan.gherkinsalad.browser.Browser;
 public abstract class BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
 	protected static Browser browser;
+	
+	public void execute_javascript(String script, Object... args) {
+		((JavascriptExecutor) browser.driver()).executeScript(script, args);
+	}
+	
+	public void execute_async_javascript(String script, Object... args) {
+		((JavascriptExecutor) browser.driver()).executeAsyncScript(script, args);
+	}
+	
+	public void javascript_popup_click_ok() {
+		Alert alert = get_current_alert_box();
+		if(alert != null) {
+			Report.action("Accepted the javascript popup '" + alert.getText() + "'");
+			alert.accept();
+		}
+	}
+	
+	public void javascript_popup_dismiss() {
+		if(browser.is_Chrome()) {
+			javascript_popup_click_ok();
+			return;
+		}
+		Alert alert = get_current_alert_box();
+		if(alert != null) {
+			Report.action("Dismissed the javascript popup '" + alert.getText() + "'");
+			alert.dismiss();
+		}
+	}
+	
+	@Beta
+	public void javascript_authentication(String username, String password) {
+//		Alert alert = get_current_alert_box();
+//		if(alert != null) {
+//			Credentials c = new UserAndPassword(username, password);
+//			Report.action("Authenticating using the javascript popup with username '" + username + "', password '" + password +"'");
+//			alert.authenticateUsing(c);
+//		}
+	}
+	
+	private Alert get_current_alert_box() {
+		try {
+			return browser.driver().switchTo().alert();
+		} catch (NoAlertPresentException nape) {
+		}
+		return null;
+	}
 	
 	/**
 	 * Use this method to make the current running thread wait for the number of seconds specified by property seconds.wait.after.each.step

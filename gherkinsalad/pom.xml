@@ -7,12 +7,24 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<selenium.version>2.24.1</selenium.version>
+		<selenium.version>2.25.0</selenium.version>
 	</properties>
 
 	<build>
 		<finalName>gherkinsalad</finalName>
 		<plugins>
+			<plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -122,6 +134,11 @@
 			<artifactId>groovy-all</artifactId>
 			<version>1.8.1</version>
 		</dependency>
+		<dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.9.2</version>
+        </dependency>
 	</dependencies>
 
 	<pluginRepositories>

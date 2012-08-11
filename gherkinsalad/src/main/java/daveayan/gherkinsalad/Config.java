@@ -15,6 +15,8 @@ public class Config {
 	
 	public static String chrome_webdriver_location = null;
 	
+	public static String proxy_url = null;
+	
 	public static int seconds_wait_after_each_step = 0;
 	public static int seconds_timeout = 30;
 	public static int seconds_poll_interval = 1;
@@ -38,6 +40,8 @@ public class Config {
 			seconds_wait_after_each_step = Integer.parseInt(config.getProperty("seconds.wait.after.each.step"));
 			seconds_timeout = Integer.parseInt(config.getProperty("seconds.timeout"));
 			seconds_poll_interval = Integer.parseInt(config.getProperty("seconds.poll.interval"));
+			
+			proxy_url = config.getProperty("proxy.url");
 			
 				String os_name= System.getProperty("os.name");
 				if(os_name.trim().contains("Mac")) {

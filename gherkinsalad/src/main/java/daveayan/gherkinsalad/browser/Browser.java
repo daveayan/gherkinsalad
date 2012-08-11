@@ -147,19 +147,19 @@ public class Browser {
 		return instance;
 	}
 
-	private boolean is_IE() {
+	public boolean is_IE() {
 		return "ie".equalsIgnoreCase(this.name);
 	}
 
-	private boolean is_Chrome() {
+	public boolean is_Chrome() {
 		return "chrome".equalsIgnoreCase(this.name);
 	}
 
-	private boolean is_Firefox() {
+	public boolean is_Firefox() {
 		return "firefox".equalsIgnoreCase(this.name);
 	}
 	
-	private boolean is_htmlunit() {
+	public boolean is_htmlunit() {
 		return "html".equalsIgnoreCase(this.name) || "htmlunit".equalsIgnoreCase(this.name);
 	}
 	
