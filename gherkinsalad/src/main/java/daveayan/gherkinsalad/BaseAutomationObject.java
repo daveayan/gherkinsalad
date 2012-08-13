@@ -44,6 +44,14 @@ public abstract class BaseAutomationObject {
 	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
 	protected static Browser browser;
 	
+	public void switch_to_default_window() {
+		browser.switch_to_default_window();
+	}
+	
+	public void switch_to_window_with_name(String name) {
+		browser.driver().switchTo().window(name);
+	}
+	
 	public void execute_javascript(String script, Object... args) {
 		((JavascriptExecutor) browser.driver()).executeScript(script, args);
 	}

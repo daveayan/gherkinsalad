@@ -22,7 +22,7 @@ import daveayan.lang.Nullable;
 public class Element implements Nullable {
 	private WebElement _webElement;
 	
-	private WebElement _nativeWebElement() {
+	public WebElement _nativeWebElement() {
 		return _webElement;
 	}
 	

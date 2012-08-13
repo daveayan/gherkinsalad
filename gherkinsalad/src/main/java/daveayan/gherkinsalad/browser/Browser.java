@@ -57,8 +57,13 @@ public class Browser {
 	private String name;
 
 	private static WebDriver instance;
+	private static String default_window_handle = StringUtils.EMPTY;;
 
 	private static int screen_shot_count = 0;
+	
+	public void switch_to_default_window() {
+		instance.switchTo().window(default_window_handle);
+	}
 
 	/**
 	 * Use this method to take a screenshot of the current browser window. The screenshot is taken as a png file and saved in target/screenshots folder.
@@ -113,6 +118,7 @@ public class Browser {
 			System.err.println(wde.getMessage());
 		}
 		instance = null;
+		default_window_handle = StringUtils.EMPTY;
 	}
 
 	/**
@@ -128,6 +134,7 @@ public class Browser {
 		} else if(this.is_htmlunit()) {
 			instance = HtmlUnitBrowser.getDriver();
 		}
+		default_window_handle = instance.getWindowHandle();
 	}
 
 	/**
