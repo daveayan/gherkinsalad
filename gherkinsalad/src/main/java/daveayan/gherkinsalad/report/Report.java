@@ -31,6 +31,10 @@ public class Report {
 		report("-- " + action);
 	}
 	
+	public static void error(String action) {
+		report("EE " + action);
+	}
+	
 	public static void screenshot_taken(String filename) {
 		action("Screen shot taken at '" + filename + "'");
 	}

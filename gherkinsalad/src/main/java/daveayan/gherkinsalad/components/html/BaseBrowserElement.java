@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import junit.framework.Assert;
+import daveayan.gherkinsalad.test.Assert;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
