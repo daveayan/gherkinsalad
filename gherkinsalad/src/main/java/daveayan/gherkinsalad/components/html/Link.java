@@ -36,6 +36,11 @@ public class Link extends BaseBrowserElement implements Clickable {
 		click_if_enabled();
 	}
 	
+	public boolean isDisplayed() {
+		Element element = fetch_element();
+		return element.is_not_null();
+	}
+	
 	public void click_if_exists_and_enabled() {
 		wait_between_steps();
 		Element element = fetch_element();
