@@ -25,6 +25,36 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<source>1.6</source>
+					<complianceLevel>1.6</complianceLevel>
+					<verbose>false</verbose>
+					<showWeaveInfo>false</showWeaveInfo>
+					<target>1.6</target>
+					<weaveDependencies>
+						<weaveDependency>
+							<groupId>info.cukes</groupId>
+							<artifactId>cucumber-junit</artifactId>
+						</weaveDependency>
+						<weaveDependency>
+							<groupId>info.cukes</groupId>
+							<artifactId>cucumber-java</artifactId>
+						</weaveDependency>
+					</weaveDependencies>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -140,11 +170,42 @@
             <artifactId>scala-library</artifactId>
             <version>2.9.2</version>
         </dependency>
+        <dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.11</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>daveayan</groupId>
+			<artifactId>mirage</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>daveayan-releases</id>
+			<url>https://github.com/daveayan/_mavenrepository/raw/master/releases</url>
+		</repository>
+	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>daveayan-releases</id>
+			<id>daveayan-plugins</id>
 			<url>https://github.com/daveayan/_mavenrepository/raw/master/releases</url>
 		</pluginRepository>
 	</pluginRepositories>

@@ -1,0 +1,32 @@
+#feature {
+	color:black;
+	text-indent:10px;
+}
+#scenario {
+	color:black;
+	text-indent:40px;
+}
+#step {
+	color:black;
+	text-indent:70px;
+}
+#action {
+	color:black;
+	text-indent:100px;
+}
+#ask {
+	color:black;
+	text-indent:100px;
+}
+#error {
+	color:black;
+	text-indent:100px;
+}
+#warn {
+	color:black;
+	text-indent:100px;
+}
+#screenshot {
+	color:black;
+	text-indent:130px;
+}
