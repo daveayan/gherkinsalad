@@ -18,8 +18,6 @@
 **/
 package daveayan.gherkinsalad;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
@@ -41,8 +39,27 @@ import daveayan.gherkinsalad.report.Report;
  * </ul>
  */
 public abstract class BaseAutomationObject {
-	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
 	protected static Browser browser;
+	
+	protected void ask(String ask) {
+		Report.ask(ask);
+	}
+	
+	protected void warn(String warn) {
+		Report.warn(warn);
+	}
+	
+	protected void task(String task) {
+		Report.task(task);
+	}
+	
+	protected void action(String action) {
+		Report.action(action);
+	}
+	
+	protected void error(String error) {
+		Report.error(error);
+	}
 	
 	public void switch_to_default_window() {
 		browser.switch_to_default_window();
@@ -63,7 +80,7 @@ public abstract class BaseAutomationObject {
 	public void javascript_popup_click_ok() {
 		Alert alert = get_current_alert_box();
 		if(alert != null) {
-			Report.action("Accepted the javascript popup '" + alert.getText() + "'");
+			action("Accepted the javascript popup '" + alert.getText() + "'");
 			alert.accept();
 		}
 	}
@@ -75,7 +92,7 @@ public abstract class BaseAutomationObject {
 		}
 		Alert alert = get_current_alert_box();
 		if(alert != null) {
-			Report.action("Dismissed the javascript popup '" + alert.getText() + "'");
+			action("Dismissed the javascript popup '" + alert.getText() + "'");
 			alert.dismiss();
 		}
 	}
@@ -85,7 +102,7 @@ public abstract class BaseAutomationObject {
 //		Alert alert = get_current_alert_box();
 //		if(alert != null) {
 //			Credentials c = new UserAndPassword(username, password);
-//			Report.action("Authenticating using the javascript popup with username '" + username + "', password '" + password +"'");
+//			action("Authenticating using the javascript popup with username '" + username + "', password '" + password +"'");
 //			alert.authenticateUsing(c);
 //		}
 	}
@@ -127,11 +144,11 @@ public abstract class BaseAutomationObject {
 		if(seconds == 0) return;
 		try {
 			if(seconds >= 7) {
-				log.info("User is waiting for " + seconds + " seconds");
+				action("User is waiting for " + seconds + " seconds");
 			}
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
-			log.info(e.getMessage());
+			error(e.getMessage());
 		}
 	}
 	
@@ -171,10 +188,10 @@ public abstract class BaseAutomationObject {
 	 */
 	public void goto_url(String url) {
 		if(browser != null) {
-			log.info("Navigating to URL '" + url + "'");
+			action("Navigating to URL '" + url + "'");
 			browser.goto_url(url);
 		} else {
-			log.info("Browser is null, cannot navigate to URL '" + url + "'");
+			error("Browser is null, cannot navigate to URL '" + url + "'");
 		}
 	}
 }

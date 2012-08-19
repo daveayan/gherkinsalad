@@ -1,7 +1,5 @@
 package daveayan.gherkinsalad.components.html;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NullElement;
 
@@ -10,8 +8,6 @@ import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.report.Report;
 
 public class Link extends BaseBrowserElement implements Clickable {
-	private static Log log = LogFactory.getLog(Link.class);
-	
 	public static Link find(By locator) {
 		Link l = new Link();
 		l.found(locator);
@@ -28,8 +24,11 @@ public class Link extends BaseBrowserElement implements Clickable {
 		Element element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
+			action("Clicked " + this);
+		} else {
+			action("Did not click disabled " + this);
+			takeScreenshot();
 		}
-		Report.action("Clicked " + this);
 	}
 	
 	public void click_if_exists() {
@@ -47,8 +46,14 @@ public class Link extends BaseBrowserElement implements Clickable {
 		if(! (element instanceof NullElement)) {
 			if(this.isEnabled()) {
 				element.click();
+				action("Clicked " + this);
+			} else {
+				action("Did not click disabled " + this);
+				takeScreenshot();
 			}
-			Report.action("Clicked " + this);
+		} else {
+			action("Did not click non existent " + this);
+			takeScreenshot();
 		}
 	}
 }

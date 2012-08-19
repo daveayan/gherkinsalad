@@ -36,7 +36,9 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 			wait_between_steps();
 			element.clear();
 			element.sendKeys(text);
-			Report.action("Entered text '" + text + "' in " + this);
+			action("Entered text '" + text + "' in " + this);
+		} else {
+			action("Did not enter text '" + text + "' in disabled text field '" + this + "'");
 		}
 	}
 
@@ -47,7 +49,9 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 			String current_text = element.getAttribute("value");
 			element.clear();
 			element.sendKeys(text + current_text);
-			Report.action("Appended text '" + text + "' in " + this);
+			action("Appended text '" + text + "' in " + this);
+		} else {
+			action("Did not append text '" + text + "' in disabled text field '" + this + "'");
 		}
 	}
 
@@ -55,6 +59,9 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 		Element element = fetch_element();
 		if(this.isEnabled()) {
 			element.click();
+			action("Clicked in textfield " + this);
+		} else {
+			action("Did not click disabled textfield " + this);
 		}
 	}
 	

@@ -67,7 +67,8 @@ public class Report {
 	}
 	
 	public static void screenshot_taken(String filename) {
-		report(formatted_html("screenshot", "Screen shot taken at '" + filename + "'"));
+		String html = "<div id=\"screenshot\">" + current_date_time() + " Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a></div>";
+		report(html);
 	}
 	
 	private static String formatted_html(String id, String text) {

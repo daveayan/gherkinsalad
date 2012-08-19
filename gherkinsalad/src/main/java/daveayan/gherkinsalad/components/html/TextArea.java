@@ -34,7 +34,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 			wait_between_steps();
 			element.clear();
 			element.sendKeys(text);
-			Report.action("Entered text '" + text + "' in " + this);
+			action("Entered text '" + text + "' in " + this);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 			String current_text = element.getAttribute("value");
 			element.clear();
 			element.sendKeys(text + current_text);
-			Report.action("Appended text '" + text + "' in " + this);
+			action("Appended text '" + text + "' in " + this);
 		}
 	}
 	
