@@ -6,7 +6,6 @@ import gherkin.formatter.model.Step;
 import org.junit.runners.ParentRunner;
 
 import cucumber.runtime.StepDefinitionMatch;
-import daveayan.gherkinsalad.report.Report;
 import daveayan.mirage.ReflectionUtils;
 
 public aspect ReportFeatureScenarioStep {
@@ -21,18 +20,18 @@ public aspect ReportFeatureScenarioStep {
 	
 	before() : running_feature() {
 		ParentRunner pr = (ParentRunner) thisJoinPoint.getTarget();
-		Report.feature(pr.getDescription().toString());
+		System.out.println(pr.getDescription().toString());
 	}
 	
 	before() : running_scenario() {
 		ParentRunner pr = (ParentRunner) thisJoinPoint.getTarget();
-		Report.scenario(pr.getDescription().toString());
+		System.out.println(pr.getDescription().toString());
 	}
 	
 	before() : running_step() {
 		StepDefinitionMatch m = (StepDefinitionMatch) thisJoinPoint.getArgs()[0];
 		Step step = (Step) ReflectionUtils.getFieldInObject(m, "step");
-		Report.step(step.getKeyword() + " " + m.getStepName());
+		System.out.println(step.getKeyword() + " " + m.getStepName());
 	}
 	
 // Not used. These are here for reference only	

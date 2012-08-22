@@ -12,11 +12,64 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import daveayan.gherkinsalad.components.functions.GetTextFunction;
+import daveayan.gherkinsalad.report.Report;
 import daveayan.lang.NullList;
 
 public class Elements {
 	private List<Element> _elements = new ArrayList<Element>();
+	
+	public void should_have_any_of_these_texts(String... texts) {
+		List<String> available_texts = new ArrayList<String>();
+		for(String text: texts) {
+			for(Element element: _nativeList()) {
+				available_texts.add(element.getText());
+				if(element.getText().contains(text)) {
+					Report.task("Found '" + text + "' in " + convert_to_string(texts));
+					return;
+				}
+			}
+		}
+		Report.error("Did not find any of the texts " + convert_to_string(texts) + ", found " + convert_to_string(available_texts));
+	}
+	
+	public void should_have_all_of_these_texts(String... texts) {
+		List<String> text_not_available = new ArrayList<String>();
+		for(String text: texts) {
+			boolean found = Boolean.FALSE;
+			for(Element element: _nativeList()) {
+				if(element.getText().contains(text)) {
+					found = Boolean.TRUE;
+					break;
+				}
+			}
+			if(! found) {
+				text_not_available.add(text);
+			}
+		}
+		if(text_not_available.isEmpty()) {
+			Report.task("Found all expected texts " + convert_to_string(texts));
+		} else {
+			Report.error("Did not find expected texts " + convert_to_string(text_not_available));
+		}
+	}
+	
+	private String convert_to_string(List<String> texts) {
+		return convert_to_string(texts.toArray(new String[] {}));
+	}
+	
+	private String convert_to_string(String... texts) {
+		StringBuffer sb = new StringBuffer("'");
+		if(texts != null) {
+			for(int i = 0 ; i < texts.length ; i++) {
+				sb.append(texts[i]);
+				if(i != texts.length - 1) {
+					sb.append(", ");
+				}
+			}
+		}
+		sb.append("'");
+		return sb.toString();
+	}
 	
 	public void each(Predicate<Element> predicate) {
 		for(Element e: _elements) {
