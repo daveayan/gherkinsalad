@@ -15,7 +15,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void click_if_enabled() {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			element.click();
 		}
@@ -29,7 +29,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void enter_text_if_enabled(String text) {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			element.clear();
@@ -39,7 +39,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void append_text_if_enabled(String text) {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			String current_text = element.getAttribute("value");
@@ -50,7 +50,7 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 	}
 	
 	public boolean isEnabled() {
-		Element element = fetch_element();
+		Element element = root_element();
 		return element.isEnabled();
 	}
 	

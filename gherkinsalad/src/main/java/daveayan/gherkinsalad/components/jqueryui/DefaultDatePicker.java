@@ -80,7 +80,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	
 	private String get_month_in_picker() {
 		while(true) {
-			Element cal_month = fetch_element().findElement(By.className("ui-datepicker-month"));
+			Element cal_month = root_element().findElement(By.className("ui-datepicker-month"));
 			String cal_month_text = cal_month.getText();
 			if(StringUtils.isNotEmpty(cal_month_text)) {
 				return cal_month_text;
@@ -90,7 +90,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	
 	private String get_year_in_picker() {
 		while(true) {
-			Element cal_year = fetch_element().findElement(By.className("ui-datepicker-year"));
+			Element cal_year = root_element().findElement(By.className("ui-datepicker-year"));
 			String cal_year_text = cal_year.getText();
 			if(StringUtils.isNotEmpty(cal_year_text)) {
 				return cal_year_text;

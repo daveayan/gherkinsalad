@@ -15,13 +15,13 @@ public class Link extends BaseBrowserElement implements Clickable {
 	}
 	
 	public boolean isEnabled() {
-		Element element = fetch_element();
+		Element element = root_element();
 		return element.isEnabled();
 	}
 
 	public void click_if_enabled() {
 		wait_between_steps();
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			element.click();
 			action("Clicked " + this);
@@ -36,13 +36,13 @@ public class Link extends BaseBrowserElement implements Clickable {
 	}
 	
 	public boolean isDisplayed() {
-		Element element = fetch_element();
+		Element element = root_element();
 		return element.is_not_null();
 	}
 	
 	public void click_if_exists_and_enabled() {
 		wait_between_steps();
-		Element element = fetch_element();
+		Element element = root_element();
 		if(! (element instanceof NullElement)) {
 			if(this.isEnabled()) {
 				element.click();

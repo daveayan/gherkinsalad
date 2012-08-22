@@ -68,7 +68,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		return false;
 	}
 
-	public Element fetch_element() {
+	public Element root_element() {
 		Element element = findElement(element_locator);
 		return element;
 	}
@@ -114,7 +114,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	 * Default implementation. Returns the value from getText() method of WebElement
 	 */
 	public String getText() {
-		Element element = fetch_element();
+		Element element = root_element();
 		return element.getText();
 	}
 

@@ -7,16 +7,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 
+import daveayan.gherkinsalad.Strings;
+
 public class Elements_should_have_all_of_these_texts_Test {
 	
 	@Test public void test_1() {
-		elements.should_have_all_of_these_texts("String1");
-		elements.should_have_all_of_these_texts("String1", "String2", "String3");
-		elements.should_have_all_of_these_texts("String1", "String2", "String4");
+		elements.should_have_all_of_these_texts(Strings.new_instance().add("String1"));
+		elements.should_have_all_of_these_texts(Strings.new_instance().add("String1").add("String2").add("String3"));
+		elements.should_have_all_of_these_texts(Strings.new_instance().add("String1").add("String2").add("String4"));
 		
-		elements.should_have_any_of_these_texts("String1");
-		elements.should_have_any_of_these_texts("String1", "String2", "String3");
-		elements.should_have_any_of_these_texts("String4");
+		elements.should_have_any_of_these_texts(Strings.new_instance().add("String1"));
+		elements.should_have_any_of_these_texts(Strings.new_instance().add("String1").add("String2").add("String3"));
+		elements.should_have_any_of_these_texts(Strings.new_instance().add("String4"));
 	}
 	
 	Elements elements = new Elements();

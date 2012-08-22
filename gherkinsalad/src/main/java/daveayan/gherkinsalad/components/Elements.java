@@ -12,29 +12,39 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.report.Report;
 import daveayan.lang.NullList;
 
 public class Elements {
 	private List<Element> _elements = new ArrayList<Element>();
 	
-	public void should_have_any_of_these_texts(String... texts) {
+	public void should_have_any_of_these_texts(Strings texts) {
 		List<String> available_texts = new ArrayList<String>();
-		for(String text: texts) {
+		
+		Iterator<String> iter = texts.iterator();
+		while(iter.hasNext()) {
+			String text = iter.next();
 			for(Element element: _nativeList()) {
 				available_texts.add(element.getText());
 				if(element.getText().contains(text)) {
-					Report.task("Found '" + text + "' in " + convert_to_string(texts));
+					Report.task("Found '" + text + "' in " + texts);
 					return;
 				}
 			}
 		}
-		Report.error("Did not find any of the texts " + convert_to_string(texts) + ", found " + convert_to_string(available_texts));
+		Report.error("Did not find any of the texts " + texts + ", found " + available_texts);
 	}
 	
-	public void should_have_all_of_these_texts(String... texts) {
+	public void each_element_should_have_all_of_these_texts(String... texts) {
+		StringBuffer sb = new StringBuffer();
+	}
+	
+	public void should_have_all_of_these_texts(Strings texts) {
 		List<String> text_not_available = new ArrayList<String>();
-		for(String text: texts) {
+		Iterator<String> iter = texts.iterator();
+		while(iter.hasNext()) {
+			String text = iter.next();
 			boolean found = Boolean.FALSE;
 			for(Element element: _nativeList()) {
 				if(element.getText().contains(text)) {
@@ -47,28 +57,18 @@ public class Elements {
 			}
 		}
 		if(text_not_available.isEmpty()) {
-			Report.task("Found all expected texts " + convert_to_string(texts));
+			Report.task("Found all expected texts " + texts);
 		} else {
-			Report.error("Did not find expected texts " + convert_to_string(text_not_available));
+			Report.error("Did not find expected texts " + text_not_available + " in " + this);
 		}
 	}
 	
-	private String convert_to_string(List<String> texts) {
-		return convert_to_string(texts.toArray(new String[] {}));
-	}
-	
-	private String convert_to_string(String... texts) {
-		StringBuffer sb = new StringBuffer("'");
-		if(texts != null) {
-			for(int i = 0 ; i < texts.length ; i++) {
-				sb.append(texts[i]);
-				if(i != texts.length - 1) {
-					sb.append(", ");
-				}
-			}
+	public String toString() {
+		Strings strings = Strings.new_instance();
+		for(Element element: _nativeList()) {
+			strings = strings.add(element.getText());
 		}
-		sb.append("'");
-		return sb.toString();
+		return strings.toString();
 	}
 	
 	public void each(Predicate<Element> predicate) {

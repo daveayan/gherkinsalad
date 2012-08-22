@@ -18,7 +18,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 		if(isNotDisplayed()) {
 			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
 		}
-		Element element = fetch_element();
+		Element element = root_element();
 		if(is_null(element)) {
 			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
 		}
@@ -26,12 +26,12 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	}
 	
 	public boolean isEnabled() {
-		Element element = fetch_element();
+		Element element = root_element();
 		return element.isEnabled();
 	}
 
 	public void enter_text_if_enabled(String text) {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			element.clear();
@@ -43,7 +43,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void append_text_if_enabled(String text) {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			wait_between_steps();
 			String current_text = element.getAttribute("value");
@@ -56,7 +56,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	}
 
 	public void click_if_enabled() {
-		Element element = fetch_element();
+		Element element = root_element();
 		if(this.isEnabled()) {
 			element.click();
 			action("Clicked in textfield " + this);
