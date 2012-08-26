@@ -10,46 +10,29 @@ import daveayan.gherkinsalad.report.Report;
 
 public class ReportingTest {
 	@Test public void test_reporting() {
-		Report.feature("Some Feature");
-		Report.scenario("Scenario 1");
-		Report.step("Given some given in scenario 1");
-		Report.action("Clicked Something 1");
-		Report.action("Clicked Something 1");
-		Report.action("Entered Something in Something");
-		Report.step("And some given in scenario 1");
-		Report.action("Selected Something 1");
-		Report.action("Entered Something in Something");
-		Report.step("When some when in scenario 1");
-		Report.action("Clicked Something 1");
-		Report.step("Then some then in scenario 1");
-		Report.action("Something exists 1");
-		Report.action("Something exists 1");
-		Report.step("And some then in scenario 1");
-		Report.action("Something exists 1");
-		Report.action("Something exists 1");
-		Report.action("Something exists 1");
-		Report.warn("Did not verify this 1");
-		Report.step("And some more then in scenario 1");
-		Report.action("Something exists 1");
-		Report.warn("Did not verify this 1");
-		Report.warn("Did not verify this 1");
-		Report.error("Something is not right 1");
+		Report.feature("Feature 1");
+			Report.scenario("Scenario 1");
+				Report.step("Step 1");
+					Report.task("Task 1");
+						Report.action("Action 1");
+						Report.screenshot_taken("screenshot 1");
+					Report.task("Task 2");
+				Report.step("Step 2");
+			Report.scenario("Scenario 2");
+				Report.step("Step 1");
+					Report.task("Task 1");
+						Report.action("Action 1");
+						Report.screenshot_taken("screenshot 1");
+						Report.error("Error 1");
+				Report.step("Step 2");
 		
-		Report.scenario("Scenario 2");
-		Report.step("Given some given in scenario 2");
-		Report.step("And some given in scenario 2");
-		Report.step("When some when in scenario 2");
-		Report.step("Then some then in scenario 2");
-		Report.step("And some then in scenario 2");
-		Report.step("And some more then in scenario 2");
-		
-		Report.scenario("Scenario 3");
-		Report.step("Given some given in scenario 3");
-		Report.step("And some given in scenario 3");
-		Report.step("When some when in scenario 3");
-		Report.step("Then some then in scenario 3");
-		Report.step("And some then in scenario 3");
-		Report.step("And some more then in scenario 3");
+		Report.feature("Feature 2");
+			Report.scenario("Scenario 1");
+				Report.step("Step 1");
+				Report.step("Step 2");
+			Report.scenario("Scenario 2");
+				Report.step("Step 1");
+				Report.step("Step 2");
 	}
 	
 	@Before public void before() {

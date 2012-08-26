@@ -117,7 +117,6 @@ public class Elements {
 			if(e.hasAllTexts(expectedTexts)) {
 				return e;
 			}
-			System.out.println("Element '" + e + "' does not have texts '" + expectedTexts + "'");
 		}
 		return new NullElement();
 	}

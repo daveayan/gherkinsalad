@@ -167,10 +167,8 @@ public abstract class BaseAutomationObject {
 	 * @param browser_name
 	 */
 	public void launch_browser(String browser_name) {
-		if(browser == null) {
-			browser = Browser.instance_of(browser_name);
-			browser.launch();
-		}
+		browser = Browser.instance_of(browser_name);
+		browser.launch();
 	}
 
 	
