@@ -1,8 +1,9 @@
 package daveayan.gherkinsalad.test;
 
+import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.report.Report;
 
-public class Assert {
+public class Assert extends BaseAutomationObject{
 	/**
 	 * Protect constructor since it is a static only class
 	 */
@@ -43,6 +44,7 @@ public class Assert {
 	 */
 	static public void fail(String message) {
 		Report.error(message);
+		browser.takeScreenshot();
 	}
 	/**
 	 * Fails a test with no message.

@@ -8,7 +8,7 @@ import daveayan.gherkinsalad.components.TextEnterable;
 public class TinyMceEditorTest extends BaseTest {
 	@Test
 	public void firefox_tiny_mce_test() {
-		super.launch_browser("firefox");
+		super.launch_browser("chrome");
 		super.goto_url("http://www.tinymce.com/tryit/full.php");
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
@@ -17,5 +17,9 @@ public class TinyMceEditorTest extends BaseTest {
 		// TO IMPLEMENT ASSERTIONS
 		
 		wait_for_seconds(10);
+		
+		String text = tinyMceEditor.getText();
+		System.out.println(text);
+		wait_for_seconds(4);
 	}
 }

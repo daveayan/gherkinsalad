@@ -96,19 +96,6 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	/**
 	 * DEFAULT IMPLEMENTATIONS OF THE BROWSERELEMENT INTERFACE
 	 */
-	/**
-	 * Default implementation. Returns Boolean.FALSE
-	 */
-	public boolean is_null() {
-		return false;
-	}
-
-	/**
-	 * Default implementation. Returns ! is_null()
-	 */
-	public boolean is_not_null() {
-		return !is_null();
-	}
 
 	/**
 	 * Default implementation. Returns the value from getText() method of WebElement

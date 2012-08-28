@@ -26,6 +26,7 @@ import com.google.common.annotations.Beta;
 
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.report.Report;
+import daveayan.lang.Nullable;
 
 /** @author daveayan */
 /**
@@ -38,7 +39,7 @@ import daveayan.gherkinsalad.report.Report;
  * <li>Wait between execution of steps or page object operations</li>
  * </ul>
  */
-public abstract class BaseAutomationObject {
+public abstract class BaseAutomationObject implements Nullable {
 	protected static Browser browser;
 	
 	protected void ask(String ask) {
@@ -47,6 +48,7 @@ public abstract class BaseAutomationObject {
 	
 	protected void warn(String warn) {
 		Report.warn(warn);
+		browser.takeScreenshot();
 	}
 	
 	protected void task(String task) {
@@ -193,5 +195,19 @@ public abstract class BaseAutomationObject {
 		} else {
 			error("Browser is null, cannot navigate to URL '" + url + "'");
 		}
+	}
+	
+	/**
+	 * Default implementation. Returns Boolean.FALSE
+	 */
+	public boolean is_null() {
+		return false;
+	}
+
+	/**
+	 * Default implementation. Returns ! is_null()
+	 */
+	public boolean is_not_null() {
+		return !is_null();
 	}
 }

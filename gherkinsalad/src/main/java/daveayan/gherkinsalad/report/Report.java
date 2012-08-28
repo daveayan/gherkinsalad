@@ -44,7 +44,7 @@ public class Report {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"feature\">";
-		html += "\n<div class=\"title\">" + feature + "</div>";
+		html += "\n<div class=\"title\">" + feature + "<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		feature_already_started = Boolean.TRUE;
@@ -56,7 +56,7 @@ public class Report {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"scenario\">";
-		html += "\n<div class=\"title\">" + scenario + "</div>";
+		html += "\n<div class=\"title\">" + scenario + "<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		scenario_already_started = Boolean.TRUE;
@@ -67,7 +67,7 @@ public class Report {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"step\">";
-		html += "\n<div class=\"title\">" + step + "</div>";
+		html += "\n<div class=\"title\">" + step + "<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		step_already_started = Boolean.TRUE;
@@ -95,13 +95,13 @@ public class Report {
 	
 	public static void screenshot_taken(String filename) {
 		String html = StringUtils.EMPTY;
-		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a>" + "</div>";
+		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
 		report(html);
 	}
 	
 	private static String formatted_html(String id, String text) {
 		String html = StringUtils.EMPTY;
-		html += "<div class=\"" + id + "\">" + text + "</div>";
+		html += "<div class=\"" + id + "\">" + text + "<span class=\"date\">" + current_date_time() + "</span></div>";
 		return html;
 	}
 	
@@ -135,36 +135,18 @@ public class Report {
 		sb.append("<html>");
 		sb.append("<head>");
 		sb.append("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\">");
-		sb.append("<!--[if lt IE 9]>");
-		sb.append("<script src=\"html5shiv.js\"></script>");
-		sb.append("<![endif]-->");
+		sb.append("<!--[if lt IE 9]><script src=\"html5shiv.js\"></script><![endif]-->");
 		sb.append("<script src=\"jquery-1.8.0.min.js\"></script>");
-		sb.append("<script type=\"text/javascript\">");
-		sb.append("$(document).ready(function(){");
-		sb.append("$(\".title\").click(function(){");
-		sb.append("$(this).next().toggle();");
-		sb.append("});");
-		sb.append("$(\".action.error\").each(function() {");
-		sb.append("var $node = $(this).parent().prev();");
-		sb.append("$node.addClass(\"error\");");
-		sb.append("var $parent = $node.parent().parent().prev();");
-		sb.append("$parent.addClass(\"error\");");
-		sb.append("$parent.parent().parent().prev().addClass(\"error\");");
-		sb.append("});");
-		sb.append("$(\"#expandAll\").click(function() {");
-		sb.append("$(\".content\").show();");
-		sb.append("});");
-		sb.append("$(\"#collapseAll\").click(function() {");
-		sb.append("$(\".content\").hide();");
-		sb.append("});");
-		sb.append("});");
-		sb.append("</script>");
+		sb.append("<script src=\"gherkinsaladreport.js\"></script>");
 		sb.append("</head>");
 		sb.append("<body>");
 		sb.append("<header><h1>Gherkin Salad Report</h1></header>");
 		sb.append("<div id=\"mainActions\">");
 		sb.append("<a id=\"expandAll\" href=\"#\">Expand All</a>");
 		sb.append("<a id=\"collapseAll\" href=\"#\">Collapse All</a>");
+		sb.append("<a id=\"failedScenarios\" href=\"#\">Failed Scenarios</a>");
+		sb.append("<a id=\"warningScenarios\" href=\"#\">Warning Scenarios</a>");
+		sb.append("<a id=\"showAll\" href=\"#\">Show All</a>");
 		sb.append("</div>");
 		sb.append("<div class=\"clear\"></div>");
 		

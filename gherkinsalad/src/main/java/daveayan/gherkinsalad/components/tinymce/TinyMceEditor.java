@@ -13,6 +13,13 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 		return rte;
 	}
 	
+	public String getText() {
+		wait_between_steps_plus(2);
+		browser.driver().switchTo().frame(0);
+		WebElement editable = browser.driver().switchTo().activeElement();
+		return editable.getText();
+	}
+	
 	public void click_if_enabled() {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(0);
@@ -29,6 +36,7 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(0);
 		WebElement editable = browser.driver().switchTo().activeElement();
+		editable.clear();
 		editable.sendKeys(text);
 		browser.driver().switchTo().defaultContent();
 	}
