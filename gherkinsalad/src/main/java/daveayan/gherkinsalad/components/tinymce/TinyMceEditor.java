@@ -17,7 +17,9 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(0);
 		WebElement editable = browser.driver().switchTo().activeElement();
-		return editable.getText();
+		String content = editable.getText();
+		browser.driver().switchTo().defaultContent();
+		return content;
 	}
 	
 	public void click_if_enabled() {
