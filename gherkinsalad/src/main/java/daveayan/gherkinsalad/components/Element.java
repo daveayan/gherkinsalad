@@ -17,9 +17,10 @@ import org.openqa.selenium.support.ui.Wait;
 import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.Config;
+import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.lang.Nullable;
 
-public class Element implements Nullable {
+public class Element extends BaseBrowserElement implements Nullable {
 	private WebElement _webElement;
 	
 	public WebElement _nativeWebElement() {
@@ -150,21 +151,5 @@ public class Element implements Nullable {
 
 	public String getText() {
 		return _webElement.getText();
-	}
-
-	public boolean isDisplayed() {
-		return true;
-	}
-
-	public boolean isEnabled() {
-		return true;
-	}
-
-	public boolean is_null() {
-		return false;
-	}
-
-	public boolean is_not_null() {
-		return ! is_null();
 	}
 }

@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import daveayan.gherkinsalad.test.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NullElement;
@@ -40,7 +38,7 @@ import daveayan.gherkinsalad.BaseAutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
 import daveayan.gherkinsalad.components.Element;
-import daveayan.lang.Nullable;
+import daveayan.gherkinsalad.test.Assert;
 
 /**@author daveayan*/
 /**
@@ -54,19 +52,19 @@ import daveayan.lang.Nullable;
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
 	private By element_locator;
 
-	protected boolean is_not_null(Object o) {
-		return !is_null(o);
-	}
-
-	protected boolean is_null(Object o) {
-		if (o == null)
-			return true;
-		if (o instanceof Nullable) {
-			Nullable n = (Nullable) o;
-			return n.is_null();
-		}
-		return false;
-	}
+//	protected boolean is_not_null(Object o) {
+//		return !is_null(o);
+//	}
+//
+//	protected boolean is_null(Object o) {
+//		if (o == null)
+//			return true;
+//		if (o instanceof Nullable) {
+//			Nullable n = (Nullable) o;
+//			return n.is_null();
+//		}
+//		return false;
+//	}
 
 	public Element root_element() {
 		Element element = findElement(element_locator);

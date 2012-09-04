@@ -42,6 +42,30 @@ import daveayan.lang.Nullable;
 public abstract class BaseAutomationObject implements Nullable {
 	protected static Browser browser;
 	
+	protected void feature(String feature_name) {
+		Report.feature("Feature: "+ feature_name);
+	}
+	
+	protected void scenario(String scenario_name) {
+		Report.scenario("Scenario: " + scenario_name);
+	}
+	
+	protected void given(String step_name) {
+		Report.step("Given " + step_name);
+	}
+	
+	protected void when(String step_name) {
+		Report.step("When " + step_name);
+	}
+	
+	protected void then(String step_name) {
+		Report.step("Then " + step_name);
+	}
+	
+	protected void and(String step_name) {
+		Report.step("And " + step_name);
+	}
+	
 	protected void ask(String ask) {
 		Report.ask(ask);
 	}

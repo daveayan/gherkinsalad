@@ -109,6 +109,7 @@ public class Report {
 		create_file_if_not_exists();
 		File report_file = new File(Path.TO_TARGET + "report.html");
 		try {
+			System.out.println("\n" + text);
 			FileUtils.writeStringToFile(report_file, "\n" + text, true);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -119,10 +120,13 @@ public class Report {
 		File report_file = new File(Path.TO_TARGET + "report.html");
 		if(report_file.exists()) return;
 		try {
-			FileUtils.writeStringToFile(report_file, report_header(), true);
+			String report_header = report_header();
+			System.out.println(report_header);
+			FileUtils.writeStringToFile(report_file, report_header, true);
 			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "style.css"), Path.TO_TARGET_FOLDER);
 			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "html5shiv.js"), Path.TO_TARGET_FOLDER);
 			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "jquery-1.8.0.min.js"), Path.TO_TARGET_FOLDER);
+			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "gherkinsaladreport.js"), Path.TO_TARGET_FOLDER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

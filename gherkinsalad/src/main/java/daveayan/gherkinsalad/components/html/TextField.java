@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.TextEnterable;
-import daveayan.gherkinsalad.report.Report;
 
 public class TextField extends BaseBrowserElement implements TextEnterable {
 	
@@ -16,11 +15,13 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 	
 	public String getText() {
 		if(isNotDisplayed()) {
-			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
+			error("Element '" + this + "' is not displayed. Cannot getText on this element");
+			return "NOT_DISPLAYED";
 		}
 		Element element = root_element();
-		if(is_null(element)) {
-			throw new AssertionError("Element '" + this + "' is not displayed. Cannot getText on this element");
+		if(element.is_null()) {
+			error("Element '" + this + "' is not displayed. Cannot getText on this element");
+			return "IS_NULL";
 		}
 		return element.getAttribute("value");
 	}

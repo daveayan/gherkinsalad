@@ -24,6 +24,12 @@ public class DatePickerTest extends BaseTest {
 		
 		// #########
 		
+		final DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		
+		date_textbox.click_if_enabled();
+		datepicker.select_date(new Date(), new Date());
+		date_textbox.should_have_text(df.format(new Date()));
+		
 		date_textbox.click_if_enabled();
 		datepicker.select_date(new Date("07/06/2012"), new Date());
 		date_textbox.should_have_text("07/06/2012");
@@ -59,7 +65,6 @@ public class DatePickerTest extends BaseTest {
 		date_textbox.should_have_text("07/09/2012");
 		
 		// #########
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		Calendar two_years_from_today = Calendar.getInstance();
 		two_years_from_today.add(Calendar.YEAR, 2);
 		two_years_from_today.add(Calendar.MONTH, 2);
