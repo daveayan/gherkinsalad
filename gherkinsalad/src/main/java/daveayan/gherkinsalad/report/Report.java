@@ -7,14 +7,19 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.Path;
 
 public class Report {
+	private static Log log = LogFactory.getLog(Report.class);
 	private static DateFormat df = DateFormat.getDateTimeInstance();
 	private static boolean feature_already_started = Boolean.FALSE;
 	private static boolean scenario_already_started = Boolean.FALSE;
 	private static boolean step_already_started = Boolean.FALSE;
+	private static File report_folder = null;
 	
 	private static void close_step() {
 		if(step_already_started) {
@@ -93,6 +98,15 @@ public class Report {
 		report(formatted_html("action error", action));
 	}
 	
+	public static void screenshot_taken(File screenshot_file, String file_name) {
+		try {
+			FileUtils.copyFile(screenshot_file, new File(report_folder + "/screenshots/" + file_name));
+			screenshot_taken(file_name);
+		} catch (IOException e) {
+			error("Unable to take screenshot : " + Path.TO_SCREENSHOTS + file_name);
+		}
+	}
+	
 	public static void screenshot_taken(String filename) {
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
@@ -107,7 +121,7 @@ public class Report {
 	
 	private static void report(String text) {
 		create_file_if_not_exists();
-		File report_file = new File(Path.TO_TARGET + "report.html");
+		File report_file = new File(report_folder + "/report.html");
 		try {
 			System.out.println("\n" + text);
 			FileUtils.writeStringToFile(report_file, "\n" + text, true);
@@ -117,16 +131,16 @@ public class Report {
 	}
 	
 	private static void create_file_if_not_exists() {
-		File report_file = new File(Path.TO_TARGET + "report.html");
+		report_folder();
+		File report_file = new File(report_folder + "/report.html");
 		if(report_file.exists()) return;
 		try {
 			String report_header = report_header();
-			System.out.println(report_header);
 			FileUtils.writeStringToFile(report_file, report_header, true);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "style.css"), Path.TO_TARGET_FOLDER);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "html5shiv.js"), Path.TO_TARGET_FOLDER);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "jquery-1.8.0.min.js"), Path.TO_TARGET_FOLDER);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "gherkinsaladreport.js"), Path.TO_TARGET_FOLDER);
+			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "style.css"), report_folder);
+			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "html5shiv.js"), report_folder);
+			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "jquery-1.8.0.min.js"), report_folder);
+			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "gherkinsaladreport.js"), report_folder);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -159,5 +173,18 @@ public class Report {
 	
 	private static String current_date_time() {
 		return df.format(new Date());
+	}
+	
+	private static void report_folder() {
+		if(report_folder == null) {
+			File folder = new File(Config.execution_results_storage_location);
+			if(! folder.exists()) {
+				folder.mkdirs();
+			}
+			String report_folder_name = Config.execution_results_storage_location + "/" + current_date_time() + "/";
+			report_folder = new File(report_folder_name);
+			report_folder.mkdirs();
+			log.info("REPORTING FOLDER is " + folder.getAbsolutePath());
+		}
 	}
 }

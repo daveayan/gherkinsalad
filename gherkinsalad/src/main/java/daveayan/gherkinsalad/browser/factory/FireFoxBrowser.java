@@ -25,6 +25,7 @@ import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -45,7 +46,21 @@ import daveayan.gherkinsalad.report.Report;
  */
 public class FireFoxBrowser {
 	private static Log log = LogFactory.getLog(FireFoxBrowser.class);
+	
 	public static WebDriver getDriver() {
+		FirefoxProfile firefoxProfile = new FirefoxProfile(); 
+
+    firefoxProfile.setPreference("network.proxy.type", 1); 
+    firefoxProfile.setPreference("network.proxy.http", "corp-hts-proxy.mhc"); 
+    firefoxProfile.setPreference("network.proxy.http_port", 8080); 
+    firefoxProfile.setPreference("network.proxy.ssl", "corp-hts-proxy.mhc"); 
+    firefoxProfile.setPreference("network.proxy.ssl_port", 8080); 
+    firefoxProfile.setPreference("network.proxy.no_proxies_on", ""); 
+
+    return new FirefoxDriver(firefoxProfile); 
+	}
+	
+	public static WebDriver getDriver1() {
 		try {
 			Report.action("Opening Firefox");
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();

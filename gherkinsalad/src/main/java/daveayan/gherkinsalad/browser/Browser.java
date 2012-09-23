@@ -20,16 +20,12 @@ package daveayan.gherkinsalad.browser;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
-import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.FireFoxBrowser;
 import daveayan.gherkinsalad.browser.factory.HtmlUnitBrowser;
@@ -80,13 +76,8 @@ public class Browser {
 	 * as int.
 	 */
 	public void takeScreenshotAsFile(String file_name) {
-		try {
 			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenshot_file, new File(Path.TO_SCREENSHOTS + file_name));
-			Report.screenshot_taken(file_name);
-		} catch (Throwable th) {
-			Report.error("Unable to take screenshot : " + Path.TO_SCREENSHOTS + file_name);
-		}
+			Report.screenshot_taken(screenshot_file, file_name);
 	}
 
 	/**
