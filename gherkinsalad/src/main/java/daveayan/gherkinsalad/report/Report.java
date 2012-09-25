@@ -185,7 +185,7 @@ public class Report {
 			if(! folder.exists()) {
 				folder.mkdirs();
 			}
-			String report_folder_name = Config.execution_results_storage_location + "/" + current_date_time() + "/";
+			String report_folder_name = Config.execution_results_storage_location + "/" + System.currentTimeMillis() + "/";
 			report_folder = new File(report_folder_name);
 			report_folder.mkdirs();
 			log.info("REPORTING FOLDER is " + folder.getAbsolutePath());
