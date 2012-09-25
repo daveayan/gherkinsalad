@@ -47,7 +47,7 @@ import daveayan.gherkinsalad.report.Report;
 public class FireFoxBrowser {
 	private static Log log = LogFactory.getLog(FireFoxBrowser.class);
 	
-	public static WebDriver getDriver() {
+	public static WebDriver getDriver1() {
 		FirefoxProfile firefoxProfile = new FirefoxProfile(); 
 
     firefoxProfile.setPreference("network.proxy.type", 1); 
@@ -60,7 +60,7 @@ public class FireFoxBrowser {
     return new FirefoxDriver(firefoxProfile); 
 	}
 	
-	public static WebDriver getDriver1() {
+	public static WebDriver getDriver() {
 		try {
 			Report.action("Opening Firefox");
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();

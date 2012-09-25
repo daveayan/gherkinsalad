@@ -94,8 +94,12 @@ public class Report {
 		report(formatted_html("action", action));
 	}
 	
-	public static void error(String action) {
-		report(formatted_html("action error", action));
+	public static void error(String error) {
+		report(formatted_html("action error", error));
+	}
+	
+	public static void info(String info) {
+		report(formatted_html("info", info));
 	}
 	
 	public static void screenshot_taken(File screenshot_file, String file_name) {

@@ -88,7 +88,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(element_locator);
 		}
-		return Element.newInstance(_webElement);
+		return Element.newInstance(_webElement, element_locator);
 	}
 
 	/**

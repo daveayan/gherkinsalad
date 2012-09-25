@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import daveayan.gherkinsalad.Strings;
@@ -32,8 +33,8 @@ public class Elements_should_have_all_of_these_texts_Test {
 		when(element2.getText()).thenReturn("String2");
 		when(element3.getText()).thenReturn("String3");
 		
-		elements.add(Element.newInstance(element1));
-		elements.add(Element.newInstance(element2));
-		elements.add(Element.newInstance(element3));
+		elements.add(Element.newInstance(element1, By.name("name")));
+		elements.add(Element.newInstance(element2, By.name("name")));
+		elements.add(Element.newInstance(element3, By.name("name")));
 	}
 }

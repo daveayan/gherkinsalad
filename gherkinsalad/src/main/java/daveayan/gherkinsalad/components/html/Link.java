@@ -5,7 +5,6 @@ import org.openqa.selenium.NullElement;
 
 import daveayan.gherkinsalad.components.Clickable;
 import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.report.Report;
 
 public class Link extends BaseBrowserElement implements Clickable {
 	public static Link find(By locator) {
@@ -24,7 +23,6 @@ public class Link extends BaseBrowserElement implements Clickable {
 		Element element = root_element();
 		if(this.isEnabled()) {
 			element.click();
-			action("Clicked " + this);
 		} else {
 			action("Did not click disabled " + this);
 			takeScreenshot();
@@ -46,7 +44,6 @@ public class Link extends BaseBrowserElement implements Clickable {
 		if(! (element instanceof NullElement)) {
 			if(this.isEnabled()) {
 				element.click();
-				action("Clicked " + this);
 			} else {
 				action("Did not click disabled " + this);
 				takeScreenshot();

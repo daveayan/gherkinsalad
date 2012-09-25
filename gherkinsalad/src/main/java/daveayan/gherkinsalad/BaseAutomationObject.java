@@ -70,6 +70,10 @@ public abstract class BaseAutomationObject implements Nullable {
 		Report.ask(ask);
 	}
 	
+	protected void info(String info) {
+		Report.info(info);
+	}
+	
 	protected void warn(String warn) {
 		Report.warn(warn);
 		browser.takeScreenshot();
@@ -233,5 +237,19 @@ public abstract class BaseAutomationObject implements Nullable {
 	 */
 	public boolean is_not_null() {
 		return !is_null();
+	}
+	
+	public boolean is_not_null(Object object) {
+		return ! is_null(object);
+	}
+	
+	public boolean is_null(Object object) {
+		if(object == null) {
+			return true;
+		}
+		if(object instanceof Nullable) {
+			return ((Nullable) object).is_null();
+		}
+		return false;
 	}
 }

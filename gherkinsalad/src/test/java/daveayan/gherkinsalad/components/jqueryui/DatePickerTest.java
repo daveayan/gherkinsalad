@@ -16,7 +16,7 @@ import daveayan.gherkinsalad.components.html.TextField;
 public class DatePickerTest extends BaseTest {
 	@Test
 	public void firefox_jquery_ui_default_date_picker_test() {
-		super.launch_browser("Firefox");
+		super.launch_browser("chrome");
 		super.goto_url("http://jqueryui.com/demos/datepicker/");
 		
 		DatePicker datepicker = new DefaultDatePicker();

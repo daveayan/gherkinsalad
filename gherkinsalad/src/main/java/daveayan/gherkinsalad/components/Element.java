@@ -21,15 +21,17 @@ import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.lang.Nullable;
 
 public class Element extends BaseBrowserElement implements Nullable {
+	private String _name;
 	private WebElement _webElement;
 	
 	public WebElement _nativeWebElement() {
 		return _webElement;
 	}
 	
-	public static Element newInstance(WebElement we) {
+	public static Element newInstance(WebElement we, By locator) {
 		Element e = new Element();
 		e._webElement = we;
+		e._name = locator.toString();
 		return e;
 	}
 	
@@ -52,26 +54,50 @@ public class Element extends BaseBrowserElement implements Nullable {
 	}
 	
 	public boolean has(String text) {
-		if(_webElement != null) {
-			return _webElement.getText().contains(text);
+		if(is_not_null(_webElement)) {
+			boolean value = _webElement.getText().contains(text);
+			if(value == true) {
+				info("Element '" + this._name + "' - has text '" + text + "'");
+			} else {
+				info("Element '" + this._name + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
+			}
+			return value;
 		}
+		info("Element '" + this._name + "' - has a null _webelement, cannot do has(" + text + ")");
 		return false;
 	}
 	
 	public boolean is(String text) {
-		if(_webElement != null) {
-			return StringUtils.equals(text, _webElement.getText());
+		if(is_not_null(_webElement)) {
+			boolean value = StringUtils.equals(text, _webElement.getText());
+			if(value == true) {
+				info("Element '" + this._name + "' - is text '" + text + "'");
+			} else {
+				info("Element '" + this._name + "' - is not text '" + text + "'");
+			}
+			return value;
 		}
+		info("Element '" + this._name + "' - has a null _webelement, cannot do is(" + text + ")");
 		return false;
 	}
 	
 	// Methods from WebElement interface
 	public void clear() {
-		_webElement.clear();
+		if(is_not_null(_webElement)) {
+			_webElement.clear();
+			action("Cleared text in element " + _name);
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do clear()");
+		}
 	}
 
 	public void click() {
-		_webElement.click();
+		if(is_not_null(_webElement)) {
+			_webElement.click();
+			action("Clicked on element " + _name);
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do click()");
+		}
 	}
 
 	public Element findElement(final By by) {
@@ -91,7 +117,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(by);
 		}
-		return Element.newInstance(_webElement);
+		return Element.newInstance(_webElement, by);
 	}
 	
 	public Elements findElements(final By by) {
@@ -111,45 +137,110 @@ public class Element extends BaseBrowserElement implements Nullable {
 		Elements elements = new Elements();
 		if(_webElements != null) {
 			for(WebElement _we: _webElements) {
-				elements.add(Element.newInstance(_we));
+				elements.add(Element.newInstance(_we, by));
 			}
 		}
 		return elements;
 	}
 
 	public String getAttribute(String arg0) {
-		return _webElement.getAttribute(arg0);
+		if(is_not_null(arg0)) {
+			String value = _webElement.getAttribute(arg0);
+			info("Element '" + this._name + "' - Attribute '" + arg0 + "' has value '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getAttribute(" + arg0 + ")");
+		}
+		return StringUtils.EMPTY;
 	}
 
 	public String getCssValue(String arg0) {
-		return _webElement.getCssValue(arg0);
+		if(is_not_null(arg0)) {
+			String value = _webElement.getCssValue(arg0);
+			info("Element '" + this._name + "' - CSS '" + arg0 + "' has value '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getCssValue(" + arg0 + ")");
+		}
+		return StringUtils.EMPTY;
 	}
 
 	public Point getLocation() {
-		return _webElement.getLocation();
+		if(is_not_null(_webElement)) {
+			Point value = _webElement.getLocation();
+			info("Element '" + this._name + "' - Location is '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getLocation()");
+		}
+		return new Point(0, 0);
 	}
 
 	public Dimension getSize() {
-		return _webElement.getSize();
+		if(is_not_null(_webElement)) {
+			Dimension value = _webElement.getSize();
+			info("Element '" + this._name + "' - Dimention is '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getSize()");
+		}
+		return new Dimension(0, 0);
 	}
 
 	public String getTagName() {
-		return _webElement.getTagName();
+		if(is_not_null(_webElement)) {
+			String value = _webElement.getTagName();
+			info("Element '" + this._name + "' - Tag Name is '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getTagName()");
+		}
+		return StringUtils.EMPTY;
 	}
 
 	public boolean isSelected() {
-		return _webElement.isSelected();
+		if(is_not_null(_webElement)) {
+			boolean value = _webElement.isSelected();
+			info("Element '" + this._name + "' - isSelected '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do isSelected()");
+		}
+		return Boolean.FALSE;
 	}
 
 	public void sendKeys(CharSequence... arg0) {
-		_webElement.sendKeys(arg0);
+		if(is_not_null(_webElement)) {
+			_webElement.sendKeys(arg0);
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do sendKeys(" + arg0 + ")");
+		}
 	}
 
 	public void submit() {
-		_webElement.submit();
+		if(is_not_null(_webElement)) {
+			_webElement.submit();
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do submit()");
+		}
 	}
 
 	public String getText() {
-		return _webElement.getText();
+		if(is_not_null(_webElement)) {
+			String value = _webElement.getText();
+			info("Element '" + this._name + "' - Text is '" + value + "'");
+			return value;
+		} else {
+			info("Element '" + this._name + "' - has a null _webelement, cannot do getText()");
+		}
+		return StringUtils.EMPTY;
+	}
+	
+	public void name(String name) {
+		this._name = name;
+	}
+	
+	public String name() {
+		return _name;
 	}
 }

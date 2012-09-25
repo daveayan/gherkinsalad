@@ -53,6 +53,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	}
 	
 	private void select_date(Calendar date_to_select, Calendar current_date) {
+		takeScreenshot();
 		int day = date_to_select.get(Calendar.DAY_OF_MONTH);
 		int year = date_to_select.get(Calendar.YEAR);
 		String month_name = date_to_select.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
@@ -76,6 +77,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 		}
 		log.info("Found month and year, finding day");
 		Link.find(By.linkText(day+"")).click_if_enabled();
+		takeScreenshot();
 	}
 	
 	private String get_month_in_picker() {
