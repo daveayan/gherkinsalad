@@ -6,7 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.openqa.selenium.NullElement;
+
+import scala.actors.threadpool.Arrays;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -240,5 +243,9 @@ public class Elements {
 
 	public <T> T[] toArray(T[] element1) {
 		return _elements.toArray(element1);
+	}
+
+	public void addAll(Element... elements) {
+		_nativeList().addAll(Arrays.asList(elements));
 	}
 }

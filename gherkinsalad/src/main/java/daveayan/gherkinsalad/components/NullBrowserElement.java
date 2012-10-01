@@ -30,6 +30,10 @@ import daveayan.gherkinsalad.browser.Browser;
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
 public class NullBrowserElement implements Clickable, Selectable, TextEnterable, BrowserElement {
+	public BrowserElement name(String name) {
+		throw new AssertionError("operation public BrowserElement name(String name) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	
 	public String getText() {
 		throw new AssertionError("operation public String getText() not allowed on a NullBrowserElement '" + this + "'");
 	}

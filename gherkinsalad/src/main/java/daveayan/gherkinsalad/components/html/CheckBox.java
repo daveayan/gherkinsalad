@@ -9,6 +9,12 @@ import daveayan.gherkinsalad.components.Element;
 
 public class CheckBox extends BaseBrowserElement implements Clickable {
 	private static Log log = LogFactory.getLog(CheckBox.class);
+	
+	public CheckBox name(String name) {
+		super.name(name);
+		return this;
+	}
+	
 	public boolean isEnabled() {
 		Element element = root_element();
 		return element.isEnabled();

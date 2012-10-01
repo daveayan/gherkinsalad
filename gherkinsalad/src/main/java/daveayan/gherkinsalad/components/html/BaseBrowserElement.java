@@ -18,10 +18,14 @@
  **/
 package daveayan.gherkinsalad.components.html;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NullElement;
@@ -50,6 +54,7 @@ import daveayan.gherkinsalad.test.Assert;
  * </ul>
  */
 public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
+	private String _name = StringUtils.EMPTY;
 	private By element_locator;
 
 //	protected boolean is_not_null(Object o) {
@@ -68,6 +73,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 
 	public Element root_element() {
 		Element element = findElement(element_locator);
+		validate_position_and_css(element);
 		return element;
 	}
 
@@ -88,7 +94,7 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(element_locator);
 		}
-		return Element.newInstance(_webElement, element_locator);
+		return Element.newInstance(_webElement, _name);
 	}
 
 	/**
@@ -197,6 +203,11 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
 	}
 
+	public BrowserElement name(String name) {
+		this._name = name;
+		return this;
+	}
+	
 	/**
 	 * Sets the element locator for this browser element. Element Locator can be specified using the <a
 	 * href="http://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/By.html">By</a> object
@@ -241,4 +252,63 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	public String toString() {
 		return this.getClass().getName() + ", " + element_locator;
 	}
+
+	public String name() {
+		if(StringUtils.isBlank(_name)) {
+			if(element_locator != null) {
+				return element_locator.toString();
+			} else {
+				return "No Name";
+			}
+		} else {
+			return _name;
+		}
+	}
+	
+	private boolean thisIsNamedElement() {
+		return StringUtils.isNotBlank(_name);
+	}
+	
+	private void validate_position_and_css(Element element) {
+		if(element.is_not_null()) {
+			if(thisIsNamedElement()) {
+				String expected = find_position_and_css(this._name);
+				String actual = element.static_info();
+				if(StringUtils.isNotBlank(expected)) {
+					boolean match = StringUtils.equals(expected, actual);
+					if(match) {
+						action("Verified that position, size and css of '" + this._name + "' is ok");
+					} else {
+						error("Position, size and css of '" + this._name + "' is not verified. Expected '" + expected +"', actual '" + actual + "'");
+					}
+				} else {
+					save_position_and_css(this._name, actual);
+				}
+			}
+		}
+	}
+	
+	private void save_position_and_css(String name, String info) {
+		File file = new File(Config.execution_results_storage_location + "/" + sanitizeFilename(name) + ".info");
+		try {
+			FileUtils.writeStringToFile(file, info, false);
+		} catch (IOException e) {
+		}
+	}
+	
+	private String find_position_and_css(String name) {
+		File file = new File(Config.execution_results_storage_location + "/" + sanitizeFilename(name) + ".info");
+		if(file.exists()) {
+			try {
+				String contents = FileUtils.readFileToString(file);
+				return contents;
+			} catch (IOException e) {
+			}
+		}
+		return StringUtils.EMPTY;
+	}
+	
+	private String sanitizeFilename(String name) {
+    return name.replaceAll("[:\\\\/*?|<>]", "_");
+  }
 }

@@ -13,6 +13,11 @@ public class Link extends BaseBrowserElement implements Clickable {
 		return l;
 	}
 	
+	public Link name(String name) {
+		super.name(name);
+		return this;
+	}
+	
 	public boolean isEnabled() {
 		Element element = root_element();
 		return element.isEnabled();

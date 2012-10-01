@@ -16,11 +16,12 @@ import daveayan.gherkinsalad.components.html.TextField;
 public class DatePickerTest extends BaseTest {
 	@Test
 	public void firefox_jquery_ui_default_date_picker_test() {
+		long starttime = System.currentTimeMillis();
 		super.launch_browser("chrome");
 		super.goto_url("http://jqueryui.com/demos/datepicker/");
 		
 		DatePicker datepicker = new DefaultDatePicker();
-		TextEnterable date_textbox = TextField.find(By.id("datepicker"));
+		TextEnterable date_textbox = TextField.find(By.id("datepicker")).name("Date Picker - Text Box");
 		
 		// #########
 		
@@ -80,5 +81,9 @@ public class DatePickerTest extends BaseTest {
 		date_textbox.click_if_enabled();
 		datepicker.select_date(two_years_before_today.getTime(), new Date());
 		date_textbox.should_have_text(df.format(two_years_before_today.getTime()));
+		
+		long endtime = System.currentTimeMillis();
+		
+		System.out.println("Time Taken " + (endtime - starttime));
 	}
 }

@@ -18,8 +18,8 @@ import daveayan.gherkinsalad.components.html.Link;
 public class DefaultDatePicker extends BaseBrowserElement implements DatePicker {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
 	
-	public Clickable next_month = Link.find(By.className("ui-datepicker-next"));
-	public Clickable prev_month = Link.find(By.className("ui-datepicker-prev"));
+	public Clickable next_month = Link.find(By.className("ui-datepicker-next")).name("Date Picker - Next Month");
+	public Clickable prev_month = Link.find(By.className("ui-datepicker-prev")).name("Date Picker - Previous Month");
 	
 	public void select_date_except_weekends(Date date_to_select, Date current_date) {
 		Calendar cal1 = Calendar.getInstance();
@@ -76,13 +76,13 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 			}
 		}
 		log.info("Found month and year, finding day");
-		Link.find(By.linkText(day+"")).click_if_enabled();
+		Link.find(By.linkText(day+"")).name("Date Picker - Day " + day).click_if_enabled();
 		takeScreenshot();
 	}
 	
 	private String get_month_in_picker() {
 		while(true) {
-			Element cal_month = root_element().findElement(By.className("ui-datepicker-month"));
+			Element cal_month = root_element().findElement(By.className("ui-datepicker-month")).name("Date Picker - Month");
 			String cal_month_text = cal_month.getText();
 			if(StringUtils.isNotEmpty(cal_month_text)) {
 				return cal_month_text;
@@ -92,7 +92,7 @@ public class DefaultDatePicker extends BaseBrowserElement implements DatePicker 
 	
 	private String get_year_in_picker() {
 		while(true) {
-			Element cal_year = root_element().findElement(By.className("ui-datepicker-year"));
+			Element cal_year = root_element().findElement(By.className("ui-datepicker-year")).name("Date Picker - Year");
 			String cal_year_text = cal_year.getText();
 			if(StringUtils.isNotEmpty(cal_year_text)) {
 				return cal_year_text;

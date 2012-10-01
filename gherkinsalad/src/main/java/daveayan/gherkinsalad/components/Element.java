@@ -21,18 +21,33 @@ import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.lang.Nullable;
 
 public class Element extends BaseBrowserElement implements Nullable {
-	private String _name;
 	private WebElement _webElement;
 	
 	public WebElement _nativeWebElement() {
 		return _webElement;
 	}
 	
-	public static Element newInstance(WebElement we, By locator) {
+	public static Element newInstance(WebElement we, String name) {
 		Element e = new Element();
 		e._webElement = we;
-		e._name = locator.toString();
+		e.name(name);
 		return e;
+	}
+	
+	public Element name(String name) {
+		super.name(name);
+		return this;
+	}
+	
+	public String static_info() {
+		String info = "";
+		Point point = getLocation();
+		info += "X = " + point.getX();
+		info += ", Y = " + point.getY();
+		Dimension dimension = getSize();
+		info += ", Height = " + dimension.getHeight();
+		info += ", Width = " + dimension.getWidth();
+		return info;
 	}
 	
 	public boolean hasAllTexts(String... expectedTexts) {
@@ -57,13 +72,13 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			boolean value = _webElement.getText().contains(text);
 			if(value == true) {
-				info("Element '" + this._name + "' - has text '" + text + "'");
+				info("Element '" + this.name() + "' - has text '" + text + "'");
 			} else {
-				info("Element '" + this._name + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
+				info("Element '" + this.name() + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
 			}
 			return value;
 		}
-		info("Element '" + this._name + "' - has a null _webelement, cannot do has(" + text + ")");
+		info("Element '" + this.name() + "' - has a null _webelement, cannot do has(" + text + ")");
 		return false;
 	}
 	
@@ -71,13 +86,13 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			boolean value = StringUtils.equals(text, _webElement.getText());
 			if(value == true) {
-				info("Element '" + this._name + "' - is text '" + text + "'");
+				info("Element '" + this.name() + "' - is text '" + text + "'");
 			} else {
-				info("Element '" + this._name + "' - is not text '" + text + "'");
+				info("Element '" + this.name() + "' - is not text '" + text + "'");
 			}
 			return value;
 		}
-		info("Element '" + this._name + "' - has a null _webelement, cannot do is(" + text + ")");
+		info("Element '" + this.name() + "' - has a null _webelement, cannot do is(" + text + ")");
 		return false;
 	}
 	
@@ -85,18 +100,18 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public void clear() {
 		if(is_not_null(_webElement)) {
 			_webElement.clear();
-			action("Cleared text in element " + _name);
+			action("Cleared text in element " + name());
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do clear()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do clear()");
 		}
 	}
 
 	public void click() {
 		if(is_not_null(_webElement)) {
 			_webElement.click();
-			action("Clicked on element " + _name);
+			action("Clicked on element " + name());
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do click()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do click()");
 		}
 	}
 
@@ -117,7 +132,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(by);
 		}
-		return Element.newInstance(_webElement, by);
+		return Element.newInstance(_webElement, by.toString());
 	}
 	
 	public Elements findElements(final By by) {
@@ -137,7 +152,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		Elements elements = new Elements();
 		if(_webElements != null) {
 			for(WebElement _we: _webElements) {
-				elements.add(Element.newInstance(_we, by));
+				elements.add(Element.newInstance(_we, by.toString()));
 			}
 		}
 		return elements;
@@ -146,10 +161,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getAttribute(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getAttribute(arg0);
-			info("Element '" + this._name + "' - Attribute '" + arg0 + "' has value '" + value + "'");
+			info("Element '" + this.name() + "' - Attribute '" + arg0 + "' has value '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getAttribute(" + arg0 + ")");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getAttribute(" + arg0 + ")");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -157,10 +172,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getCssValue(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getCssValue(arg0);
-			info("Element '" + this._name + "' - CSS '" + arg0 + "' has value '" + value + "'");
+			info("Element '" + this.name() + "' - CSS '" + arg0 + "' has value '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getCssValue(" + arg0 + ")");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getCssValue(" + arg0 + ")");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -168,10 +183,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public Point getLocation() {
 		if(is_not_null(_webElement)) {
 			Point value = _webElement.getLocation();
-			info("Element '" + this._name + "' - Location is '" + value + "'");
+			info("Element '" + this.name() + "' - Location is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getLocation()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getLocation()");
 		}
 		return new Point(0, 0);
 	}
@@ -179,10 +194,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public Dimension getSize() {
 		if(is_not_null(_webElement)) {
 			Dimension value = _webElement.getSize();
-			info("Element '" + this._name + "' - Dimention is '" + value + "'");
+			info("Element '" + this.name() + "' - Dimention is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getSize()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getSize()");
 		}
 		return new Dimension(0, 0);
 	}
@@ -190,10 +205,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getTagName() {
 		if(is_not_null(_webElement)) {
 			String value = _webElement.getTagName();
-			info("Element '" + this._name + "' - Tag Name is '" + value + "'");
+			info("Element '" + this.name() + "' - Tag Name is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getTagName()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getTagName()");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -201,10 +216,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public boolean isSelected() {
 		if(is_not_null(_webElement)) {
 			boolean value = _webElement.isSelected();
-			info("Element '" + this._name + "' - isSelected '" + value + "'");
+			info("Element '" + this.name() + "' - isSelected '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do isSelected()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do isSelected()");
 		}
 		return Boolean.FALSE;
 	}
@@ -213,7 +228,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			_webElement.sendKeys(arg0);
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do sendKeys(" + arg0 + ")");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do sendKeys(" + arg0 + ")");
 		}
 	}
 
@@ -221,26 +236,18 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			_webElement.submit();
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do submit()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do submit()");
 		}
 	}
 
 	public String getText() {
 		if(is_not_null(_webElement)) {
 			String value = _webElement.getText();
-			info("Element '" + this._name + "' - Text is '" + value + "'");
+			info("Element '" + this.name() + "' - Text is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this._name + "' - has a null _webelement, cannot do getText()");
+			info("Element '" + this.name() + "' - has a null _webelement, cannot do getText()");
 		}
 		return StringUtils.EMPTY;
-	}
-	
-	public void name(String name) {
-		this._name = name;
-	}
-	
-	public String name() {
-		return _name;
 	}
 }

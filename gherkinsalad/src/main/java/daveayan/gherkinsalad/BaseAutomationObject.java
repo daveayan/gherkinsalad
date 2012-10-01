@@ -25,6 +25,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import com.google.common.annotations.Beta;
 
 import daveayan.gherkinsalad.browser.Browser;
+import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.report.Report;
 import daveayan.lang.Nullable;
 
@@ -89,6 +90,13 @@ public abstract class BaseAutomationObject implements Nullable {
 	
 	protected void error(String error) {
 		Report.error(error);
+	}
+	
+	protected void verify_profile(String name, Element... elements) {
+		System.out.println("PROFILE: " + name);
+		for(Element element: elements) {
+			System.out.println(element.static_info());
+		}
 	}
 	
 	public void switch_to_default_window() {

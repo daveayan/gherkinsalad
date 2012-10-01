@@ -17,6 +17,11 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		return d;
 	}
 	
+	public DropDown name(String name) {
+		super.name(name);
+		return this;
+	}
+	
 	public boolean isEnabled() {
 		Element element = root_element();
 		return element.isEnabled();

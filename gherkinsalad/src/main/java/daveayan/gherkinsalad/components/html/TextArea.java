@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.TextEnterable;
-import daveayan.gherkinsalad.report.Report;
 
 public class TextArea extends BaseBrowserElement implements TextEnterable {
 	
@@ -12,6 +11,11 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 		TextArea ta = new TextArea();
 		ta.found(locator);
 		return ta;
+	}
+	
+	public TextArea name(String name) {
+		super.name(name);
+		return this;
 	}
 
 	public void click_if_enabled() {

@@ -29,6 +29,7 @@ import daveayan.lang.Nullable;
  * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend BaseBrowserElement.
  */
 public interface BrowserElement extends CanBeEnabled, CanBeDisabled, Nullable {
+	public BrowserElement name(String name);
 	public BrowserElement found(By element_locator);
 	
 	public String getText();

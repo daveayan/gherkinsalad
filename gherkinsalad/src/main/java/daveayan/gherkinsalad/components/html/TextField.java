@@ -13,6 +13,11 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 		return tb;
 	}
 	
+	public TextField name(String name) {
+		super.name(name);
+		return this;
+	}
+	
 	public String getText() {
 		if(isNotDisplayed()) {
 			error("Element '" + this + "' is not displayed. Cannot getText on this element");

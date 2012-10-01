@@ -4,6 +4,11 @@ import daveayan.gherkinsalad.components.Clickable;
 import daveayan.gherkinsalad.components.Element;
 
 public class RadioButton extends BaseBrowserElement implements Clickable {
+	public RadioButton name(String name) {
+		super.name(name);
+		return this;
+	}
+	
 	public boolean isEnabled() {
 		Element element = root_element();
 		return element.isEnabled();
