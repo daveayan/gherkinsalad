@@ -27,10 +27,11 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return _webElement;
 	}
 	
-	public static Element newInstance(WebElement we, String name) {
+	public static Element newInstance(WebElement we, String name, By element_locator) {
 		Element e = new Element();
 		e._webElement = we;
 		e.name(name);
+		e.found(element_locator);
 		return e;
 	}
 	
@@ -132,7 +133,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(by);
 		}
-		return Element.newInstance(_webElement, by.toString());
+		return Element.newInstance(_webElement, by.toString(), by);
 	}
 	
 	public Elements findElements(final By by) {
@@ -152,7 +153,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		Elements elements = new Elements();
 		if(_webElements != null) {
 			for(WebElement _we: _webElements) {
-				elements.add(Element.newInstance(_we, by.toString()));
+				elements.add(Element.newInstance(_we, by.toString(), by));
 			}
 		}
 		return elements;

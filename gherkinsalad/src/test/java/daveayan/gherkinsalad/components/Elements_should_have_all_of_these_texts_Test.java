@@ -33,8 +33,8 @@ public class Elements_should_have_all_of_these_texts_Test {
 		when(element2.getText()).thenReturn("String2");
 		when(element3.getText()).thenReturn("String3");
 		
-		elements.add(Element.newInstance(element1, "Element 1"));
-		elements.add(Element.newInstance(element2, "Element 2"));
-		elements.add(Element.newInstance(element3, "Element 3"));
+		elements.add(Element.newInstance(element1, "Element 1", By.id("some")));
+		elements.add(Element.newInstance(element2, "Element 2", By.id("some")));
+		elements.add(Element.newInstance(element3, "Element 3", By.id("some")));
 	}
 }
