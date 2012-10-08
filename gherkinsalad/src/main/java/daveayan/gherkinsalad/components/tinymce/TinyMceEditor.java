@@ -15,7 +15,8 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 	
 	public String getText() {
 		wait_between_steps_plus(2);
-		browser.driver().switchTo().frame(0);
+//		browser.driver().switchTo().frame(0);
+		browser.driver().switchTo().frame("content_ifr");
 		WebElement editable = browser.driver().switchTo().activeElement();
 		String content = editable.getText();
 		browser.driver().switchTo().defaultContent();
@@ -24,7 +25,8 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 	
 	public void click_if_enabled() {
 		wait_between_steps_plus(2);
-		browser.driver().switchTo().frame(0);
+//		browser.driver().switchTo().frame(0);
+		browser.driver().switchTo().frame("content_ifr");
 		WebElement editable = browser.driver().switchTo().activeElement();
 		editable.click();
 		browser.driver().switchTo().defaultContent();
@@ -36,7 +38,8 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 
 	public void enter_text_if_enabled(String text) {
 		wait_between_steps_plus(2);
-		browser.driver().switchTo().frame(0);
+//		browser.driver().switchTo().frame(0);
+		browser.driver().switchTo().frame("content_ifr");
 		WebElement editable = browser.driver().switchTo().activeElement();
 		editable.clear();
 		editable.sendKeys(text);
@@ -45,7 +48,8 @@ public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {
 
 	public void append_text_if_enabled(String text) {
 		wait_between_steps_plus(2);
-		browser.driver().switchTo().frame(0);
+//		browser.driver().switchTo().frame(0);
+		browser.driver().switchTo().frame("content_ifr");
 		WebElement editable = browser.driver().switchTo().activeElement();
 		editable.sendKeys(text);
 		browser.driver().switchTo().defaultContent();

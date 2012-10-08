@@ -12,11 +12,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import daveayan.gherkinsalad.BaseAutomationObject;
+import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.report.Report;
 
 public class XlsDataFile extends XlsFile {
-	private static Log log = LogFactory.getLog(BaseAutomationObject.class);
+	private static Log log = LogFactory.getLog(XlsDataFile.class);
 	private Map<String, String> data = new HashMap<String, String>();
 	
 	public static XlsDataFile openXlsFile(String file_absolute_path) {

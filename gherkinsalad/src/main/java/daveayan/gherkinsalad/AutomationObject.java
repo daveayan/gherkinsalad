@@ -18,6 +18,8 @@
 **/
 package daveayan.gherkinsalad;
 
+import java.util.Random;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
@@ -40,8 +42,9 @@ import daveayan.lang.Nullable;
  * <li>Wait between execution of steps or page object operations</li>
  * </ul>
  */
-public abstract class BaseAutomationObject implements Nullable {
+public abstract class AutomationObject implements Nullable {
 	protected static Browser browser;
+	protected Random random = new Random();
 	
 	protected void feature(String feature_name) {
 		Report.feature("Feature: "+ feature_name);

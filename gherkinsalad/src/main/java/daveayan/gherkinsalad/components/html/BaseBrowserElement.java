@@ -38,7 +38,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.google.common.base.Function;
 
-import daveayan.gherkinsalad.BaseAutomationObject;
+import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
 import daveayan.gherkinsalad.components.Element;
@@ -53,7 +53,7 @@ import daveayan.gherkinsalad.test.Assert;
  * <li>Methods to find more browser elements within this one</li>
  * </ul>
  */
-public abstract class BaseBrowserElement extends BaseAutomationObject implements BrowserElement {
+public abstract class BaseBrowserElement extends AutomationObject implements BrowserElement {
 	private String _name = StringUtils.EMPTY;
 	private By element_locator;
 
@@ -139,17 +139,11 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	 */
 	public void should_have_text(String... expected_texts) {
 		if (expected_texts != null) {
-			List<String> expected_text_not_present = new ArrayList<String>();
 			String element_text = getText();
 			for (String expected_text : expected_texts) {
 				if (!element_text.contains(expected_text.trim())) {
-					expected_text_not_present.add(expected_text.trim());
+					error("Component '" + this + "' does not have expected text(s) '" + expected_text + "'It has '" + element_text + "'");
 				}
-			}
-			if (!expected_text_not_present.isEmpty()) {
-				takeScreenshot();
-				throw new AssertionError("Component '" + this + "' does not have expected text(s) '"
-						+ expected_text_not_present + "'\n. It has text '" + element_text + "'");
 			}
 		}
 	}
@@ -161,16 +155,11 @@ public abstract class BaseBrowserElement extends BaseAutomationObject implements
 	 */
 	public void should_not_have_text(String... unexpected_texts) {
 		if (unexpected_texts != null) {
-			List<String> unexpected_text_present = new ArrayList<String>();
 			String element_text = getText();
 			for (String expected_text : unexpected_texts) {
 				if (element_text.contains(expected_text.trim())) {
-					unexpected_text_present.add(expected_text.trim());
+					error("Component '" + this + "' has unexpected text(s) '" + element_text + "'It has '" + element_text + "'");
 				}
-			}
-			if (!unexpected_text_present.isEmpty()) {
-				takeScreenshot();
-				throw new AssertionError("Component '" + this + "' has unexpected text(s) '" + unexpected_text_present + "'");
 			}
 		}
 	}

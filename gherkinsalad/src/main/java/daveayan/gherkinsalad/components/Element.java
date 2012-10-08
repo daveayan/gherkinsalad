@@ -11,6 +11,7 @@ import org.openqa.selenium.NullElement;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -158,7 +159,71 @@ public class Element extends BaseBrowserElement implements Nullable {
 		}
 		return elements;
 	}
+	
+	public void move_by(int x, int y) {
+		takeScreenshot();
+		Point current_location = getLocation();
+		action("Current position of element '" + current_location + "', Moving by (x, y) = (" + x + ", " + y + ")");
+		
+		Actions drag = new Actions(browser.driver());
+		try {
+			drag.dragAndDropBy(_nativeWebElement(), x, y).build().perform();
+			Point new_location = getLocation();
+			action("New position of element '" + new_location + "', Moved by (x, y) = (" + x + ", " + y + ")");
+		} catch (org.openqa.selenium.interactions.MoveTargetOutOfBoundsException mtoobe) {
+			error("Cannot move element '" + current_location + "', to (x, y) = (" + x + ", " + y + "), got org.openqa.selenium.interactions.MoveTargetOutOfBoundsException");
+		}
+		
+		takeScreenshot();
+	}
+	
+	public void move_to(int x, int y) {
+		takeScreenshot();
+		Point current_location = getLocation();
+		int offset_x = x - current_location.getX();
+		int offset_y = y - current_location.getY();
+		
+		action("Current position of element '" + current_location + "', Moving to (x, y) = (" + x + ", " + y + ")");
+		Actions drag = new Actions(browser.driver());
+		try {
+			drag.dragAndDropBy(_nativeWebElement(), offset_x, offset_y).build().perform();
+			Point new_location = getLocation();
+			action("New position of element '" + new_location + "', Moved to (x, y) = (" + x + ", " + y + ")");
+		} catch (org.openqa.selenium.interactions.MoveTargetOutOfBoundsException mtoobe) {
+			error("Cannot move element '" + current_location + "', to (x, y) = (" + x + ", " + y + "), got org.openqa.selenium.interactions.MoveTargetOutOfBoundsException");
+		}
+		
+		takeScreenshot();
+	}
+	
+	public void move_to(Element other_element) {
+		takeScreenshot();
+		action("Moving element '" + this + "' to element '" + other_element + "'");
+		Actions drag = new Actions(browser.driver());
+		try {
+			drag.dragAndDrop(_nativeWebElement(), other_element._nativeWebElement());
+			action("Moved element '" + this + "' to element '" + other_element + "'");
+		} catch (org.openqa.selenium.interactions.MoveTargetOutOfBoundsException mtoobe) {
+			error("Cannot move element '" + this + "' to element '" + other_element + "', got org.openqa.selenium.interactions.MoveTargetOutOfBoundsException");
+		}
+		takeScreenshot();
+	}
 
+	public void select_upto(Element other_element) {
+		Actions actions = new Actions(browser.driver());
+		
+		actions.moveToElement(_nativeWebElement()).build().perform();
+		wait_between_steps_plus(1);
+		
+		actions.clickAndHold(_nativeWebElement()).build().perform();
+		wait_between_steps_plus(1);
+		
+		actions.moveToElement(other_element._nativeWebElement()).build().perform();
+		wait_between_steps_plus(1);
+		
+		actions.release().build().perform();
+	}
+	
 	public String getAttribute(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getAttribute(arg0);

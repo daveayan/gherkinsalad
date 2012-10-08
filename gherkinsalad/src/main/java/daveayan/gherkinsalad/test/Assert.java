@@ -1,9 +1,9 @@
 package daveayan.gherkinsalad.test;
 
-import daveayan.gherkinsalad.BaseAutomationObject;
+import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.report.Report;
 
-public class Assert extends BaseAutomationObject{
+public class Assert extends AutomationObject{
 	/**
 	 * Protect constructor since it is a static only class
 	 */

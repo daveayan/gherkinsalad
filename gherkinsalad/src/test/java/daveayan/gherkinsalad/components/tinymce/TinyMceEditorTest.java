@@ -8,18 +8,20 @@ import daveayan.gherkinsalad.components.TextEnterable;
 public class TinyMceEditorTest extends BaseTest {
 	@Test
 	public void firefox_tiny_mce_test() {
-		super.launch_browser("chrome");
+		super.launch_browser("firefox");
 		super.goto_url("http://www.tinymce.com/tryit/full.php");
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
-		tinyMceEditor.enter_text_if_enabled("ABC TEST");
+//		tinyMceEditor.enter_text_if_enabled("enter_text_if_enabled");
+		tinyMceEditor.should_have_text("enter_text_if_enabled");
+		wait_for_seconds(3);
 		
-		// TO IMPLEMENT ASSERTIONS
+//		tinyMceEditor.enter_text_if_enabled("");
+//		tinyMceEditor.append_text_if_enabled("enter_text_if_enabled 111");
+		tinyMceEditor.should_have_text("enter_text_if_enabled 111");
+		wait_for_seconds(3);
 		
-		wait_for_seconds(10);
-		
-		String text = tinyMceEditor.getText();
-		System.out.println(text);
-		wait_for_seconds(4);
+		tinyMceEditor.enter_text_if_enabled("");
+		wait_for_seconds(3);
 	}
 }
