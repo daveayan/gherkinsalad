@@ -127,7 +127,7 @@ public class Report {
 	
 	private static void report(String text) {
 		create_file_if_not_exists();
-		File report_file = new File(report_folder + "/report.html");
+		File report_file = new File(report_folder + "/index.html");
 		try {
 			System.out.println("\n" + text);
 			FileUtils.writeStringToFile(report_file, "\n" + text, true);
@@ -138,7 +138,7 @@ public class Report {
 	
 	private static void create_file_if_not_exists() {
 		report_folder();
-		File report_file = new File(report_folder + "/report.html");
+		File report_file = new File(report_folder + "/index.html");
 		if(report_file.exists()) return;
 		try {
 			String report_header = report_header();
