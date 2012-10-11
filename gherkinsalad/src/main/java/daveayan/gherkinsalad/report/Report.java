@@ -3,6 +3,7 @@ package daveayan.gherkinsalad.report;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -16,6 +17,7 @@ import daveayan.gherkinsalad.Path;
 public class Report {
 	private static Log log = LogFactory.getLog(Report.class);
 	private static DateFormat df = DateFormat.getDateTimeInstance();
+	private static DateFormat df_for_file = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss");
 	private static boolean feature_already_started = Boolean.FALSE;
 	private static boolean scenario_already_started = Boolean.FALSE;
 	private static boolean step_already_started = Boolean.FALSE;
@@ -175,6 +177,10 @@ public class Report {
 		return sb.toString();
 	}
 	
+	private static String current_date_time_file_name() {
+		return df_for_file.format(new Date());
+	}
+	
 	private static String current_date_time() {
 		return df.format(new Date());
 	}
@@ -185,7 +191,7 @@ public class Report {
 			if(! folder.exists()) {
 				folder.mkdirs();
 			}
-			String report_folder_name = Config.execution_results_storage_location + "/" + System.currentTimeMillis() + "/";
+			String report_folder_name = Config.execution_results_storage_location + "/" + current_date_time_file_name() + "/";
 			report_folder = new File(report_folder_name);
 			report_folder.mkdirs();
 			log.info("REPORTING FOLDER is " + folder.getAbsolutePath());
