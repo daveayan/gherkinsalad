@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.openqa.selenium.NullElement;
 
 import scala.actors.threadpool.Arrays;
@@ -40,7 +39,7 @@ public class Elements {
 	}
 	
 	public void each_element_should_have_all_of_these_texts(String... texts) {
-		StringBuffer sb = new StringBuffer();
+//		StringBuffer sb = new StringBuffer();
 	}
 	
 	public void should_have_all_of_these_texts(Strings texts) {
@@ -245,6 +244,7 @@ public class Elements {
 		return _elements.toArray(element1);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void addAll(Element... elements) {
 		_nativeList().addAll(Arrays.asList(elements));
 	}
