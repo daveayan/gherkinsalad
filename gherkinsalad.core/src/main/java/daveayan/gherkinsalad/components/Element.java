@@ -137,6 +137,15 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return Element.newInstance(_webElement, by.toString(), by);
 	}
 	
+//	public Element findElementImmediate(final By by) {
+//		WebElement in = _nativeWebElement();
+//		if (in == null || in instanceof NullElement) {
+//			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
+//		}
+//		WebElement _webElement = in.findElement(by);
+//		return Element.newInstance(_webElement, by.toString(), by);
+//	}
+	
 	public Elements findElements(final By by) {
 		WebElement in = _nativeWebElement();
 		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
@@ -151,14 +160,19 @@ public class Element extends BaseBrowserElement implements Nullable {
 		} catch (TimeoutException toe) {
 			return Elements.nullInstance();
 		}
-		Elements elements = new Elements();
-		if(_webElements != null) {
-			for(WebElement _we: _webElements) {
-				elements.add(Element.newInstance(_we, by.toString(), by));
-			}
-		}
+		Elements elements = convertToElements(_webElements, by);
 		return elements;
 	}
+	
+//	public Elements findElementsImmediate(final By by) {
+//		WebElement in = _nativeWebElement();
+//		if (in == null || in instanceof NullElement) {
+//			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
+//		}
+//		List<WebElement> _webElements = in.findElements(by);
+//		Elements elements = convertToElements(_webElements, by);
+//		return elements;
+//	}
 	
 	public void move_by(int x, int y) {
 		takeScreenshot();
@@ -222,6 +236,16 @@ public class Element extends BaseBrowserElement implements Nullable {
 		wait_between_steps_plus(1);
 		
 		actions.release().build().perform();
+	}
+	
+	private Elements convertToElements(List<WebElement> _webElements, By locator) {
+		Elements elements = new Elements();
+		if(_webElements != null) {
+			for(WebElement _we: _webElements) {
+				elements.add(Element.newInstance(_we, locator.toString(), locator));
+			}
+		}
+		return elements;
 	}
 	
 	public String getAttribute(String arg0) {

@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
+import daveayan.BaseTest;
+
 public class TextSelectionTest extends BaseTest {
 	@Test public void select_text_using_firefox() {
 		super.launch_browser("firefox");

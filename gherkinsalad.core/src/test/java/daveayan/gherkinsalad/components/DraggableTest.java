@@ -1,10 +1,9 @@
-package daveayan.gherkinsalad.components.jqueryui;
+package daveayan.gherkinsalad.components;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import daveayan.gherkinsalad.components.BaseTest;
-import daveayan.gherkinsalad.components.Element;
+import daveayan.BaseTest;
 
 public class DraggableTest extends BaseTest {
 	@Test

@@ -3,6 +3,7 @@ package daveayan.gherkinsalad.components;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import daveayan.BaseTest;
 import daveayan.gherkinsalad.components.html.Link;
 
 public class JavascriptNewWindowTest extends BaseTest {

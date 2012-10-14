@@ -2,7 +2,7 @@ package daveayan.gherkinsalad.components.tinymce;
 
 import org.junit.Test;
 
-import daveayan.gherkinsalad.components.BaseTest;
+import daveayan.BaseTest;
 import daveayan.gherkinsalad.components.TextEnterable;
 
 public class TinyMceEditorTest extends BaseTest {

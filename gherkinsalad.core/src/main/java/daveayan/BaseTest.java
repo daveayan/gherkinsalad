@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components;
+package daveayan;
 
 import java.io.File;
 

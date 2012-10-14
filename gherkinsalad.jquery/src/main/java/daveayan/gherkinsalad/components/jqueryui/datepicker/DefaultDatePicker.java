@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components.jqueryui;
+package daveayan.gherkinsalad.components.jqueryui.datepicker;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 
 import daveayan.gherkinsalad.components.Clickable;
-import daveayan.gherkinsalad.components.DatePicker;
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.gherkinsalad.components.html.Link;
