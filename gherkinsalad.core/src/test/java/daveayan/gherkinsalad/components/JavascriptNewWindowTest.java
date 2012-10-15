@@ -14,10 +14,8 @@ public class JavascriptNewWindowTest extends BaseTest {
 		Clickable link = Link.find(By.id("namedwindow"));
 		link.click_if_enabled();
 		
-		wait_for_seconds(4);
 		System.out.println("Switching");
 		switch_to_default_window();
 		System.out.println("Switched");
-		wait_for_seconds(8);
 	} 
 }

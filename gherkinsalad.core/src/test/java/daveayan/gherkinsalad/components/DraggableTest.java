@@ -9,7 +9,7 @@ public class DraggableTest extends BaseTest {
 	@Test
 	public void test_chrome() {
 		super.launch_browser("chrome");
-		super.goto_url("http://jqueryui.com/demos/draggable/");
+		super.goto_test_page("draggable-test.html");
 		Element the_box = findElement(By.id("draggable"));
 		the_box.move_by(10, 10);
 		the_box.move_to(100, 100);
@@ -20,7 +20,7 @@ public class DraggableTest extends BaseTest {
 	@Test
 	public void test_firefox() {
 		super.launch_browser("firefox");
-		super.goto_url("http://jqueryui.com/demos/draggable/");
+		super.goto_test_page("draggable-test.html");
 		Element the_box = findElement(By.id("draggable"));
 		the_box.move_by(10, 10);
 		the_box.move_to(100, 100);

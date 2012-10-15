@@ -17,7 +17,6 @@ public class TextSelectionTest extends BaseTest {
 		Actions actions = new Actions(browser.driver());
 		
 		actions.moveToElement(first_p._nativeWebElement()).build().perform();
-		wait_for_seconds(3);
 		System.out.println("Moved to element 1");
 		
 		actions.clickAndHold(first_p._nativeWebElement()).build().perform();
@@ -36,6 +35,5 @@ public class TextSelectionTest extends BaseTest {
 		first_p.getText();
 		
 		second_p.getText();
-		wait_for_seconds(5);
 	}
 }

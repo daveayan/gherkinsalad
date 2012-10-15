@@ -14,14 +14,11 @@ public class TinyMceEditorTest extends BaseTest {
 		
 //		tinyMceEditor.enter_text_if_enabled("enter_text_if_enabled");
 		tinyMceEditor.should_have_text("enter_text_if_enabled");
-		wait_for_seconds(3);
 		
 //		tinyMceEditor.enter_text_if_enabled("");
 //		tinyMceEditor.append_text_if_enabled("enter_text_if_enabled 111");
 		tinyMceEditor.should_have_text("enter_text_if_enabled 111");
-		wait_for_seconds(3);
 		
 		tinyMceEditor.enter_text_if_enabled("");
-		wait_for_seconds(3);
 	}
 }
