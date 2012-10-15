@@ -1,0 +1,63 @@
+[0.001][INFO]:      ChromeDriver 22.0.1203.0 C:\Users\Administrator\Documents\NetBeansProjects\github\gherkinsalad\gherkinsalad\src\test\resources\system\win.chromedriver.exe
+[0.814][FINE]:      Initializing session with capabilities {
+   "browserName": "chrome",
+   "platform": "ANY",
+   "version": ""
+}
+
+[0.815][INFO]:      Launching chrome: "C:\Users\fabdin\AppData\Local\Google\Chrome\Application\chrome.exe" --disable-hang-monitor --disable-prompt-on-repost --dom-automation --full-memory-crash-report --no-default-browser-check --no-first-run --ignore-certificate-errors --disable-popup-blocking --homepage=about:blank
+[1.644][INFO]:      Connected to Chrome successfully. Version: 22.0.1229.92
+[1.648][FINE]:      Command received (/session/6a681308f093ed5977ada944479a7ef2)
+[1.649][FINE]:      Command finished (/session/6a681308f093ed5977ada944479a7ef2) with response {
+   "sessionId": "6a681308f093ed5977ada944479a7ef2",
+   "status": 0,
+   "value": {
+      "acceptSslCerts": false,
+      "applicationCacheEnabled": false,
+      "browserConnectionEnabled": false,
+      "browserName": "chrome",
+      "chrome.chromedriverVersion": "22.0.1203.0",
+      "chrome.nativeEvents": false,
+      "cssSelectorsEnabled": true,
+      "databaseEnabled": false,
+      "handlesAlerts": true,
+      "javascriptEnabled": true,
+      "locationContextEnabled": false,
+      "nativeEvents": true,
+      "platform": "windows",
+      "rotatable": false,
+      "takesScreenshot": true,
+      "version": "22.0.1229.92",
+      "webStorageEnabled": true
+   }
+}
+
+[1.651][FINE]:      Command received (/session/6a681308f093ed5977ada944479a7ef2/window_handle)
+[1.651][FINER]:     Waiting for all views to stop loading...
+[1.651][FINER]:     Done waiting for all views to stop loading
+[1.651][FINER]:     Waiting for all views to stop loading...
+[1.651][FINER]:     Done waiting for all views to stop loading
+[1.651][FINE]:      Command finished (/session/6a681308f093ed5977ada944479a7ef2/window_handle) with response {
+   "sessionId": "6a681308f093ed5977ada944479a7ef2",
+   "status": 0,
+   "value": "f1-2"
+}
+
+[1.655][FINE]:      Command received (/session/6a681308f093ed5977ada944479a7ef2/url) with params {
+   "url": "http://jqueryui.com/demos/datepicker/"
+}
+
+[1.655][FINER]:     Waiting for all views to stop loading...
+[1.656][FINER]:     Done waiting for all views to stop loading
+[7.779][FINER]:     Waiting for all views to stop loading...
+[20.636][FINER]:    Done waiting for all views to stop loading
+[20.636][WARNING]:  Command finished (/session/6a681308f093ed5977ada944479a7ef2/url) with response {
+   "sessionId": "6a681308f093ed5977ada944479a7ef2",
+   "status": 13,
+   "value": {
+      "message": "Navigation failed with error code=2."
+   }
+}
+
+[20.642][FINE]:     Command received (/session/6a681308f093ed5977ada944479a7ef2/window)
+[23.578][INFO]:     Chrome shutdown
