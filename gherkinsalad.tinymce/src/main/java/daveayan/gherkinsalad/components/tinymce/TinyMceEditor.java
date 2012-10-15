@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.components.TextEnterable;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 
-public class TinyMceEditor extends BaseBrowserElement implements TextEnterable {	
+public class TinyMceEditor  extends BaseBrowserElement implements TextEnterable {	
 	public static TinyMceEditor find(By locator) {
 		TinyMceEditor rte = new TinyMceEditor();
 		rte.found(locator);

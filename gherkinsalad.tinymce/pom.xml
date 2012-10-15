@@ -7,9 +7,8 @@
 		<relativePath>../pom.xml</relativePath>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>gherkinsalad.jquery</artifactId>
-	<packaging>jar</packaging>
-	<name>gherkinsalad.jquery</name>
+	<artifactId>gherkinsalad.tinymce</artifactId>
+	<name>gherkinsalad.tinymce</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.daveayan</groupId>

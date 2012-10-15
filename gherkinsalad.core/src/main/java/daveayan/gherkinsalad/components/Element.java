@@ -134,7 +134,11 @@ public class Element extends BaseBrowserElement implements Nullable {
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(by);
 		}
-		return Element.newInstance(_webElement, by.toString(), by);
+		if(_webElement == null) {
+			return NullElement.newInstance(by);
+		} else {
+			return Element.newInstance(_webElement, by.toString(), by);
+		}
 	}
 	
 //	public Element findElementImmediate(final By by) {
