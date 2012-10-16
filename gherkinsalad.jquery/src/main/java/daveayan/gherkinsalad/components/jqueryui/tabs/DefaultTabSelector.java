@@ -62,7 +62,7 @@ public class DefaultTabSelector extends BaseBrowserElement implements Tabs {
 	}
 	
 	private boolean tab_is_selected(Element tab) {
-		return tab.getCssValue("aria-selected").contains("true");
+		return tab.getAttribute("aria-selected").contains("true");
 	}
 	
 	private Element find_tab_li(final String tab_name) {
