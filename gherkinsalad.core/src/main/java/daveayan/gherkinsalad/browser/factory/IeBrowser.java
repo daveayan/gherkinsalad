@@ -33,9 +33,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
  * 
  * @see Browser
  */
-public class IeBrowser {
+public class IeBrowser implements BrowserFactory {
 	private static Log log = LogFactory.getLog(IeBrowser.class);
-	public static WebDriver getDriver() {
+	public WebDriver getDriver() {
 		try {
 			WebDriver ie = new InternetExplorerDriver();
 			return ie;

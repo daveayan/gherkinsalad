@@ -25,7 +25,6 @@ import org.openqa.selenium.NullWebDriver;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -44,10 +43,10 @@ import daveayan.gherkinsalad.report.Report;
  * 
  * @see Browser
  */
-public class FireFoxBrowser {
+public class FireFoxBrowser implements BrowserFactory {
 	private static Log log = LogFactory.getLog(FireFoxBrowser.class);
 	
-	public static WebDriver getDriver() {
+	public WebDriver getDriver() {
 		try {
 			Report.action("Opening Firefox");
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();

@@ -11,8 +11,8 @@ import org.apache.commons.logging.LogFactory;
 public class Config {
 	private static Log log = LogFactory.getLog(Config.class);
 	
-	private static Properties user_config = null;
-	private static Properties default_config = null;
+	private static Properties user_config = new Properties();
+	private static Properties default_config = new Properties();
 	
 	public static String chrome_webdriver_location = null;
 	

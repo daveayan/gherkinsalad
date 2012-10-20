@@ -40,9 +40,9 @@ import daveayan.gherkinsalad.Config;
  * 
  * @see Browser
 **/
-public class ChromeBrowser {
+public class ChromeBrowser implements BrowserFactory {
 	private static Log log = LogFactory.getLog(ChromeBrowser.class);
-	public static WebDriver getDriver() {
+	public WebDriver getDriver() {
 		try {
 			File file = new File(Config.chrome_webdriver_location);
 			ChromeDriverService service = new ChromeDriverService.Builder()

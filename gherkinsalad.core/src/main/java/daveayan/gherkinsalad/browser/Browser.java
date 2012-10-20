@@ -26,11 +26,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
+import daveayan.gherkinsalad.Config;
+import daveayan.gherkinsalad.browser.factory.BrowserFactory;
 import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
 import daveayan.gherkinsalad.browser.factory.FireFoxBrowser;
 import daveayan.gherkinsalad.browser.factory.HtmlUnitBrowser;
 import daveayan.gherkinsalad.browser.factory.IeBrowser;
 import daveayan.gherkinsalad.report.Report;
+import daveayan.mirage.ReflectionUtils;
 /** @author daveayan */
 /**
  * Unless absolutely needed do not use this class directly. Use the daveayan.gherkinsalad.BaseAutomationObject object instead.
@@ -113,15 +116,8 @@ public class Browser {
 	 * Use this method to actually launch the browser window that is represented by this object.
 	 */
 	public void launch() {
-		if (this.is_IE()) {
-			instance = IeBrowser.getDriver();
-		} else if (this.is_Chrome()) {
-			instance = ChromeBrowser.getDriver();
-		} else if (this.is_Firefox()) {
-			instance = FireFoxBrowser.getDriver();
-		} else if(this.is_htmlunit()) {
-			instance = HtmlUnitBrowser.getDriver();
-		}
+		BrowserFactory _launcher = (BrowserFactory) ReflectionUtils.objectFor(Config.getProperty("browser." + this.name.toLowerCase().trim() + ".class"));
+		instance = _launcher.getDriver();
 		default_window_handle = instance.getWindowHandle();
 	}
 

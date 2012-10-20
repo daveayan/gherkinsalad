@@ -37,9 +37,9 @@ import daveayan.gherkinsalad.browser.Browser;
  * 
  * @see Browser
  */
-public class HtmlUnitBrowser {
-	private static Log log = LogFactory.getLog(FireFoxBrowser.class);
-	public static WebDriver getDriver() {
+public class HtmlUnitBrowser implements BrowserFactory {
+	private static Log log = LogFactory.getLog(HtmlUnitBrowser.class);
+	public WebDriver getDriver() {
 		try {
 			HtmlUnitDriver driver = new HtmlUnitDriver();
 			driver.setJavascriptEnabled(true);
