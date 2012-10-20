@@ -171,6 +171,8 @@ public class Report {
 		sb.append("<a id=\"failedScenarios\" href=\"#\">Failed Scenarios</a>");
 		sb.append("<a id=\"warningScenarios\" href=\"#\">Warning Scenarios</a>");
 		sb.append("<a id=\"showAll\" href=\"#\">Show All</a>");
+		sb.append("<input type=\"checkbox\" id=\"showActions\"><span>Show Actions</span>");
+		sb.append("<input type=\"checkbox\" id=\"showInfo\"><span>Show Info</span>");
 		sb.append("</div>");
 		sb.append("<div class=\"clear\"></div>");
 		
