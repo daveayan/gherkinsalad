@@ -2,6 +2,7 @@ package daveayan.gherkinsalad.report;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.io.IOUtils;
 
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.Path;
@@ -22,6 +24,7 @@ public class Report {
 	private static boolean scenario_already_started = Boolean.FALSE;
 	private static boolean step_already_started = Boolean.FALSE;
 	private static File report_folder = null;
+	private static String report_file_name = "/index.html";
 	
 	private static void close_step() {
 		if(step_already_started) {
@@ -127,7 +130,7 @@ public class Report {
 	
 	private static void report(String text) {
 		create_file_if_not_exists();
-		File report_file = new File(report_folder + "/report.html");
+		File report_file = new File(report_folder + report_file_name);
 		try {
 			System.out.println("\n" + text);
 			FileUtils.writeStringToFile(report_file, "\n" + text, true);
@@ -138,45 +141,24 @@ public class Report {
 	
 	private static void create_file_if_not_exists() {
 		report_folder();
-		File report_file = new File(report_folder + "/report.html");
+		File report_file = new File(report_folder + report_file_name);
 		if(report_file.exists()) return;
-		try {
-			String report_header = report_header();
-			FileUtils.writeStringToFile(report_file, report_header, true);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "style.css"), report_folder);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "html5shiv.js"), report_folder);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "jquery-1.8.0.min.js"), report_folder);
-			FileUtils.copyFileToDirectory(new File(Path.TO_REPORT_FILES + "gherkinsaladreport.js"), report_folder);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		stream_classpath_resource_to_file("/gherkinsaladreport-index.html", report_folder + report_file_name);
+		stream_classpath_resource_to_file("/style.css", report_folder + "/style.css");
+		stream_classpath_resource_to_file("/html5shiv.js", report_folder + "/html5shiv.js");
+		stream_classpath_resource_to_file("/jquery-1.8.0.min.js", report_folder + "/jquery-1.8.0.min.js");
+		stream_classpath_resource_to_file("/gherkinsaladreport.js", report_folder + "/gherkinsaladreport.js");
 	}
 	
-	private static String report_header() {
-		StringBuffer sb = new StringBuffer();
-		
-		sb.append("<!DOCTYPE HTML>");
-		sb.append("<html>");
-		sb.append("<head>");
-		sb.append("<link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\">");
-		sb.append("<!--[if lt IE 9]><script src=\"html5shiv.js\"></script><![endif]-->");
-		sb.append("<script src=\"jquery-1.8.0.min.js\"></script>");
-		sb.append("<script src=\"gherkinsaladreport.js\"></script>");
-		sb.append("</head>");
-		sb.append("<body>");
-		sb.append("<header><h1>Gherkin Salad Report</h1></header>");
-		sb.append("<div id=\"mainActions\">");
-		sb.append("<a id=\"expandAll\" href=\"#\">Expand All</a>");
-		sb.append("<a id=\"collapseAll\" href=\"#\">Collapse All</a>");
-		sb.append("<a id=\"failedScenarios\" href=\"#\">Failed Scenarios</a>");
-		sb.append("<a id=\"warningScenarios\" href=\"#\">Warning Scenarios</a>");
-		sb.append("<a id=\"showAll\" href=\"#\">Show All</a>");
-		sb.append("<input type=\"checkbox\" id=\"showActions\"><span>Show Actions</span>");
-		sb.append("<input type=\"checkbox\" id=\"showInfo\"><span>Show Info</span>");
-		sb.append("</div>");
-		sb.append("<div class=\"clear\"></div>");
-		
-		return sb.toString();
+	private static void stream_classpath_resource_to_file(String path_to_classpath_resource, String file_to_write) {
+		InputStream stream = Report.class.getResourceAsStream(path_to_classpath_resource);
+		try {
+			String contents = IOUtils.readFully(stream);
+			FileUtils.writeStringToFile(new File(file_to_write), contents);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static String current_date_time_file_name() {
