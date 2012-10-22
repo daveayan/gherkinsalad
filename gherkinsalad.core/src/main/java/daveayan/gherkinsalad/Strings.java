@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Strings {
+import org.apache.commons.lang.StringUtils;
+
+public class Strings extends AutomationObject {
 	List<String> _nativeStrings = new ArrayList<String>();
 	
 	public static Strings instance_from(String string, String delimiter) {
@@ -16,6 +18,12 @@ public class Strings {
 	public static Strings instance_from(String... strings) {
 		Strings _strings = new Strings();
 		_strings.set(strings);
+		return _strings;
+	}
+	
+	public static Strings instance_from(List<String> strings) {
+		Strings _strings = new Strings();
+		_strings._nativeStrings.addAll(strings);
 		return _strings;
 	}
 	
@@ -66,6 +74,38 @@ public class Strings {
 			_newStrings._nativeStrings.add(s.toLowerCase());
 		}
 		return _newStrings;
+	}
+	
+	public Strings should_have_all_these_strings(String... expected_strings) {
+		return should_have_all_these_strings(Strings.instance_from(expected_strings));
+	}
+	
+	public Strings should_have_all_these_strings(List<String> expected_strings) {
+		return should_have_all_these_strings(Strings.instance_from(expected_strings));
+	}
+	
+	public Strings should_have_all_these_strings(Strings expected_strings) {
+		Strings strings_not_present = Strings.new_instance();
+		for(String s1: expected_strings._nativeStrings) {
+			boolean found = false;
+			for(String s2: _nativeStrings) {
+				if(StringUtils.equals(s1, s2)) {
+					found = true;
+					break;
+				}
+			}
+			if(! found) {
+				strings_not_present._nativeStrings.add(s1);
+			}
+		}
+		return strings_not_present;
+	}
+	
+	public void should_be_empty() {
+		if(this._nativeStrings().isEmpty()) {
+			return;
+		}
+		error("Expected the list of strings to be empty, found these values however '" + this.toString() + "'");
 	}
 	
 	private void set(String... strings) {

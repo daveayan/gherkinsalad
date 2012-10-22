@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,11 +17,12 @@ public class Config {
 	
 	public static String chrome_webdriver_location = null;
 	
-	public static String proxy_url = null;
-	
 	public static int seconds_wait_after_each_step = 0;
 	public static int seconds_timeout = 30;
 	public static int seconds_poll_interval = 1;
+	
+	public static boolean validate_css = Boolean.FALSE;
+	public static boolean validate_position = Boolean.FALSE;
 	
 	public static String execution_results_storage_location = null;
 	
@@ -45,23 +47,24 @@ public class Config {
 		Properties config = new Properties();
 		try {
 			config.load(new FileInputStream(file));
+			
+			String seconds_1 = config.getProperty("seconds.wait.after.each.step");
+			if(seconds_1 != null) seconds_wait_after_each_step = Integer.parseInt(seconds_1);
 
-			if(seconds_wait_after_each_step != -1) {
-				String seconds = config.getProperty("seconds.wait.after.each.step");
-				if(seconds != null) seconds_wait_after_each_step = Integer.parseInt(seconds);
-			}
-			if(seconds_timeout != -1) {
-				String seconds = config.getProperty("seconds.timeout");
-				if(seconds != null) seconds_timeout = Integer.parseInt(seconds);
-			}
-			if(seconds_poll_interval != -1) {
-				String seconds = config.getProperty("seconds.poll.interval");
-				if(seconds != null) seconds_poll_interval = Integer.parseInt(seconds);
-			}
+			String seconds_2 = config.getProperty("seconds.timeout");
+			if(seconds_2 != null) seconds_timeout = Integer.parseInt(seconds_2);
 			
-			if(proxy_url != null) proxy_url = config.getProperty("proxy.url");
+			String seconds_3 = config.getProperty("seconds.poll.interval");
+			if(seconds_3 != null) seconds_poll_interval = Integer.parseInt(seconds_3);
 			
-			if(execution_results_storage_location == null) execution_results_storage_location = config.getProperty("execution.results.storage.location");
+			String validate_1 = config.getProperty("validate.css");
+			if(validate_1 != null) validate_css = Boolean.parseBoolean(validate_1);
+			
+			String validate_2 = config.getProperty("validate.position");
+			if(validate_2 != null) validate_position = Boolean.parseBoolean(validate_2);
+			
+			String execution_1 = config.getProperty("execution.results.storage.location");
+			if(StringUtils.isNotBlank(execution_1)) execution_results_storage_location = new String(execution_1);
 			
 			String os_name= System.getProperty("os.name");
 			if(os_name.trim().contains("Mac")) {
@@ -85,15 +88,17 @@ public class Config {
 	}
 	
 	public static void load_properties_from(String user_properties_file_path, String default_properties_file_path) {
+		log.info("Loading remaining properties from default properties file");
+		default_config = load_properties_from_file(new File(default_properties_file_path));
+		log.info("GHKSALAD default specific config is: " + default_config);
+		
 		File user_specific_properties_file = new File(user_properties_file_path);
 		if(user_specific_properties_file.exists()) {
 			log.info("User specific configuration exists, Using " + user_specific_properties_file.getAbsolutePath());
 			user_config = load_properties_from_file(user_specific_properties_file);
 			log.info("GHKSALAD user specific config is: " + user_config);
 		}
-		log.info("Loading remaining properties from default properties file");
-		default_config = load_properties_from_file(new File(default_properties_file_path));
-		log.info("GHKSALAD default specific config is: " + default_config);
+		
 		garnish_properties();
 	}
 	

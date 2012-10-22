@@ -45,4 +45,9 @@ public interface Selectable extends BrowserElement {
 	 * @return
 	 */
 	public List<String> get_all_options();
+	/**
+	 * Use this method to get the text of the currently selected option
+	 * @return
+	 */
+	public String get_selected_option();
 }

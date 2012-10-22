@@ -2,6 +2,10 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.2
+- flag in properties file to auto validate positions and css. This is because the auto validation is not completely implemented.
+- jqueryui - Select Menu implementation
+===========================
 1.1
 - Take the browser fully qualified name from properties file and use it to instantiate
 - Reporting updates so that the js, css files are not needed in every project. loading from classpath

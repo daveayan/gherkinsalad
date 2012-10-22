@@ -18,17 +18,12 @@
 **/
 package daveayan.gherkinsalad.browser.factory;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.NullWebDriver;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.report.Report;
 
@@ -49,14 +44,7 @@ public class FireFoxBrowser implements BrowserFactory {
 	public WebDriver getDriver() {
 		try {
 			Report.action("Opening Firefox");
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			if(StringUtils.isNotEmpty(Config.proxy_url)) {
-				Proxy proxy = new Proxy();
-				proxy.setProxyAutoconfigUrl("http://youdomain/config");
-				capabilities.setCapability(CapabilityType.PROXY, proxy);
-				Report.action("With proxy '" + Config.proxy_url + "'");
-			}
-			WebDriver driver = new FirefoxDriver(capabilities);
+			WebDriver driver = new FirefoxDriver();
 			return driver;
 		} catch (Throwable th) {
 			log.info(th.getMessage());

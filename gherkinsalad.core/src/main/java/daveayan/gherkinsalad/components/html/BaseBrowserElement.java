@@ -259,19 +259,21 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	}
 	
 	private void validate_position_and_css(Element element) {
-		if(element.is_not_null()) {
-			if(thisIsNamedElement()) {
-				String expected = find_position_and_css(this._name);
-				String actual = element.static_info();
-				if(StringUtils.isNotBlank(expected)) {
-					boolean match = StringUtils.equals(expected, actual);
-					if(match) {
-						action("Verified that position, size and css of '" + this._name + "' is ok");
+		if(Config.validate_position) {
+			if(element.is_not_null()) {
+				if(thisIsNamedElement()) {
+					String expected = find_position_and_css(this._name);
+					String actual = element.static_info();
+					if(StringUtils.isNotBlank(expected)) {
+						boolean match = StringUtils.equals(expected, actual);
+						if(match) {
+							action("Verified that position, size and css of '" + this._name + "' is ok");
+						} else {
+							error("Position, size and css of '" + this._name + "' is not verified. Expected '" + expected +"', actual '" + actual + "'");
+						}
 					} else {
-						error("Position, size and css of '" + this._name + "' is not verified. Expected '" + expected +"', actual '" + actual + "'");
+						save_position_and_css(this._name, actual);
 					}
-				} else {
-					save_position_and_css(this._name, actual);
 				}
 			}
 		}

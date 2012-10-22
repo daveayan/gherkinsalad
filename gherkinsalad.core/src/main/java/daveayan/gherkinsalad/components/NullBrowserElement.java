@@ -156,4 +156,8 @@ public class NullBrowserElement extends AutomationObject implements Clickable, S
 		takeScreenshot();
 		throw new AssertionError("operation get_all_options not allowed on a NullBrowserElement '" + this + "'");
 	}
+
+	public String get_selected_option() {
+		throw new AssertionError("operation public String get_selected_option() not allowed on a NullBrowserElement '" + this + "'");
+	}
 }

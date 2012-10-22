@@ -57,4 +57,9 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String get_selected_option() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
