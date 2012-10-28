@@ -1,9 +1,9 @@
 # GherkinSalad
 
-This is a framework that helps in creation and maintainence of automation test suites. The objectives of this framework are:
+The objectives of this framework are:
 
 - To make it easy to create page objects and use them
-- To promote creation of reusable complex component objects
+- To promote creation of complex reusable component objects
 
 GherkinSalad uses Java, Maven, WebDriver
 
@@ -67,3 +67,10 @@ This will find a text field, clear the existing text and enter new text in there
 
 #### More Information
 More information can be found on the [wiki](https://github.com/daveayan/gherkinsalad/wiki)
+
+#### Support
+Feel free to open an issue ticket [here](https://github.com/daveayan/gherkinsalad/issues)
+
+OR
+
+Contact me at gherkinsalad [ a t ] gmail
