@@ -20,6 +20,7 @@ package daveayan.gherkinsalad;
 
 import java.util.Random;
 
+import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
@@ -43,6 +44,7 @@ import daveayan.lang.Nullable;
  * </ul>
  */
 public abstract class AutomationObject implements Nullable {
+	protected String _name = StringUtils.EMPTY;
 	protected static Browser browser;
 	protected Random random = new Random();
 	
@@ -262,5 +264,9 @@ public abstract class AutomationObject implements Nullable {
 			return ((Nullable) object).is_null();
 		}
 		return false;
+	}
+	
+	protected boolean thisIsNamedElement() {
+		return StringUtils.isNotBlank(_name);
 	}
 }

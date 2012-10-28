@@ -21,13 +21,31 @@ import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
 import daveayan.lang.Nullable;
 
+
+/** @author daveayan */
+/**
+ * This class is a wrapper around the WebElement object that Webdriver provides. It has the same methods as the WebElement and has a lot of more methods.
+ */
 public class Element extends BaseBrowserElement implements Nullable {
 	private WebElement _webElement;
 	
+	/**
+	 * Use this method to get back the native WebElement under the hood
+	 * @return WebElement
+	 */
 	public WebElement _nativeWebElement() {
 		return _webElement;
 	}
 	
+	/**
+	 * Use this factory method to create a new instance of Element that wraps WebElement object.
+	 * NOTE: Do not use this method unless explicitly needed.
+	 * 
+	 * @param we - WebElement
+	 * @param name - Name of the element, a generic string
+	 * @param element_locator, How was this element located. This is used to find child elements under it.
+	 * @return Element
+	 */
 	public static Element newInstance(WebElement we, String name, By element_locator) {
 		Element e = new Element();
 		e._webElement = we;
@@ -36,11 +54,20 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return e;
 	}
 	
+	/**
+	 * Use this method to give this element a good readable name.
+	 * @return self with the updated name
+	 */
 	public Element name(String name) {
-		super.name(name);
+		this._name = name;
 		return this;
 	}
 	
+	/**
+	 * This method is called internally by the framework to get the information about the element like location, size and CSS. This information can then be used to do validations on each run.
+	 * NOTE: This method is still under development.
+	 * @return
+	 */
 	public String static_info() {
 		String info = "";
 		Point point = getLocation();
@@ -52,6 +79,12 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return info;
 	}
 	
+	/**
+	 * Use this method to check if all the supplied text strings exist in the element's text. Internally this method calls the "has(text)" method. Verifies with case sensitivity.
+	 * @param expectedTexts
+	 * @return false - if at least one supplied text string is not present
+	 * 				 true - if all the supplied text strings are present
+	 */
 	public boolean hasAllTexts(String... expectedTexts) {
 		for(String e: expectedTexts) {
 			if(! this.has(e)) {
@@ -61,6 +94,12 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return true;
 	}
 	
+	/**
+	 * Use this method to check if any of the supplied text strings exist in the element's text. Internally this method calls the "has(text)" method. Verifies with case sensitivity.
+	 * @param expectedTexts
+	 * @return false - if none of the supplied text string is present
+	 * 				 true - if at least the supplied text strings are present
+	 */
 	public boolean hasAnyText(String... expectedTexts) {
 		for(String e: expectedTexts) {
 			if(this.has(e)) {
@@ -70,31 +109,43 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return false;
 	}
 	
+	/**
+	 * Use this method to verify if the element has a certain text. Verifies with case sensitivity.
+	 * @param text
+	 * @return false - if the text is not present
+	 * 				 true - if the text is present
+	 */
 	public boolean has(String text) {
 		if(is_not_null(_webElement)) {
 			boolean value = _webElement.getText().contains(text);
 			if(value == true) {
-				info("Element '" + this.name() + "' - has text '" + text + "'");
+				info("Element '" + super.name() + "' - has text '" + text + "'");
 			} else {
-				info("Element '" + this.name() + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
+				info("Element '" + super.name() + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
 			}
 			return value;
 		}
-		info("Element '" + this.name() + "' - has a null _webelement, cannot do has(" + text + ")");
+		info("Element '" + super.name() + "' - has a null _webelement, cannot do has(" + text + ")");
 		return false;
 	}
 	
+	/**
+	 * Use this method to verify if the element text is exactly the same as the text passed in. Verifies with case sensitivity.
+	 * @param text
+	 * @return false - if the webElement.getText 
+	 * 				 true - if the text is present
+	 */
 	public boolean is(String text) {
 		if(is_not_null(_webElement)) {
 			boolean value = StringUtils.equals(text, _webElement.getText());
 			if(value == true) {
-				info("Element '" + this.name() + "' - is text '" + text + "'");
+				info("Element '" + super.name() + "' - is text '" + text + "'");
 			} else {
-				info("Element '" + this.name() + "' - is not text '" + text + "'");
+				info("Element '" + super.name() + "' - is not text '" + text + "'");
 			}
 			return value;
 		}
-		info("Element '" + this.name() + "' - has a null _webelement, cannot do is(" + text + ")");
+		info("Element '" + super.name() + "' - has a null _webelement, cannot do is(" + text + ")");
 		return false;
 	}
 	
@@ -104,7 +155,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 			_webElement.clear();
 			action("Cleared text in element " + name());
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do clear()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do clear()");
 		}
 	}
 
@@ -113,7 +164,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 			_webElement.click();
 			action("Clicked on element " + name());
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do click()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do click()");
 		}
 	}
 
@@ -255,10 +306,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getAttribute(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getAttribute(arg0);
-			info("Element '" + this.name() + "' - Attribute '" + arg0 + "' has value '" + value + "'");
+			info("Element '" + super.name() + "' - Attribute '" + arg0 + "' has value '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getAttribute(" + arg0 + ")");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getAttribute(" + arg0 + ")");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -266,10 +317,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getCssValue(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getCssValue(arg0);
-			info("Element '" + this.name() + "' - CSS '" + arg0 + "' has value '" + value + "'");
+			info("Element '" + super.name() + "' - CSS '" + arg0 + "' has value '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getCssValue(" + arg0 + ")");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getCssValue(" + arg0 + ")");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -277,10 +328,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public Point getLocation() {
 		if(is_not_null(_webElement)) {
 			Point value = _webElement.getLocation();
-			info("Element '" + this.name() + "' - Location is '" + value + "'");
+			info("Element '" + super.name() + "' - Location is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getLocation()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getLocation()");
 		}
 		return new Point(0, 0);
 	}
@@ -288,10 +339,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public Dimension getSize() {
 		if(is_not_null(_webElement)) {
 			Dimension value = _webElement.getSize();
-			info("Element '" + this.name() + "' - Dimention is '" + value + "'");
+			info("Element '" + super.name() + "' - Dimention is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getSize()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getSize()");
 		}
 		return new Dimension(0, 0);
 	}
@@ -299,10 +350,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public String getTagName() {
 		if(is_not_null(_webElement)) {
 			String value = _webElement.getTagName();
-			info("Element '" + this.name() + "' - Tag Name is '" + value + "'");
+			info("Element '" + super.name() + "' - Tag Name is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getTagName()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getTagName()");
 		}
 		return StringUtils.EMPTY;
 	}
@@ -310,10 +361,10 @@ public class Element extends BaseBrowserElement implements Nullable {
 	public boolean isSelected() {
 		if(is_not_null(_webElement)) {
 			boolean value = _webElement.isSelected();
-			info("Element '" + this.name() + "' - isSelected '" + value + "'");
+			info("Element '" + super.name() + "' - isSelected '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do isSelected()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do isSelected()");
 		}
 		return Boolean.FALSE;
 	}
@@ -322,7 +373,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			_webElement.sendKeys(arg0);
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do sendKeys(" + arg0 + ")");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do sendKeys(" + arg0 + ")");
 		}
 	}
 
@@ -330,17 +381,17 @@ public class Element extends BaseBrowserElement implements Nullable {
 		if(is_not_null(_webElement)) {
 			_webElement.submit();
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do submit()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do submit()");
 		}
 	}
 
 	public String getText() {
 		if(is_not_null(_webElement)) {
 			String value = _webElement.getText();
-			info("Element '" + this.name() + "' - Text is '" + value + "'");
+			info("Element '" + super.name() + "' - Text is '" + value + "'");
 			return value;
 		} else {
-			info("Element '" + this.name() + "' - has a null _webelement, cannot do getText()");
+			info("Element '" + super.name() + "' - has a null _webelement, cannot do getText()");
 		}
 		return StringUtils.EMPTY;
 	}

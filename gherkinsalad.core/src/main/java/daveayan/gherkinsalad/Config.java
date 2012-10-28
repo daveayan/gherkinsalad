@@ -89,9 +89,11 @@ public class Config {
 	
 	public static void load_properties_from(String user_properties_file_path, String default_properties_file_path) {
 		log.info("Loading remaining properties from default properties file");
-		default_config = load_properties_from_file(new File(default_properties_file_path));
-		log.info("GHKSALAD default specific config is: " + default_config);
-		
+		File default_properties_file = new File(default_properties_file_path);
+		if(default_properties_file.exists()) {
+			default_config = load_properties_from_file(new File(default_properties_file_path));
+			log.info("GHKSALAD default specific config is: " + default_config);
+		}
 		File user_specific_properties_file = new File(user_properties_file_path);
 		if(user_specific_properties_file.exists()) {
 			log.info("User specific configuration exists, Using " + user_specific_properties_file.getAbsolutePath());

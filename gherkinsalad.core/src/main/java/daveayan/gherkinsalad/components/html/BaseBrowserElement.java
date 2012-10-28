@@ -54,7 +54,6 @@ import daveayan.gherkinsalad.test.Assert;
  * </ul>
  */
 public abstract class BaseBrowserElement extends AutomationObject implements BrowserElement {
-	private String _name = StringUtils.EMPTY;
 	private By element_locator;
 
 //	protected boolean is_not_null(Object o) {
@@ -94,7 +93,7 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 		} catch (TimeoutException toe) {
 			return NullElement.newInstance(element_locator);
 		}
-		return Element.newInstance(_webElement, _name, by);
+		return Element.newInstance(_webElement, name(), by);
 	}
 
 	/**
@@ -241,7 +240,7 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	public String toString() {
 		return this.getClass().getName() + ", " + element_locator;
 	}
-
+	
 	public String name() {
 		if(StringUtils.isBlank(_name)) {
 			if(element_locator != null) {
@@ -254,25 +253,21 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 		}
 	}
 	
-	private boolean thisIsNamedElement() {
-		return StringUtils.isNotBlank(_name);
-	}
-	
 	private void validate_position_and_css(Element element) {
 		if(Config.validate_position) {
 			if(element.is_not_null()) {
 				if(thisIsNamedElement()) {
-					String expected = find_position_and_css(this._name);
+					String expected = find_position_and_css(this.name());
 					String actual = element.static_info();
 					if(StringUtils.isNotBlank(expected)) {
 						boolean match = StringUtils.equals(expected, actual);
 						if(match) {
-							action("Verified that position, size and css of '" + this._name + "' is ok");
+							action("Verified that position, size and css of '" + this.name() + "' is ok");
 						} else {
-							error("Position, size and css of '" + this._name + "' is not verified. Expected '" + expected +"', actual '" + actual + "'");
+							error("Position, size and css of '" + this.name() + "' is not verified. Expected '" + expected +"', actual '" + actual + "'");
 						}
 					} else {
-						save_position_and_css(this._name, actual);
+						save_position_and_css(this.name(), actual);
 					}
 				}
 			}
