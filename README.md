@@ -52,9 +52,9 @@ The page object is created by simply using the constructor. Within the page obje
 
 #### Within the page object
 ###### Working with HTML links and buttons
-<code><pre>Clickable somelink = Link.find(By.id("someid"));
+<pre><code>Clickable somelink = Link.find(By.id("someid"));
 somelink.click_if_enabled();
-</pre></code>
+</code></pre>
 The first line of code will create an object that has methods to perform click for the element that can be identified by the locator specified. The second line performs the clicking of the link only if it is enabled.
 For more information about Clickable check the javadocs
 
