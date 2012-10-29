@@ -1,11 +1,12 @@
 # GherkinSalad
 
-The objectives of this framework are:
+This framework makes it easy to
 
-- To make it easy to create page objects and use them
-- To promote creation of complex reusable component objects
+- Create page objects and use them
+- Create complex reusable component objects
+- Get a jumpstart on UI automation
 
-GherkinSalad uses Java, Maven, WebDriver
+gS uses Java, Maven, WebDriver
 
 ## Features
 - DSL to interact with page objects, perform validations and create reusable complex component objects
@@ -67,7 +68,12 @@ This will select the first option in the dropdown that has the text specified. F
 <pre><code>TextEnterable someTextField = TextField.find(By.id("someid"));
 someTextField.enter_text_if_enabled("text to enter");
 </code></pre>
-This will find a text field, clear the existing text and enter new text in there.
+This will find a **text field**, clear the existing text and enter new text in there.
+
+<pre><code>TextEnterable someTextField = TextArea.find(By.id("someid"));
+someTextField.enter_text_if_enabled("text to enter");
+</code></pre>
+This will find a **text area**, clear the existing text and enter new text in there.
 
 #### More Information
 More information can be found on the [wiki](https://github.com/daveayan/gherkinsalad/wiki)
@@ -78,3 +84,22 @@ Open an issue [here](https://github.com/daveayan/gherkinsalad/issues)
 OR
 
 Contact me at gherkinsalad [ a t ] gmail
+
+#### Copyright
+Copyright (c) 2011 - 2012 Ayan Dave http://daveayan.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
+associated documentation files (the "Software"), to deal in the Software without restriction, including 
+without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the 
+following conditions:
+
+- The above copyright notice and this permission notice shall be included without any changes or alterations 
+in all copies or substantial portions of the Software.
+- This software shall be used for Good, not Evil.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
