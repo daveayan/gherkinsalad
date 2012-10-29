@@ -40,10 +40,14 @@ This defines the page object that represents the content within the body tag - b
 		super.launch_browser("firefox");
 		login_page.login_as("username", "password");
 	}
+	@After
+	public void teardown() {
+		close_browser();
+	}
 }
 </code></pre>
 
-The page object is created by simply using the constructor. Within the page object all the interactions will happen with the instance of browser that is currently available. The framework under the Component object handles it
+The page object is created by simply using the constructor. Within the page object all the interactions will happen with the instance of browser that is currently available. The framework under the Component object handles it.
 
 #### Within the page object
 ###### Working with HTML links and buttons
@@ -69,7 +73,7 @@ This will find a text field, clear the existing text and enter new text in there
 More information can be found on the [wiki](https://github.com/daveayan/gherkinsalad/wiki)
 
 #### Support
-Feel free to open an issue ticket [here](https://github.com/daveayan/gherkinsalad/issues)
+Open an issue [here](https://github.com/daveayan/gherkinsalad/issues)
 
 OR
 
