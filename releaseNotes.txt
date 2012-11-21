@@ -2,6 +2,12 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.3
+- Default implementation of isDisplayed and isEnabled moved to BaseBrowserElement
+- TextArea - Pending methods added
+- TextArea - More info and action messages added
+- The default implementations around should / should not displayed / enabled now print action messages of verification
+===========================
 1.2
 - flag in properties file to auto validate positions and css. This is because the auto validation is not completely implemented.
 - jqueryui - Select Menu implementation

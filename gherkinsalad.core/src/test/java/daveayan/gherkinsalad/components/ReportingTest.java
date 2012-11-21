@@ -15,6 +15,7 @@ public class ReportingTest {
 				Report.step("Step 1");
 					Report.task("Task 1");
 						Report.action("Action 1");
+						Report.info("Info 1");
 						Report.screenshot_taken("screenshot 1");
 					Report.task("Task 2");
 				Report.step("Step 2");

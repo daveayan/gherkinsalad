@@ -17,11 +17,6 @@ public class Link extends BaseBrowserElement implements Clickable {
 		super.name(name);
 		return this;
 	}
-	
-	public boolean isEnabled() {
-		Element element = root_element();
-		return element.isEnabled();
-	}
 
 	public void click_if_enabled() {
 		wait_between_steps();
@@ -36,11 +31,6 @@ public class Link extends BaseBrowserElement implements Clickable {
 	
 	public void click_if_exists() {
 		click_if_enabled();
-	}
-	
-	public boolean isDisplayed() {
-		Element element = root_element();
-		return element.is_not_null();
 	}
 	
 	public void click_if_exists_and_enabled() {

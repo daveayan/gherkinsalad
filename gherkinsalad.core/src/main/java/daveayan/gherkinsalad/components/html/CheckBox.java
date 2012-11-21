@@ -14,11 +14,6 @@ public class CheckBox extends BaseBrowserElement implements Clickable {
 		super.name(name);
 		return this;
 	}
-	
-	public boolean isEnabled() {
-		Element element = root_element();
-		return element.isEnabled();
-	}
 
 	public void click_if_enabled() {
 		Element element = root_element();

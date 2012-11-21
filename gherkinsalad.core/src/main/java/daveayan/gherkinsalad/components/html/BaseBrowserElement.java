@@ -42,7 +42,6 @@ import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
 import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.test.Assert;
 
 /**@author daveayan*/
 /**
@@ -77,6 +76,10 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	}
 
 	public Element findElement(final By by) {
+		if(by == null) {
+			error("Cannot find element on the page with a null element locator");
+			return NullElement.newInstance(element_locator);
+		}
 		if (browser.driver() instanceof NullWebDriver) {
 			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
 		}
@@ -167,28 +170,44 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	 * Default Implementation. Asserts that isDisplayed() method returns Boolean.TRUE
 	 */
 	public void should_be_displayed() {
-		Assert.assertTrue("Expected '" + this + "' to be displayed, found it hidden", this.isDisplayed());
+		if(this.isDisplayed()) {
+			action("Verified '" + this + "' is displayed");
+		} else {
+			error("Expected '" + this + "' to be displayed, found it hidden");
+		}
 	}
 
 	/**
 	 * Default Implementation. Asserts that isNotDisplayed() method returns Boolean.TRUE
 	 */
 	public void should_not_be_displayed() {
-		Assert.assertTrue("Expected '" + this + "' to be hidden, found it displayed", this.isNotDisplayed());
+		if(this.isNotDisplayed()) {
+			action("Verified '" + this + "' is NOT displayed");
+		} else {
+			error("Expected '" + this + "' to be hidden, found it displayed");
+		}
 	}
 
 	/**
 	 * Default Implementation. Asserts that isEnabled() method returns Boolean.TRUE
 	 */
 	public void should_be_enabled() {
-		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isEnabled());
+		if(this.isEnabled()) {
+			action("Verified '" + this + "' is enabled");
+		} else {
+			error("Expected '" + this + "' to be enabled, found it disabled");
+		}
 	}
 
 	/**
 	 * Default Implementation. Asserts that isDisabled() returns Boolean.TRUE
 	 */
 	public void should_be_disabled() {
-		Assert.assertTrue("Expected '" + this + "' to be enabled, found it disabled", this.isDisabled());
+		if(this.isDisabled()) {
+			action("Verified '" + this + "' is disabled");
+		} else {
+			error("Expected '" + this + "' to be disabled, found it enabled");
+		}
 	}
 
 	public BrowserElement name(String name) {
@@ -207,10 +226,12 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	}
 
 	/**
-	 * Default Implementation. Returns Boolean.TRUE
+	 * Default Implementation.
 	 */
 	public boolean isEnabled() {
-		return Boolean.TRUE;
+		Element element = root_element();
+		String disabled_attribute = element.getAttribute("disabled");
+		return element.isEnabled() && (disabled_attribute == null);
 	}
 
 	/**
@@ -221,10 +242,14 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	}
 
 	/**
-	 * Default Implementation. Returns Boolean.TRUE
+	 * Default Implementation.
 	 */
 	public boolean isDisplayed() {
-		return Boolean.TRUE;
+		Element element = root_element();
+		if(element.is_not_null() && element.isDisplayed()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

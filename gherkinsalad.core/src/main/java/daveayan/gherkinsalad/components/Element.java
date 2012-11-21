@@ -395,4 +395,22 @@ public class Element extends BaseBrowserElement implements Nullable {
 		}
 		return StringUtils.EMPTY;
 	}
+	
+	public boolean isEnabled() {
+		if(is_not_null(_webElement)) {
+			boolean isEnabled = _webElement.isEnabled();
+			info("Element '" + super.name() + "' - isEnabled is '" + isEnabled + "'");
+			return isEnabled;
+		}
+		return Boolean.FALSE;
+	}
+	
+	public boolean isDisplayed() {
+		if(is_not_null(_webElement)) {
+			boolean isDisplayed = _webElement.isDisplayed();
+			info("Element '" + super.name() + "' - isDisplayed is '" + isDisplayed + "'");
+			return isDisplayed;
+		}
+		return Boolean.FALSE;
+	}
 }

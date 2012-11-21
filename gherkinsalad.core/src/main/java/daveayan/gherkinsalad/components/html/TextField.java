@@ -30,11 +30,6 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 		}
 		return element.getAttribute("value");
 	}
-	
-	public boolean isEnabled() {
-		Element element = root_element();
-		return element.isEnabled();
-	}
 
 	public void enter_text_if_enabled(String text) {
 		Element element = root_element();
@@ -60,23 +55,31 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 			action("Did not append text '" + text + "' in disabled text field '" + this + "'");
 		}
 	}
-
+	
 	public void click_if_enabled() {
 		Element element = root_element();
 		if(this.isEnabled()) {
 			element.click();
-			action("Clicked in textfield " + this);
 		} else {
-			action("Did not click disabled textfield " + this);
+			action("Did not click '" + this + "' since it is not enabled");
 		}
 	}
 	
 	public void click_if_exists() {
-		click_if_enabled();
+		Element element = root_element();
+		if(this.isDisplayed()) {
+			element.click();
+		} else {
+			action("Did not click '" + this + "' since it is not displayed");
+		}
 	}
-
+	
 	public void click_if_exists_and_enabled() {
-		// TODO Auto-generated method stub
-		
+		Element element = root_element();
+		if(this.isEnabled() && this.isDisplayed()) {
+			element.click();
+		} else {
+			action("Did not click '" + this + "' since it is not enabled and not displayed");
+		}
 	}
 }
