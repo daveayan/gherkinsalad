@@ -3,6 +3,7 @@ GHERKIN SALAD RELEASE NOTES
 
 ===========================
 1.3
+- should* methods in Strings prints error and action messages as appropriate
 - Default implementation of isDisplayed and isEnabled moved to BaseBrowserElement
 - TextArea - Pending methods added
 - TextArea - More info and action messages added

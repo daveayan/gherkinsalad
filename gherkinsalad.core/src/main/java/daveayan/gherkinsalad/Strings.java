@@ -98,11 +98,17 @@ public class Strings extends AutomationObject {
 				strings_not_present._nativeStrings.add(s1);
 			}
 		}
+		if(strings_not_present.is_not_empty()) {
+			error("Expected to find the following strings, did not find them however - " + strings_not_present.toString());
+		} else {
+			action("Verified that all these strings are present - " + expected_strings.toString());
+		}
 		return strings_not_present;
 	}
 	
 	public void should_be_empty() {
-		if(this._nativeStrings().isEmpty()) {
+		if(is_empty()) {
+			action("Verified list of strings is empty");
 			return;
 		}
 		error("Expected the list of strings to be empty, found these values however '" + this.toString() + "'");
@@ -118,5 +124,13 @@ public class Strings extends AutomationObject {
 	
 	public List<String> _nativeStrings() {
 		return _nativeStrings;
+	}
+	
+	public boolean is_empty() {
+		return _nativeStrings().isEmpty();
+	}
+	
+	public boolean is_not_empty() {
+		return ! is_empty();
 	}
 }
