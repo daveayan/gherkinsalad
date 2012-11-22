@@ -37,13 +37,8 @@ public class Strings extends AutomationObject {
 	}
 	
 	public Strings add(String newString) {
-		List<String> newList = new ArrayList<String>();
-		newList.addAll(_nativeStrings);
-		newList.add(newString);
-		
-		Strings _strings = new Strings();
-		_strings._nativeStrings = newList;
-		return _strings;
+		this._nativeStrings().add(newString);
+		return this;
 	}
 	
 	public String toString() {
@@ -76,34 +71,37 @@ public class Strings extends AutomationObject {
 		return _newStrings;
 	}
 	
-	public Strings should_have_all_these_strings(String... expected_strings) {
-		return should_have_all_these_strings(Strings.instance_from(expected_strings));
-	}
-	
-	public Strings should_have_all_these_strings(List<String> expected_strings) {
-		return should_have_all_these_strings(Strings.instance_from(expected_strings));
-	}
-	
-	public Strings should_have_all_these_strings(Strings expected_strings) {
+	public Strings has_all_these(String... expected_strings) {
 		Strings strings_not_present = Strings.new_instance();
-		for(String s1: expected_strings._nativeStrings) {
-			boolean found = false;
-			for(String s2: _nativeStrings) {
-				if(StringUtils.equals(s1, s2)) {
-					found = true;
-					break;
-				}
+		for(String expected_string: expected_strings) {
+			if(this.does_not_have(expected_string)) {
+				strings_not_present._nativeStrings.add(expected_string);
 			}
-			if(! found) {
-				strings_not_present._nativeStrings.add(s1);
-			}
-		}
-		if(strings_not_present.is_not_empty()) {
-			error("Expected to find the following strings, did not find them however - " + strings_not_present.toString());
-		} else {
-			action("Verified that all these strings are present - " + expected_strings.toString());
 		}
 		return strings_not_present;
+	}
+	
+	public Strings has_any_of_these(String... expected_strings) {
+		Strings strings_present = Strings.new_instance();
+		for(String expected_string: expected_strings) {
+			if(this.has(expected_string)) {
+				strings_present.add(expected_string);
+			}
+		}
+		return strings_present;
+	}
+	
+	public boolean has(String string) {
+		for(String s: _nativeStrings()) {
+			if(StringUtils.equals(s, string)) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
+	
+	public boolean does_not_have(String string) {
+		return ! has(string);
 	}
 	
 	public void should_be_empty() {
@@ -112,6 +110,14 @@ public class Strings extends AutomationObject {
 			return;
 		}
 		error("Expected the list of strings to be empty, found these values however '" + this.toString() + "'");
+	}
+	
+	public void should_not_be_empty() {
+		if(is_not_empty()) {
+			action("Verified list of strings is NOT empty");
+			return;
+		}
+		error("Expected the list of strings to be NOT empty, however it is");
 	}
 	
 	private void set(String... strings) {

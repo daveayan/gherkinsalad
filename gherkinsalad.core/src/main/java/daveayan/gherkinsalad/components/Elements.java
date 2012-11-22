@@ -106,6 +106,17 @@ public class Elements {
 	public Element findFirstElementWithText(String expectedText) {
 		if(_elements != null) {
 			for(Element e: _elements) {
+				if(e.is(expectedText)) {
+					return e;
+				}
+			}
+		}
+		return new NullElement();
+	}
+	
+	public Element findFirstElementWithPartialText(String expectedText) {
+		if(_elements != null) {
+			for(Element e: _elements) {
 				if(e.has(expectedText)) {
 					return e;
 				}

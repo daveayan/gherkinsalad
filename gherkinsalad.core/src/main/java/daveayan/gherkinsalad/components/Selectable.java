@@ -18,7 +18,7 @@
 **/
 package daveayan.gherkinsalad.components;
 
-import java.util.List;
+import daveayan.gherkinsalad.Strings;
 /** @author daveayan */
 /**
  * Interface that indicates that a browser element has multiple options from which one can be selected. This is an interface for the Dropdowns
@@ -39,12 +39,22 @@ public interface Selectable extends BrowserElement {
 	 * Asserts that all the options provided as input exist in the dropdown. The dropdown may have more options which is ok but it has to have these.
 	 * @param options
 	 */
-	public void should_have_options(String... options);
+	public void should_have_all_these(String... options);
+	/**
+	 * Asserts that at least one of the options provided as input exist in the dropdown. The dropdown may have more options which is ok but it has to have at lease one of these.
+	 * @param options
+	 */
+	public void should_have_any_of_these(String... options);
+	/**
+	 * Asserts that all the options provided as input do NOT exist in the dropdown. The dropdown may have more options which is ok but it has to have none of these.
+	 * @param options
+	 */
+	public void should_not_have_any_of_these(String... options);
 	/**
 	 * Use this method to get a list of all the option texts in the dropdown
 	 * @return
 	 */
-	public List<String> get_all_options();
+	public Strings get_all_options();
 	/**
 	 * Use this method to get the text of the currently selected option
 	 * @return

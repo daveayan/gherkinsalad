@@ -18,12 +18,11 @@
 **/
 package daveayan.gherkinsalad.components;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import daveayan.gherkinsalad.AutomationObject;
+import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.browser.Browser;
 /** @author daveayan */
 /**
@@ -31,10 +30,19 @@ import daveayan.gherkinsalad.browser.Browser;
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
 public class NullBrowserElement extends AutomationObject implements Clickable, Selectable, TextEnterable, BrowserElement {
-	public BrowserElement name(String name) {
-		throw new AssertionError("operation public BrowserElement name(String name) not allowed on a NullBrowserElement '" + this + "'");
+	public void should_have_all_these(String... expected_strings) {
+		throw new AssertionError("operation public void should_have_all_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_have_any_of_these(String... options) {
+		throw new AssertionError("operation public void should_have_any_of_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
 	
+	public void should_not_have_any_of_these(String... options) {
+		throw new AssertionError("operation public void should_not_have_any_of_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public BrowserElement name(String name) {
+		throw new AssertionError("operation public BrowserElement name(String name) not allowed on a NullBrowserElement '" + this + "'");
+	}	
 	public String getText() {
 		takeScreenshot();
 		throw new AssertionError("operation public String getText() not allowed on a NullBrowserElement '" + this + "'");
@@ -152,7 +160,7 @@ public class NullBrowserElement extends AutomationObject implements Clickable, S
 		takeScreenshot();
 		throw new AssertionError("operation should_not_be_displayed not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public List<String> get_all_options() {
+	public Strings get_all_options() {
 		takeScreenshot();
 		throw new AssertionError("operation get_all_options not allowed on a NullBrowserElement '" + this + "'");
 	}
