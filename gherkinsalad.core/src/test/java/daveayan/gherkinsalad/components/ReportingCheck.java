@@ -8,7 +8,7 @@ import org.junit.Test;
 import daveayan.gherkinsalad.Path;
 import daveayan.gherkinsalad.report.Report;
 
-public class ReportingTest {
+public class ReportingCheck {
 	@Test public void test_reporting() {
 		Report.feature("Feature 1");
 			Report.scenario("Scenario 1");

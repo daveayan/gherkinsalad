@@ -230,6 +230,9 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	 */
 	public boolean isEnabled() {
 		Element element = root_element();
+		if(element.is_null()) {
+			return Boolean.FALSE;
+		}
 		String disabled_attribute = element.getAttribute("disabled");
 		return element.isEnabled() && (disabled_attribute == null);
 	}

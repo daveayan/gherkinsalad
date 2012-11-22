@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import daveayan.BaseTest;
 
-public class TextSelectionTest extends BaseTest {
+public class TextSelectionCheck extends BaseTest {
 	@Test public void select_text_using_firefox() {
 		super.launch_browser("firefox");
 		super.goto_test_page("test-text-selection.html");

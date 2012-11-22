@@ -69,4 +69,17 @@ public class TextArea extends BaseBrowserElement implements TextEnterable {
 			action("Did not append text in element '" + this + "' since it is not enabled");
 		}
 	}
+	
+	public String getText() {
+		if(isNotDisplayed()) {
+			error("Element '" + this + "' is not displayed. Cannot getText on this element");
+			return "NOT_DISPLAYED";
+		}
+		Element element = root_element();
+		if(element.is_null()) {
+			error("Element '" + this + "' is not displayed. Cannot getText on this element");
+			return "IS_NULL";
+		}
+		return element.getAttribute("value");
+	}
 }
