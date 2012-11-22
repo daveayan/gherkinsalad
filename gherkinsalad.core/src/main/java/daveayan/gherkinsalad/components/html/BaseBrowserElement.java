@@ -247,9 +247,13 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	public boolean isDisplayed() {
 		Element element = root_element();
 		if(element.is_not_null() && element.isDisplayed()) {
-			return true;
+			String hidden = element.getAttribute("hidden");
+			if(hidden != null && hidden.equals("true")) {
+				return Boolean.FALSE;
+			}
+			return Boolean.TRUE;
 		}
-		return false;
+		return Boolean.FALSE;
 	}
 
 	/**

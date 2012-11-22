@@ -33,7 +33,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 
 	public void enter_text_if_enabled(String text) {
 		Element element = root_element();
-		if(this.isEnabled()) {
+		if(this.isDisplayed() && this.isEnabled()) {
 			wait_between_steps();
 			element.clear();
 			element.sendKeys(text);
@@ -45,7 +45,7 @@ public class TextField extends BaseBrowserElement implements TextEnterable {
 
 	public void append_text_if_enabled(String text) {
 		Element element = root_element();
-		if(this.isEnabled()) {
+		if(this.isDisplayed() && this.isEnabled()) {
 			wait_between_steps();
 			String current_text = element.getAttribute("value");
 			element.clear();

@@ -12,30 +12,55 @@ import daveayan.gherkinsalad.components.Selectable;
 public class DropDownTest extends BaseTest {
 	@Test public void test_enabled_dropdown_firefox() {
 		super.launch_browser("firefox");
-		super.goto_test_page("html-dropdown-test.html");
+		super.goto_test_page("html-test.html");
 		test_enabled_dropdown();
 		super.close_browser();
 	}
 	
 	@Test public void test_disabled_dropdown_firefox() {
 		super.launch_browser("firefox");
-		super.goto_test_page("html-dropdown-test.html");
+		super.goto_test_page("html-test.html");
 		test_disabled_dropdown();
+		super.close_browser();
+	}
+	
+	@Test public void test_hidden_dropdown_firefox() {
+		super.launch_browser("firefox");
+		super.goto_test_page("html-test.html");
+		test_hidden_dropdown();
 		super.close_browser();
 	}
 	
 	@Test public void test_enabled_dropdown_chrome() {
 		super.launch_browser("chrome");
-		super.goto_test_page("html-dropdown-test.html");
+		super.goto_test_page("html-test.html");
 		test_enabled_dropdown();
 		super.close_browser();
 	}
 	
 	@Test public void test_disabled_dropdown_chrome() {
 		super.launch_browser("chrome");
-		super.goto_test_page("html-dropdown-test.html");
+		super.goto_test_page("html-test.html");
 		test_disabled_dropdown();
 		super.close_browser();
+	}
+	
+	@Test public void test_hidden_dropdown_chrome() {
+		super.launch_browser("chrome");
+		super.goto_test_page("html-test.html");
+		test_hidden_dropdown();
+		super.close_browser();
+	}
+	
+	private void test_hidden_dropdown() {
+		Selectable dropdown = DropDown.find(By.id("hidden-dropdown"));
+		
+		Assert.assertTrue(dropdown.isNotDisplayed());
+		Assert.assertTrue(dropdown.isDisabled());
+		Assert.assertTrue(dropdown.is_not_null());
+		Assert.assertFalse(dropdown.isDisplayed());
+		Assert.assertFalse(dropdown.isEnabled());
+		Assert.assertFalse(dropdown.is_null());
 	}
 	
 	private void test_disabled_dropdown() {
