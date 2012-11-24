@@ -22,10 +22,10 @@ import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.components.core.BrowserElement;
 /** @author daveayan */
 /**
- * Interface that indicates that a browser element has multiple options from which *Only One* can be selected. This is an interface for the Dropdowns
+ * Interface that indicates that a browser element has multiple options from which *Multiple* can be selected. This is an interface for the Dropdowns
  * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend Dropdown.
  */
-public interface Selectable extends BrowserElement {
+public interface MultiOptionSelectable extends BrowserElement {
 	/**
 	 * Use this method to select the option by text in the dropdown
 	 * @param option
@@ -42,6 +42,11 @@ public interface Selectable extends BrowserElement {
 	 */
 	public void should_have_all_these(String... options);
 	/**
+	 * Use this method to get the text of the currently selected options if the control allows multiple selections. If the control allows single selection this returns 
+	 * a Strings object with just one string in there
+	 * @return
+	 */
+	/**
 	 * Asserts that at least one of the options provided as input exist in the dropdown. The dropdown may have more options which is ok but it has to have at lease one of these.
 	 * @param options
 	 */
@@ -52,21 +57,19 @@ public interface Selectable extends BrowserElement {
 	 */
 	public void should_not_have_any_of_these(String... options);
 	
-	public void should_have_this_option_selected(String option);
-	
-	public void should_have_this_code_selected(String code);
-	
-	public void should_not_have_this_option_selected(String option);
-	
-	public void should_not_have_this_code_selected(String code);
 	/**
 	 * Use this method to get a list of all the option texts in the dropdown
 	 * @return
 	 */
 	public Strings get_all_options();
-	/**
-	 * Use this method to get the text of the currently selected option
-	 * @return
-	 */
-	public String get_selected_option();
+	
+	public Strings get_selected_options();
+	
+	public void should_have_these_options_selected(Strings option);
+	
+	public void should_have_these_codes_selected(Strings code);
+	
+	public void should_not_have_these_options_selected(Strings option);
+	
+	public void should_not_have_these_codes_selected(Strings code);
 }

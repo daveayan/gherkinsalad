@@ -9,16 +9,16 @@ import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.components.core.Component;
 import daveayan.gherkinsalad.components.core.Element;
 import daveayan.gherkinsalad.components.core.Elements;
-import daveayan.gherkinsalad.components.html.Selectable;
+import daveayan.gherkinsalad.components.html.SingleOptionSelectable;
 
-public class DropDown extends Component implements Selectable {
-	public static DropDown find(By locator) {
-		DropDown d = new DropDown();
+public class SingleOptionSelectableDropDown extends Component implements SingleOptionSelectable {
+	public static SingleOptionSelectableDropDown find(By locator) {
+		SingleOptionSelectableDropDown d = new SingleOptionSelectableDropDown();
 		d.found(locator);
 		return d;
 	}
 
-	public DropDown name(String name) {
+	public SingleOptionSelectableDropDown name(String name) {
 		super.name(name);
 		return this;
 	}

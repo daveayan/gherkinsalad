@@ -53,7 +53,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	private void test_hidden_checkboxgroup() {
-		Selectable radiobuttongroup = RadioButtonGroup.find(By.name("hidden_preselected_radio"));
+		SingleOptionSelectable radiobuttongroup = RadioButtonGroup.find(By.name("hidden_preselected_radio"));
 		
 		Assert.assertTrue(radiobuttongroup.isNotDisplayed());
 		Assert.assertFalse(radiobuttongroup.isDisabled());
@@ -64,7 +64,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	private void test_disabled_checkboxgroup() {
-		Selectable radiobuttongroup = RadioButtonGroup.find(By.name("disabled_preselected_radio"));
+		SingleOptionSelectable radiobuttongroup = RadioButtonGroup.find(By.name("disabled_preselected_radio"));
 		
 		Assert.assertTrue(radiobuttongroup.isDisplayed());
 		Assert.assertTrue(radiobuttongroup.isDisabled());
@@ -81,7 +81,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	private void test_enabled_checkboxgroup() {
-		Selectable radiobuttongroup = RadioButtonGroup.find(By.name("enabled_nonselected_radio"));
+		SingleOptionSelectable radiobuttongroup = RadioButtonGroup.find(By.name("enabled_nonselected_radio"));
 		
 		Assert.assertTrue(radiobuttongroup.isDisplayed());
 		Assert.assertTrue(radiobuttongroup.isEnabled());

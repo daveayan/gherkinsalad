@@ -25,15 +25,15 @@ import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.components.html.Clickable;
-import daveayan.gherkinsalad.components.html.MultiSelectable;
-import daveayan.gherkinsalad.components.html.Selectable;
+import daveayan.gherkinsalad.components.html.MultiOptionSelectable;
+import daveayan.gherkinsalad.components.html.SingleOptionSelectable;
 import daveayan.gherkinsalad.components.html.TextEnterable;
 /** @author daveayan */
 /**
  * Implementing the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern this object is returned back if
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
-public class NullBrowserElement extends AutomationObject implements Clickable, Selectable, MultiSelectable, TextEnterable, BrowserElement {
+public class NullBrowserElement extends AutomationObject implements Clickable, SingleOptionSelectable, MultiOptionSelectable, TextEnterable, BrowserElement {
 	public void should_have_these_options_selected(Strings option) {
 		throw new AssertionError("operation public void should_have_these_options_selected(Strings option) not allowed on a NullBrowserElement '" + this + "'");
 	}

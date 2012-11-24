@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.html.impl.DropDown;
+import daveayan.gherkinsalad.components.html.impl.SingleOptionSelectableDropDown;
 
 public class DropDownTest extends BaseTest {
 	@Test public void test_enabled_dropdown_firefox() {
@@ -53,7 +53,7 @@ public class DropDownTest extends BaseTest {
 	}
 	
 	private void test_hidden_dropdown() {
-		Selectable dropdown = DropDown.find(By.id("hidden-dropdown"));
+		SingleOptionSelectable dropdown = SingleOptionSelectableDropDown.find(By.id("hidden-dropdown"));
 		
 		Assert.assertTrue(dropdown.isNotDisplayed());
 		Assert.assertTrue(dropdown.isEnabled());
@@ -64,7 +64,7 @@ public class DropDownTest extends BaseTest {
 	}
 	
 	private void test_disabled_dropdown() {
-		Selectable dropdown = DropDown.find(By.id("disabled-dropdown"));
+		SingleOptionSelectable dropdown = SingleOptionSelectableDropDown.find(By.id("disabled-dropdown"));
 		
 		Assert.assertTrue(dropdown.isDisplayed());
 		Assert.assertTrue(dropdown.isDisabled());
@@ -84,7 +84,7 @@ public class DropDownTest extends BaseTest {
 	}
 	
 	private void test_enabled_dropdown() {
-		Selectable dropdown = DropDown.find(By.id("enabled-dropdown"));
+		SingleOptionSelectable dropdown = SingleOptionSelectableDropDown.find(By.id("enabled-dropdown"));
 		
 		Assert.assertTrue(dropdown.isDisplayed());
 		Assert.assertTrue(dropdown.isEnabled());

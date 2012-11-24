@@ -53,7 +53,7 @@ public class CheckBoxGroupTest extends BaseTest {
 	}
 	
 	private void test_hidden_checkboxgroup() {
-		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("hidden_preselected_checkbox"));
+		MultiOptionSelectable checkboxgroup = CheckBoxGroup.find(By.name("hidden_preselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isNotDisplayed());
 		Assert.assertFalse(checkboxgroup.isDisabled());
@@ -64,7 +64,7 @@ public class CheckBoxGroupTest extends BaseTest {
 	}
 	
 	private void test_disabled_checkboxgroup() {
-		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("disabled_preselected_checkbox"));
+		MultiOptionSelectable checkboxgroup = CheckBoxGroup.find(By.name("disabled_preselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isDisplayed());
 		Assert.assertTrue(checkboxgroup.isDisabled());
@@ -74,14 +74,14 @@ public class CheckBoxGroupTest extends BaseTest {
 		Assert.assertFalse(checkboxgroup.is_null());
 		
 		Assert.assertEquals("'Bike, Car'", checkboxgroup.get_all_options().toString());
-		Assert.assertEquals("'Car'", checkboxgroup.get_selected_option());
+		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 		
 		checkboxgroup.select_option_if_enabled("Bike");
-		Assert.assertEquals("'Car'", checkboxgroup.get_selected_option());
+		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 	}
 	
 	private void test_enabled_checkboxgroup() {
-		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("enabled_nonselected_checkbox"));
+		MultiOptionSelectable checkboxgroup = CheckBoxGroup.find(By.name("enabled_nonselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isDisplayed());
 		Assert.assertTrue(checkboxgroup.isEnabled());
@@ -91,19 +91,19 @@ public class CheckBoxGroupTest extends BaseTest {
 		Assert.assertFalse(checkboxgroup.is_null());
 		
 		Assert.assertEquals("'Bike, Car'", checkboxgroup.get_all_options().toString());
-		Assert.assertEquals("''", checkboxgroup.get_selected_option().toString());
+		Assert.assertEquals("''", checkboxgroup.get_selected_options().toString());
 		Assert.assertEquals("''", checkboxgroup.get_selected_options().toString());
 		
 		checkboxgroup.select_option_if_enabled("Car");
-		Assert.assertEquals("'Car'", checkboxgroup.get_selected_option().toString());
+		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 		
 		checkboxgroup.select_code_if_enabled("Bike");
-		Assert.assertEquals("'Bike, Car'", checkboxgroup.get_selected_option().toString());
+		Assert.assertEquals("'Bike, Car'", checkboxgroup.get_selected_options().toString());
 		Assert.assertEquals("'Bike, Car'", checkboxgroup.get_selected_options().toString());
 		
 		checkboxgroup = CheckBoxGroup.find(By.name("enabled_preselected_checkbox"));
-		Assert.assertEquals("'Car'", checkboxgroup.get_selected_option().toString());
+		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 		Assert.assertEquals("'Car'", checkboxgroup.get_selected_options().toString());
 	}
 	

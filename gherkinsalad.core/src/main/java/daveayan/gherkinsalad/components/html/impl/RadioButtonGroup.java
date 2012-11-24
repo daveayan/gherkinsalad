@@ -10,9 +10,9 @@ import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.components.core.Component;
 import daveayan.gherkinsalad.components.core.Element;
 import daveayan.gherkinsalad.components.core.Elements;
-import daveayan.gherkinsalad.components.html.Selectable;
+import daveayan.gherkinsalad.components.html.SingleOptionSelectable;
 
-public class RadioButtonGroup extends Component implements Selectable {
+public class RadioButtonGroup extends Component implements SingleOptionSelectable {
 	public static RadioButtonGroup find(By locator) {
 		RadioButtonGroup rbg = new RadioButtonGroup();
 		rbg.found(locator);

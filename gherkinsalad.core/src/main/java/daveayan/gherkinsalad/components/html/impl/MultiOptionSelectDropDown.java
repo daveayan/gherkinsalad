@@ -8,12 +8,12 @@ import com.google.common.base.Predicate;
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.components.core.Element;
 import daveayan.gherkinsalad.components.core.Elements;
-import daveayan.gherkinsalad.components.html.MultiSelectable;
+import daveayan.gherkinsalad.components.html.MultiOptionSelectable;
 
-public class MultiSelectDropDown extends DropDown implements MultiSelectable {
+public class MultiOptionSelectDropDown extends SingleOptionSelectableDropDown implements MultiOptionSelectable {
 	
-	public static MultiSelectDropDown find(By locator) {
-		MultiSelectDropDown d = new MultiSelectDropDown();
+	public static MultiOptionSelectDropDown find(By locator) {
+		MultiOptionSelectDropDown d = new MultiOptionSelectDropDown();
 		d.found(locator);
 		return d;
 	}
