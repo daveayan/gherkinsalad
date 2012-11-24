@@ -94,4 +94,8 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 		});
 		return selected_option.getText();
 	}
+	
+	public Strings get_selected_options() {
+		return Strings.instance_from(get_selected_option());
+	}
 }

@@ -3,6 +3,7 @@ GHERKIN SALAD RELEASE NOTES
 
 ===========================
 1.4
+- CheckBoxGroup functionality and tests updated. Few tweaks remain.
 - TextArea functionality and tests updated
 - TextField functionality and tests updated
 - has_all_these, has_any_of_these methods on Strings added and updated

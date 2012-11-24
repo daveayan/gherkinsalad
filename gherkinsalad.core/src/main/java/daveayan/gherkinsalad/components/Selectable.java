@@ -60,4 +60,10 @@ public interface Selectable extends BrowserElement {
 	 * @return
 	 */
 	public String get_selected_option();
+	/**
+	 * Use this method to get the text of the currently selected options if the control allows multiple selections. If the control allows single selection this returns 
+	 * a Strings object with just one string in there
+	 * @return
+	 */
+	public Strings get_selected_options();
 }

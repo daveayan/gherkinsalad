@@ -42,6 +42,7 @@ import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.components.BrowserElement;
 import daveayan.gherkinsalad.components.Element;
+import daveayan.gherkinsalad.components.Elements;
 
 /**@author daveayan*/
 /**
@@ -74,6 +75,11 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 		validate_position_and_css(element);
 		return element;
 	}
+	
+	public Elements root_elements() {
+		Elements elements = findElements(element_locator);
+		return elements;
+	}
 
 	public Element findElement(final By by) {
 		if(by == null) {
@@ -97,6 +103,41 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 			return NullElement.newInstance(element_locator);
 		}
 		return Element.newInstance(_webElement, name(), by);
+	}
+	
+	public Elements findElements(final By by) {
+		if(by == null) {
+			error("Cannot find element on the page with a null element locator");
+			return Elements.nullInstance();
+		}
+		if (browser.driver() instanceof NullWebDriver) {
+			throw new AssertionError("Cannot find any element '" + by + "' on a NullWebDriver");
+		}
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.driver())
+				.withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
+				.pollingEvery(Config.seconds_poll_interval, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
+		List<WebElement> _webElements;
+		try {
+			_webElements = wait.until(new Function<WebDriver, List<WebElement>>() {
+				public List<WebElement> apply(WebDriver driver) {
+					return driver.findElements(by);
+				}
+			});
+		} catch (TimeoutException toe) {
+			return Elements.nullInstance();
+		}
+		Elements elements = convertToElements(_webElements, by);
+		return elements;
+	}
+	
+	private Elements convertToElements(List<WebElement> _webElements, By locator) {
+		Elements elements = new Elements();
+		if(_webElements != null) {
+			for(WebElement _we: _webElements) {
+				elements.add(Element.newInstance(_we, locator.toString(), locator));
+			}
+		}
+		return elements;
 	}
 
 	/**

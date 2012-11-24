@@ -66,11 +66,15 @@ public class Elements {
 	}
 	
 	public String toString() {
+		return toStrings().toString();
+	}
+	
+	public Strings toStrings() {
 		Strings strings = Strings.new_instance();
 		for(Element element: _nativeList()) {
 			strings = strings.add(element.getText());
 		}
-		return strings.toString();
+		return strings;
 	}
 	
 	public void each(Predicate<Element> predicate) {
@@ -141,6 +145,21 @@ public class Elements {
 			}
 		}
 		return new NullElement();
+	}
+	
+	public Elements findElementsThatMatch(Predicate<Element> predicate) {
+		Elements filtered_elements = new Elements();
+		for(Element element: _elements) {
+			if(predicate.apply(element)) {
+				filtered_elements.add(element);
+			}
+		}
+		return filtered_elements;
+	}
+	
+	public Strings toStrings(Function<Element, String> function) {
+		List<String> strings = Lists.transform(_elements, function);
+		return Strings.instance_from(strings);
 	}
 	
 	public List<Element> _nativeList() {

@@ -30,6 +30,9 @@ import daveayan.gherkinsalad.browser.Browser;
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
 public class NullBrowserElement extends AutomationObject implements Clickable, Selectable, TextEnterable, BrowserElement {
+	public Strings get_selected_options() {
+		throw new AssertionError("operation public Strings get_selected_options() not allowed on a NullBrowserElement '" + this + "'");
+	}
 	public void should_have_all_these(String... expected_strings) {
 		throw new AssertionError("operation public void should_have_all_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
