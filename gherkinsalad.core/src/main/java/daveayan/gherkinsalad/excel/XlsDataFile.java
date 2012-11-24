@@ -12,15 +12,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import daveayan.gherkinsalad.AutomationObject;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 
 public class XlsDataFile extends XlsFile {
 	private static Log log = LogFactory.getLog(XlsDataFile.class);
 	private Map<String, String> data = new HashMap<String, String>();
 	
 	public static XlsDataFile openXlsFile(String file_absolute_path) {
-		Report.action("Opening XLS file '" + file_absolute_path + "'");
+		ReportFactory.reporter().action("Opening XLS file '" + file_absolute_path + "'");
 		XlsDataFile support = new XlsDataFile();
 		InputStream inp;
 		try {
@@ -39,12 +38,12 @@ public class XlsDataFile extends XlsFile {
 	public String get_data_for_role_key(String role, String key) {
 		String value = data.get(role.toUpperCase() + "_" + key);
 		value = StringUtils.trimToEmpty(value);
-		Report.action("Data for role '" + role + "', key '" + key + "' is '" + value + "'");
+		ReportFactory.reporter().action("Data for role '" + role + "', key '" + key + "' is '" + value + "'");
 		return value;
 	}
 	
 	public void switch_to_sheet(String sheet_name) {
-		Report.action("Switching to sheet '" + sheet_name + "'");
+		ReportFactory.reporter().action("Switching to sheet '" + sheet_name + "'");
 		current_sheet = workbook.getSheet(sheet_name);
 		load_up_data();
 	}

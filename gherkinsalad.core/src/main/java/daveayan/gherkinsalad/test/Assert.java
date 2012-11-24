@@ -1,7 +1,7 @@
 package daveayan.gherkinsalad.test;
 
 import daveayan.gherkinsalad.AutomationObject;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 
 public class Assert extends AutomationObject{
 	protected Assert() {
@@ -36,7 +36,7 @@ public class Assert extends AutomationObject{
 	 * Fails a test with the given message.
 	 */
 	public static void fail(String message) {
-		Report.error(message);
+		ReportFactory.reporter().error(message);
 		browser.takeScreenshot();
 	}
 	/**
@@ -71,7 +71,7 @@ public class Assert extends AutomationObject{
 			return;
 		if (expected != null && expected.equals(actual))
 			return;
-		Report.error(message + " Expected '" + expected + "', Found '" + actual +"'");
+		ReportFactory.reporter().error(message + " Expected '" + expected + "', Found '" + actual +"'");
 	}
 	/**
 	 * Use this to assert that two Strings are equal. 

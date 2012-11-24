@@ -28,11 +28,7 @@ import org.openqa.selenium.WebDriverException;
 
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.browser.factory.BrowserFactory;
-import daveayan.gherkinsalad.browser.factory.ChromeBrowser;
-import daveayan.gherkinsalad.browser.factory.FireFoxBrowser;
-import daveayan.gherkinsalad.browser.factory.HtmlUnitBrowser;
-import daveayan.gherkinsalad.browser.factory.IeBrowser;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 import daveayan.mirage.ReflectionUtils;
 /** @author daveayan */
 /**
@@ -80,7 +76,7 @@ public class Browser {
 	 */
 	public void takeScreenshotAsFile(String file_name) {
 			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
-			Report.screenshot_taken(screenshot_file, file_name);
+			ReportFactory.reporter().screenshot_taken(screenshot_file, file_name);
 	}
 
 	/**

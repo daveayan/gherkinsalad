@@ -29,7 +29,7 @@ import com.google.common.annotations.Beta;
 
 import daveayan.gherkinsalad.browser.Browser;
 import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 import daveayan.lang.Nullable;
 
 /** @author daveayan */
@@ -49,52 +49,52 @@ public abstract class AutomationObject implements Nullable {
 	protected Random random = new Random();
 	
 	protected void feature(String feature_name) {
-		Report.feature("Feature: "+ feature_name);
+		ReportFactory.reporter().feature("Feature: "+ feature_name);
 	}
 	
 	protected void scenario(String scenario_name) {
-		Report.scenario("Scenario: " + scenario_name);
+		ReportFactory.reporter().scenario("Scenario: " + scenario_name);
 	}
 	
 	protected void given(String step_name) {
-		Report.step("Given " + step_name);
+		ReportFactory.reporter().given("Given " + step_name);
 	}
 	
 	protected void when(String step_name) {
-		Report.step("When " + step_name);
+		ReportFactory.reporter().when("When " + step_name);
 	}
 	
 	protected void then(String step_name) {
-		Report.step("Then " + step_name);
+		ReportFactory.reporter().then("Then " + step_name);
 	}
 	
 	protected void and(String step_name) {
-		Report.step("And " + step_name);
+		ReportFactory.reporter().and("And " + step_name);
 	}
 	
 	protected void ask(String ask) {
-		Report.ask(ask);
+		ReportFactory.reporter().ask(ask);
 	}
 	
 	protected void info(String info) {
-		Report.info(info);
+		ReportFactory.reporter().info(info);
 	}
 	
 	protected void warn(String warn) {
-		Report.warn(warn);
+		ReportFactory.reporter().warn(warn);
 		browser.takeScreenshot();
 	}
 	
 	protected void task(String task) {
-		Report.task(task);
+		ReportFactory.reporter().task(task);
 	}
 	
 	protected void action(String action) {
-		Report.action(action);
+		ReportFactory.reporter().action(action);
 	}
 	
 	protected void error(String error) {
-		Report.error(error);
+		ReportFactory.reporter().error(error);
 	}
 	
 	protected void verify_profile(String name, Element... elements) {

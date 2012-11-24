@@ -26,6 +26,8 @@ public class Config {
 	
 	public static String execution_results_storage_location = null;
 	
+	public static String reporter_class = "daveayan.gherkinsalad.report.DefaultHtmlReporter";
+	
 	public static String getProperty(String key) {
 		String value = user_config.getProperty(key);
 		if(value == null) {
@@ -66,6 +68,9 @@ public class Config {
 			String execution_1 = config.getProperty("execution.results.storage.location");
 			if(StringUtils.isNotBlank(execution_1)) execution_results_storage_location = new String(execution_1);
 			
+			String reporter_1 = config.getProperty("reporter");
+			if(StringUtils.isNotBlank(reporter_1)) reporter_class = new String(reporter_1);
+			
 			String os_name= System.getProperty("os.name");
 			if(os_name.trim().contains("Mac")) {
 				chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver";
@@ -84,7 +89,8 @@ public class Config {
 		if(seconds_wait_after_each_step == -1) seconds_wait_after_each_step = 0;
 		if(seconds_timeout == -1) seconds_timeout = 30;
 		if(seconds_poll_interval == -1) seconds_poll_interval = 1;
-		if(execution_results_storage_location == null) execution_results_storage_location = Path.TO_TARGET;
+		if(StringUtils.isBlank(execution_results_storage_location)) execution_results_storage_location = Path.TO_TARGET;
+		if(StringUtils.isBlank(reporter_class)) reporter_class = "daveayan.gherkinsalad.report.DefaultHtmlReporter";
 	}
 	
 	public static void load_properties_from(String user_properties_file_path, String default_properties_file_path) {

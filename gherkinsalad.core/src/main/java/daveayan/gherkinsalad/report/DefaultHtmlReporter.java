@@ -16,8 +16,8 @@ import org.openqa.selenium.io.IOUtils;
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.Path;
 
-public class Report {
-	private static Log log = LogFactory.getLog(Report.class);
+public class DefaultHtmlReporter implements Reporter {
+	private static Log log = LogFactory.getLog(DefaultHtmlReporter.class);
 	private static DateFormat df = DateFormat.getDateTimeInstance();
 	private static DateFormat df_for_file = new SimpleDateFormat("yyyy_MM_dd__HH_mm_ss");
 	private static boolean feature_already_started = Boolean.FALSE;
@@ -26,28 +26,28 @@ public class Report {
 	private static File report_folder = null;
 	private static String report_file_name = "/index.html";
 	
-	private static void close_step() {
+	private void close_step() {
 		if(step_already_started) {
 			report("</div></div>");
 			step_already_started = Boolean.FALSE;
 		}
 	}
 	
-	private static void close_scenario() {
+	private void close_scenario() {
 		if(scenario_already_started) {
 			report("</div></div>");
 			scenario_already_started = Boolean.FALSE;
 		}
 	}
 	
-	private static void close_feature() {
+	private void close_feature() {
 		if(feature_already_started) {
 			report("</div></div>");
 			feature_already_started = Boolean.FALSE;
 		}
 	}
 	
-	public static void feature(String feature) {
+	public void feature(String feature) {
 		close_step();
 		close_scenario();
 		close_feature();
@@ -60,7 +60,7 @@ public class Report {
 		feature_already_started = Boolean.TRUE;
 	}
 	
-	public static void scenario(String scenario) {
+	public void scenario(String scenario) {
 		close_step();
 		close_scenario();
 		
@@ -72,7 +72,68 @@ public class Report {
 		scenario_already_started = Boolean.TRUE;
 	}
 	
-	public static void step(String step) {
+	public void given(String step_name) {
+		step(step_name);
+	}
+	
+	public void when(String step_name) {
+		step(step_name);
+	}
+	
+	public void then(String step_name) {
+		step(step_name);
+	}
+	
+	public void and(String step_name) {
+		step(step_name);
+	}
+	
+	public void ask(String task) {
+		report(formatted_html("ask", task));
+	}
+	
+	public void warn(String task) {
+		report(formatted_html("warn", task));
+	}
+	
+	public void task(String task) {
+		report(formatted_html("task", task));
+	}
+	
+	public void action(String action) {
+		report(formatted_html("action", action));
+	}
+	
+	public void error(String error) {
+		report(formatted_html("action error", error));
+	}
+	
+	public void info(String info) {
+		report(formatted_html("info", info));
+	}
+	
+	public void screenshot_taken(File screenshot_file, String file_name) {
+		try {
+			FileUtils.copyFile(screenshot_file, new File(report_folder + "/screenshots/" + file_name));
+			screenshot_taken(file_name);
+		} catch (IOException e) {
+			error("Unable to take screenshot : " + Path.TO_SCREENSHOTS + file_name);
+		}
+	}
+	
+	public void screenshot_taken(String filename) {
+		String html = StringUtils.EMPTY;
+		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
+		report(html);
+	}
+	
+	private String formatted_html(String id, String text) {
+		String html = StringUtils.EMPTY;
+		html += "<div class=\"" + id + "\">" + text + "<span class=\"date\">" + current_date_time() + "</span></div>";
+		return html;
+	}
+	
+	private void step(String step) {
 		close_step();
 		
 		String html = StringUtils.EMPTY;
@@ -83,52 +144,7 @@ public class Report {
 		step_already_started = Boolean.TRUE;
 	}
 	
-	public static void ask(String task) {
-		report(formatted_html("ask", task));
-	}
-	
-	public static void warn(String task) {
-		report(formatted_html("warn", task));
-	}
-	
-	public static void task(String task) {
-		report(formatted_html("task", task));
-	}
-	
-	public static void action(String action) {
-		report(formatted_html("action", action));
-	}
-	
-	public static void error(String error) {
-		report(formatted_html("action error", error));
-	}
-	
-	public static void info(String info) {
-		report(formatted_html("info", info));
-	}
-	
-	public static void screenshot_taken(File screenshot_file, String file_name) {
-		try {
-			FileUtils.copyFile(screenshot_file, new File(report_folder + "/screenshots/" + file_name));
-			screenshot_taken(file_name);
-		} catch (IOException e) {
-			error("Unable to take screenshot : " + Path.TO_SCREENSHOTS + file_name);
-		}
-	}
-	
-	public static void screenshot_taken(String filename) {
-		String html = StringUtils.EMPTY;
-		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
-		report(html);
-	}
-	
-	private static String formatted_html(String id, String text) {
-		String html = StringUtils.EMPTY;
-		html += "<div class=\"" + id + "\">" + text + "<span class=\"date\">" + current_date_time() + "</span></div>";
-		return html;
-	}
-	
-	private static void report(String text) {
+	private void report(String text) {
 		create_file_if_not_exists();
 		File report_file = new File(report_folder + report_file_name);
 		try {
@@ -139,7 +155,7 @@ public class Report {
 		}
 	}
 	
-	private static void create_file_if_not_exists() {
+	private void create_file_if_not_exists() {
 		report_folder();
 		File report_file = new File(report_folder + report_file_name);
 		if(report_file.exists()) return;
@@ -150,8 +166,8 @@ public class Report {
 		stream_classpath_resource_to_file("/gherkinsaladreport.js", report_folder + "/gherkinsaladreport.js");
 	}
 	
-	private static void stream_classpath_resource_to_file(String path_to_classpath_resource, String file_to_write) {
-		InputStream stream = Report.class.getResourceAsStream(path_to_classpath_resource);
+	private void stream_classpath_resource_to_file(String path_to_classpath_resource, String file_to_write) {
+		InputStream stream = DefaultHtmlReporter.class.getResourceAsStream(path_to_classpath_resource);
 		try {
 			String contents = IOUtils.readFully(stream);
 			FileUtils.writeStringToFile(new File(file_to_write), contents);
@@ -161,15 +177,15 @@ public class Report {
 		}
 	}
 	
-	private static String current_date_time_file_name() {
+	private String current_date_time_file_name() {
 		return df_for_file.format(new Date());
 	}
 	
-	private static String current_date_time() {
+	private String current_date_time() {
 		return df.format(new Date());
 	}
 	
-	private static void report_folder() {
+	private void report_folder() {
 		if(report_folder == null) {
 			File folder = new File(Config.execution_results_storage_location);
 			if(! folder.exists()) {

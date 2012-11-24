@@ -3,6 +3,7 @@ GHERKIN SALAD RELEASE NOTES
 
 ===========================
 1.4
+- Ability to create our own reporting modules with a default html reporter
 - MultiSelectDropDown functionality and tests added. should* methods remain.
 - CheckBoxGroup functionality and tests updated. Few tweaks remain.
 - TextArea functionality and tests updated

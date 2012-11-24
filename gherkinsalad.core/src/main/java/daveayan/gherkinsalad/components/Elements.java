@@ -15,7 +15,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import daveayan.gherkinsalad.Strings;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 import daveayan.lang.NullList;
 
 public class Elements {
@@ -30,12 +30,12 @@ public class Elements {
 			for(Element element: _nativeList()) {
 				available_texts.add(element.getText());
 				if(element.getText().contains(text)) {
-					Report.task("Found '" + text + "' in " + texts);
+					ReportFactory.reporter().task("Found '" + text + "' in " + texts);
 					return;
 				}
 			}
 		}
-		Report.error("Did not find any of the texts " + texts + ", found " + available_texts);
+		ReportFactory.reporter().error("Did not find any of the texts " + texts + ", found " + available_texts);
 	}
 	
 	public void each_element_should_have_all_of_these_texts(String... texts) {
@@ -59,9 +59,9 @@ public class Elements {
 			}
 		}
 		if(text_not_available.isEmpty()) {
-			Report.task("Found all expected texts " + texts);
+			ReportFactory.reporter().task("Found all expected texts " + texts);
 		} else {
-			Report.error("Did not find expected texts " + text_not_available + " in " + this);
+			ReportFactory.reporter().error("Did not find expected texts " + text_not_available + " in " + this);
 		}
 	}
 	

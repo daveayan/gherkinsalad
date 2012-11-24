@@ -25,7 +25,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import daveayan.gherkinsalad.browser.Browser;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 
 /**
  * @author daveayan
@@ -43,7 +43,7 @@ public class FireFoxBrowser implements BrowserFactory {
 	
 	public WebDriver getDriver() {
 		try {
-			Report.action("Opening Firefox");
+			ReportFactory.reporter().action("Opening Firefox");
 			WebDriver driver = new FirefoxDriver();
 			return driver;
 		} catch (Throwable th) {

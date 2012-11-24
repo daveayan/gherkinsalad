@@ -6,34 +6,34 @@ import org.junit.Before;
 import org.junit.Test;
 
 import daveayan.gherkinsalad.Path;
-import daveayan.gherkinsalad.report.Report;
+import daveayan.gherkinsalad.report.ReportFactory;
 
 public class ReportingCheck {
 	@Test public void test_reporting() {
-		Report.feature("Feature 1");
-			Report.scenario("Scenario 1");
-				Report.step("Step 1");
-					Report.task("Task 1");
-						Report.action("Action 1");
-						Report.info("Info 1");
-						Report.screenshot_taken("screenshot 1");
-					Report.task("Task 2");
-				Report.step("Step 2");
-			Report.scenario("Scenario 2");
-				Report.step("Step 1");
-					Report.task("Task 1");
-						Report.action("Action 1");
-						Report.screenshot_taken("screenshot 1");
-						Report.error("Error 1");
-				Report.step("Step 2");
+		ReportFactory.reporter().feature("Feature 1");
+			ReportFactory.reporter().scenario("Scenario 1");
+				ReportFactory.reporter().given("Step 1");
+					ReportFactory.reporter().task("Task 1");
+						ReportFactory.reporter().action("Action 1");
+						ReportFactory.reporter().info("Info 1");
+						ReportFactory.reporter().screenshot_taken("screenshot 1");
+					ReportFactory.reporter().task("Task 2");
+				ReportFactory.reporter().when("Step 2");
+			ReportFactory.reporter().scenario("Scenario 2");
+				ReportFactory.reporter().then("Step 1");
+					ReportFactory.reporter().task("Task 1");
+						ReportFactory.reporter().action("Action 1");
+						ReportFactory.reporter().screenshot_taken("screenshot 1");
+						ReportFactory.reporter().error("Error 1");
+				ReportFactory.reporter().given("Step 2");
 		
-		Report.feature("Feature 2");
-			Report.scenario("Scenario 1");
-				Report.step("Step 1");
-				Report.step("Step 2");
-			Report.scenario("Scenario 2");
-				Report.step("Step 1");
-				Report.step("Step 2");
+		ReportFactory.reporter().feature("Feature 2");
+			ReportFactory.reporter().scenario("Scenario 1");
+				ReportFactory.reporter().when("Step 1");
+				ReportFactory.reporter().then("Step 2");
+			ReportFactory.reporter().scenario("Scenario 2");
+				ReportFactory.reporter().when("Step 1");
+				ReportFactory.reporter().then("Step 2");
 	}
 	
 	@Before public void before() {
