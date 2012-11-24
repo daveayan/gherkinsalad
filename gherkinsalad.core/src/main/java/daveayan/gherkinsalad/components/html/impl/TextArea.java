@@ -1,11 +1,12 @@
-package daveayan.gherkinsalad.components.html;
+package daveayan.gherkinsalad.components.html.impl;
 
 import org.openqa.selenium.By;
 
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.TextEnterable;
+import daveayan.gherkinsalad.components.core.Component;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.html.TextEnterable;
 
-public class TextArea extends BaseBrowserElement implements TextEnterable {
+public class TextArea extends Component implements TextEnterable {
 	
 	public static TextArea find(By locator) {
 		TextArea ta = new TextArea();

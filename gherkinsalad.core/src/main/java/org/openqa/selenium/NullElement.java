@@ -1,7 +1,7 @@
 package org.openqa.selenium;
 
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Elements;
 
 public class NullElement extends Element {
 	private By selector;

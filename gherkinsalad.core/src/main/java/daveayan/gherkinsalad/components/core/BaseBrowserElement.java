@@ -16,7 +16,7 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
-package daveayan.gherkinsalad.components.html;
+package daveayan.gherkinsalad.components.core;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,9 +40,6 @@ import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Config;
-import daveayan.gherkinsalad.components.BrowserElement;
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
 
 /**@author daveayan*/
 /**
@@ -55,20 +52,6 @@ import daveayan.gherkinsalad.components.Elements;
  */
 public abstract class BaseBrowserElement extends AutomationObject implements BrowserElement {
 	private By element_locator;
-
-//	protected boolean is_not_null(Object o) {
-//		return !is_null(o);
-//	}
-//
-//	protected boolean is_null(Object o) {
-//		if (o == null)
-//			return true;
-//		if (o instanceof Nullable) {
-//			Nullable n = (Nullable) o;
-//			return n.is_null();
-//		}
-//		return false;
-//	}
 
 	public Element root_element() {
 		Element element = findElement(element_locator);

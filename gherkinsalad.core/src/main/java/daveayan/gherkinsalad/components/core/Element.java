@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.core;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,8 +18,6 @@ import org.openqa.selenium.support.ui.Wait;
 import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.Config;
-import daveayan.gherkinsalad.components.html.BaseBrowserElement;
-import daveayan.lang.Nullable;
 
 
 /** @author daveayan */

@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.Selectable;
+import daveayan.gherkinsalad.components.html.impl.RadioButtonGroup;
 
 public class RadioButtonGroupTest extends BaseTest {
 	@Test public void test_enabled_radiobuttongroup_firefox() {

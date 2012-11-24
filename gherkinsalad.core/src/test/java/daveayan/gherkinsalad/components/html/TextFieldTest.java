@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.TextEnterable;
+import daveayan.gherkinsalad.components.html.impl.TextField;
 
 public class TextFieldTest extends BaseTest {
 	@Test public void test_enabled_textfield_firefox() {

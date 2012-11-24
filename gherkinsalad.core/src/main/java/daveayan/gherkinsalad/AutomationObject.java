@@ -28,9 +28,9 @@ import org.openqa.selenium.NoAlertPresentException;
 import com.google.common.annotations.Beta;
 
 import daveayan.gherkinsalad.browser.Browser;
-import daveayan.gherkinsalad.components.Element;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Nullable;
 import daveayan.gherkinsalad.report.ReportFactory;
-import daveayan.lang.Nullable;
 
 /** @author daveayan */
 /**

@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.Selectable;
+import daveayan.gherkinsalad.components.html.Selectable;
 import daveayan.gherkinsalad.test.Assert;
 
 public class DefaultSelectMenuTest extends BaseTest {

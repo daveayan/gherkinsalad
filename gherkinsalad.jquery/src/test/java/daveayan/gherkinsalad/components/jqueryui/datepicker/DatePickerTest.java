@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.TextEnterable;
-import daveayan.gherkinsalad.components.html.TextField;
+import daveayan.gherkinsalad.components.html.TextEnterable;
+import daveayan.gherkinsalad.components.html.impl.TextField;
 
 public class DatePickerTest extends BaseTest {
 	@SuppressWarnings("deprecation")

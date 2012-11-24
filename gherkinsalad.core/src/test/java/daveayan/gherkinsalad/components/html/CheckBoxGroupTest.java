@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.MultiSelectable;
+import daveayan.gherkinsalad.components.html.impl.CheckBoxGroup;
 
 public class CheckBoxGroupTest extends BaseTest {
 	@Test public void test_enabled_checkboxgroup_firefox() {

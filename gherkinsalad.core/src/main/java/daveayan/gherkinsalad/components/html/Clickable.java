@@ -16,12 +16,24 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.html;
+
+import daveayan.gherkinsalad.components.core.BrowserElement;
+
 /** @author daveayan */
 /**
- * Interface that indicates that a browser element can be disabled.
- * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend BaseBrowserElement.
+ * Interface that indicates that a browser element can be clicked.
+ * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend Link.
  */
-public interface CanBeDisabled {
-	public boolean isDisabled();
+public interface Clickable extends BrowserElement {
+	/**
+	 * Click the element if it is enabled, i.e. isEnabled() returns true
+	 * If the element is not displayed calling this method will throw AssertionError
+	 */
+	public void click_if_enabled();
+	
+	/**
+	 * Click the element if it is displayed and enabled, i.e. isDisplayed() returns true and isEnabled() returns true
+	 */
+	public void click_if_exists_and_enabled();
 }

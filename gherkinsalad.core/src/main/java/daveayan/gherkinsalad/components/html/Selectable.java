@@ -16,9 +16,10 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.html;
 
 import daveayan.gherkinsalad.Strings;
+import daveayan.gherkinsalad.components.core.BrowserElement;
 /** @author daveayan */
 /**
  * Interface that indicates that a browser element has multiple options from which *Only One* can be selected. This is an interface for the Dropdowns

@@ -16,34 +16,12 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
-
-import org.openqa.selenium.By;
-
-import daveayan.lang.Nullable;
+package daveayan.gherkinsalad.components.core;
 /** @author daveayan */
 /**
- * Interface to describe any element on a browser. The browser element may have other composite elements. A browser element may be enabled or disabled.
- * This may be "null" if the requested element cannot be found on the browser. This class uses the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern.
- * 
+ * Interface that indicates that a browser element can be disabled.
  * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend BaseBrowserElement.
  */
-public interface BrowserElement extends CanBeEnabled, CanBeDisabled, Nullable {
-	public BrowserElement name(String name);
-	public BrowserElement found(By element_locator);
-	
-	public String getText();
-	
-	public boolean isDisplayed();
-	public boolean isNotDisplayed();
-	public boolean has_text(String... expected_texts);
-	
-	public void should_be_enabled();
-	public void should_be_disabled();
-	
-	public void should_be_displayed();
-	public void should_not_be_displayed();
-	
-	public void should_have_text(String... expected_texts);
-	public void should_not_have_text(String... expected_texts);
+public interface CanBeDisabled {
+	public boolean isDisabled();
 }

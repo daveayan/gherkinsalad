@@ -16,21 +16,14 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.core;
+
 /** @author daveayan */
 /**
- * Interface that indicates that a browser element can be clicked.
- * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend Link.
+ * Any class that implements this interface indicates that it supports the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern.
+ *
  */
-public interface Clickable extends BrowserElement {
-	/**
-	 * Click the element if it is enabled, i.e. isEnabled() returns true
-	 * If the element is not displayed calling this method will throw AssertionError
-	 */
-	public void click_if_enabled();
-	
-	/**
-	 * Click the element if it is displayed and enabled, i.e. isDisplayed() returns true and isEnabled() returns true
-	 */
-	public void click_if_exists_and_enabled();
+public interface Nullable {
+	public boolean is_null();
+	public boolean is_not_null();
 }

@@ -3,6 +3,7 @@ GHERKIN SALAD RELEASE NOTES
 
 ===========================
 1.4
+- Refactor: Moved some code around to appropriate packages
 - RadioButtonGroup functionality and tests updated. should* methods remain.
 - Ability to create our own reporting modules with a default html reporter
 - MultiSelectDropDown functionality and tests added. should* methods remain.

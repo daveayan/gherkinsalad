@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import daveayan.BaseTest;
+import daveayan.gherkinsalad.components.core.Element;
 
 public class TextSelectionCheck extends BaseTest {
 	@Test public void select_text_using_firefox() {

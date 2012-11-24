@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.After;
 
-import daveayan.gherkinsalad.components.html.BaseBrowserElement;
+import daveayan.gherkinsalad.components.core.BaseBrowserElement;
 
 public class BaseTest extends BaseBrowserElement {
 

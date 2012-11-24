@@ -4,7 +4,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.html.Link;
+import daveayan.gherkinsalad.components.html.Clickable;
+import daveayan.gherkinsalad.components.html.impl.Link;
 
 public class JavascriptAlertBoxTest extends BaseTest {
 	@Test public void test_alert_box_handling_in_firefox() {

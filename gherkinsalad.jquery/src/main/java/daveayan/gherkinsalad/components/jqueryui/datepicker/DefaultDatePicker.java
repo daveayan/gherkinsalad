@@ -9,10 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 
-import daveayan.gherkinsalad.components.Clickable;
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
-import daveayan.gherkinsalad.components.html.Link;
+import daveayan.gherkinsalad.components.html.Clickable;
+import daveayan.gherkinsalad.components.html.impl.Link;
 
 public class DefaultDatePicker extends BaseBrowserElement implements DatePicker {
 	private static Log log = LogFactory.getLog(BaseBrowserElement.class);

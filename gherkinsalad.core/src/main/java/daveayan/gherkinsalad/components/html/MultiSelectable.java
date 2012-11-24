@@ -16,14 +16,27 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.lang;
+package daveayan.gherkinsalad.components.html;
 
+import daveayan.gherkinsalad.Strings;
 /** @author daveayan */
 /**
- * Any class that implements this interface indicates that it supports the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern.
- *
+ * Interface that indicates that a browser element has multiple options from which *Multiple* can be selected. This is an interface for the Dropdowns
+ * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend Dropdown.
  */
-public interface Nullable {
-	public boolean is_null();
-	public boolean is_not_null();
+public interface MultiSelectable extends Selectable {
+	/**
+	 * Use this method to get the text of the currently selected options if the control allows multiple selections. If the control allows single selection this returns 
+	 * a Strings object with just one string in there
+	 * @return
+	 */
+	public Strings get_selected_options();
+	
+	public void should_have_these_options_selected(Strings option);
+	
+	public void should_have_these_codes_selected(Strings code);
+	
+	public void should_not_have_these_options_selected(Strings option);
+	
+	public void should_not_have_these_codes_selected(Strings code);
 }

@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components.html;
+package daveayan.gherkinsalad.components.html.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
@@ -6,11 +6,12 @@ import org.openqa.selenium.By;
 import com.google.common.base.Predicate;
 
 import daveayan.gherkinsalad.Strings;
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.Selectable;
+import daveayan.gherkinsalad.components.core.Component;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Elements;
+import daveayan.gherkinsalad.components.html.Selectable;
 
-public class DropDown extends BaseBrowserElement implements Selectable {
+public class DropDown extends Component implements Selectable {
 	public static DropDown find(By locator) {
 		DropDown d = new DropDown();
 		d.found(locator);

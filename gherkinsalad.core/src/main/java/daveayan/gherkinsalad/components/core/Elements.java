@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.report.ReportFactory;
-import daveayan.lang.NullList;
 
 public class Elements {
 	private List<Element> _elements = new ArrayList<Element>();

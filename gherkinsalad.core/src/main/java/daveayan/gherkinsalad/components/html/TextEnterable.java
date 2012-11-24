@@ -16,12 +16,22 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.html;
 /** @author daveayan */
 /**
- * Interface that indicates that a browser element can be enabled.
- * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend BaseBrowserElement.
+ * Interface that indicates that text can be entered in the BrowserElement.
+ * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend TextField or TextArea.
  */
-public interface CanBeEnabled {
-	public boolean isEnabled();
+public interface TextEnterable extends Clickable {
+	/**
+	 * Clear the existing text and enter the text passed in as parameter
+	 * @param text
+	 */
+	public void enter_text_if_enabled(String text);
+	/**
+	 * Append the text passed in as parameter to the existing text. The text may be appended before the existing text or after the existing text,
+	 * depending on the implementation
+	 * @param text
+	 */
+	public void append_text_if_enabled(String text);
 }

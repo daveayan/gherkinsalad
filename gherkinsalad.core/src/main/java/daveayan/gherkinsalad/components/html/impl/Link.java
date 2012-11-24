@@ -1,12 +1,13 @@
-package daveayan.gherkinsalad.components.html;
+package daveayan.gherkinsalad.components.html.impl;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NullElement;
 
-import daveayan.gherkinsalad.components.Clickable;
-import daveayan.gherkinsalad.components.Element;
+import daveayan.gherkinsalad.components.core.Component;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.html.Clickable;
 
-public class Link extends BaseBrowserElement implements Clickable {
+public class Link extends Component implements Clickable {
 	public static Link find(By locator) {
 		Link l = new Link();
 		l.found(locator);

@@ -9,11 +9,11 @@ import org.openqa.selenium.By;
 import com.google.common.base.Predicate;
 
 import daveayan.gherkinsalad.Strings;
-import daveayan.gherkinsalad.components.Clickable;
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.Selectable;
 import daveayan.gherkinsalad.components.html.BaseBrowserElement;
+import daveayan.gherkinsalad.components.html.Clickable;
+import daveayan.gherkinsalad.components.html.Selectable;
 
 public class DefaultSelectMenu extends BaseBrowserElement implements Selectable, Clickable {
 

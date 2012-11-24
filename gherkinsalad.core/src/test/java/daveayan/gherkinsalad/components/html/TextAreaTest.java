@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.TextEnterable;
+import daveayan.gherkinsalad.components.html.impl.TextArea;
 
 public class TextAreaTest extends BaseTest {
 	@Test public void test_enabled_textarea_firefox() {

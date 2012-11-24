@@ -16,7 +16,7 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **/
-package daveayan.gherkinsalad.components;
+package daveayan.gherkinsalad.components.core;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +24,10 @@ import org.openqa.selenium.WebDriver;
 import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.browser.Browser;
+import daveayan.gherkinsalad.components.html.Clickable;
+import daveayan.gherkinsalad.components.html.MultiSelectable;
+import daveayan.gherkinsalad.components.html.Selectable;
+import daveayan.gherkinsalad.components.html.TextEnterable;
 /** @author daveayan */
 /**
  * Implementing the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern this object is returned back if

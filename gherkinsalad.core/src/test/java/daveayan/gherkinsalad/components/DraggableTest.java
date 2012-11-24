@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
+import daveayan.gherkinsalad.components.core.Element;
 
 public class DraggableTest extends BaseTest {
 	@Test

@@ -1,4 +1,4 @@
-package daveayan.gherkinsalad.components.html;
+package daveayan.gherkinsalad.components.html.impl;
 
 import org.openqa.selenium.By;
 
@@ -6,11 +6,12 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import daveayan.gherkinsalad.Strings;
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.MultiSelectable;
+import daveayan.gherkinsalad.components.core.Component;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Elements;
+import daveayan.gherkinsalad.components.html.MultiSelectable;
 
-public class CheckBoxGroup extends BaseBrowserElement implements MultiSelectable {
+public class CheckBoxGroup extends Component implements MultiSelectable {
 
 	public static CheckBoxGroup find(By locator) {
 		CheckBoxGroup cbg = new CheckBoxGroup();
