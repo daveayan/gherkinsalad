@@ -21,7 +21,7 @@ package daveayan.gherkinsalad.components;
 import daveayan.gherkinsalad.Strings;
 /** @author daveayan */
 /**
- * Interface that indicates that a browser element has multiple options from which one can be selected. This is an interface for the Dropdowns
+ * Interface that indicates that a browser element has multiple options from which *Only One* can be selected. This is an interface for the Dropdowns
  * Unless absolutely needed do not make your page object implement this interface directly. Instead make them extend Dropdown.
  */
 public interface Selectable extends BrowserElement {
@@ -50,6 +50,14 @@ public interface Selectable extends BrowserElement {
 	 * @param options
 	 */
 	public void should_not_have_any_of_these(String... options);
+	
+	public void should_have_this_option_selected(String option);
+	
+	public void should_have_this_code_selected(String code);
+	
+	public void should_not_have_this_option_selected(String option);
+	
+	public void should_not_have_this_code_selected(String code);
 	/**
 	 * Use this method to get a list of all the option texts in the dropdown
 	 * @return
@@ -60,10 +68,4 @@ public interface Selectable extends BrowserElement {
 	 * @return
 	 */
 	public String get_selected_option();
-	/**
-	 * Use this method to get the text of the currently selected options if the control allows multiple selections. If the control allows single selection this returns 
-	 * a Strings object with just one string in there
-	 * @return
-	 */
-	public Strings get_selected_options();
 }

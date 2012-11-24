@@ -56,10 +56,10 @@ public class DropDownTest extends BaseTest {
 		Selectable dropdown = DropDown.find(By.id("hidden-dropdown"));
 		
 		Assert.assertTrue(dropdown.isNotDisplayed());
-		Assert.assertTrue(dropdown.isDisabled());
+		Assert.assertTrue(dropdown.isEnabled());
 		Assert.assertTrue(dropdown.is_not_null());
 		Assert.assertFalse(dropdown.isDisplayed());
-		Assert.assertFalse(dropdown.isEnabled());
+		Assert.assertFalse(dropdown.isDisabled());
 		Assert.assertFalse(dropdown.is_null());
 	}
 	

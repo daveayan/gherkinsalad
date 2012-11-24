@@ -98,4 +98,24 @@ public class DropDown extends BaseBrowserElement implements Selectable {
 	public Strings get_selected_options() {
 		return Strings.instance_from(get_selected_option());
 	}
+
+	public void should_have_this_option_selected(String option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_this_code_selected(String code) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_this_option_selected(String option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_this_code_selected(String code) {
+		// TODO Auto-generated method stub
+		
+	}
 }

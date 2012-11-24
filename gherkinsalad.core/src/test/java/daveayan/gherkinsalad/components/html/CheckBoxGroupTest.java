@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.Selectable;
+import daveayan.gherkinsalad.components.MultiSelectable;
 
 public class CheckBoxGroupTest extends BaseTest {
 	@Test public void test_enabled_checkboxgroup_firefox() {
@@ -53,7 +53,7 @@ public class CheckBoxGroupTest extends BaseTest {
 	}
 	
 	private void test_hidden_checkboxgroup() {
-		Selectable checkboxgroup = CheckBoxGroup.find(By.name("hidden_preselected_checkbox"));
+		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("hidden_preselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isNotDisplayed());
 		Assert.assertFalse(checkboxgroup.isDisabled());
@@ -64,7 +64,7 @@ public class CheckBoxGroupTest extends BaseTest {
 	}
 	
 	private void test_disabled_checkboxgroup() {
-		Selectable checkboxgroup = CheckBoxGroup.find(By.name("disabled_preselected_checkbox"));
+		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("disabled_preselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isDisplayed());
 		Assert.assertTrue(checkboxgroup.isDisabled());
@@ -81,7 +81,7 @@ public class CheckBoxGroupTest extends BaseTest {
 	}
 	
 	private void test_enabled_checkboxgroup() {
-		Selectable checkboxgroup = CheckBoxGroup.find(By.name("enabled_nonselected_checkbox"));
+		MultiSelectable checkboxgroup = CheckBoxGroup.find(By.name("enabled_nonselected_checkbox"));
 		
 		Assert.assertTrue(checkboxgroup.isDisplayed());
 		Assert.assertTrue(checkboxgroup.isEnabled());

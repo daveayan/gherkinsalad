@@ -8,9 +8,9 @@ import com.google.common.base.Predicate;
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.components.Element;
 import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.Selectable;
+import daveayan.gherkinsalad.components.MultiSelectable;
 
-public class CheckBoxGroup extends BaseBrowserElement implements Selectable {
+public class CheckBoxGroup extends BaseBrowserElement implements MultiSelectable {
 
 	public static CheckBoxGroup find(By locator) {
 		CheckBoxGroup cbg = new CheckBoxGroup();
@@ -32,21 +32,6 @@ public class CheckBoxGroup extends BaseBrowserElement implements Selectable {
 			}
 		});
 		element_to_select.click();
-	}
-
-	public void should_have_all_these(String... options) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void should_have_any_of_these(String... options) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void should_not_have_any_of_these(String... options) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public Strings get_all_options() {
@@ -77,5 +62,60 @@ public class CheckBoxGroup extends BaseBrowserElement implements Selectable {
 			public String apply(Element input) {
 				return input.getAttribute("value");
 			}});
+	}
+	
+	public void should_have_all_these(String... options) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_any_of_these(String... options) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_any_of_these(String... options) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_this_option_selected(String option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_this_code_selected(String code) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_this_option_selected(String option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_this_code_selected(String code) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_these_options_selected(Strings option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_have_these_codes_selected(Strings code) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_these_options_selected(Strings option) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void should_not_have_these_codes_selected(Strings code) {
+		// TODO Auto-generated method stub
+		
 	}
 }

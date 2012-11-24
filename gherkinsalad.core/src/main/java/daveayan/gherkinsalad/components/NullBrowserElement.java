@@ -29,7 +29,31 @@ import daveayan.gherkinsalad.browser.Browser;
  * Implementing the <a href="http://industriallogic.com/xp/refactoring/nullObject.html">Null Object</a> Pattern this object is returned back if
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
-public class NullBrowserElement extends AutomationObject implements Clickable, Selectable, TextEnterable, BrowserElement {
+public class NullBrowserElement extends AutomationObject implements Clickable, Selectable, MultiSelectable, TextEnterable, BrowserElement {
+	public void should_have_these_options_selected(Strings option) {
+		throw new AssertionError("operation public void should_have_these_options_selected(Strings option) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_have_these_codes_selected(Strings code) {
+		throw new AssertionError("operation public void should_have_these_codes_selected(Strings code) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_have_these_options_selected(Strings option) {
+		throw new AssertionError("operation public void should_not_have_these_options_selected(Strings option) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_have_these_codes_selected(Strings code) {
+		throw new AssertionError("operation public void should_not_have_these_codes_selected(Strings code) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_have_this_option_selected(String option) {
+		throw new AssertionError("operation public void should_have_this_option_selected(String option) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_have_this_code_selected(String code) {
+		throw new AssertionError("operation public void should_have_this_code_selected(String code) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_have_this_option_selected(String option) {
+		throw new AssertionError("operation public void should_not_have_this_option_selected(String option) not allowed on a NullBrowserElement '" + this + "'");
+	}
+	public void should_not_have_this_code_selected(String code) {
+		throw new AssertionError("operation public void should_not_have_this_code_selected(String code) not allowed on a NullBrowserElement '" + this + "'");
+	}
 	public Strings get_selected_options() {
 		throw new AssertionError("operation public Strings get_selected_options() not allowed on a NullBrowserElement '" + this + "'");
 	}
@@ -39,7 +63,6 @@ public class NullBrowserElement extends AutomationObject implements Clickable, S
 	public void should_have_any_of_these(String... options) {
 		throw new AssertionError("operation public void should_have_any_of_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
-	
 	public void should_not_have_any_of_these(String... options) {
 		throw new AssertionError("operation public void should_not_have_any_of_these(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
