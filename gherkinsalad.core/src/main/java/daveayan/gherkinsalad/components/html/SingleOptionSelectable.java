@@ -54,11 +54,7 @@ public interface SingleOptionSelectable extends BrowserElement {
 	
 	public void should_have_this_option_selected(String option);
 	
-	public void should_have_this_code_selected(String code);
-	
 	public void should_not_have_this_option_selected(String option);
-	
-	public void should_not_have_this_code_selected(String code);
 	/**
 	 * Use this method to get a list of all the option texts in the dropdown
 	 * @return

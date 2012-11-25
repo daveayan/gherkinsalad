@@ -8,8 +8,9 @@ import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
 import daveayan.gherkinsalad.components.html.impl.SingleOptionSelectableDropDown;
+import daveayan.gherkinsalad.report.UnitTestReportCapturer;
 
-public class DropDownTest extends BaseTest {
+public class SingleOptionSelectableDropDownTest extends BaseTest {
 	@Test public void test_enabled_dropdown_firefox() {
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
@@ -75,6 +76,11 @@ public class DropDownTest extends BaseTest {
 		
 		Assert.assertEquals("', Volvo Option 2, Volvo, Saab, Mercedes, Audi'", dropdown.get_all_options().toString());
 		Assert.assertEquals("Saab", dropdown.get_selected_option());
+		
+		UnitTestReportCapturer.buffer = new StringBuffer();
+		dropdown.should_have_this_option_selected("Saab");
+		dropdown.should_not_have_this_option_selected("Audi");
+		System.out.println(UnitTestReportCapturer.buffer.toString());
 		
 		dropdown.select_option_if_enabled("Volvo");
 		Assert.assertEquals("Saab", dropdown.get_selected_option());

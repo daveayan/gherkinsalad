@@ -101,17 +101,7 @@ public class RadioButtonGroup extends Component implements SingleOptionSelectabl
 		
 	}
 
-	public void should_have_this_code_selected(String code) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void should_not_have_this_option_selected(String option) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void should_not_have_this_code_selected(String code) {
 		// TODO Auto-generated method stub
 		
 	}

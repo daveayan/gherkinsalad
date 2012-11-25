@@ -14,6 +14,14 @@ public class BaseTest extends BaseBrowserElement {
 		goto_url(path);
 	}
 	
+	public void assert_this_text_exist_in_report() {
+		
+	}
+	
+	public void clear_report() {
+		
+	}
+	
 	@After
 	public void close_browser() {
 		super.close_browser();
