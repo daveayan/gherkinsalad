@@ -5,14 +5,14 @@ GHERKIN SALAD RELEASE NOTES
 1.4
 - Cleaner interfaces and objects for single option selectable and multi option selectable
 - Refactor: Moved some code around to appropriate packages
-- RadioButtonGroup functionality and tests updated. should* methods remain.
+- RadioButtonGroup functionality and tests updated.
 - Ability to create our own reporting modules with a default html reporter
-- MultiSelectDropDown functionality and tests added. should* methods remain.
-- CheckBoxGroup functionality and tests updated. should* methods remain.
-- TextArea functionality and tests updated. should* methods remain.
-- TextField functionality and tests updated. should* methods remain.
+- MultiSelectDropDown functionality and tests added.
+- CheckBoxGroup functionality and tests updated.
+- TextArea functionality and tests updated.
+- TextField functionality and tests updated.
 - has_all_these, has_any_of_these methods on Strings added and updated
-- Default Dropdown functionality all updated. should* methods remain.
+- Default Dropdown functionality all updated.
 ===========================
 1.3
 - should* methods in Strings prints error and action messages as appropriate

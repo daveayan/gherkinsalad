@@ -7,6 +7,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import daveayan.gherkinsalad.Strings;
+import daveayan.gherkinsalad.Utils;
 import daveayan.gherkinsalad.components.core.Component;
 import daveayan.gherkinsalad.components.core.Element;
 import daveayan.gherkinsalad.components.core.Elements;
@@ -97,13 +98,21 @@ public class RadioButtonGroup extends Component implements SingleOptionSelectabl
 	}
 
 	public void should_have_this_option_selected(String option) {
-		// TODO Auto-generated method stub
-		
+		String selected_option = get_selected_option();
+		if(Utils.equals(selected_option, option)) {
+			action("Verified that the selected option in " + this + " is '" + option + "'");
+		} else {
+			error("Expected " + this + " to have selected option '" + option +"', found these instead '" + selected_option + "'");
+		}
 	}
 
 	public void should_not_have_this_option_selected(String option) {
-		// TODO Auto-generated method stub
-		
+		String selected_option = get_selected_option();
+		if(Utils.not_equals(selected_option, option)) {
+			action("Verified that the selected option in " + this + " is NOT '" + option + "'");
+		} else {
+			error("Expected " + this + " to NOT have selected option '" + option +"', found it selected instead");
+		}
 	}
 	
 	private Strings toStrings(Elements elements) {

@@ -65,7 +65,7 @@ public interface MultiOptionSelectable extends BrowserElement {
 	
 	public Strings get_selected_options();
 	
-	public void should_have_these_options_selected(Strings option);
+	public void should_have_these_options_selected(String... options);
 	
-	public void should_not_have_these_options_selected(Strings option);
+	public void should_not_have_these_options_selected(String... options);
 }

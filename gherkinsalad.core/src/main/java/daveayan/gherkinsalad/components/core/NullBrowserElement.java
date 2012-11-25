@@ -34,11 +34,11 @@ import daveayan.gherkinsalad.components.html.TextEnterable;
  * an element cannot be found on the browser. Calling any method on this class will result in an assertion error.
  */
 public class NullBrowserElement extends AutomationObject implements Clickable, SingleOptionSelectable, MultiOptionSelectable, TextEnterable, BrowserElement {
-	public void should_have_these_options_selected(Strings option) {
-		throw new AssertionError("operation public void should_have_these_options_selected(Strings option) not allowed on a NullBrowserElement '" + this + "'");
+	public void should_have_these_options_selected(String... options) {
+		throw new AssertionError("operation public void should_have_these_options_selected(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
-	public void should_not_have_these_options_selected(Strings option) {
-		throw new AssertionError("operation public void should_not_have_these_options_selected(Strings option) not allowed on a NullBrowserElement '" + this + "'");
+	public void should_not_have_these_options_selected(String... options) {
+		throw new AssertionError("operation public void should_not_have_these_options_selected(String... options) not allowed on a NullBrowserElement '" + this + "'");
 	}
 	public void should_have_this_option_selected(String option) {
 		throw new AssertionError("operation public void should_have_this_option_selected(String option) not allowed on a NullBrowserElement '" + this + "'");

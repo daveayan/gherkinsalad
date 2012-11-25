@@ -102,7 +102,7 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 		if(Utils.equals(selected_option, option)) {
 			action("Verified that the selected option in " + this + " is '" + option + "'");
 		} else {
-			error("Expected dropdown " + this + " to have selected option '" + option +"', found these instead '" + selected_option + "'");
+			error("Expected " + this + " to have selected option '" + option +"', found these instead '" + selected_option + "'");
 		}
 	}
 
@@ -111,7 +111,7 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 		if(Utils.not_equals(selected_option, option)) {
 			action("Verified that the selected option in " + this + " is NOT '" + option + "'");
 		} else {
-			error("Expected dropdown " + this + " to NOT have selected option '" + option +"', found it selected instead");
+			error("Expected " + this + " to NOT have selected option '" + option +"', found it selected instead");
 		}
 	}
 }
