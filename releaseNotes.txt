@@ -3,6 +3,8 @@ GHERKIN SALAD RELEASE NOTES
 
 ===========================
 1.4
+- Updated jqueryui selectmenu
+- Support for ARIA Displayed in Element.java
 - Cleaner interfaces and objects for single option selectable and multi option selectable
 - Refactor: Moved some code around to appropriate packages
 - RadioButtonGroup functionality and tests updated.

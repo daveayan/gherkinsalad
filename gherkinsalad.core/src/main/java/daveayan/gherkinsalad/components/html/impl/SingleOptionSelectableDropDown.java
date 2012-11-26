@@ -46,6 +46,27 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 		}
 	}
 
+	public Strings get_all_options() {
+		Strings option_strings = Strings.new_instance();
+		Elements options = root_element().findElements(By.tagName("option"));
+		option_strings = Strings.instance_from(options.asString());
+		return option_strings;
+	}
+
+	public String get_selected_option() {
+		Elements options = root_element().findElements(By.tagName("option"));
+		Element selected_option = options.findFirstElementThatMatches(new Predicate<Element>() {
+			public boolean apply(Element input) {
+				String selected = input.getAttribute("selected");
+				if(StringUtils.isNotBlank(selected)) {
+					return selected.equals("selected") || selected.equals("true");
+				}
+				return false;
+			}
+		});
+		return selected_option.getText();
+	}
+	
 	public void should_have_all_these(String... expected_options) {
 		Strings option_strings = get_all_options();
 		Strings strings_not_present = option_strings.has_all_these(expected_options);
@@ -74,27 +95,6 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 		} else {
 			error("Expected dropdown " + this + " to have none of these options " + Strings.instance_from(expected_options).toString() + " found these " + strings_present);
 		}
-	}
-
-	public Strings get_all_options() {
-		Strings option_strings = Strings.new_instance();
-		Elements options = root_element().findElements(By.tagName("option"));
-		option_strings = Strings.instance_from(options.asString());
-		return option_strings;
-	}
-
-	public String get_selected_option() {
-		Elements options = root_element().findElements(By.tagName("option"));
-		Element selected_option = options.findFirstElementThatMatches(new Predicate<Element>() {
-			public boolean apply(Element input) {
-				String selected = input.getAttribute("selected");
-				if(StringUtils.isNotBlank(selected)) {
-					return selected.equals("selected") || selected.equals("true");
-				}
-				return false;
-			}
-		});
-		return selected_option.getText();
 	}
 
 	public void should_have_this_option_selected(String option) {

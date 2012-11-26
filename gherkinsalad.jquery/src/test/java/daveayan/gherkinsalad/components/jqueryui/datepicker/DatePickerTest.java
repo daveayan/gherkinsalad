@@ -1,5 +1,6 @@
 package daveayan.gherkinsalad.components.jqueryui.datepicker;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,7 +22,7 @@ public class DatePickerTest extends BaseTest {
 		super.goto_url("http://jqueryui.com/resources/demos/datepicker/default.html");
 		
 		DatePicker datepicker = new DefaultDatePicker();
-		TextEnterable date_textbox = TextField.find(By.id("datepicker")).name("Date Picker - Text Box");
+		TextEnterable date_textbox = TextField.find(By.id("datepicker"));
 		
 		// #########
 		

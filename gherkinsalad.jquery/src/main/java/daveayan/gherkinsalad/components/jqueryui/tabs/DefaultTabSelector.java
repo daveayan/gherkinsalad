@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 
 import com.google.common.base.Predicate;
 
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.html.BaseBrowserElement;
+import daveayan.gherkinsalad.components.core.BaseBrowserElement;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Elements;
 
 public class DefaultTabSelector extends BaseBrowserElement implements Tabs {
 

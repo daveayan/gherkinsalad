@@ -3,7 +3,7 @@ package daveayan.gherkinsalad.components.tinymce;
 import org.junit.Test;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.TextEnterable;
+import daveayan.gherkinsalad.components.html.TextEnterable;
 
 public class TinyMceEditorTest extends BaseTest {
 	@Test
@@ -12,13 +12,19 @@ public class TinyMceEditorTest extends BaseTest {
 		super.goto_url("http://www.tinymce.com/tryit/full.php");
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
-//		tinyMceEditor.enter_text_if_enabled("enter_text_if_enabled");
-		tinyMceEditor.should_have_text("enter_text_if_enabled");
+		tinyMceEditor.append_text_if_enabled("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ");
 		
-//		tinyMceEditor.enter_text_if_enabled("");
-//		tinyMceEditor.append_text_if_enabled("enter_text_if_enabled 111");
-		tinyMceEditor.should_have_text("enter_text_if_enabled 111");
+		System.out.println(tinyMceEditor.getText());
+	}
+	
+	@Test
+	public void chrome_tiny_mce_test() {
+		super.launch_browser("chrome");
+		super.goto_url("http://www.tinymce.com/tryit/full.php");
+		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
-		tinyMceEditor.enter_text_if_enabled("");
+		tinyMceEditor.append_text_if_enabled("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
+		
+		System.out.println(tinyMceEditor.getText());
 	}
 }

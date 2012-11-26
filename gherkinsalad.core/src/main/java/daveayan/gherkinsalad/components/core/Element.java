@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Wait;
 import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.Config;
+import daveayan.gherkinsalad.Utils;
 
 
 /** @author daveayan */
@@ -190,15 +191,6 @@ public class Element extends BaseBrowserElement implements Nullable {
 		}
 	}
 	
-//	public Element findElementImmediate(final By by) {
-//		WebElement in = _nativeWebElement();
-//		if (in == null || in instanceof NullElement) {
-//			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
-//		}
-//		WebElement _webElement = in.findElement(by);
-//		return Element.newInstance(_webElement, by.toString(), by);
-//	}
-	
 	public Elements findElements(final By by) {
 		WebElement in = _nativeWebElement();
 		Wait<WebElement> wait = new FluentWait<WebElement>(in).withTimeout(Config.seconds_timeout, TimeUnit.SECONDS)
@@ -216,16 +208,6 @@ public class Element extends BaseBrowserElement implements Nullable {
 		Elements elements = convertToElements(_webElements, by);
 		return elements;
 	}
-	
-//	public Elements findElementsImmediate(final By by) {
-//		WebElement in = _nativeWebElement();
-//		if (in == null || in instanceof NullElement) {
-//			throw new AssertionError("Cannot find any element '" + by + "' on a null web element '" + in + "'");
-//		}
-//		List<WebElement> _webElements = in.findElements(by);
-//		Elements elements = convertToElements(_webElements, by);
-//		return elements;
-//	}
 	
 	public void move_by(int x, int y) {
 		takeScreenshot();
@@ -300,6 +282,96 @@ public class Element extends BaseBrowserElement implements Nullable {
 		}
 		return elements;
 	}
+	
+	public boolean isNotHidden() {
+		return ! isHidden();
+	}
+	
+	public boolean isHidden() {
+		String hidden = getAttribute("hidden");
+		if(hidden != null && hidden.equals("true")) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
+	
+	public boolean isStyleNotDisplayed() {
+		return ! isStyleDisplayed();
+	}
+	
+	public boolean isStyleDisplayed() {
+		String style = getAttribute("style");
+		if(StringUtils.isNotBlank(style)) {
+			if(style.contains("display: none")) {
+				return Boolean.FALSE;
+			}
+		}
+		return Boolean.TRUE;
+	}
+	
+//	ALL ARIA METHODS - START 
+	
+//	ARIA DISPLAYED
+	public boolean isArisEnabled() {
+		return ! isAriaDisabled();
+	}
+	
+	public boolean isAriaDisabled() {
+		String ariadisabled = getAttribute("aria-disabled");
+		if(StringUtils.isNotBlank(ariadisabled)) {
+			if(Utils.equals(ariadisabled, "true")) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
+	
+//	ARIA HIDDEN
+	public boolean isAriaNotHidden() {
+		return ! isAriaHidden();
+	}
+	
+	public boolean isAriaHidden() {
+		String ariahidden = getAttribute("aria-hidden");
+		if(StringUtils.isNotBlank(ariahidden)) {
+			if(Utils.equals(ariahidden, "true")) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
+	
+//	ARIA READ ONLY
+	public boolean isAriaNotReadonly() {
+		return ! isAriaReadonly();
+	}
+	
+	public boolean isAriaReadonly() {
+		String ariareadonly = getAttribute("aria-readonly");
+		if(StringUtils.isNotBlank(ariareadonly)) {
+			if(Utils.equals(ariareadonly, "true")) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}	
+	
+//	ARIA SELECTED
+	public boolean isAriaNotSelected() {
+		return ! isAriaSelected();
+	}
+	
+	public boolean isAriaSelected() {
+		String ariareadonly = getAttribute("aria-selected");
+		if(StringUtils.isNotBlank(ariareadonly)) {
+			if(Utils.equals(ariareadonly, "true")) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}	
+	
+//	ALL ARIA METHODS - END
 	
 	public String getAttribute(String arg0) {
 		if(is_not_null(arg0)) {

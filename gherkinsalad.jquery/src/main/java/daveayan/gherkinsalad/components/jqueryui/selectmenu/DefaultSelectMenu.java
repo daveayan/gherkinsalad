@@ -9,13 +9,12 @@ import org.openqa.selenium.By;
 import com.google.common.base.Predicate;
 
 import daveayan.gherkinsalad.Strings;
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.Elements;
-import daveayan.gherkinsalad.components.html.BaseBrowserElement;
-import daveayan.gherkinsalad.components.html.Clickable;
-import daveayan.gherkinsalad.components.html.Selectable;
+import daveayan.gherkinsalad.components.core.Element;
+import daveayan.gherkinsalad.components.core.Elements;
+import daveayan.gherkinsalad.components.html.SingleOptionSelectable;
+import daveayan.gherkinsalad.components.html.impl.SingleOptionSelectableDropDown;
 
-public class DefaultSelectMenu extends BaseBrowserElement implements Selectable, Clickable {
+public class DefaultSelectMenu extends SingleOptionSelectableDropDown implements SingleOptionSelectable {
 
 	public static DefaultSelectMenu find(By locator) {
 		DefaultSelectMenu m = new DefaultSelectMenu();
@@ -24,7 +23,7 @@ public class DefaultSelectMenu extends BaseBrowserElement implements Selectable,
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<String> get_all_options() {
+	public Strings get_all_options() {
 		List<String> options = ListUtils.EMPTY_LIST;
 		if(isEnabled()) {
 			click_if_enabled();
@@ -33,7 +32,7 @@ public class DefaultSelectMenu extends BaseBrowserElement implements Selectable,
 			options = li_a_s.asString();
 			click_if_enabled();
 		}
-		return options;
+		return Strings.instance_from(options);
 	}
 	
 	public String get_selected_option() {
@@ -61,7 +60,6 @@ public class DefaultSelectMenu extends BaseBrowserElement implements Selectable,
 	}
 
 	public void select_code_if_enabled(String arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -72,27 +70,6 @@ public class DefaultSelectMenu extends BaseBrowserElement implements Selectable,
 			Element element_to_select = ul.findElement(By.partialLinkText(option));
 			element_to_select.click();
 		}
-	}
-
-	public void should_have_options(String... expected_strings) {
-		Strings options = Strings.instance_from(get_all_options());
-		Strings strings_not_present = options.should_have_all_these_strings(expected_strings);
-		strings_not_present.should_be_empty();
-	}
-	
-	public void click_if_enabled() {
-		if(isEnabled()) {
-			root_element().click();
-			wait_for_seconds(1);
-		}
-	}
-
-	public void click_if_exists_and_enabled() {
-		click_if_enabled();
-	}
-	
-	public boolean isDisplayed() {
-		return root_element().is_not_null();
 	}
 	
 	public boolean isEnabled() {
@@ -109,5 +86,12 @@ public class DefaultSelectMenu extends BaseBrowserElement implements Selectable,
 		String ul_id = a_link_id.split("-button")[0] + "-menu";
 		Element ul = findElement(By.id(ul_id));
 		return ul;
+	}
+	
+	private void click_if_enabled() {
+		if(isEnabled()) {
+			root_element().click();
+			wait_for_seconds(1);
+		}
 	}
 }

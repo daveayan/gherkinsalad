@@ -9,13 +9,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 
-import daveayan.gherkinsalad.components.Element;
-import daveayan.gherkinsalad.components.html.BaseBrowserElement;
+import daveayan.gherkinsalad.components.core.Component;
+import daveayan.gherkinsalad.components.core.Element;
 import daveayan.gherkinsalad.components.html.Clickable;
 import daveayan.gherkinsalad.components.html.impl.Link;
 
-public class DefaultDatePicker extends BaseBrowserElement implements DatePicker {
-	private static Log log = LogFactory.getLog(BaseBrowserElement.class);
+public class DefaultDatePicker extends Component implements DatePicker {
+	private static Log log = LogFactory.getLog(DefaultDatePicker.class);
 	
 	public Clickable next_month = Link.find(By.className("ui-datepicker-next")).name("Date Picker - Next Month");
 	public Clickable prev_month = Link.find(By.className("ui-datepicker-prev")).name("Date Picker - Previous Month");
