@@ -73,6 +73,9 @@ public class Strings extends AutomationObject {
 	
 	public Strings has_all_these(String... expected_strings) {
 		Strings strings_not_present = Strings.new_instance();
+		if(expected_strings == null) {
+			return strings_not_present;
+		}
 		for(String expected_string: expected_strings) {
 			if(this.does_not_have(expected_string)) {
 				strings_not_present._nativeStrings.add(expected_string);
@@ -83,12 +86,41 @@ public class Strings extends AutomationObject {
 	
 	public Strings has_any_of_these(String... expected_strings) {
 		Strings strings_present = Strings.new_instance();
+		if(expected_strings == null) {
+			return strings_present;
+		}
 		for(String expected_string: expected_strings) {
 			if(this.has(expected_string)) {
 				strings_present.add(expected_string);
 			}
 		}
 		return strings_present;
+	}
+	
+	public Strings does_not_have_all_these(String... unexpected_strings) {
+		Strings unexpected_strings_present = Strings.new_instance();
+		if(unexpected_strings == null) {
+			return unexpected_strings_present;
+		}
+		for(String unexpected_string: unexpected_strings) {
+			if(this.has(unexpected_string)) {
+				unexpected_strings_present._nativeStrings.add(unexpected_string);
+			}
+		}
+		return unexpected_strings_present;
+	}
+	
+	public Strings does_not_have_any_of_these(String... unexpected_strings) {
+		Strings unexpected_strings_not_present = Strings.new_instance();
+		if(unexpected_strings == null) {
+			return unexpected_strings_not_present;
+		}
+		for(String unexpected_string: unexpected_strings) {
+			if(this.does_not_have(unexpected_string)) {
+				unexpected_strings_not_present.add(unexpected_string);
+			}
+		}
+		return unexpected_strings_not_present;
 	}
 	
 	public boolean has(String string) {

@@ -2,6 +2,10 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.5
+- Take screenshots on AutomationObject::error
+- New methods on Strings - does_not_have_all_these, does_not_have_any_of_these 
+===========================
 1.4
 - Updated jqueryui selectmenu
 - Support for ARIA Displayed in Element.java

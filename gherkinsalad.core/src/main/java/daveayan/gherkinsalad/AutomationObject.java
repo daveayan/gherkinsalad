@@ -95,6 +95,7 @@ public abstract class AutomationObject implements Nullable {
 	
 	protected void error(String error) {
 		ReportFactory.reporter().error(error);
+		takeScreenshot();
 	}
 	
 	protected void verify_profile(String name, Element... elements) {
