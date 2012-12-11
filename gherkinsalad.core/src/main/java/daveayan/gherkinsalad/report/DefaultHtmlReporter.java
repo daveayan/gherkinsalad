@@ -123,7 +123,7 @@ public class DefaultHtmlReporter implements Reporter {
 	
 	public void screenshot_taken(String filename) {
 		String html = StringUtils.EMPTY;
-		html += "<div class=\"screenshot\">" + "Screenshot taken <a href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "<div class=\"screenshot\">" + "Screenshot taken <a class=\"image\" href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
 		report(html);
 	}
 	
