@@ -2,6 +2,12 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.6
+- Moved HTML components to its own project
+- Moved cucumber support to its own project
+- Reporting updates: Show screenshots in popup
+- Upgraded to webdriver 2.28.0
+===========================
 1.5
 - Take screenshots on AutomationObject::error
 - New methods on Strings - does_not_have_all_these, does_not_have_any_of_these 

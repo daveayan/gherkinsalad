@@ -14,5 +14,10 @@
 			<artifactId>gherkinsalad.core</artifactId>
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.daveayan</groupId>
+			<artifactId>gherkinsalad.html</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

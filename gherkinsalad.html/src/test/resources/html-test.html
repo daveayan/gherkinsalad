@@ -1,0 +1,124 @@
+<html>
+	<head></head>
+	<body>
+		<select id="enabled-dropdown">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab">Saab</option>
+			<option value="mercedes">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<select id="disabled-dropdown" disabled="disabled">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab" selected="selected">Saab</option>
+			<option value="mercedes">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<select id="hidden-dropdown" hidden="true">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab" selected="selected">Saab</option>
+			<option value="mercedes">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<br/><br/>
+		<select id="enabled-multi-dropdown" multiple="multiple">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab">Saab</option>
+			<option value="mercedes">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<select id="disabled-multi-dropdown" disabled="disabled" multiple="multiple">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab" selected="selected">Saab</option>
+			<option value="mercedes" selected="selected">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<select id="hidden-multi-dropdown" hidden="true" multiple="multiple">
+			<option value="pleaseselect"></option>
+			<option value="vo2">Volvo Option 2</option>
+			<option value="vo1">Volvo</option>
+			<option value="saab" selected="selected">Saab</option>
+			<option value="mercedes">Mercedes</option>
+			<option value="audi">Audi</option>
+		</select>
+		
+		<br/><br/>
+		<a href="#">Enabled Link</a>&nbsp;&nbsp;&nbsp;<span id=enabled_link_click_count">0</span>
+		
+		<br/><br/>
+		<a href="#" hidden="true">Hidden Link</a>
+		
+		<br/><br/>
+		<input id="enabled_blank_textfield" type="text"/>
+		
+		<input id="enabled_filled_textfield" type="text" value="AAA"/>
+		
+		<input id="disabled_blank_textfield" type="text" disabled="disabled"/>
+		
+		<input id="disabled_filled_textfield" type="text" disabled="disabled" value="AAA"/>
+		
+		<input id="hidden_filled_textfield" type="text" value="AAA" hidden="true"/>
+		
+		<br/><br/>
+		
+		<textarea id="enabled_blank_textarea"></textarea>
+		
+		<textarea id="enabled_filled_textarea">BBB</textarea>
+		
+		<textarea id="disabled_blank_textarea" disabled="disabled"></textarea>
+		
+		<textarea id="disabled_filled_textarea" disabled="disabled">BBB</textarea>
+		
+		<textarea id="hidded_filled_textarea" hidden="true">BBB</textarea>
+		
+		<br/><br/>
+		<form>
+			<input type="checkbox" name="enabled_nonselected_checkbox" value="Bike">I have a bike&nbsp;&nbsp;
+			<input type="checkbox" name="enabled_nonselected_checkbox" value="Car">I have a car
+		</form>
+		<form>
+			<input type="checkbox" name="enabled_preselected_checkbox" value="Bike">I have a bike&nbsp;&nbsp;
+			<input type="checkbox" name="enabled_preselected_checkbox" value="Car" checked="checked">I have a car
+		</form>
+		<form>
+			<input type="checkbox" name="disabled_preselected_checkbox" value="Bike" disabled="disabled">I have a bike&nbsp;&nbsp;
+			<input type="checkbox" name="disabled_preselected_checkbox" value="Car" checked="checked" disabled="disabled">I have a car
+		</form>
+		<form>
+			<input type="checkbox" name="hidden_preselected_checkbox" value="Bike" hidden="true">I have a bike&nbsp;&nbsp;
+			<input type="checkbox" name="hidden_preselected_checkbox" value="Car" checked="checked" hidden="true">I have a car
+		</form>
+		
+		<br/><br/>
+		<form>
+			<input type="radio" name="enabled_nonselected_radio" value="Bike">I have a bike&nbsp;&nbsp;
+			<input type="radio" name="enabled_nonselected_radio" value="Car">I have a car
+		</form>
+		<form>
+			<input type="radio" name="enabled_preselected_radio" value="Bike">I have a bike&nbsp;&nbsp;
+			<input type="radio" name="enabled_preselected_radio" value="Car" checked="checked">I have a car
+		</form>
+		<form>
+			<input type="radio" name="disabled_preselected_radio" value="Bike" disabled="disabled">I have a bike&nbsp;&nbsp;
+			<input type="radio" name="disabled_preselected_radio" value="Car" checked="checked" disabled="disabled">I have a car
+		</form>
+		<form>
+			<input type="radio" name="hidden_preselected_radio" value="Bike" hidden="true">I have a bike&nbsp;&nbsp;
+			<input type="radio" name="hidden_preselected_radio" value="Car" checked="checked" hidden="true">I have a car
+		</form>
+	</body>
+</html>

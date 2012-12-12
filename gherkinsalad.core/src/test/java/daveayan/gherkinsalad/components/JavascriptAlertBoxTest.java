@@ -4,8 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import daveayan.BaseTest;
-import daveayan.gherkinsalad.components.html.Clickable;
-import daveayan.gherkinsalad.components.html.impl.Link;
+import daveayan.gherkinsalad.components.core.Element;
 
 public class JavascriptAlertBoxTest extends BaseTest {
 	@Test public void test_alert_box_handling_in_firefox() {
@@ -15,11 +14,11 @@ public class JavascriptAlertBoxTest extends BaseTest {
 		javascript_popup_click_ok();
 		javascript_popup_dismiss();
 		
-		Clickable link = Link.find(By.linkText("here"));
-		link.click_if_enabled();
+		Element link = findElement(By.linkText("here"));
+		link.click();
 		javascript_popup_click_ok();
 		
-		link.click_if_enabled();
+		link.click();
 		javascript_popup_dismiss();
 	}
 	
@@ -30,11 +29,11 @@ public class JavascriptAlertBoxTest extends BaseTest {
 		javascript_popup_click_ok();
 		javascript_popup_dismiss();
 		
-		Clickable link = Link.find(By.linkText("here"));
-		link.click_if_enabled();
+		Element link = findElement(By.linkText("here"));
+		link.click();
 		javascript_popup_click_ok();
 		
-		link.click_if_enabled();
+		link.click();
 		javascript_popup_dismiss();
 	}
 }
