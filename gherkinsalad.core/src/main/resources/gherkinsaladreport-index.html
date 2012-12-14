@@ -2,13 +2,20 @@
 <body><header>
 	<h1>Gherkin Salad Report</h1>
 </header>
+<div id="report-results">
+<ul>
+	<li><span id="feature-count">0</span> feature(s)</li>
+</ul>
+</div>
 <div id="mainActions">
 	<a id="expandAll" href="#">Expand All</a>
 	<a id="collapseAll" href="#">Collapse All</a>
 	<a id="failedScenarios" href="#">Failed Scenarios</a>
 	<a id="warningScenarios" href="#">Warning Scenarios</a>
 	<a id="showAll" href="#">Show All</a>
-	<input type="checkbox" id="showActions"><span>Show Actions</span>
-	<input type="checkbox" id="showInfo"><span>Show Info</span>
+	<input type="checkbox" id="showActions"><label for="showActions">Show Actions</label>
+	<input type="checkbox" id="showInfo"><label for="showInfo">Show Info</label>
 </div>
 <div class="clear">	</div>
+<div id="no-warning-scenarios">No warning scenarios available</div>
+<div id="no-failed-scenarios">No failed scenarios available</div>
