@@ -1,7 +1,10 @@
 $(document).ready(function(){
 	$(".title").click(function(){
 		$(this).next().toggle();
+		$(this).toggleClass('open');
 	});
+	
+	$(".image").colorbox();
 	
 	$(".warn").each(function() {
 		var $node = $(this).parent().prev();
@@ -19,17 +22,26 @@ $(document).ready(function(){
 		$parent.parent().parent().prev().addClass("error");
 	});
 	
+	$(".feature").each(function() {
+		var count = $(this).find(".scenario").size();
+		$(this).find(".scenario-count").html(count);
+	});
+	
 	$("#expandAll").click(function() {
 		$(".content").show();
+		$(".content").prev().removeClass("open");
 		actions_and_info();
 	});
 	
 	$("#collapseAll").click(function() {
 		$(".content").hide();
+		$(".content").prev().addClass("open");
 		actions_and_info();
 	});
 	
 	$("#failedScenarios").click(function() {
+		showOrHideFailedScenarios();
+		$("#no-warning-scenarios").hide();
 		$('.feature').hide();
 		var $node = $('.feature .title.error').parent();
 		$node.show();
@@ -39,6 +51,8 @@ $(document).ready(function(){
 	});
 	
 	$("#warningScenarios").click(function() {
+		showOrHideWarningScenarios();
+		$("#no-failed-scenarios").hide();
 		$('.feature').hide();
 		var $node = $('.feature .title.warn').parent();
 		$node.show();
@@ -48,6 +62,8 @@ $(document).ready(function(){
 	});
 	
 	$("#showAll").click(function() {
+		$("#no-warning-scenarios").hide();
+		$("#no-failed-scenarios").hide();
 		$('.feature').show();
 		$('.scenario').show();
 		actions_and_info();
@@ -60,17 +76,35 @@ $(document).ready(function(){
 	$("#showActions").click(function() {
 		actions_and_info();
 	});
-	
-	function actions_and_info() {
-		if($("#showInfo").attr('checked')) {
-			$('.info').show();
-		} else {
-			$('.info').hide();
-		}
-		if($("#showActions").attr('checked')) {
-			$('.action').show();
-		} else {
-			$('.action').hide();
-		}
-	}
 });
+
+function actions_and_info() {
+	if($("#showInfo").attr('checked')) {
+		$('.info').show();
+	} else {
+		$('.info').hide();
+	}
+	if($("#showActions").attr('checked')) {
+		$('.action').show();
+	} else {
+		$('.action').hide();
+	}
+}
+
+function showOrHideWarningScenarios() {
+	var n = $(".warn").size();
+	if(n < 1) {
+		$("#no-warning-scenarios").show();
+	} else {
+		$("#no-warning-scenarios").hide();
+	}
+}
+
+function showOrHideFailedScenarios() {
+	var n = $(".error").size();
+	if(n < 1) {
+		$("#no-failed-scenarios").show();
+	} else {
+		$("#no-failed-scenarios").hide();
+	}
+}

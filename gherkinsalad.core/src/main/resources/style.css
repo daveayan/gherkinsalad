@@ -62,6 +62,17 @@ h1 {
 .clear {
 	clear: both;
 }
+#report-results {
+	padding: 20px 20px 0 20px;
+}
+#report-results ul {
+	background: #EEE;
+	border: 1px solid #CCC;
+	padding: 10px 20px;
+}
+#report-results ul li{
+	padding: 5px 0;
+}
 #mainActions {
 	padding: 20px 20px 0 20px;
 }
@@ -72,16 +83,19 @@ h1 {
 }
 .feature {
 	padding: 5px 20px;
-	color: #333;
+	color: green;
 	margin: 3px 0;
 }
 .feature > .title {
-	background-color: #EEE;
-	padding: 5px 10px;
-	border: 1px solid #CCC;
+	background: #CFFC83 url('images/arrow.png') no-repeat 5px 50%;
+	border: 1px solid #A4E56D;
+	padding: 5px 10px 5px 20px;
 	font-size: 14px;
 	font-weight: bold;
 	cursor: pointer;
+}
+.feature > .title.open {
+	background: #CFFC83 url('images/side-arrow.png') no-repeat 5px 50%;
 }
 .feature .date {
 	float: right;
@@ -94,11 +108,14 @@ h1 {
 	margin: 3px 0;
 }
 .scenario > .title {
-	background-color: #CFFC83;
+	background: #CFFC83 url('images/arrow.png') no-repeat 5px 50%;
 	border: 1px solid #A4E56D;
 	padding: 5px 10px;
 	cursor: pointer;
 	font-weight: bold;
+}
+.scenario > .title.open {
+	background: #CFFC83 url('images/side-arrow.png') no-repeat 5px 50%;
 }
 .scenario > .content {
 	padding-left: 5px;
@@ -108,10 +125,13 @@ h1 {
 	margin: 3px 0;
 }
 .step > .title {
-	background-color: #DFF8B5;
+	background: #DFF8B5 url('images/arrow.png') no-repeat 5px 50%;
 	border: 1px solid #B4F743;
 	padding: 5px 10px;
 	cursor: pointer;
+}
+.step > .title.open {
+	background: #DFF8B5 url('images/side-arrow.png') no-repeat 5px 50%;
 }
 .step > .content {
 	padding-left: 10px;
@@ -123,6 +143,9 @@ h1 {
 	background-color: #FCFCBF;
 	border: 1px solid #F5F532;
 	padding: 5px 10px;
+}
+.action, .task {
+	display: none;
 }
 .screenshot {
 	color: #559FCF;
@@ -141,8 +164,15 @@ h1 {
 	border: 1px solid #EECB8E;
 	padding: 5px 10px;
 }
+.feature > .warn, .scenario > .warn, .step > .warn {
+	padding: 5px 10px 5px 20px;
+}
 .feature > .error, .scenario > .error, .step > .error, .action.error, .task.error {
 	color:#E93C3C; 
 	background-color: #FAE5E5;
 	border: 1px solid #F1C7C7;
+}
+#no-failed-scenarios, #no-warning-scenarios {
+	padding: 20px;
+	display: none;
 }

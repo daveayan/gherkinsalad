@@ -54,7 +54,7 @@ public class DefaultHtmlReporter implements Reporter {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"feature\">";
-		html += "\n<div class=\"title\">" + feature + "<span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "\n<div class=\"title\">" + feature + " [ <span class=\"scenario-count\">0</span> scenario(s) ]<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		feature_already_started = Boolean.TRUE;
@@ -123,7 +123,7 @@ public class DefaultHtmlReporter implements Reporter {
 	
 	public void screenshot_taken(String filename) {
 		String html = StringUtils.EMPTY;
-		html += "<div class=\"screenshot\">" + "Screenshot taken <a class=\"image\" href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "<div class=\"screenshot action\">" + "Screenshot taken <a class=\"image\" href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
 		report(html);
 	}
 	
