@@ -54,7 +54,7 @@ public class DefaultHtmlReporter implements Reporter {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"feature\">";
-		html += "\n<div class=\"title\">" + feature + " [ <span class=\"scenario-count\">0</span> scenario(s) ]<span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "\n<div class=\"title\">" + feature + " [ <span class=\"scenario-count\">0 scenario(s)</span> ]<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		feature_already_started = Boolean.TRUE;

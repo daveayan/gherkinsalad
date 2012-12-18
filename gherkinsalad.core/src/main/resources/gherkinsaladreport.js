@@ -6,8 +6,6 @@ $(document).ready(function(){
 	
 	$(".image").colorbox();
 	
-	$("#feature-count").html($(".feature").size());
-	
 	$(".warn").each(function() {
 		var $node = $(this).parent().prev();
 		$node.addClass("warn");
@@ -22,11 +20,8 @@ $(document).ready(function(){
 		var $parent = $node.parent().parent().prev();
 		$parent.addClass("error");
 		$parent.parent().parent().prev().addClass("error");
-	});
-	
-	$(".feature").each(function() {
-		var count = $(this).find(".scenario").size();
-		$(this).find(".scenario-count").html(count);
+		featureCount();
+		scenarioCount();
 	});
 	
 	$("#expandAll").click(function(event) {
@@ -84,6 +79,20 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 });
+
+function featureCount() {
+	var totalFeatures = $(".feature").size();
+	var failedFeatures = $(".feature > .title.error").size();
+	$("#feature-count").html(totalFeatures + " feature(s); " + failedFeatures + " failed, " + (totalFeatures - failedFeatures) + " passed.");
+}
+
+function scenarioCount() {
+	$(".feature").each(function() {
+		var totalScenarios = $(this).find(".scenario").size();
+		var failedScenarios = $(this).find(".scenario > .title.error").size();
+		$(this).find(".scenario-count").html(totalScenarios + " scenario(s); " + failedScenarios + " failed, " + (totalScenarios - failedScenarios) + " passed.");
+	});
+}
 
 function actions_and_info() {
 	if($("#showInfo").attr('checked')) {
