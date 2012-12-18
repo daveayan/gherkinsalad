@@ -150,7 +150,7 @@ h1 {
 	border: 1px solid #F5F532;
 	padding: 5px 10px;
 }
-.action, .task {
+.action, .task, .info {
 	display: none;
 }
 .screenshot {

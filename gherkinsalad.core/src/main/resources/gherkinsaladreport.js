@@ -29,19 +29,22 @@ $(document).ready(function(){
 		$(this).find(".scenario-count").html(count);
 	});
 	
-	$("#expandAll").click(function() {
+	$("#expandAll").click(function(event) {
+		event.preventDefault();
 		$(".content").show();
 		$(".content").prev().removeClass("open");
 		actions_and_info();
 	});
 	
-	$("#collapseAll").click(function() {
+	$("#collapseAll").click(function(event) {
+		event.preventDefault();
 		$(".content").hide();
 		$(".content").prev().addClass("open");
 		actions_and_info();
 	});
 	
-	$("#failedScenarios").click(function() {
+	$("#failedScenarios").click(function(event) {
+		event.preventDefault();
 		showOrHideFailedScenarios();
 		$("#no-warning-scenarios").hide();
 		$('.feature').hide();
@@ -52,7 +55,8 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 	
-	$("#warningScenarios").click(function() {
+	$("#warningScenarios").click(function(event) {
+		event.preventDefault();
 		showOrHideWarningScenarios();
 		$("#no-failed-scenarios").hide();
 		$('.feature').hide();
@@ -63,7 +67,8 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 	
-	$("#showAll").click(function() {
+	$("#showAll").click(function(event) {
+		event.preventDefault();
 		$("#no-warning-scenarios").hide();
 		$("#no-failed-scenarios").hide();
 		$('.feature').show();
