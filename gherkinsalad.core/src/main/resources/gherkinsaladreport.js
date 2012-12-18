@@ -6,6 +6,8 @@ $(document).ready(function(){
 	
 	$(".image").colorbox();
 	
+	$("#feature-count").html($(".feature").size());
+	
 	$(".warn").each(function() {
 		var $node = $(this).parent().prev();
 		$node.addClass("warn");

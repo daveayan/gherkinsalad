@@ -138,7 +138,7 @@ public class DefaultHtmlReporter implements Reporter {
 		
 		String html = StringUtils.EMPTY;
 		html += "<div class=\"step\">";
-		html += "\n<div class=\"title\">" + step + "<span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "\n<div class=\"title open\">" + step + "<span class=\"date\">" + current_date_time() + "</span></div>";
 		html += "\n<div class=\"content\">";
 		report(html);
 		step_already_started = Boolean.TRUE;
