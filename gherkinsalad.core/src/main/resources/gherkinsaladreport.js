@@ -20,26 +20,26 @@ $(document).ready(function(){
 		var $parent = $node.parent().parent().prev();
 		$parent.addClass("error");
 		$parent.parent().parent().prev().addClass("error");
+		featureCount();
+		scenarioCount();
 	});
 	
-	$(".feature").each(function() {
-		var count = $(this).find(".scenario").size();
-		$(this).find(".scenario-count").html(count);
-	});
-	
-	$("#expandAll").click(function() {
+	$("#expandAll").click(function(event) {
+		event.preventDefault();
 		$(".content").show();
 		$(".content").prev().removeClass("open");
 		actions_and_info();
 	});
 	
-	$("#collapseAll").click(function() {
+	$("#collapseAll").click(function(event) {
+		event.preventDefault();
 		$(".content").hide();
 		$(".content").prev().addClass("open");
 		actions_and_info();
 	});
 	
-	$("#failedScenarios").click(function() {
+	$("#failedScenarios").click(function(event) {
+		event.preventDefault();
 		showOrHideFailedScenarios();
 		$("#no-warning-scenarios").hide();
 		$('.feature').hide();
@@ -50,7 +50,8 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 	
-	$("#warningScenarios").click(function() {
+	$("#warningScenarios").click(function(event) {
+		event.preventDefault();
 		showOrHideWarningScenarios();
 		$("#no-failed-scenarios").hide();
 		$('.feature').hide();
@@ -61,7 +62,8 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 	
-	$("#showAll").click(function() {
+	$("#showAll").click(function(event) {
+		event.preventDefault();
 		$("#no-warning-scenarios").hide();
 		$("#no-failed-scenarios").hide();
 		$('.feature').show();
@@ -77,6 +79,20 @@ $(document).ready(function(){
 		actions_and_info();
 	});
 });
+
+function featureCount() {
+	var totalFeatures = $(".feature").size();
+	var failedFeatures = $(".feature > .title.error").size();
+	$("#feature-count").html(totalFeatures + " feature(s); " + failedFeatures + " failed, " + (totalFeatures - failedFeatures) + " passed.");
+}
+
+function scenarioCount() {
+	$(".feature").each(function() {
+		var totalScenarios = $(this).find(".scenario").size();
+		var failedScenarios = $(this).find(".scenario > .title.error").size();
+		$(this).find(".scenario-count").html(totalScenarios + " scenario(s); " + failedScenarios + " failed, " + (totalScenarios - failedScenarios) + " passed.");
+	});
+}
 
 function actions_and_info() {
 	if($("#showInfo").attr('checked')) {
