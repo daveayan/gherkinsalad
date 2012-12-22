@@ -95,7 +95,9 @@ h1 {
 	cursor: pointer;
 }
 .feature > .title.open {
-	background: #CFFC83 url('images/side-arrow.png') no-repeat 5px 50%;
+	background-image: url('images/side-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
 }
 .feature .date {
 	float: right;
@@ -110,12 +112,14 @@ h1 {
 .scenario > .title {
 	background: #CFFC83 url('images/arrow.png') no-repeat 5px 50%;
 	border: 1px solid #A4E56D;
-	padding: 5px 10px;
+	padding: 5px 10px 5px 20px;
 	cursor: pointer;
 	font-weight: bold;
 }
 .scenario > .title.open {
-	background: #CFFC83 url('images/side-arrow.png') no-repeat 5px 50%;
+	background-image: url('images/side-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
 }
 .scenario > .content {
 	padding-left: 5px;
@@ -127,11 +131,13 @@ h1 {
 .step > .title {
 	background: #DFF8B5 url('images/arrow.png') no-repeat 5px 50%;
 	border: 1px solid #B4F743;
-	padding: 5px 10px;
+	padding: 5px 10px 5px 20px;
 	cursor: pointer;
 }
 .step > .title.open {
-	background: #DFF8B5 url('images/side-arrow.png') no-repeat 5px 50%;
+	background-image: url('images/side-arrow.png');
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
 }
 .step > .content {
 	padding-left: 10px;
@@ -144,7 +150,7 @@ h1 {
 	border: 1px solid #F5F532;
 	padding: 5px 10px;
 }
-.action, .task {
+.action, .task, .info {
 	display: none;
 }
 .screenshot {
