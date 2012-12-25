@@ -146,6 +146,9 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 			List<String> expected_text_not_present = new ArrayList<String>();
 			String element_text = getText();
 			for (String expected_text : expected_texts) {
+				if(element_text == null || expected_text == null) {
+					action("element_text = " + element_text + ", expected_text = " + expected_text);
+				}
 				if (!element_text.contains(expected_text.trim())) {
 					expected_text_not_present.add(expected_text.trim());
 				}
@@ -168,7 +171,9 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 			String element_text = getText();
 			for (String expected_text : expected_texts) {
 				if (!element_text.contains(expected_text.trim())) {
-					error("Component '" + this + "' does not have expected text(s) '" + expected_text + "'It has '" + element_text + "'");
+					error("Component '" + this + "' does not have expected text '" + expected_text + "'It has '" + element_text + "'");
+				} else {
+					action("Verified component '" + this + "' has expected text '" + expected_text + ".");
 				}
 			}
 		}
@@ -185,6 +190,8 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 			for (String expected_text : unexpected_texts) {
 				if (element_text.contains(expected_text.trim())) {
 					error("Component '" + this + "' has unexpected text(s) '" + element_text + "'It has '" + element_text + "'");
+				} else {
+					action("Verified component '" + this + "' does not have text '" + element_text + ".");
 				}
 			}
 		}
