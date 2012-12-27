@@ -41,6 +41,10 @@ public class Strings extends AutomationObject {
 		return this;
 	}
 	
+	public String[] asStringsArray() {
+		return this._nativeStrings().toArray(new String[] {});
+	}
+	
 	public String toString() {
 		StringBuffer sb = new StringBuffer("'");
 		if(_nativeStrings != null) {

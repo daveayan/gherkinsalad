@@ -115,12 +115,14 @@ public class Element extends BaseBrowserElement implements Nullable {
 	 * 				 true - if the text is present
 	 */
 	public boolean has(String text) {
+		String text_to_verify = StringUtils.trimToEmpty(text);
 		if(is_not_null(_webElement)) {
-			boolean value = _webElement.getText().contains(text);
+			String webelement_text = StringUtils.trimToEmpty(_webElement.getText());
+			boolean value = webelement_text.contains(text_to_verify);
 			if(value == true) {
-				info("Element '" + super.name() + "' - has text '" + text + "'");
+				info("Element '" + super.name() + "' - has text '" + text_to_verify + "'");
 			} else {
-				info("Element '" + super.name() + "' - does not have text '" + text + "'. It has '" + _webElement.getText() + "'");
+				info("Element '" + super.name() + "' - does not have text '" + text_to_verify + "'. It has '" + webelement_text + "'");
 			}
 			return value;
 		}
@@ -135,16 +137,18 @@ public class Element extends BaseBrowserElement implements Nullable {
 	 * 				 true - if the text is present
 	 */
 	public boolean is(String text) {
+		String text_to_verify = StringUtils.trimToEmpty(text);
 		if(is_not_null(_webElement)) {
-			boolean value = StringUtils.equals(text, _webElement.getText());
+			String webelement_text = StringUtils.trimToEmpty(_webElement.getText());
+			boolean value = StringUtils.equals(text_to_verify, webelement_text);
 			if(value == true) {
-				info("Element '" + super.name() + "' - is text '" + text + "'");
+				info("Element '" + super.name() + "' - is text '" + text_to_verify + "'");
 			} else {
-				info("Element '" + super.name() + "' - is not text '" + text + "'");
+				info("Element '" + super.name() + "' - is not text '" + text_to_verify + "'");
 			}
 			return value;
 		}
-		info("Element '" + super.name() + "' - has a null _webelement, cannot do is(" + text + ")");
+		info("Element '" + super.name() + "' - has a null _webelement, cannot do is(" + text_to_verify + ")");
 		return false;
 	}
 	
@@ -457,7 +461,7 @@ public class Element extends BaseBrowserElement implements Nullable {
 
 	public String getText() {
 		if(is_not_null(_webElement)) {
-			String value = _webElement.getText();
+			String value = StringUtils.trimToEmpty(_webElement.getText());
 			info("Element '" + super.name() + "' - Text is '" + value + "'");
 			return value;
 		} else {

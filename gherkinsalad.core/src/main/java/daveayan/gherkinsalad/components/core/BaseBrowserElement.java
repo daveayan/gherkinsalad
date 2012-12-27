@@ -40,6 +40,7 @@ import com.google.common.base.Function;
 
 import daveayan.gherkinsalad.AutomationObject;
 import daveayan.gherkinsalad.Config;
+import daveayan.gherkinsalad.Strings;
 
 /**@author daveayan*/
 /**
@@ -145,6 +146,10 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 		if (expected_texts != null) {
 			List<String> expected_text_not_present = new ArrayList<String>();
 			String element_text = getText();
+			if(element_text == null) {
+				action("element_text is null on " + this + ", cannot verify expected_texts " + Strings.instance_from(expected_texts).toString());
+				return false;
+			}
 			for (String expected_text : expected_texts) {
 				if(element_text == null || expected_text == null) {
 					action("element_text = " + element_text + ", expected_text = " + expected_text);

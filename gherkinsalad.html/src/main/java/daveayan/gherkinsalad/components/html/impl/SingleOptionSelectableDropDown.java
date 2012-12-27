@@ -53,7 +53,7 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 		return option_strings;
 	}
 
-	public String get_selected_option() {
+	public String get_selected_option_text() {
 		Elements options = root_element().findElements(By.tagName("option"));
 		Element selected_option = options.findFirstElementThatMatches(new Predicate<Element>() {
 			public boolean apply(Element input) {
@@ -65,6 +65,10 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 			}
 		});
 		return selected_option.getText();
+	}
+	
+	public String get_selected_option_code() {
+		return get_selected_option_text();
 	}
 	
 	public void should_have_all_these(String... expected_options) {
@@ -98,7 +102,7 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 	}
 
 	public void should_have_this_option_selected(String option) {
-		String selected_option = get_selected_option();
+		String selected_option = get_selected_option_text();
 		if(Utils.equals(selected_option, option)) {
 			action("Verified that the selected option in " + this + " is '" + option + "'");
 		} else {
@@ -107,7 +111,7 @@ public class SingleOptionSelectableDropDown extends Component implements SingleO
 	}
 
 	public void should_not_have_this_option_selected(String option) {
-		String selected_option = get_selected_option();
+		String selected_option = get_selected_option_text();
 		if(Utils.not_equals(selected_option, option)) {
 			action("Verified that the selected option in " + this + " is NOT '" + option + "'");
 		} else {

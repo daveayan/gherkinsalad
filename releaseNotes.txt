@@ -2,6 +2,13 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.7
+- On SingleOptionSelectable method added get_selected_option_code, related updates to drodown classes
+- Radio Button implementation to select by option text
+- Error and Action messages and stream binaries from defaultHtmlReporter
+- (chai-thatipamula) Added scenraio and feature count
+- (chai-thatipamula) Reporting UI bug fixes
+===========================
 1.6
 - Moved HTML components to its own project
 - Moved cucumber support to its own project

@@ -28,10 +28,10 @@ public class DefaultSelectMenuTest extends BaseTest {
 		
 		jqueryui_selectmenu = DefaultSelectMenu.find(By.id("speed-button"));
 		jqueryui_selectmenu.should_have_all_these("Slower", "Medium", "Slow", "Fast", "Faster");
-		selected_option = jqueryui_selectmenu.get_selected_option();
+		selected_option = jqueryui_selectmenu.get_selected_option_text();
 		Assert.assertEquals("Expected option 'Medium' to be selected, found '" + selected_option + "'", "Medium", selected_option);
 		jqueryui_selectmenu.select_option_if_enabled("Slower");
-		selected_option = jqueryui_selectmenu.get_selected_option();
+		selected_option = jqueryui_selectmenu.get_selected_option_text();
 		Assert.assertEquals("Expected option 'Slower' to be selected, found '" + selected_option + "'", "Slower", selected_option);
 	}
 	

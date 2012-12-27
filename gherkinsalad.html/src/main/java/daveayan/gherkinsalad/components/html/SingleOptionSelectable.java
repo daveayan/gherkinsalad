@@ -64,5 +64,10 @@ public interface SingleOptionSelectable extends BrowserElement {
 	 * Use this method to get the text of the currently selected option
 	 * @return
 	 */
-	public String get_selected_option();
+	public String get_selected_option_text();	
+	/**
+	 * Use this method to get the text of the currently selected option
+	 * @return
+	 */
+	public String get_selected_option_code();
 }

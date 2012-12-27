@@ -35,7 +35,7 @@ public class DefaultSelectMenu extends SingleOptionSelectableDropDown implements
 		return Strings.instance_from(options);
 	}
 	
-	public String get_selected_option() {
+	public String get_selected_option_text() {
 		String option = StringUtils.EMPTY;
 		if(isEnabled()) {
 			click_if_enabled();
@@ -52,6 +52,7 @@ public class DefaultSelectMenu extends SingleOptionSelectableDropDown implements
 				}
 	    });
 	    if(selected_element.is_not_null()) {
+	    	info("Selected element is " + selected_element);
 	    	option = selected_element.getText();
 	    }
 	    click_if_enabled();

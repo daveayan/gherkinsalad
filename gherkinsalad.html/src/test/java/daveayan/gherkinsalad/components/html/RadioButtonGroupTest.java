@@ -74,10 +74,16 @@ public class RadioButtonGroupTest extends BaseTest {
 		Assert.assertFalse(radiobuttongroup.is_null());
 		
 		Assert.assertEquals("'Bike, Car'", radiobuttongroup.get_all_options().toString());
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option());
+		Assert.assertEquals("Car", radiobuttongroup.get_selected_option_code());
+		Assert.assertEquals("I have a car", radiobuttongroup.get_selected_option_text());
 		
-		radiobuttongroup.select_option_if_enabled("Bike");
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option());
+		radiobuttongroup.select_option_if_enabled("I have a bike");
+		Assert.assertEquals("Car", radiobuttongroup.get_selected_option_code());
+		Assert.assertEquals("I have a car", radiobuttongroup.get_selected_option_text());
+		
+		radiobuttongroup.select_code_if_enabled("Bike");
+		Assert.assertEquals("Car", radiobuttongroup.get_selected_option_code());
+		Assert.assertEquals("I have a car", radiobuttongroup.get_selected_option_text());
 	}
 	
 	private void test_enabled_checkboxgroup() {
@@ -91,20 +97,20 @@ public class RadioButtonGroupTest extends BaseTest {
 		Assert.assertFalse(radiobuttongroup.is_null());
 		
 		Assert.assertEquals("'Bike, Car'", radiobuttongroup.get_all_options().toString());
-		Assert.assertEquals("", radiobuttongroup.get_selected_option().toString());
-		Assert.assertEquals("", radiobuttongroup.get_selected_option().toString());
+		Assert.assertEquals("", radiobuttongroup.get_selected_option_code().toString());
+		Assert.assertEquals("", radiobuttongroup.get_selected_option_text());
 		
-		radiobuttongroup.select_option_if_enabled("Car");
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option().toString());
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option().toString());
+		radiobuttongroup.select_option_if_enabled("I have a car");
+		Assert.assertEquals("Car", radiobuttongroup.get_selected_option_code().toString());
+		Assert.assertEquals("I have a car", radiobuttongroup.get_selected_option_text());
 		
 		radiobuttongroup.select_code_if_enabled("Bike");
-		Assert.assertEquals("Bike", radiobuttongroup.get_selected_option().toString());
-		Assert.assertEquals("Bike", radiobuttongroup.get_selected_option().toString());
+		Assert.assertEquals("Bike", radiobuttongroup.get_selected_option_code().toString());
+		Assert.assertEquals("I have a bike", radiobuttongroup.get_selected_option_text());
 		
 		radiobuttongroup = RadioButtonGroup.find(By.name("enabled_preselected_radio"));
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option().toString());
-		Assert.assertEquals("Car", radiobuttongroup.get_selected_option().toString());
+		Assert.assertEquals("Car", radiobuttongroup.get_selected_option_code().toString());
+		Assert.assertEquals("I have a car", radiobuttongroup.get_selected_option_text());
 	}
 	
 	@After public void teardown() {

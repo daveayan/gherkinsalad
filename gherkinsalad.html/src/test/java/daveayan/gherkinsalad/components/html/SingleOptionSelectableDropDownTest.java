@@ -74,13 +74,13 @@ public class SingleOptionSelectableDropDownTest extends BaseTest {
 		Assert.assertFalse(dropdown.is_null());
 		
 		Assert.assertEquals("', Volvo Option 2, Volvo, Saab, Mercedes, Audi'", dropdown.get_all_options().toString());
-		Assert.assertEquals("Saab", dropdown.get_selected_option());
+		Assert.assertEquals("Saab", dropdown.get_selected_option_text());
 		
 		dropdown.select_option_if_enabled("Volvo");
-		Assert.assertEquals("Saab", dropdown.get_selected_option());
+		Assert.assertEquals("Saab", dropdown.get_selected_option_text());
 		
 		dropdown.select_code_if_enabled("vo2");
-		Assert.assertEquals("Saab", dropdown.get_selected_option());
+		Assert.assertEquals("Saab", dropdown.get_selected_option_text());
 	}
 	
 	private void test_enabled_dropdown() {
@@ -94,13 +94,13 @@ public class SingleOptionSelectableDropDownTest extends BaseTest {
 		Assert.assertFalse(dropdown.is_null());
 		
 		Assert.assertEquals("', Volvo Option 2, Volvo, Saab, Mercedes, Audi'", dropdown.get_all_options().toString());
-		Assert.assertEquals("", dropdown.get_selected_option());
+		Assert.assertEquals("", dropdown.get_selected_option_text());
 		
 		dropdown.select_option_if_enabled("Volvo");
-		Assert.assertEquals("Volvo", dropdown.get_selected_option());
+		Assert.assertEquals("Volvo", dropdown.get_selected_option_text());
 		
 		dropdown.select_code_if_enabled("vo2");
-		Assert.assertEquals("Volvo Option 2", dropdown.get_selected_option());
+		Assert.assertEquals("Volvo Option 2", dropdown.get_selected_option_text());
 	}
 	
 	@After public void teardown() {
