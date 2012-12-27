@@ -4,7 +4,7 @@
 		<groupId>com.daveayan</groupId>
 		<artifactId>gherkinsalad</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7</version>
 	</parent>
 	<artifactId>gherkinsalad.cucumber</artifactId>
 	<packaging>jar</packaging>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>com.daveayan</groupId>
 			<artifactId>gherkinsalad.core</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
