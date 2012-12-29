@@ -2,6 +2,9 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+1.8
+- Reporting: Show tasks always, Show action errors always
+===========================
 1.7
 - On SingleOptionSelectable method added get_selected_option_code, related updates to drodown classes
 - Radio Button implementation to select by option text

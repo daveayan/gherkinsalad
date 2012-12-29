@@ -105,6 +105,8 @@ function actions_and_info() {
 	} else {
 		$('.action').hide();
 	}
+	$('.action.error').show();
+	$('.screenshot').show();
 }
 
 function showOrHideWarningScenarios() {

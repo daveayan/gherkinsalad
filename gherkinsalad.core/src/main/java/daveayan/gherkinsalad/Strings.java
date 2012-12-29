@@ -41,6 +41,16 @@ public class Strings extends AutomationObject {
 		return this;
 	}
 	
+	public Strings add(String... newStrings) {
+		this.add(Strings.instance_from(newStrings));
+		return this;
+	}
+	
+	public Strings add(Strings newStrings) {
+		this._nativeStrings().addAll(newStrings._nativeStrings);
+		return this;
+	}
+	
 	public String[] asStringsArray() {
 		return this._nativeStrings().toArray(new String[] {});
 	}

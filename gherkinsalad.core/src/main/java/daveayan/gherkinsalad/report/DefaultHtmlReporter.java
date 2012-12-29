@@ -15,6 +15,7 @@ import org.apache.poi.util.IOUtils;
 
 import daveayan.gherkinsalad.Config;
 import daveayan.gherkinsalad.Path;
+import daveayan.gherkinsalad.Strings;
 
 public class DefaultHtmlReporter implements Reporter {
 	private static Log log = LogFactory.getLog(DefaultHtmlReporter.class);
@@ -106,10 +107,22 @@ public class DefaultHtmlReporter implements Reporter {
 	
 	public void error(String error) {
 		report(formatted_html("action error", error));
+		code_trace();
 	}
 	
 	public void info(String info) {
 		report(formatted_html("info", info));
+	}
+	
+	protected void code_trace() {
+		StackTraceElement[] trace_element = Thread.currentThread().getStackTrace();
+		Strings traces = Strings.new_instance();
+		if(trace_element != null) {
+			for(StackTraceElement element: trace_element) {
+				traces.add(element.toString());
+			}
+		}
+		info(traces.toString());
 	}
 	
 	public void screenshot_taken(File screenshot_file, String file_name) {
