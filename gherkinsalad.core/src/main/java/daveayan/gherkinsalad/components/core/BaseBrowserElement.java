@@ -191,9 +191,10 @@ public abstract class BaseBrowserElement extends AutomationObject implements Bro
 	 */
 	public void should_not_have_text(String... unexpected_texts) {
 		if (unexpected_texts != null) {
-			String element_text = getText();
-			for (String expected_text : unexpected_texts) {
-				if (element_text.contains(expected_text.trim())) {
+			String element_text = StringUtils.trimToEmpty(getText());
+			for (String unexpected_text : unexpected_texts) {
+				String trimmed_unexpected_text = StringUtils.trimToEmpty(unexpected_text);
+				if (element_text.contains(trimmed_unexpected_text)) {
 					error("Component '" + this + "' has unexpected text(s) '" + element_text + "'It has '" + element_text + "'");
 				} else {
 					action("Verified component '" + this + "' does not have text '" + element_text + ".");

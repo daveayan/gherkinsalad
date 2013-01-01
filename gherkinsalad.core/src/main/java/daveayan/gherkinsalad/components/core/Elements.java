@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 import daveayan.gherkinsalad.Strings;
 import daveayan.gherkinsalad.report.ReportFactory;
 
-public class Elements {
+public class Elements extends BaseBrowserElement implements Nullable {
 	private List<Element> _elements = new ArrayList<Element>();
 	
 	public void should_have_any_of_these_texts(Strings texts) {
@@ -79,6 +79,16 @@ public class Elements {
 		for(Element e: _elements) {
 			predicate.apply(e);
 		}
+	}
+	
+	public Elements filter(Predicate<Element> predicate) {
+		Elements filtered_elements = new Elements();
+		for(Element e: _elements) {
+			if(predicate.apply(e)) {
+				filtered_elements.add(e);
+			}
+		}
+		return filtered_elements;
 	}
 	
 	public List<String> asString() {
@@ -158,6 +168,13 @@ public class Elements {
 	public Strings toStrings(Function<Element, String> function) {
 		List<String> strings = Lists.transform(_elements, function);
 		return Strings.instance_from(strings);
+	}
+	
+	public Element getRandomElement() {
+		if(_nativeList() == null) {
+			return new NullElement();
+		}
+		return _nativeList().get(this.random.nextInt(_nativeList().size()));
 	}
 	
 	public List<Element> _nativeList() {

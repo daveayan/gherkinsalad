@@ -122,7 +122,7 @@ public class DefaultHtmlReporter implements Reporter {
 				traces.add(element.toString());
 			}
 		}
-		info(traces.toString());
+		report(formatted_html("action error", traces.toString()));
 	}
 	
 	public void screenshot_taken(File screenshot_file, String file_name) {
@@ -136,7 +136,7 @@ public class DefaultHtmlReporter implements Reporter {
 	
 	public void screenshot_taken(String filename) {
 		String html = StringUtils.EMPTY;
-		html += "<div class=\"screenshot action\">" + "Screenshot taken <a class=\"image\" href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
+		html += "<div class=\"screenshot\">" + "Screenshot taken <a class=\"image\" href=\"" + Path.TO_SCREENSHOTS_SUBFOLDER + filename + "\">" + filename +"</a> <span class=\"date\">" + current_date_time() + "</span></div>";
 		report(html);
 	}
 	
