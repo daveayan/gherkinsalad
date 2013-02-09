@@ -114,11 +114,19 @@ public abstract class AutomationObject implements Nullable {
 	}
 	
 	public void execute_javascript(String script, Object... args) {
-		((JavascriptExecutor) browser.driver()).executeScript(script, args);
+		try {
+			((JavascriptExecutor) browser.driver()).executeScript(script, args);
+		} catch (Exception e) {
+			error("Exception encounterd while running javascript - '" + script +"'");
+		}
 	}
 	
 	public void execute_async_javascript(String script, Object... args) {
-		((JavascriptExecutor) browser.driver()).executeAsyncScript(script, args);
+		try {
+			((JavascriptExecutor) browser.driver()).executeAsyncScript(script, args);
+		} catch (Exception e) {
+			error("Exception encounterd while running async javascript - '" + script +"'");
+		}
 	}
 	
 	public void javascript_popup_click_ok() {

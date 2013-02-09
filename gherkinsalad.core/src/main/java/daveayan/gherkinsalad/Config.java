@@ -26,7 +26,7 @@ public class Config {
 	
 	public static String execution_results_storage_location = null;
 	
-	public static String reporter_class = "daveayan.gherkinsalad.report.DefaultHtmlReporter";
+	public static String reporter_class = "daveayan.gherkinsalad.report.impl.DefaultHtmlReporter";
 	
 	public static String getProperty(String key) {
 		String value = user_config.getProperty(key);
@@ -91,6 +91,9 @@ public class Config {
 		if(seconds_poll_interval == -1) seconds_poll_interval = 1;
 		if(StringUtils.isBlank(execution_results_storage_location)) execution_results_storage_location = Path.TO_TARGET;
 		if(StringUtils.isBlank(reporter_class)) reporter_class = "daveayan.gherkinsalad.report.DefaultHtmlReporter";
+		default_config.put("browser.firefox.class", "daveayan.gherkinsalad.browser.factory.FireFoxBrowser");
+		default_config.put("browser.chrome.class", "daveayan.gherkinsalad.browser.factory.ChromeBrowser");
+		default_config.put("browser.ie.class", "daveayan.gherkinsalad.browser.factory.IeBrowser");
 	}
 	
 	public static void load_properties_from(String user_properties_file_path, String default_properties_file_path) {

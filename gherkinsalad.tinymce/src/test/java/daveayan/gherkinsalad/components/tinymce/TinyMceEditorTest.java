@@ -13,8 +13,6 @@ public class TinyMceEditorTest extends BaseTest {
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
 		tinyMceEditor.append_text_if_enabled("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ");
-		
-		System.out.println(tinyMceEditor.getText());
 	}
 	
 	@Test
@@ -24,6 +22,10 @@ public class TinyMceEditorTest extends BaseTest {
 		TextEnterable tinyMceEditor = new TinyMceEditor();
 		
 		tinyMceEditor.append_text_if_enabled("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB ");
+		
+		System.out.println(tinyMceEditor.getText());
+		
+		tinyMceEditor.enter_text_if_enabled("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC ");
 		
 		System.out.println(tinyMceEditor.getText());
 	}

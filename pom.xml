@@ -40,6 +40,7 @@
 		<module>gherkinsalad.core</module>
 		<module>gherkinsalad.html</module>
 		<module>gherkinsalad.jquery</module>
+		<module>gherkinsalad.dojo</module>
 		<module>gherkinsalad.tinymce</module>
 		<module>gherkinsalad.cucumber</module>
 	</modules>

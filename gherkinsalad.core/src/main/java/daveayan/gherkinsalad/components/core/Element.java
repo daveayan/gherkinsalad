@@ -313,6 +313,18 @@ public class Element extends BaseBrowserElement implements Nullable {
 		return Boolean.TRUE;
 	}
 	
+	public boolean isAttributeEnabled() {
+		return ! isAttributeDisabled();
+	}
+	
+	public boolean isAttributeDisabled() {
+		String disabled_attribute = getAttribute("disabled");
+		if(disabled_attribute != null) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
+	
 //	ALL ARIA METHODS - START 
 	
 //	ARIA DISPLAYED

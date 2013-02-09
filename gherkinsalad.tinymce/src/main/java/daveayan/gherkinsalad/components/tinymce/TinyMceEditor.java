@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import daveayan.gherkinsalad.components.core.Component;
 import daveayan.gherkinsalad.components.html.TextEnterable;
 
+/**
+ * @author daveayan
+ */
 public class TinyMceEditor extends Component implements TextEnterable {
 	private String iframe_name_or_id = "content_ifr";
 	public static TinyMceEditor find_iframe(String nameOrId) {
@@ -22,6 +25,9 @@ public class TinyMceEditor extends Component implements TextEnterable {
 		return content;
 	}
 	
+	/**
+	 * This does not work with Firefox. Open issue: http://code.google.com/p/selenium/issues/detail?id=3569
+	 */
 	public void click_if_enabled() {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(iframe_name_or_id);
@@ -34,6 +40,9 @@ public class TinyMceEditor extends Component implements TextEnterable {
 		return true;
 	}
 
+	/**
+	 * This does not work with Firefox. Open issue: http://code.google.com/p/selenium/issues/detail?id=3569
+	 */
 	public void enter_text_if_enabled(String text) {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(iframe_name_or_id);
@@ -43,6 +52,9 @@ public class TinyMceEditor extends Component implements TextEnterable {
 		browser.driver().switchTo().defaultContent();
 	}
 
+	/**
+	 * This does not work with Firefox. Open issue: http://code.google.com/p/selenium/issues/detail?id=3569
+	 */
 	public void append_text_if_enabled(String text) {
 		wait_between_steps_plus(2);
 		browser.driver().switchTo().frame(iframe_name_or_id);
