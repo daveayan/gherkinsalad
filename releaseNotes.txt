@@ -2,6 +2,15 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 
 ===========================
+2.1
+- Stream chrome driver out as needed
+===========================
+2.0
+- Reporting Updates, default properties set
+- FireFox Browser for Tests for my local machine.
+- Defaulting the browser if none is specified
+- skipping the dojo as of yet
+===========================
 1.8
 - Reporting: Show tasks always, Show action errors always
 ===========================
