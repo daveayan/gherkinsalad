@@ -3,11 +3,16 @@ package daveayan.gherkinsalad;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.util.IOUtils;
+
+import daveayan.gherkinsalad.report.impl.DefaultHtmlReporter;
 
 public class Config {
 	private static Log log = LogFactory.getLog(Config.class);
@@ -70,15 +75,6 @@ public class Config {
 			
 			String reporter_1 = config.getProperty("reporter");
 			if(StringUtils.isNotBlank(reporter_1)) reporter_class = new String(reporter_1);
-			
-			String os_name= System.getProperty("os.name");
-			if(os_name.trim().contains("Mac")) {
-				chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver";
-			} else if(os_name.trim().contains("Linux")) {
-				chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/linux.chromedriver";
-			} else {
-				chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/win.chromedriver.exe";
-			}
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());
 		}
@@ -94,6 +90,8 @@ public class Config {
 		if(StringUtils.isEmpty(default_config.getProperty("browser.firefox.class"))) default_config.put("browser.firefox.class", "daveayan.gherkinsalad.browser.factory.FireFoxBrowser");
 		if(StringUtils.isEmpty(default_config.getProperty("browser.chrome.class"))) default_config.put("browser.chrome.class", "daveayan.gherkinsalad.browser.factory.ChromeBrowser");
 		if(StringUtils.isEmpty(default_config.getProperty("browser.ie.class"))) default_config.put("browser.ie.class", "daveayan.gherkinsalad.browser.factory.IeBrowser");
+		
+		setup_chrome_driver();
 	}
 	
 	public static void load_properties_from(String user_properties_file_path, String default_properties_file_path) {
@@ -111,6 +109,36 @@ public class Config {
 		}
 		
 		garnish_properties();
+	}
+	
+	private static void setup_chrome_driver() {
+		String os_name= System.getProperty("os.name");
+		if(os_name.trim().contains("Mac")) {
+			chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver";
+			stream_classpath_resource_to_file("/chrome/mac.chromedriver", Path.TO_SYSTEM_RESOURCES + "/mac.chromedriver");
+		} else if(os_name.trim().contains("Linux")) {
+			chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/linux.chromedriver";
+			stream_classpath_resource_to_file("/chrome/linux.chromedriver", Path.TO_SYSTEM_RESOURCES + "/linux.chromedriver");
+		} else {
+			chrome_webdriver_location = Path.TO_SYSTEM_RESOURCES + "/win.chromedriver.exe";
+			stream_classpath_resource_to_file("/chrome/win.chromedriver.exe", Path.TO_SYSTEM_RESOURCES + "/win.chromedriver.exe");
+		}
+	}
+	
+	private static void stream_classpath_resource_to_file(String path_to_classpath_resource, String file_to_write) {
+		File to_file = new File(file_to_write);
+		if(to_file.exists()) {
+			return;
+		}
+		
+		InputStream stream = DefaultHtmlReporter.class.getResourceAsStream(path_to_classpath_resource);
+		try {
+			byte[] contents = IOUtils.toByteArray(stream);
+			FileUtils.writeByteArrayToFile(new File(file_to_write), contents);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	static {

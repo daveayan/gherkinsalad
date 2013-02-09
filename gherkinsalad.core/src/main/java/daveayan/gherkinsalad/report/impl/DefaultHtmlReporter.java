@@ -173,18 +173,18 @@ public class DefaultHtmlReporter implements Reporter {
 		report_folder();
 		File report_file = new File(report_folder + report_file_name);
 		if(report_file.exists()) return;
-		stream_classpath_resource_to_file("/gherkinsaladreport-index.html", report_folder + report_file_name);
-		stream_classpath_resource_to_file("/style.css", report_folder + "/style.css");
-		stream_classpath_resource_to_file("/html5shiv.js", report_folder + "/html5shiv.js");
-		stream_classpath_resource_to_file("/jquery-1.8.0.min.js", report_folder + "/jquery-1.8.0.min.js");
-		stream_classpath_resource_to_file("/gherkinsaladreport.js", report_folder + "/gherkinsaladreport.js");
-		stream_classpath_resource_to_file("/colorbox.css", report_folder + "/colorbox.css");
-		stream_classpath_resource_to_file("/jquery.colorbox-min.js", report_folder + "/jquery.colorbox-min.js");
+		stream_classpath_resource_to_file("/defaultreport/gherkinsaladreport-index.html", report_folder + report_file_name);
+		stream_classpath_resource_to_file("/defaultreport/style.css", report_folder + "/style.css");
+		stream_classpath_resource_to_file("/defaultreport/html5shiv.js", report_folder + "/html5shiv.js");
+		stream_classpath_resource_to_file("/defaultreport/jquery-1.8.0.min.js", report_folder + "/jquery-1.8.0.min.js");
+		stream_classpath_resource_to_file("/defaultreport/gherkinsaladreport.js", report_folder + "/gherkinsaladreport.js");
+		stream_classpath_resource_to_file("/defaultreport/colorbox.css", report_folder + "/colorbox.css");
+		stream_classpath_resource_to_file("/defaultreport/jquery.colorbox-min.js", report_folder + "/jquery.colorbox-min.js");
 		
-		stream_classpath_resource_to_file("/images/arrow.png", report_folder + "/images/arrow.png");
-		stream_classpath_resource_to_file("/images/controls.png", report_folder + "/images/controls.png");
-		stream_classpath_resource_to_file("/images/loading.gif", report_folder + "/images/loading.gif");
-		stream_classpath_resource_to_file("/images/side-arrow.png", report_folder + "/images/side-arrow.png");
+		stream_classpath_resource_to_file("/defaultreport/images/arrow.png", report_folder + "/images/arrow.png");
+		stream_classpath_resource_to_file("/defaultreport/images/controls.png", report_folder + "/images/controls.png");
+		stream_classpath_resource_to_file("/defaultreport/images/loading.gif", report_folder + "/images/loading.gif");
+		stream_classpath_resource_to_file("/defaultreport/images/side-arrow.png", report_folder + "/images/side-arrow.png");
 	}
 	
 	private void stream_classpath_resource_to_file(String path_to_classpath_resource, String file_to_write) {
