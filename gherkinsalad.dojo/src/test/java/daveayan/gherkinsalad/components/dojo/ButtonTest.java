@@ -13,7 +13,7 @@ public class ButtonTest extends BaseTest {
 		super.launch_browser("firefox");
 		super.goto_url("http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dijit/themes/themeTester.html");
 		
-		test_em();
+//		test_em();
 	}
 	
 	@Test public void chrome_test() {
