@@ -10,6 +10,7 @@ import daveayan.gherkinsalad.components.html.impl.TextField;
 
 public class TextFieldTest extends BaseTest {
 	@Test public void test_enabled_textfield_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_enabled_textfield();
@@ -17,6 +18,7 @@ public class TextFieldTest extends BaseTest {
 	}
 	
 	@Test public void test_enabled_textfield_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_enabled_textfield();
@@ -24,6 +26,7 @@ public class TextFieldTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_textfield_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_disabled_textfield();
@@ -31,6 +34,7 @@ public class TextFieldTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_textfield_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_disabled_textfield();
@@ -38,6 +42,7 @@ public class TextFieldTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_textfield_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_hidden_textfield();
@@ -45,6 +50,7 @@ public class TextFieldTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_textfield_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_hidden_textfield();

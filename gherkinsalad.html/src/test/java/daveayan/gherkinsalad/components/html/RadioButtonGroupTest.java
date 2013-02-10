@@ -11,6 +11,7 @@ import daveayan.gherkinsalad.components.html.impl.RadioButtonGroup;
 
 public class RadioButtonGroupTest extends BaseTest {
 	@Test public void test_enabled_radiobuttongroup_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_enabled_checkboxgroup();
@@ -18,6 +19,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_radiobuttongroup_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_disabled_checkboxgroup();
@@ -25,6 +27,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_radiobuttongroup_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_hidden_checkboxgroup();
@@ -32,6 +35,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	@Test public void test_enabled_radiobuttongroup_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_enabled_checkboxgroup();
@@ -39,6 +43,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_radiobuttongroup_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_disabled_checkboxgroup();
@@ -46,6 +51,7 @@ public class RadioButtonGroupTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_radiobuttongroup_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_hidden_checkboxgroup();

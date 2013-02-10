@@ -11,12 +11,14 @@ import daveayan.gherkinsalad.components.html.SingleOptionSelectable;
 
 public class DefaultSelectMenuTest extends BaseTest {
 	@Test public void test_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		goto_url("http://view.jqueryui.com/selectmenu/demos/selectmenu/default.html");
 		test_select_menu();
 	}
 	
 	@Test public void test_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		goto_url("http://view.jqueryui.com/selectmenu/demos/selectmenu/default.html");
 		test_select_menu();

@@ -46,7 +46,7 @@ public class ChromeBrowser implements BrowserFactory {
 		try {
 			File file = new File(Config.chrome_webdriver_location);
 			ChromeDriverService service = new ChromeDriverService.Builder()
-					.usingChromeDriverExecutable(file)
+					.usingDriverExecutable(file)
 					.usingAnyFreePort().build();
 			service.start();
 			WebDriver instance = new ChromeDriver(service, DesiredCapabilities.chrome());

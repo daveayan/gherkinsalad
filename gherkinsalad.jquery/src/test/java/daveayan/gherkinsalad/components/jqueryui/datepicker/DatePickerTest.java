@@ -14,13 +14,27 @@ import daveayan.gherkinsalad.components.html.TextEnterable;
 import daveayan.gherkinsalad.components.html.impl.TextField;
 
 public class DatePickerTest extends BaseTest {
-	@SuppressWarnings("deprecation")
+	@Test
+	public void chrome_jquery_ui_default_date_picker_test() {
+		if(is_chrome_disabled()) return;
+		super.launch_browser("chrome");
+		super.goto_url("http://jqueryui.com/resources/demos/datepicker/default.html");
+		
+		test();
+	}
+	
 	@Test
 	public void firefox_jquery_ui_default_date_picker_test() {
-		long starttime = System.currentTimeMillis();
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_url("http://jqueryui.com/resources/demos/datepicker/default.html");
 		
+		test();
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void test() {
+		long starttime = System.currentTimeMillis();
 		DatePicker datepicker = new DefaultDatePicker();
 		TextEnterable date_textbox = TextField.find(By.id("datepicker"));
 		

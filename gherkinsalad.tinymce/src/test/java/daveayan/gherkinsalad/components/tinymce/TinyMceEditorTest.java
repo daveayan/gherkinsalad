@@ -8,6 +8,7 @@ import daveayan.gherkinsalad.components.html.TextEnterable;
 public class TinyMceEditorTest extends BaseTest {
 	@Test
 	public void firefox_tiny_mce_test() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_url("http://www.tinymce.com/tryit/full.php");
 		TextEnterable tinyMceEditor = new TinyMceEditor();
@@ -17,6 +18,7 @@ public class TinyMceEditorTest extends BaseTest {
 	
 	@Test
 	public void chrome_tiny_mce_test() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_url("http://www.tinymce.com/tryit/full.php");
 		TextEnterable tinyMceEditor = new TinyMceEditor();

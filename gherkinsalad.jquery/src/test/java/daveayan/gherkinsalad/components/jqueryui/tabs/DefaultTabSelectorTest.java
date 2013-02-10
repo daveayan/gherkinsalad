@@ -7,10 +7,23 @@ import daveayan.BaseTest;
 
 public class DefaultTabSelectorTest extends BaseTest {
 	@Test
-	public void sample() {
-		Tabs t = null;
+	public void test_chrome() {
+		if(is_chrome_disabled()) return;
+		super.launch_browser("chrome");
+		
+		test();
+	}
+	
+	@Test
+	public void test_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");		
 		
+		test();
+	}
+	
+	private void test() {
+		Tabs t = null;
 		goto_test_page("tabs-default.html");
 		t = DefaultTabSelector.find(By.xpath("/html/body/div/ul"));
 		verify_tabs(t);

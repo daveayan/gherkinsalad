@@ -9,6 +9,7 @@ import daveayan.gherkinsalad.components.core.Element;
 public class DraggableTest extends BaseTest {
 	@Test
 	public void test_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("draggable-test.html");
 		Element the_box = findElement(By.id("draggable"));
@@ -20,6 +21,7 @@ public class DraggableTest extends BaseTest {
 	
 	@Test
 	public void test_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("draggable-test.html");
 		Element the_box = findElement(By.id("draggable"));

@@ -10,6 +10,7 @@ import daveayan.gherkinsalad.components.html.Clickable;
 
 public class ButtonTest extends BaseTest {
 	@Test public void firefox_test() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_url("http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dijit/themes/themeTester.html");
 		
@@ -17,9 +18,10 @@ public class ButtonTest extends BaseTest {
 	}
 	
 	@Test public void chrome_test() {
-//		super.launch_browser("chrome");
-//		super.goto_url("http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dijit/themes/themeTester.html");
-//		
+		if(is_firefox_disabled()) return;
+		super.launch_browser("chrome");
+		super.goto_url("http://download.dojotoolkit.org/release-1.6.1/dojo-release-1.6.1/dijit/themes/themeTester.html");
+		
 //		test_em();
 	}
 	

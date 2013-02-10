@@ -8,10 +8,23 @@ import daveayan.BaseTest;
 import daveayan.gherkinsalad.components.core.Element;
 
 public class TextSelectionCheck extends BaseTest {
+	@Test public void select_text_using_chrome() {
+		if(is_chrome_disabled()) return;
+		super.launch_browser("chrome");
+		super.goto_test_page("test-text-selection.html");
+	
+		test_all();
+	}
+	
 	@Test public void select_text_using_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("test-text-selection.html");
 		
+		test_all();
+	}
+	
+	private void test_all() {
 		Element first_p = findElement(By.xpath("/html/body/p[1]"));
 		Element second_p = findElement(By.xpath("/html/body/p[2]"));
 		

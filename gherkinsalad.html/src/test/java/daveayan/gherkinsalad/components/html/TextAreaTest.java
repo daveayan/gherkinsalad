@@ -10,6 +10,7 @@ import daveayan.gherkinsalad.components.html.impl.TextArea;
 
 public class TextAreaTest extends BaseTest {
 	@Test public void test_enabled_textarea_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_enabled_textarea();
@@ -17,6 +18,7 @@ public class TextAreaTest extends BaseTest {
 	}
 	
 	@Test public void test_enabled_textarea_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_enabled_textarea();
@@ -24,6 +26,7 @@ public class TextAreaTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_textarea_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_disabled_textarea();
@@ -31,6 +34,7 @@ public class TextAreaTest extends BaseTest {
 	}
 	
 	@Test public void test_disabled_textarea_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_disabled_textarea();
@@ -38,6 +42,7 @@ public class TextAreaTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_textarea_firefox() {
+		if(is_firefox_disabled()) return;
 		super.launch_browser("firefox");
 		super.goto_test_page("html-test.html");
 		test_hidden_textarea();
@@ -45,6 +50,7 @@ public class TextAreaTest extends BaseTest {
 	}
 	
 	@Test public void test_hidden_textarea_chrome() {
+		if(is_chrome_disabled()) return;
 		super.launch_browser("chrome");
 		super.goto_test_page("html-test.html");
 		test_hidden_textarea();
