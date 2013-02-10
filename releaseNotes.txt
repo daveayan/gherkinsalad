@@ -4,6 +4,8 @@ GHERKIN SALAD RELEASE NOTES
 ===========================
 2.1
 - Stream chrome driver out as needed
+- Refactored test cases to check if a browser is enabled
+- Upgrade to selenium 2.29.0
 ===========================
 2.0
 - Reporting Updates, default properties set
