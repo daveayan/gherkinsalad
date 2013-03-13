@@ -72,6 +72,7 @@ public class Assert extends AutomationObject{
 		if (expected != null && expected.equals(actual))
 			return;
 		ReportFactory.reporter().error(message + " Expected '" + expected + "', Found '" + actual +"'");
+		browser.takeScreenshot();
 	}
 	/**
 	 * Use this to assert that two Strings are equal. 
