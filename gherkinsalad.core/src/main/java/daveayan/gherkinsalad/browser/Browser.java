@@ -75,8 +75,12 @@ public class Browser {
 	 * as int.
 	 */
 	public void takeScreenshotAsFile(String file_name) {
-			File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
-			ReportFactory.reporter().screenshot_taken(screenshot_file, file_name);
+			try {
+				File screenshot_file = ((TakesScreenshot) instance).getScreenshotAs(OutputType.FILE);
+				ReportFactory.reporter().screenshot_taken(screenshot_file, file_name);
+			} catch(Throwable th) {
+				ReportFactory.reporter().warn("Error taking screenshot '" + file_name + "'");
+			}
 	}
 
 	/**
