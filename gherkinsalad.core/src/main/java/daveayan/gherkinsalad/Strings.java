@@ -23,7 +23,7 @@ public class Strings extends AutomationObject {
 	
 	public static Strings instance_from(List<String> strings) {
 		Strings _strings = new Strings();
-		_strings._nativeStrings.addAll(strings);
+		_strings.set(strings);
 		return _strings;
 	}
 	
@@ -37,7 +37,8 @@ public class Strings extends AutomationObject {
 	}
 	
 	public Strings add(String newString) {
-		this._nativeStrings().add(newString);
+		String safeString = StringUtils.trimToEmpty(newString);
+		this._nativeStrings().add(safeString);
 		return this;
 	}
 	
@@ -47,7 +48,7 @@ public class Strings extends AutomationObject {
 	}
 	
 	public Strings add(Strings newStrings) {
-		this._nativeStrings().addAll(newStrings._nativeStrings);
+		this.set(newStrings._nativeStrings);
 		return this;
 	}
 	
@@ -72,7 +73,7 @@ public class Strings extends AutomationObject {
 	public Strings toUpperCase(Strings strings) {
 		Strings _newStrings = new Strings();
 		for(String s: strings._nativeStrings) {
-			_newStrings._nativeStrings.add(s.toUpperCase());
+			_newStrings.add(s.toUpperCase());
 		}
 		return _newStrings;
 	}
@@ -80,7 +81,7 @@ public class Strings extends AutomationObject {
 	public Strings toLowerCase(Strings strings) {
 		Strings _newStrings = new Strings();
 		for(String s: strings._nativeStrings) {
-			_newStrings._nativeStrings.add(s.toLowerCase());
+			_newStrings.add(s.toLowerCase());
 		}
 		return _newStrings;
 	}
@@ -92,7 +93,7 @@ public class Strings extends AutomationObject {
 		}
 		for(String expected_string: expected_strings) {
 			if(this.does_not_have(expected_string)) {
-				strings_not_present._nativeStrings.add(expected_string);
+				strings_not_present.add(expected_string);
 			}
 		}
 		return strings_not_present;
@@ -118,7 +119,7 @@ public class Strings extends AutomationObject {
 		}
 		for(String unexpected_string: unexpected_strings) {
 			if(this.has(unexpected_string)) {
-				unexpected_strings_present._nativeStrings.add(unexpected_string);
+				unexpected_strings_present.add(unexpected_string);
 			}
 		}
 		return unexpected_strings_present;
@@ -138,8 +139,10 @@ public class Strings extends AutomationObject {
 	}
 	
 	public boolean has(String string) {
+		String safe_string = StringUtils.trimToEmpty(string);
+		
 		for(String s: _nativeStrings()) {
-			if(StringUtils.equals(s, string)) {
+			if(StringUtils.equals(s, safe_string)) {
 				return Boolean.TRUE;
 			}
 		}
@@ -170,11 +173,19 @@ public class Strings extends AutomationObject {
 		_nativeStrings = null;
 		_nativeStrings = new ArrayList<String>();
 		for(String string: strings) {
-			_nativeStrings.add(string);
+			_nativeStrings.add(StringUtils.trimToEmpty(string));
 		}
 	}
 	
-	public List<String> _nativeStrings() {
+	private void set(List<String> strings) {
+		_nativeStrings = null;
+		_nativeStrings = new ArrayList<String>();
+		for(String string: strings) {
+			_nativeStrings.add(StringUtils.trimToEmpty(string));
+		}
+	}
+	
+	private List<String> _nativeStrings() {
 		return _nativeStrings;
 	}
 	
