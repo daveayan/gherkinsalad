@@ -46,8 +46,16 @@ public class XlsFile {
 			if(cell != null) {
 				if(cell.getCellType() == Cell.CELL_TYPE_STRING) {
 					return cell.getStringCellValue();	
+				} if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+					return Double.toString(cell.getNumericCellValue());	
+				} if(cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+					return Boolean.toString(cell.getBooleanCellValue());	
+				} if(cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+					return StringUtils.EMPTY;	
+				} if(cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+					return "Retriving formula is not supported. Cell '" + column_number + "_" + row_number + "'";
 				} else {
-					return "String Value cannot be retrieved. Cell Type: '" + cell.getCellType() + "'";
+					return "String Value cannot be retrieved in cell '" + column_number + "_" + row_number + "' . Cell Type: '" + cell.getCellType() + "'. More info: http://poi.apache.org/apidocs/org/apache/poi/ss/usermodel/Cell.html";
 				}
 			}
 		}
