@@ -43,8 +43,13 @@ public class XlsFile {
 		Row row = current_sheet.getRow(row_number);
 		if(row != null) {
 			Cell cell = row.getCell(column_number);
-			if(cell != null)
-				return cell.getStringCellValue();
+			if(cell != null) {
+				if(cell.getCellType() == Cell.CELL_TYPE_STRING) {
+					return cell.getStringCellValue();	
+				} else {
+					return "String Value cannot be retrieved. Cell Type: '" + cell.getCellType() + "'";
+				}
+			}
 		}
 		return StringUtils.EMPTY;
 	}
