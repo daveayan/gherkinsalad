@@ -44,11 +44,10 @@ public class DefaultSelectMenu extends SingleOptionSelectableDropDown implements
 			
 	    Element selected_element = li_s.findFirstElementThatMatches(new Predicate<Element>() {
 				public boolean apply(Element li_a) {
-					String value = li_a.getAttribute("aria-selected");
-					if(StringUtils.isBlank(value)) {
-						return false;
+					if(li_a.isAriaSelected() || li_a.has_attribute("class", "ui-state-focus")) {
+						return Boolean.TRUE;
 					}
-					return Boolean.parseBoolean(value);
+					return Boolean.FALSE;
 				}
 	    });
 	    if(selected_element.is_not_null()) {

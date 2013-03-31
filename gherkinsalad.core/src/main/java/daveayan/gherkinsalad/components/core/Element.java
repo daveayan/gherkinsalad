@@ -389,9 +389,23 @@ public class Element extends BaseBrowserElement implements Nullable {
 	
 //	ALL ARIA METHODS - END
 	
+	public boolean has_null_attribute(String key) {
+		String value = getAttribute(key);
+		return value == null;
+	}
+	
+	public boolean has_attribute(String key, String expected_value) {
+		String value = getAttribute(key);
+		if(StringUtils.contains(value, expected_value)) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
+	
 	public String getAttribute(String arg0) {
 		if(is_not_null(arg0)) {
 			String value = _webElement.getAttribute(arg0);
+			value = StringUtils.trim(value);
 			info("Element '" + super.name() + "' - Attribute '" + arg0 + "' has value '" + value + "'");
 			return value;
 		} else {
