@@ -185,12 +185,24 @@ public class Strings extends AutomationObject {
 		}
 	}
 	
-	private List<String> _nativeStrings() {
+	public List<String> _nativeStrings() {
 		return _nativeStrings;
 	}
 	
 	public boolean is_empty() {
 		return _nativeStrings().isEmpty();
+	}
+	
+	public boolean is_completely_empty() {
+		if(is_empty()) {
+			return Boolean.TRUE;
+		}
+		for(String string: _nativeStrings()) {
+			if(StringUtils.isNotBlank(string)) {
+				return Boolean.FALSE;
+			}
+		}
+		return Boolean.TRUE;
 	}
 	
 	public boolean is_not_empty() {

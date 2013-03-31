@@ -16,13 +16,13 @@ public class StringsTest {
 	
 	@Test public void test_does_not_have_any_of_these() {
 		assertEquals("''", empty_target.does_not_have_any_of_these((String[]) null).toString());
-		assertEquals("', null'", empty_target.does_not_have_any_of_these("", null).toString());
-		assertEquals("'null, null'", empty_target.does_not_have_any_of_these(null, null).toString());
+		assertEquals("', '", empty_target.does_not_have_any_of_these("", null).toString());
+		assertEquals("', '", empty_target.does_not_have_any_of_these(null, null).toString());
 		assertEquals("'AA, BB'", empty_target.does_not_have_any_of_these("AA", "BB").toString());
 		
 		assertEquals("''", filled_target.does_not_have_any_of_these((String[]) null).toString());
-		assertEquals("', null'", filled_target.does_not_have_any_of_these("", null).toString());
-		assertEquals("'null, null'", filled_target.does_not_have_any_of_these(null, null).toString());
+		assertEquals("', '", filled_target.does_not_have_any_of_these("", null).toString());
+		assertEquals("', '", filled_target.does_not_have_any_of_these(null, null).toString());
 		assertEquals("''", filled_target.does_not_have_any_of_these("AA", "BB").toString());
 		assertEquals("'ZZ'", filled_target.does_not_have_any_of_these("AA", "BB", "ZZ").toString());
 		assertEquals("'ZZ, YY'", filled_target.does_not_have_any_of_these("ZZ", "BB", "YY", "AA").toString());
@@ -58,13 +58,13 @@ public class StringsTest {
 	
 	@Test public void test_has_all_these() {
 		assertEquals("''", empty_target.has_all_these((String[]) null).toString());
-		assertEquals("', null'", empty_target.has_all_these("", null).toString());
-		assertEquals("'null, null'", empty_target.has_all_these(null, null).toString());
+		assertEquals("', '", empty_target.has_all_these("", null).toString());
+		assertEquals("', '", empty_target.has_all_these(null, null).toString());
 		assertEquals("'AA, BB'", empty_target.has_all_these("AA", "BB").toString());
 		
 		assertEquals("''", filled_target.has_all_these((String[]) null).toString());
-		assertEquals("', null'", filled_target.has_all_these("", null).toString());
-		assertEquals("'null, null'", filled_target.has_all_these(null, null).toString());
+		assertEquals("', '", filled_target.has_all_these("", null).toString());
+		assertEquals("', '", filled_target.has_all_these(null, null).toString());
 		assertEquals("''", filled_target.has_all_these("AA", "BB").toString());
 		assertEquals("'ZZ'", filled_target.has_all_these("AA", "BB", "ZZ").toString());
 		assertEquals("'ZZ, YY'", filled_target.has_all_these("ZZ", "BB", "YY", "AA").toString());
