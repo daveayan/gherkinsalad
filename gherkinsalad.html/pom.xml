@@ -4,7 +4,7 @@
 		<groupId>com.daveayan</groupId>
 		<artifactId>gherkinsalad</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>2.3-SNAPSHOT</version>
+		<version>2.3</version>
 	</parent>
 	<artifactId>gherkinsalad.html</artifactId>
 	<packaging>jar</packaging>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>com.daveayan</groupId>
 			<artifactId>gherkinsalad.core</artifactId>
-			<version>2.3-SNAPSHOT</version>
+			<version>2.3</version>
 		</dependency>
 	</dependencies>
 </project>
