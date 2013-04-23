@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	featureCount();
+	scenarioCount();
 	$(".title").click(function(){
 		$(this).next().toggle();
 		$(this).toggleClass('open');
@@ -20,8 +22,6 @@ $(document).ready(function(){
 		var $parent = $node.parent().parent().prev();
 		$parent.addClass("error");
 		$parent.parent().parent().prev().addClass("error");
-		featureCount();
-		scenarioCount();
 	});
 	
 	$("#expandAll").click(function(event) {
