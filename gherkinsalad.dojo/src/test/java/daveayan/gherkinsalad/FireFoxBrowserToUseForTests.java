@@ -20,7 +20,7 @@ public class FireFoxBrowserToUseForTests implements BrowserFactory {
 		try {
 			ReportFactory.reporter().action("Opening Firefox");
 			
-			FirefoxBinary binary = new FirefoxBinary(new File("/Applications/Firefox 3.app/Contents/MacOS/firefox"));
+			FirefoxBinary binary = new FirefoxBinary(new File("/Applications/Firefox 2.app/Contents/MacOS/firefox"));
 			FirefoxProfile profile = new FirefoxProfile();
 			
 			WebDriver driver = new FirefoxDriver(binary, profile);
