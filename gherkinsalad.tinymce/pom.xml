@@ -4,7 +4,7 @@
 		<groupId>com.daveayan</groupId>
 		<artifactId>gherkinsalad</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>2.5</version>
+		<version>2.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>gherkinsalad.tinymce</artifactId>
 	<name>gherkinsalad.tinymce</name>
@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>com.daveayan</groupId>
 			<artifactId>gherkinsalad.core</artifactId>
-			<version>2.5</version>
+			<version>2.6-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.daveayan</groupId>
 			<artifactId>gherkinsalad.html</artifactId>
-			<version>2.5</version>
+			<version>2.6-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
